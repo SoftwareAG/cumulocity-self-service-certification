@@ -7,13 +7,12 @@
 
 ## Diagrams & Graphics
 
-1. [Architecture](./media/architecture.drawio.svg)
-2. [Certification Flow](./media/certification-flow.drawio.svg)
-3. [Information Model](./media/information-model.drawio.svg)
-4. [TestCertificate Lifecycle](./media/test-certificate-lifecycle.drawio.svg)
-5. [Dynamic Data Model](./media/dynamic-data-model.drawio.svg)
-
-### Images
 
 1. [Measurement Fragmentand Series in C8Y-UI](media/measurement-fragmentand-series-in-ui.png)
+2. [Information Model](./media/information-model.drawio.svg)
+
+
+
+
+
 
