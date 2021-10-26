@@ -18,7 +18,7 @@ GET `{{baseUrl}}/inventory/managedObjects?pageSize=1&query=$filter=(type eq 'c8y
 
 This endpoint will create a new Testsuite
 POST `{{baseUrl}}/inventory/managedObjects/`
-as body for Postman POST request you can take this [Test Suite JSON](./data/testsuite.jsonc) as starting point.
+
 
 ---
 
@@ -35,11 +35,11 @@ GET `{{baseUrl}}/inventory/managedObjects?withTotalPages=true&pageSize=10&curren
 
 This endpoint will create a new Full Certification Run
 POST `{{baseUrl}}/inventory/managedObjects/`
-as body for Postman POST request you can take this [Full Certification JSON](./data/full-certification-run.jsonc) as starting point.
+
 
 This endpoint will update a certification run
 PUT `{{baseUrl}}/inventory/managedObjects/{{test_run_id}}`
-as body for Postman PUT request you can take this [Update Certification JSON](./data/update-certification-run.jsonc) as starting point.
+
 
 ---
 
