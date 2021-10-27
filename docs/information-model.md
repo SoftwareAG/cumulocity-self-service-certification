@@ -8,7 +8,10 @@ The test suite is created by the technical partner management team at Software A
 
 - Tests (e.g. Foundation Modules)
   - Modules (e.g. Device Information)
-    - Capabilities (e.g. c8y_IsDevice)
+    - Parts   (e.g. device config text)
+      - Capabilities (e.g. c8y_IsDevice)
+
+![model diagram](media/model.drawio.svg)
 
 The test suite data structure is used by the UI to generate the list of to be tested items.
 
@@ -16,7 +19,7 @@ The `c8y_certification_testSuite` object is represented in the following json fo
 
 ```json5
 {
-  type: 'c8y_certification_testSuite', // set by MS: type of the manged object
+  type: 'c8y_certification_testSuite', // set by MS: type of the managed object
   version: '1.2',
   tests: [
     {
@@ -28,12 +31,17 @@ The `c8y_certification_testSuite` object is represented in the following json fo
           title: 'Device Information',
           endpoint: 'deviceInformation',
           mandatory: true, // true, false or obmitted (= false)
-          capabilities: [
-            {
-              id: 'c8y_IsDevice',
-              title: 'c8y_IsDevice',
-              mandatory: true,
-            },
+          parts:[
+                  id: 'deviceParts',
+                  title: 'device parts',
+                  mandatory: true, // true, false or obmitted (= false)
+                  capabilities: [
+                                {
+                                  id: 'c8y_IsDevice',
+                                  title: 'c8y_IsDevice',
+                                  mandatory: true,
+                                },
+            ],
           ],
         },
       ],
@@ -68,15 +76,23 @@ The test run object is instantiated from the test suite data structure, by addin
   deviceInformation: {
     parent: 'foundationModules',
     status: {
-      // set by MS: added to indicate the status of each capability
-      code: 'FAILED', // set by MS
-    },
-    capabilities: {
-      c8y_IsDevice: {
-        status: {
-          code: 'FAILED',
-          text: 'The fragment <code>c8y_IsDevice</code> was not found in the inventory object of the device.', // HTML supported
+        // set by MS: added to indicate the status of each capability
+        code: 'FAILED', // set by MS
+      },
+    parts: {
+      parent: 'deviceInformation',
+      status: {
+        // set by MS: added to indicate the status of each capability
+        code: 'FAILED', // set by MS
         },
+      mandatory: true, // true, false or obmitted (= false)     
+      capabilities: {
+          c8y_IsDevice: {
+            status: {
+              code: 'FAILED',
+              text: 'The fragment <code>c8y_IsDevice</code> was not found in the inventory object of the device.', // HTML supported
+            },
+          },
       },
     },
   },
@@ -127,22 +143,42 @@ This newly created object is immutable in the sense that all test results cannot
       text: 'Certification is valid', // set by MS: long text of overall test status
     },
   },
-  deviceInformation: {
-    parent: 'foundationModules',
-    title: 'Device Information',
-    endpoint: 'deviceInformation',
-    status: {
-      code: 'FAILED',
+
+ tests: [
+    {
+      id: 'foundationModules',
+      title: 'Foundation Modules',
+      modules: [
+        {
+          id: 'deviceInformation',
+          title: 'Device Information',
+          mandatory: true, // true, false or obmitted (= false)
+          status:{
+            code: 'FAILED'
+            },
+          parts:[
+                  id: 'deviceParts',
+                  title: 'device parts',
+                  mandatory: true, // true, false or obmitted (= false)
+                  status: { 
+                    code: 'FAILED'
+                  },
+                  capabilities: [
+                    {
+                      id: 'c8y_IsDevice',
+                      title: 'c8y_IsDevice',
+                      mandatory: true,
+                      status: { 
+                        code: 'FAILED'
+                      },
+                    },
+                ],
+          ],
+        },
+      ],
     },
-  },
-  c8y_IsDevice: {
-    parent: 'deviceInformation',
-    title: 'c8y_IsDevice',
-    mandatory: true,
-    status: {
-      code: 'FAILED',
-      text: "The fragment 'c8y_IsDevice' was not found in the inventory object of the device",
-    },
+  ],
+
   },
 }
 ```
@@ -170,7 +206,9 @@ Additionally, an administrator can manually set the state to `REVOKED`, e.g. if 
   - testRun:
     - added `c8y_version`, `testSuit`-reference and overall `status` to root level
 
-## Change log
-
 - 2021-10-15
   - removed the sentenace "The only modifiable fragment is `certificate.status`, to represent the certificates life cycle." Because this is not what we want and would leave to an admin the possibillity to change the status from "outside"
+
+
+- 2021-10-27
+  - added a new layer between modul and capability named part , to get more things in detail covered.
