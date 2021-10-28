@@ -383,7 +383,7 @@ When the device receives the operation `c8y_LogfileRequest`, the following steps
 | 2.   | Internally retrieve log file and filter w.r.t. criteria found in operation                                                             |                                                                                       |
 | 3.   | Create an event with `"type": "c8y_LogfileRequest"`                                                                                    | [Create event](https://cumulocity.com/api/#operation/postEventCollectionResource)     |
 | 4.   | Upload the log file as attachment to the event                                                                                         | [Attach file to event](https://cumulocity.com/api/#operation/postEventBinaryResource) |
-| 5.   | Update operation accordingly `"status": "SUCCESSFUL", "c8y_LogfileRequest": {"file": "https://<TENANT_DOMAIN>/inventory/binaries/123"` | [Update operation](https://cumulocity.com/api/#operation/putOperationResource)        |
+| 5.   | Update operation accordingly `"status": "SUCCESSFUL", "c8y_LogfileRequest": {"file": "https://<TENANT_DOMAIN>/event/events/{id}/binaries"` | [Update operation](https://cumulocity.com/api/#operation/putOperationResource)        |
 
 ## Device Configuration
 
