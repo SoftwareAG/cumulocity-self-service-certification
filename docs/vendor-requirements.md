@@ -138,7 +138,7 @@ Example structure in device inventory:
 
 ### c8y_RequiredAvailability
 
-For details and examples, compare [device connectivity](https://cumulocity.com/api/#section/Device-management-library/Device-availability) section of the documentation.
+For details and examples, compare [device connectivity](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-availability) section of the documentation.
 
 | Fragment           | Mandatory |
 | ------------------ | --------- |
@@ -172,7 +172,7 @@ Example structure in device inventory:
 
 ## External ID
 
-For details and examples, compare [external id](https://cumulocity.com/api/#tag/External-IDs) section of the documentation.
+For details and examples, compare [external id](https://cumulocity.com/api/10.10.0/#operation/postExternalIDCollectionResource) section of the documentation.
 
 Used to identify the device in Cumulocity by its unique serial number, MAC, IMEI or similar unique identification string. If you don't want to specify a type, its recommend to use `c8y_Serial`.
 
@@ -214,7 +214,7 @@ The device creates measurements with the following content:
 | Measurement Fragment | The category of measurement | Yes |
 | Measurement Fragment Series | The name of the measurement series. Contains at least the `value` fragment, optionally the `unit` fragment | Yes |
 
- Measurements names should be written in camel-case because the Cumulocity IoT UI inserts a blank space between a lower-case and an upper-case letter and consecutive multiple upper-case letters are not separated with a blank space. The UI also does not display a prefix separated by one "_" (underline) symbol. 
+ Measurement names should be written in camel-case. Cumulocity IoT UI inserts a blank space between a lower-case and an upper-case letter. Two or more consecutive upper-case letters are not separated with blank spaces. The UI also hides the prefix of a measurement name that is ending with a "_" (underline) symbol. 
 
 Example POST body:
 
