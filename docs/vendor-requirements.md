@@ -814,6 +814,15 @@ When the device receives the operation `c8y_Command`, the following steps are ex
 | 2.   | Locally execute the command and add the result to the operation in the fragment `result` | [Update operation](https://cumulocity.com/api/#operation/putOperationResource)        |
 | 3.   | Update operation `"status": "SUCCESSFUL"`                                                | [Update operation](https://cumulocity.com/api/#operation/putOperationResource)        |
 
+Example operation after it has been executed and fragment `result` has been added to `c8y_Command`:
+
+```json5
+"c8y_Command": {
+    "text": "get uboot.sn",
+    "result": "123456"
+}
+```
+
 ## Cloud Remote Access
 
 **Document Section is still under development**
