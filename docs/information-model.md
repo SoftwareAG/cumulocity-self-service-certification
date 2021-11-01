@@ -32,7 +32,7 @@ The `c8y_certification_testSuite` object is represented in the following json fo
           endpoint: 'deviceInformation',
           mandatory: true, // true, false or obmitted (= false)
           parts:[
-                  id: 'deviceParts',
+                  id: 'parts',
                   title: 'device parts',
                   mandatory: true, // true, false or obmitted (= false)
                   capabilities: [

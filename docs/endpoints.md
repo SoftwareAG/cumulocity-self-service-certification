@@ -4,7 +4,7 @@
 
 This endpoint shall trigger all tests for a device. Call Certification Endpoint (General)
 
-GET `{{baseUrl}}/gateway-certification/certification/{deviceId}`
+GET `{{baseUrl}}/gateway-certification/perform_certification/{testRunID}?d={deviceId}`
 
 ---
 
