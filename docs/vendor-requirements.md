@@ -941,3 +941,4 @@ Example location update event:
 |-|-|-|
 | 30/09/2021 | Added MD file change log | minor |
 | 22/10/2021| Cypher suites information | minor |
+| 01/11/2021| Example added to shell feature | minor |
