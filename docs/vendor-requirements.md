@@ -45,13 +45,14 @@ For details and examples, compare [metadata](https://cumulocity.com/api/#section
 | Fragment                     | Meaning in Device Partner Portal                                                                          | Mandatory                                                       |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | `c8y_IsDevice`               | Empty fragment. Declares a Managed Object as a Device                                                     | Yes                                                             |
-| `com_cumulocity_model_Agent` | Empty fragment. Declares that the device is able to receive operations                                    | Yes for devices and gateways, No for child devices of a gateway |
+| `com_cumulocity_model_Agent` | Empty fragment. Declares that the device is able to receive operations                                    |Yes, for root devices and gateways that support operations; No, for devices and gateways that don't support operations; Must not be used for child devices; |
 | `name`                       | Sets the name of the device used e.g. in 'all devices' and 'device info' views                            | Yes                                                             |
 | `type`                       | Functional type of device e.g. water meter, pump, Gateway, environmental sensor                           | Yes                                                             |
 | `c8y_Hardware`               | Hardware information about the device                                                                     | Yes                                                             |
 | `c8y_Firmware`               | Firmware information about the device                                                                     | Yes                                                             |
 | `c8y_RequiredAvailability`   | Minimal communication interval to determine if device is offline                                          | No                                                              |
 | `c8y_SupportedOperations`    | Many optional operations are directly triggering the dynamic UI by invoking the respective operation tabs | No                                                              |
+|`externalIds`| Used to identify a device with a unique information from the physical world |Yes|
 
 Example structure in device inventory:
 
@@ -196,6 +197,10 @@ Example structure in external id managed object (this information is not stored 
 Sending measurements, events, and alarms are basic capabilities of any IoT enabled device. Therefore vendors should aim to support all three. However, there might be some instance where devices only send events (e.g. basic switches) or only measurements (e.g. basic sensor).
 Therefore it is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
 
+| Fragment | Content | Mandatory |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------- | --------- |
+|Measurements, Events, Alarms| Information send from the device to the platform |Yes, at least one of the three|
+
 ### Measurements
 
 For details and examples, compare [measurements](https://cumulocity.com/api/#tag/Measurements) section of the documentation.
@@ -208,6 +213,8 @@ The device creates measurements with the following content:
 | `time` | Date and time when the measurement was made | Yes |
 | Measurement Fragment | The category of measurement | Yes |
 | Measurement Fragment Series | The name of the measurement series. Contains at least the `value` fragment, optionally the `unit` fragment | Yes |
+
+ Measurements names should be written in camel-case because the Cumulocity IoT UI inserts a blank space between a lower-case and an upper-case letter and consecutive multiple upper-case letters are not separated with a blank space. The UI also does not display a prefix separated by one "_" (underline) symbol. 
 
 Example POST body:
 
@@ -232,6 +239,7 @@ Example POST body:
 The _Measurement Fragment_ and _Measurement Fragment Series_ are used in the Cumulocity IoT UI in the following way:
 ![Measurement Fragment and Series in UI](./media/measurement-fragmentand-series-in-ui.png)
 
+
 The following _Measurement Fragments_ are standard measurement fragments in Cumulocity IoT:
 `c8y_AccelerationMeasurement`, `c8y_Battery`, `c8y_CPUMeasurement`, `c8y_CurrentMeasurement`, `c8y_DistanceMeasurement`, `c8y_HumidityMeasurement`, `c8y_LightMeasurement`, `c8y_MeasurementPollFrequencyOperation`, `c8y_MeasurementRequestOperation`, `c8y_MemoryMeasurement`, `c8y_MotionMeasurement`, `c8y_MoistureMeasurement`, `c8y_SignalStrength`, `c8y_SinglePhaseEnergyMeasurement`, `c8y_Steam`, `c8y_Temperature`, `c8y_TemperatureMeasurement`, `c8y_ThreePhaseEnergyMeasurement`, `c8y_VoltageMeasurement`,
 
@@ -251,12 +259,12 @@ Example POST body:
 
 ```json5
 {
-  source: {
-    id: '251982',
+  "source": {
+    "id": "251982",
   },
-  type: 'Intrusion detection',
-  text: 'Door sensor was triggered',
-  time: '2021-10-19T12:03:27.845Z',
+  "type": "Intrusion detection",
+  "text": "Door sensor was triggered",
+  "time": "2021-10-19T12:03:27.845Z",
 }
 ```
 
@@ -278,14 +286,14 @@ Example POST body:
 
 ```json5
 {
-  source: {
-    id: '251982',
+  "source": {
+    "id": "251982",
   },
-  type: 'Operational State Alarms',
-  text: 'Machine stopped unexpectedly with exit reason 3',
-  severity: 'MAJOR',
-  status: 'ACTIVE',
-  time: '2021-10-19T12:03:27.845Z',
+  "type": "Operational State Alarms",
+  "text": "Machine stopped unexpectedly with exit reason 3",
+  "severity": "MAJOR",
+  "status": "ACTIVE",
+  "time": "2021-10-19T12:03:27.845Z",
 }
 ```
 
@@ -941,4 +949,5 @@ Example location update event:
 |-|-|-|
 | 30/09/2021 | Added MD file change log | minor |
 | 22/10/2021| Cypher suites information | minor |
-| 01/11/2021| Example added to shell feature | minor |
+| 01/11/2021| shell: Example added;  measurements section: Naming convention added; sending operational data: table added with mandatory information; Device Information: com_cumulocity_model_agent mandatory rule changed and externalIds added | minor |
+
