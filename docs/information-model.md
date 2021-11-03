@@ -32,21 +32,21 @@ The `c8y_certification_testSuite` object is represented in the following json fo
           endpoint: 'deviceInformation',
           mandatory: true, // true, false or obmitted (= false)
           parts:[
-                  id: 'parts',
-                  title: 'device parts',
-                  mandatory: true, // true, false or obmitted (= false)
-                  capabilities: [
-                                {
-                                  id: 'c8y_IsDevice',
-                                  title: 'c8y_IsDevice',
-                                  mandatory: true,
-                                },
-            ],
-          ],
+            id: 'parts',
+            title: 'device parts',
+            mandatory: true, // true, false or obmitted (= false)
+            capabilities: [
+              {
+                id: 'c8y_IsDevice',
+                title: 'c8y_IsDevice',
+                mandatory: true,
+              },
+            ]
+          ]
         },
-      ],
+      ]
     },
-  ],
+  ]
 }
 ```
 
@@ -87,12 +87,12 @@ The test run object is instantiated from the test suite data structure, by addin
         },
       mandatory: true, // true, false or obmitted (= false)     
       capabilities: {
-          c8y_IsDevice: {
-            status: {
-              code: 'FAILED',
-              text: 'The fragment <code>c8y_IsDevice</code> was not found in the inventory object of the device.', // HTML supported
-            },
+        c8y_IsDevice: {
+          status: {
+            code: 'FAILED',
+            text: 'The fragment <code>c8y_IsDevice</code> was not found in the inventory object of the device.', // HTML supported
           },
+        },
       },
     },
   },
@@ -130,7 +130,7 @@ This newly created object is immutable in the sense that all test results cannot
     productName: 'BCM2708 000e',
     vendorName: 'Partner Company',
     deviceId: '9656728',
-    parentId: '9656729',
+    parentId: '9656729'
   },
   certificate: {
     // set by MS: added information for certificate
@@ -141,10 +141,9 @@ This newly created object is immutable in the sense that all test results cannot
       // set by MS: status of the certificate, see certificate life cycle
       code: 'VALID', // set by MS: overall test status
       text: 'Certification is valid', // set by MS: long text of overall test status
-    },
+    }
   },
-
- tests: [
+  tests: [
     {
       id: 'foundationModules',
       title: 'Foundation Modules',
@@ -155,31 +154,31 @@ This newly created object is immutable in the sense that all test results cannot
           mandatory: true, // true, false or obmitted (= false)
           status:{
             code: 'FAILED'
-            },
-          parts:[
-                  id: 'deviceParts',
-                  title: 'device parts',
-                  mandatory: true, // true, false or obmitted (= false)
+          },
+          parts: [
+            {
+              id: 'deviceParts',
+              title: 'device parts',
+              mandatory: true, // true, false or obmitted (= false)
+              status: { 
+                code: 'FAILED'
+              },
+              capabilities: [
+                {
+                  id: 'c8y_IsDevice',
+                  title: 'c8y_IsDevice',
+                  mandatory: true,
                   status: { 
                     code: 'FAILED'
                   },
-                  capabilities: [
-                    {
-                      id: 'c8y_IsDevice',
-                      title: 'c8y_IsDevice',
-                      mandatory: true,
-                      status: { 
-                        code: 'FAILED'
-                      },
-                    },
-                ],
-          ],
+                },
+              ]
+            }
+          ]
         },
-      ],
-    },
-  ],
-
-  },
+      ]
+    }
+  ]
 }
 ```
 
