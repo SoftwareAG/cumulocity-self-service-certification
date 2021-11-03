@@ -351,9 +351,9 @@ The child device type `OPC-UA` is supporting the _foundation modules_ as well at
 
 Child device types can be freely named, however, here are some examples as orientation:.
 
-| Fragment                        | Content                                    | Required |
+| Fragment                        | Content                                    | Required for optional module |
 | ------------------------------- | ------------------------------------------ | ---------------------------- |
-| `c8y_SupportedChildDeviceTypes` | List contains supported child device types | No        |
+| `c8y_SupportedChildDeviceTypes` | List contains supported child device types | Yes        |
 
 Example structure in device inventory:
 
