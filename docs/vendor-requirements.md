@@ -42,17 +42,18 @@ Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the
 
 For details and examples, compare [metadata](https://cumulocity.com/api/#section/Device-management-library) section of documentation as well as the detail sections below.
 
-| Fragment                     | Meaning in Device Partner Portal                                                                          | Mandatory                                                       |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `c8y_IsDevice`               | Empty fragment. Declares a Managed Object as a Device                                                     | Yes                                                             |
-| `com_cumulocity_model_Agent` | Empty fragment. Declares that the device is able to receive operations                                    |Yes, for root devices and gateways that support operations; No, for devices and gateways that don't support operations; Must not be used for child devices; |
-| `name`                       | Sets the name of the device used e.g. in 'all devices' and 'device info' views                            | Yes                                                             |
-| `type`                       | Functional type of device e.g. water meter, pump, Gateway, environmental sensor                           | Yes                                                             |
-| `c8y_Hardware`               | Hardware information about the device                                                                     | Yes                                                             |
-| `c8y_Firmware`               | Firmware information about the device                                                                     | Yes                                                             |
-| `c8y_RequiredAvailability`   | Minimal communication interval to determine if device is offline                                          | No                                                              |
-| `c8y_SupportedOperations`    | Many optional operations are directly triggering the dynamic UI by invoking the respective operation tabs | No                                                              |
-|`externalIds`| Used to identify a device with a unique information from the physical world |Yes|
+| Fragment                     | Meaning in Device Partner Portal                                                                          | Mandatory                                                                                                                                                   |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `c8y_IsDevice`               | Empty fragment. Declares a Managed Object as a Device                                                     | Yes                                                                                                                                                         |
+| `com_cumulocity_model_Agent` | Empty fragment. Declares that the device is able to receive operations                                    | Yes, for root devices and gateways that support operations; No, for devices and gateways that don't support operations; Must not be used for child devices; |
+| `name`                       | Sets the name of the device used e.g. in 'all devices' and 'device info' views                            | Yes                                                                                                                                                         |
+| `type`                       | Functional type of device e.g. water meter, pump, Gateway, environmental sensor                           | Yes                                                                                                                                                         |
+| `c8y_Hardware`               | Hardware information about the device                                                                     | Yes                                                                                                                                                         |
+| `c8y_Firmware`               | Firmware information about the device                                                                     | Yes                                                                                                                                                         |
+| `c8y_Agent`                  | In∏formation about the agent run on the device                                                            | Yes                                                                                                                                                         |
+| `c8y_RequiredAvailability`   | Minimal communication interval to determine if device is offline                                          | No                                                                                                                                                          |
+| `c8y_SupportedOperations`    | Many optional operations are directly triggering the dynamic UI by invoking the respective operation tabs | No                                                                                                                                                          |
+| `externalIds`                | Used to identify a device with a unique information from the physical world                               | Yes                                                                                                                                                         |
 
 Example structure in device inventory:
 
@@ -97,7 +98,7 @@ Example structure in device inventory:
 
 ### c8y_Hardware
 
-The device certificate will be issued for device defined by `c8y_Hardware.model` and `c8y_Hardware.revision` together with the `c8y_Firmware.version` and `c8y_Firmware.name`.
+The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
 These fragments will also be used in future versions of Device Partner Portal (display one "Device" entry in the overview device list per `c8y_Hardware.model` and a dropdown in the device detail view for each `c8y_Hardware.revision`).
 
 | Fragment       | Meaning in Device Partner Portal                                        | Mandatory |
@@ -118,7 +119,7 @@ Example structure in device inventory:
 
 ### c8y_Firmware
 
-The device certificate will be issued for device defined by `c8y_Hardware.model`and `c8y_Hardware.revision` together with the `c8y_Firmware.name` and `c8y_Firmware.version`.
+The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
 
 | Fragment  | Mandatory |
 | --------- | --------- |
@@ -133,6 +134,26 @@ Example structure in device inventory:
     "name": "raspberrypi-bootloader",
     "version": "1.20140107-1",
     "url": "31aab9856861b1a587e2094690c2f6e272712cb1"
+}
+```
+
+### c8y_Agent
+
+The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
+
+| Fragment  | Mandatory |
+| --------- | --------- |
+| `name`    | Yes       |
+| `version` | Yes       |
+| `url`     | No        |
+
+Example structure in device inventory:
+
+```json5
+"c8y_Agent": {
+    "name": "myCustomAgent",
+    "version": "1.2.34",
+    "url": "https//link-to-agent-repo.url"
 }
 ```
 
@@ -197,22 +218,22 @@ Example structure in external id managed object (this information is not stored 
 Sending measurements, events, and alarms are basic capabilities of any IoT enabled device. Therefore vendors should aim to support all three. However, there might be some instance where devices only send events (e.g. basic switches) or only measurements (e.g. basic sensor).
 Therefore it is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
 
-| Fragment | Content | Mandatory |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------- | --------- |
-|Measurements, Events, Alarms| Information send from the device to the platform |Yes, at least one of the three|
+| Fragment                     | Content                                          | Mandatory                      |
+| ---------------------------- | ------------------------------------------------ | ------------------------------ |
+| Measurements, Events, Alarms | Information send from the device to the platform | Yes, at least one of the three |
 
 ### Measurements
 
 For details and examples, compare [measurements](https://cumulocity.com/api/#tag/Measurements) section of the documentation.
 
 The device creates measurements with the following content:
-| Fragment | Content | Mandatory |
+| Fragment                    | Content                                                                                                    | Mandatory |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------- | --------- |
-| `source` | Device ID | Yes |
-| `type` | Type of measurement | Yes |
-| `time` | Date and time when the measurement was made | Yes |
-| Measurement Fragment | The category of measurement | Yes |
-| Measurement Fragment Series | The name of the measurement series. Contains at least the `value` fragment, optionally the `unit` fragment | Yes |
+| `source`                    | Device ID                                                                                                  | Yes       |
+| `type`                      | Type of measurement                                                                                        | Yes       |
+| `time`                      | Date and time when the measurement was made                                                                | Yes       |
+| Measurement Fragment        | The category of measurement                                                                                | Yes       |
+| Measurement Fragment Series | The name of the measurement series. Contains at least the `value` fragment, optionally the `unit` fragment | Yes       |
 
  Measurement names should be written in camel-case. Cumulocity IoT UI inserts a blank space between a lower-case and an upper-case letter. Two or more consecutive upper-case letters are not separated with blank spaces. The UI also hides the prefix of a measurement name that is ending with a "_" (underline) symbol. 
 
@@ -248,12 +269,12 @@ The following _Measurement Fragments_ are standard measurement fragments in Cumu
 For details and examples, compare [events](https://cumulocity.com/api/#tag/Events) section of the documentation.
 
 The device creates events with the following content:
-| Fragment | Content | Mandatory |
+| Fragment | Content                                  | Mandatory |
 | -------- | ---------------------------------------- | --------- |
-| `source` | Device ID | Yes |
-| `type` | Type of event | Yes |
-| `time` | Date and time when the event was created | Yes |
-| `text` | Description of the event | Yes |
+| `source` | Device ID                                | Yes       |
+| `type`   | Type of event                            | Yes       |
+| `time`   | Date and time when the event was created | Yes       |
+| `text`   | Description of the event                 | Yes       |
 
 Example POST body:
 
@@ -273,14 +294,14 @@ Example POST body:
 For details and examples, compare [alarms](https://cumulocity.com/api/#tag/Alarms) section of the documentation.
 
 The device creates alarms with the following content:
-| Fragment | Content | Mandatory |
+| Fragment   | Content                                                                                                                                                | Mandatory |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- |
-| `source` | Device ID | Yes |
-| `type` | Type of alarm | Yes |
-| `time` | Date and time when the alarm was created | Yes |
-| `text` | Description of the alarm | Yes |
-| `severity` | One of the following severities: `CRITICAL`, `MAJOR`, `MINOR`, `WARNING` | Yes |
-| `status` | `ACTIVE` or `CLEARED`. If not specified, a new alarm will be created as `ACTIVE`. The state `ACKNOWLEDGED` is only set by the user, not by the device. | No |
+| `source`   | Device ID                                                                                                                                              | Yes       |
+| `type`     | Type of alarm                                                                                                                                          | Yes       |
+| `time`     | Date and time when the alarm was created                                                                                                               | Yes       |
+| `text`     | Description of the alarm                                                                                                                               | Yes       |
+| `severity` | One of the following severities: `CRITICAL`, `MAJOR`, `MINOR`, `WARNING`                                                                               | Yes       |
+| `status`   | `ACTIVE` or `CLEARED`. If not specified, a new alarm will be created as `ACTIVE`. The state `ACKNOWLEDGED` is only set by the user, not by the device. | No        |
 
 Example POST body:
 
@@ -384,13 +405,13 @@ Example operation sent to the device:
 
 When the device receives the operation `c8y_LogfileRequest`, the following steps are executed:
 
-| Step | Action                                                                                                                                 | Documentation                                                                         |
-| ---- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                   | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API) |
-| 1.   | Update operation `"status" : "EXECUTING"`                                                                                              | [Update operation](https://cumulocity.com/api/#operation/putOperationResource)        |
-| 2.   | Internally retrieve log file and filter w.r.t. criteria found in operation                                                             |                                                                                       |
-| 3.   | Create an event with `"type": "c8y_LogfileRequest"`                                                                                    | [Create event](https://cumulocity.com/api/#operation/postEventCollectionResource)     |
-| 4.   | Upload the log file as attachment to the event                                                                                         | [Attach file to event](https://cumulocity.com/api/#operation/postEventBinaryResource) |
+| Step | Action                                                                                                                                     | Documentation                                                                         |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                       | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API) |
+| 1.   | Update operation `"status" : "EXECUTING"`                                                                                                  | [Update operation](https://cumulocity.com/api/#operation/putOperationResource)        |
+| 2.   | Internally retrieve log file and filter w.r.t. criteria found in operation                                                                 |                                                                                       |
+| 3.   | Create an event with `"type": "c8y_LogfileRequest"`                                                                                        | [Create event](https://cumulocity.com/api/#operation/postEventCollectionResource)     |
+| 4.   | Upload the log file as attachment to the event                                                                                             | [Attach file to event](https://cumulocity.com/api/#operation/postEventBinaryResource) |
 | 5.   | Update operation accordingly `"status": "SUCCESSFUL", "c8y_LogfileRequest": {"file": "https://<TENANT_DOMAIN>/event/events/{id}/binaries"` | [Update operation](https://cumulocity.com/api/#operation/putOperationResource)        |
 
 ## Device Configuration
@@ -659,13 +680,13 @@ Example operation sent to the device:
 ```
 
 When the device receives the operation having `c8y_Firmware`, the following steps are executed:
-| Step | Action | Documentation |
+| Step | Action                                                                                                                                                                                                                                                                                                                       | Documentation                                                                                          |
 | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| 0. | Listen for operation created by platform with `"status" : "PENDING"` | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API) |
-| 1. | Update operation `"status" : "EXECUTING"` | [Update operation](https://cumulocity.com/api/#operation/putOperationResource) |
-| 2. | Compare name and version stored in the fragment `c8y_Firmware` in the inventory object of the device with the name and version stored in the received operation fragment `c8y_Firmware`. If the name and/or version are differing download from the (device specific) firmware repository referenced in the url and install. | [Device information](https://cumulocity.com/api/#section/Device-management-library/Device-information) |
-| 3. | Update the fragment `c8y_Firmware` of the inventory object of the device. | |
-| 4. | Update operation accordingly `"status": "SUCCESSFUL"` | [Update operation](https://cumulocity.com/api/#operation/putOperationResource) |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                                                                                                                                                                                                         | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API)                  |
+| 1.   | Update operation `"status" : "EXECUTING"`                                                                                                                                                                                                                                                                                    | [Update operation](https://cumulocity.com/api/#operation/putOperationResource)                         |
+| 2.   | Compare name and version stored in the fragment `c8y_Firmware` in the inventory object of the device with the name and version stored in the received operation fragment `c8y_Firmware`. If the name and/or version are differing download from the (device specific) firmware repository referenced in the url and install. | [Device information](https://cumulocity.com/api/#section/Device-management-library/Device-information) |
+| 3.   | Update the fragment `c8y_Firmware` of the inventory object of the device.                                                                                                                                                                                                                                                    |                                                                                                        |
+| 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                                                                                                                                                                                                                        | [Update operation](https://cumulocity.com/api/#operation/putOperationResource)                         |
 
 ## Device Profile
 
@@ -945,9 +966,9 @@ Example location update event:
 ```
 
 ##MD file change Log
-| Date | Chapter | Severity |
-|-|-|-|
-| 30/09/2021 | Added MD file change log | minor |
-| 22/10/2021| Cypher suites information | minor |
-| 01/11/2021| shell: Example added;  measurements section: Naming convention added; sending operational data: table added with mandatory information; Device Information: com_cumulocity_model_agent mandatory rule changed and externalIds added | medium |
+| Date       | Chapter                                                                                                                                                                                                                             | Severity |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| 30/09/2021 | Added MD file change log                                                                                                                                                                                                            | minor    |
+| 22/10/2021 | Cypher suites information                                                                                                                                                                                                           | minor    |
+| 01/11/2021 | shell: Example added;  measurements section: Naming convention added; sending operational data: table added with mandatory information; Device Information: com_cumulocity_model_agent mandatory rule changed and externalIds added | medium   |
 
