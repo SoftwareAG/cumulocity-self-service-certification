@@ -655,6 +655,7 @@ The following fragments are related to the optional device capability with a rem
 
 | Fragment                  | Content                              | Required for optional module |
 | ------------------------- | ------------------------------------ | ---------------------------- |
+| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Firmware` | Yes                          |
 
 Firmware tab will be visible on the device page only if `c8y_Firmware` is listed in the device’s supported operations.
