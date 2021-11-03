@@ -216,18 +216,18 @@ Example structure in external id managed object (this information is not stored 
 ## Sending Operational Data
 
 Sending measurements, events, and alarms are basic capabilities of any IoT enabled device. Therefore vendors should aim to support all three. However, there might be some instance where devices only send events (e.g. basic switches) or only measurements (e.g. basic sensor).
-Therefore it is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
+It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
 
-| Fragment                     | Content                                          | Mandatory                      |
+| Functionality                     | Content                                          | Mandatory                      |
 | ---------------------------- | ------------------------------------------------ | ------------------------------ |
-| Measurements, Events, Alarms | Information send from the device to the platform | Yes, at least one of the three |
+| Measurements (M), Events (E), Alarms (A)| Information send from the device to the platform | Yes, at least one of the three |
 
 ### Measurements
 
-For details and examples, compare [measurements](https://cumulocity.com/api/#tag/Measurements) section of the documentation.
+For details and examples, compare [measurements](https://cumulocity.com/api/#tag/Measurements) section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
 
 The device creates measurements with the following content:
-| Fragment                    | Content                                                                                                    | Mandatory |
+| Fragment                    | Content                                                                                                    | Mandatory for Measurements |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------- | --------- |
 | `source`                    | Device ID                                                                                                  | Yes       |
 | `type`                      | Type of measurement                                                                                        | Yes       |
@@ -266,10 +266,10 @@ The following _Measurement Fragments_ are standard measurement fragments in Cumu
 
 ### Events
 
-For details and examples, compare [events](https://cumulocity.com/api/#tag/Events) section of the documentation.
+For details and examples, compare [events](https://cumulocity.com/api/#tag/Events) section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
 
 The device creates events with the following content:
-| Fragment | Content                                  | Mandatory |
+| Fragment | Content                                  | Mandatory for Events |
 | -------- | ---------------------------------------- | --------- |
 | `source` | Device ID                                | Yes       |
 | `type`   | Type of event                            | Yes       |
@@ -291,10 +291,10 @@ Example POST body:
 
 ### Alarms
 
-For details and examples, compare [alarms](https://cumulocity.com/api/#tag/Alarms) section of the documentation.
+For details and examples, compare [alarms](https://cumulocity.com/api/#tag/Alarms) section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
 
 The device creates alarms with the following content:
-| Fragment   | Content                                                                                                                                                | Mandatory |
+| Fragment   | Content                                                                                                                                                | Mandatory for Alarms |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- |
 | `source`   | Device ID                                                                                                                                              | Yes       |
 | `type`     | Type of alarm                                                                                                                                          | Yes       |
@@ -318,6 +318,25 @@ Example POST body:
 }
 ```
 
+
+
+# Optional Modules
+
+All sections below are **optional**. If a device partner decides to certify optional modules, they are documented in the certificate and shown on the device partner portal.
+Customer can filter and search for devices that support certain modules. Therefore, it is recommended to certify all capabilities (aka. "Optional Modules") offered by the device.
+The Modules are listed below in descending order of importance based on Software AG's experience.
+To indicate that a device wants to certify an Optional Module, it has to add the respective element to the list of supported operations in the inventory object of the device. All optional modules that recieve operations require the fragment  `com_cumulocity_model_Agent` to be present in the inventory as described in [Device Information](#device-information). 
+
+Example structure in device inventory:
+
+```json5
+"c8y_SupportedOperations": [
+    "c8y_LogfileRequest",
+    "c8y_Configuration",
+    "c8y_SendConfiguration"
+]
+```
+
 ## Gateways
 
 For details and examples, compare [child operations](https://cumulocity.com/api/#tag/Child-operations) section of the documentation.
@@ -332,9 +351,9 @@ The child device type `OPC-UA` is supporting the _foundation modules_ as well at
 
 Child device types can be freely named, however, here are some examples as orientation:.
 
-| Fragment                        | Content                                    | Required for optional module |
+| Fragment                        | Content                                    | Required |
 | ------------------------------- | ------------------------------------------ | ---------------------------- |
-| `c8y_SupportedChildDeviceTypes` | List contains supported child device types | Yes (at least 1 type)        |
+| `c8y_SupportedChildDeviceTypes` | List contains supported child device types | No        |
 
 Example structure in device inventory:
 
@@ -351,23 +370,6 @@ Example structure in device inventory:
 ]
 ```
 
-# Optional Modules
-
-All sections below are **optional**. If a device partner decides to certify optional modules, they are documented in the certificate and shown on the device partner portal.
-Customer can filter and search for devices that support certain modules. Therefore, it is recommended to certify all capabilities (aka. "Optional Modules") offered by the device.
-The Modules are listed below in descending order of importance based on Software AG's experience.
-To indicate that a device wants to certify an Optional Module, it has to add the respective element to the list of supported operations in the inventory object of the device.
-
-Example structure in device inventory:
-
-```json5
-"c8y_SupportedOperations": [
-    "c8y_LogfileRequest",
-    "c8y_Configuration",
-    "c8y_SendConfiguration"
-]
-```
-
 ## Log File Retrieval
 
 Device capability to upload (filtered) log files to C8Y. For details and examples, compare `c8y_LogfileRequest` section in the [documentation](https://cumulocity.com/api/#section/Device-management-library/Miscellaneous).
@@ -376,6 +378,7 @@ The following fragments are related to the optional device capability with a rem
 
 | Fragment                  | Content                                    | Required for optional module |
 | ------------------------- | ------------------------------------------ | ---------------------------- |
+| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_LogfileRequest` | Yes                          |
 | `c8y_SupportedLogs`       | List of supported log file types           | Yes (at least 1 type)        |
 
@@ -431,6 +434,7 @@ The following fragments are related to the optional device capability with a rem
 
 | Fragment                  | Content                                       | Required for optional module |
 | ------------------------- | --------------------------------------------- | ---------------------------- |
+| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Configuration`     | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_SendConfiguration` | Yes                          |
 
@@ -496,6 +500,7 @@ The following fragments are related to the optional device capability with a rem
 
 | Fragment                      | Content                                        | Required for optional module |
 | ----------------------------- | ---------------------------------------------- | ---------------------------- |
+| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations`     | List contains element `c8y_DownloadConfigFile` | Yes                          |
 | `c8y_SupportedOperations`     | List contains element `c8y_UploadConfigFile`   | Yes                          |
 | `c8y_SupportedConfigurations` | List of supported configuration file types     | Yes (at least 1 type)        |
@@ -573,6 +578,7 @@ The following fragments are related to the optional device capability with a rem
 
 | Fragment                  | Content                                            | Required for optional module |
 | ------------------------- | -------------------------------------------------- | ---------------------------- |
+| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_SoftwareUpdate`         | Yes                          |
 | `c8y_SoftwareList`        | List of currently installed software on the device | Yes                          |
 
@@ -696,6 +702,7 @@ The following fragments are related to the optional device capability with a rem
 
 | Fragment                  | Content                                                                 | Required for optional module |
 | ------------------------- | ----------------------------------------------------------------------- | ---------------------------- |
+| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_DeviceProfile`                               | Yes                          |
 | `c8y_Profile`             | List contains element `profileName`, `profileId`, and `profileExecuted` | Yes                          |
 
@@ -757,6 +764,7 @@ The following fragments are related to the optional device capability with a rem
 
 | Fragment                  | Content                             | Required for optional module |
 | ------------------------- | ----------------------------------- | ---------------------------- |
+| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Restart` | Yes                          |
 
 Example structure in device inventory:
@@ -786,6 +794,7 @@ The following fragments are related to the optional device capability with a rem
 
 | Fragment                  | Content                                                 | Required for optional module |
 | ------------------------- | ------------------------------------------------------- | ---------------------------- |
+| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_MeasurementRequestOperation` | Yes                          |
 
 Example structure in device inventory:
@@ -816,6 +825,7 @@ The following fragments are related to the optional device capability with a rem
 
 | Fragment                  | Content                             | Required for optional module |
 | ------------------------- | ----------------------------------- | ---------------------------- |
+| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Command` | Yes                          |
 
 Example structure in device inventory:
@@ -864,6 +874,7 @@ The following fragments are related to the optional device capability with a rem
 
 | Fragment                  | Content                                         | Required for optional module |
 | ------------------------- | ----------------------------------------------- | ---------------------------- |
+| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_RemoteAccessConnect` | Yes                          |
 | `c8y_RemoteAccessList`    | List of supported remote access types           | Yes (at least 1 type)        |
 
@@ -971,4 +982,5 @@ Example location update event:
 | 30/09/2021 | Added MD file change log                                                                                                                                                                                                            | minor    |
 | 22/10/2021 | Cypher suites information                                                                                                                                                                                                           | minor    |
 | 01/11/2021 | shell: Example added;  measurements section: Naming convention added; sending operational data: table added with mandatory information; Device Information: com_cumulocity_model_agent mandatory rule changed and externalIds added | medium   |
+| 03/11/2021 | `com_cumulocity_model_agent` added as mandatory for each optional agent module that relies on receiving operations; Moved supported child device types to optional modules;  | medium   |
 
