@@ -14,26 +14,26 @@ The `c8y_certification_testSuite` object is represented in the following json fo
 
 ```json5
 {
-  type: 'c8y_certification_testSuite', // set by MS: type of the manged object
-  version: '1.3', // for (manual) comparison
-  tests: [
+  "type": "c8y_certification_testSuite", // set by MS: type of the manged object
+  "version": "1.3", // for (manual) comparison
+  "tests": [
     {
-      id: 'foundationModules',
-      title: 'Foundation Modules',
-      modules: [
+      "id": "foundationModules",
+      "title": "Foundation Modules",
+      "modules": [
         {
           // simple module
           // - only hosting capabilities.
           // - listing children on fragment `capabilities`.
-          id: 'deviceInformation',
-          title: 'Device Information',
-          mandatory: true, // boolean or obmitted (= false)
-          container: false, // boolean or obmitted (= false),
-          capabilities: [
+          "id": "deviceInformation",
+          "title": "Device Information",
+          "mandatory": true, // boolean or obmitted (= false)
+          "container": false, // boolean or obmitted (= false),
+          "capabilities": [
             {
-              id: 'c8y_IsDevice',
-              title: 'c8y_IsDevice',
-              mandatory: true,
+              "id": "c8y_IsDevice",
+              "title": "c8y_IsDevice",
+              "mandatory": true,
             },
           ],
         },
@@ -42,30 +42,30 @@ The `c8y_certification_testSuite` object is represented in the following json fo
           // - hosting further modules.
           // - limited to one layer.
           // - children listed on fragment `modules`.
-          id: 'sendingOperationalData',
-          title: 'Sending Operational Data',
-          mandatory: true,
-          container: true,
-          modules: [
+          "id": "sendingOperationalData",
+          "title": "Sending Operational Data",
+          "mandatory": true,
+          "container": true,
+          "modules": [
             {
-              id: 'operationDataMeasurements',
-              title: 'Measurements',
-              type: 'container',
-              capabilities: [
+              "id": "operationDataMeasurements",
+              "title": "Measurements",
+              "type": "container",
+              "capabilities": [
                 {
-                  id: 'operationDataMeasurements_Source',
-                  title: 'Device ID',
-                  mandatory: true,
+                  "id": "operationDataMeasurements_Source",
+                  "title": "Device ID",
+                  "mandatory": true,
                 },
                 {
-                  id: 'operationDataMeasurements_Type',
-                  title: 'Type of measurement',
-                  mandatory: true,
+                  "id": "operationDataMeasurements_Type",
+                  "title": "Type of measurement",
+                  "mandatory": true,
                 },
                 {
-                  id: 'operationDataMeasurements_Time',
-                  title: 'Date and time when the measurement was made',
-                  mandatory: true,
+                  "id": "operationDataMeasurements_Time",
+                  "title": "Date and time when the measurement was made",
+                  "mandatory": true,
                 },
               ],
             },
@@ -93,6 +93,7 @@ The test run object is instantiated from the test suite data structure, by addin
     "code": "PENDING"
   },
   "hashValue": "2e400e60b947152aec082aadcc1d820a", // set by MS: md5 hash value to make sure only SAG can change this
+  // product details
   "product": {
     "productName": "BCM2708 000e", // set by user
     "productType": "Device",
@@ -105,7 +106,8 @@ The test run object is instantiated from the test suite data structure, by addin
     "id": "deviceInformation",
     "parent": "foundationModules",
     "status": { // set by MS: added to indicate the status of each capability
-      "code": "FAILED" // set by MS
+      "code": "FAILED", // set by MS
+      // text is not required/used for modules
     },
     "mandatory": true, // boolean or obmitted (= false)
     "capabilities": [
@@ -113,35 +115,42 @@ The test run object is instantiated from the test suite data structure, by addin
         "id": "c8y_IsDevice",
         "mandatory": true,
         "status": {
-          "code": "FAILED"
+          "code": "FAILED",
+          "text": "The fragment <code>c8y_IsDevice</code> is not set."
         },
       },
     ],
   },
   // container modules are obmitted, their child-modules are listed
   {
-    "id": 'operationDataMeasurements',
-    "parent": 'sendingOperationalData',
+    "id": "operationDataMeasurements",
+    "parent": "sendingOperationalData",
+    "status": { // set by MS: added to indicate the status of each capability
+      "code": "FAILED", // set by MS
+    },
     "capabilities": [
       {
         "id": "operationDataMeasurements_Source",
         "mandatory": true,
         "status": {
-          "code": "FAILED"
+          "code": "FAILED",
+          "text": "Lorem ipsum dolor sit amet."
         },
       },
       {
         "id": "operationDataMeasurements_Type",
         "mandatory": true,
         "status": {
-          "code": "FAILED"
+          "code": "FAILED",
+          "text": "Lorem <strong>ipsum dolor</strong> sit amet."
         },
       },
       {
         "id": "operationDataMeasurements_Time",
         "mandatory": true,
         "status": {
-          "code": "FAILED"
+          "code": "FAILED",
+          "text": "Lorem ipsum dolor <i>sit</i> amet."
         },
       },
     ]
@@ -159,7 +168,7 @@ The life cycle of a test run is captured in the status of all tested capabilitie
 | `EXECUTING`   | Test is currently in execution                                                         |
 | `SUCCESSFUL`  | Test executed and returned successful state                                            |
 | `FAILED`      | Test executed and returned failed state                                                |
-| `UNSUPPORTED` | For optional modules only. Set if device does not indicate to support this capability. |
+| `UNSUPPORTED` | **For optional modules only**. Set if device does not indicate to support this capability. |
 
 When a test run object is created, all tests are set to `PENDING` state.
 When a test is stated, it sets the respective status to `EXECUTING`.
@@ -173,52 +182,95 @@ This newly created object is immutable in the sense that all test results cannot
 
 ```json5
 {
-  type: 'c8y_certification_testCertificate', // set by MS: type of the manged object
-  version: '1.0',
-  hashValue: '2e400e60b947152aec082aadcc1d820a',
-  product: {
-    productName: 'BCM2708 000e',
-    vendorName: 'Partner Company',
-    deviceId: '9656728',
-    parentId: '9656729',
+  "type": "c8y_certification_testCertificate", // set by MS: type of the manged object
+  "version": "1.3",
+  "hashValue": "2e400e60b947152aec082aadcc1d820a",
+  // product details
+  "product": {
+    "productName": "BCM2708 000e",
+    "vendorName": "Partner Company",
+    "deviceId": "9656728",
+    "parentId": "9656729",
   },
-  certificate: {
-    // set by MS: added information for certificate
-    creationDate: '2021-08-10T05:54:38.107Z', // set by MS: date of certification
-    c8yVersion: '1010.0.8', // set by MS: C8Y backend version at time of certification
-    pdfDocument: 'https://t10452223.eu-latest.cumulocity.com/inventory/binaries/7101509', // set by MS: Links to the stored document in the blob storage
-    status: {
-      // set by MS: status of the certificate, see certificate life cycle
-      code: 'VALID', // set by MS: overall test status
-      text: 'Certification is valid', // set by MS: long text of overall test status
+  // certificate details (set by MS)
+  "certificate": {
+    "creationDate": "2021-08-10T05:54:38.107Z", // date of certification
+    "c8yVersion": "1010.0.8", // C8Y backend version at time of certification
+    "pdfDocument": "https://t10452223.eu-latest.cumulocity.com/inventory/binaries/7101509", // Links to the stored document in the blob storage
+    "status": {
+      // status of the certificate, @see certificate life cycle
+      "code": "VALID", // overall test status
+      "text": "Certification is valid", // long text of overall test status, eg for display in UI
     },
   },
-  deviceInformation: {
-    parent: 'foundationModules',
-    title: 'Device Information',
-    endpoint: 'deviceInformation',
-    status: {
-      code: 'FAILED',
+  // test defintion -->
+  "tests": [
+    {
+      "id": "foundationModules",
+      "title": "Foundation Modules",
+      "modules": [
+        {
+          // simple module
+          "id": "deviceInformation",
+          "title": "Device Information",
+          "mandatory": true,
+          "status": {
+            "code": "FAILED",
+            // text is not required/used for modules
+          },
+          "capabilities": [
+            {
+              "id": "c8y_IsDevice",
+              "title": "c8y_IsDevice",
+              "mandatory": true,
+              "status": {
+                "code": "FAILED",
+                "text": "The fragment <code>c8y_IsDevice</code> is not set."
+              },
+            },
+          ]
+        },
+        {
+          // container module
+          "id": "sendingOperationalData",
+          "title": "Sending Operational Data",
+          "mandatory": true,
+          "container": true,
+          "modules": [
+            {
+              "id": "operationDataMeasurements",
+              "title": "Measurements",
+              "type": "container",
+              "status": {
+                "code": "FAILED"
+                // text is not required/used for modules
+              },
+              "capabilities": [
+                {
+                  "id": "operationDataMeasurements_Source",
+                  "title": "Device ID",
+                  "mandatory": true,
+                  "text": "Lorem ipsum dolor sit amet."
+                },
+                {
+                  "id": "operationDataMeasurements_Type",
+                  "title": "Type of measurement",
+                  "mandatory": true,
+                  "text": "Lorem <strong>ipsum dolor</strong> sit amet."
+                },
+                {
+                  "id": "operationDataMeasurements_Time",
+                  "title": "Date and time when the measurement was made",
+                  "mandatory": true,
+                  "text": "Lorem ipsum dolor <i>sit</i> amet."
+                },
+              ]
+            },
+          ]
+        },
+      ]
     },
-  },
-  c8y_IsDevice: {
-    parent: 'deviceInformation',
-    title: 'c8y_IsDevice',
-    mandatory: true,
-    status: {
-      code: 'FAILED',
-      text: "The fragment 'c8y_IsDevice' was not found in the inventory object of the device",
-    },
-  },
-  c8y_TemperatureMeasurement: {
-    parent: 'sendingOperationalData',
-    title: 'c8y_TemperatureMeasurement',
-    mandatory: true,
-    status: {
-      code: 'FAILED',
-      text: "The fragment 'c8y_IsDevice' was not found in the inventory object of the device",
-    },
-  },
+  ]
 }
 ```
 
@@ -238,17 +290,17 @@ Additionally, an administrator can manually set the state to `REVOKED`, e.g. if 
 
 ## Change log
 
+- 2021-11-04 // D. Peter
+  adjusted datamodel to incoporate an optional grouping level between module and capability
+  - added fragment `container` to modules
+  - refactored the json structure of `testSuite`, `testRun` and `testCertificate`
+- 2021-10-27
+  added a new layer between modul and capability named part , to get more things in detail covered.
+- 2021-10-15
+  removed the sentenace "The only modifiable fragment is `certificate.status`, to represent the certificates life cycle." Because this is not what we want and would leave to an admin the possibillity to change the status from "outside"
 - 2021-09-30
-
   - testSuit:
     - reverted to use arrays for tests, modules and capabilities to maintain their order. an update via put seems not to be required.
     - `mandatory` added to modules
   - testRun:
     - added `c8y_version`, `testSuit`-reference and overall `status` to root level
-
-- 2021-10-15
-
-  - removed the sentenace "The only modifiable fragment is `certificate.status`, to represent the certificates life cycle." Because this is not what we want and would leave to an admin the possibillity to change the status from "outside"
-
-- 2021-10-27
-  - added a new layer between modul and capability named part , to get more things in detail covered.
