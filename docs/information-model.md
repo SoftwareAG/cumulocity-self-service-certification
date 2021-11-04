@@ -11,6 +11,20 @@ The test suite is created by the technical partner management team at Software A
     - Parts   (e.g. device config text)
       - Capabilities (e.g. c8y_IsDevice)
 
+- Testsuite
+  - Foundation Modules
+    - Modules (e.g. Device Information) of type container
+       - Capabilities (e.g. c8y_IsDevice)
+    - Modules (e.g. Sending Operational Data) of type part
+      - Capabilities (e.g. c8y_Temperature)
+    - Modules (e.g. Gateway) of type container
+  - Optional Modules
+      - Modules (e.g. Log File Retrieval) of type container
+       - Capabilities (e.g. ...)
+    - Modules (e.g. Device Configuration) of type part
+      - Capabilities (e.g. c8y_Temperature)
+
+
 ![model diagram](media/model.drawio.svg)
 
 The test suite data structure is used by the UI to generate the list of to be tested items.
@@ -19,34 +33,54 @@ The `c8y_certification_testSuite` object is represented in the following json fo
 
 ```json5
 {
-  type: 'c8y_certification_testSuite', // set by MS: type of the managed object
-  version: '1.2',
-  tests: [
-    {
-      id: 'foundationModules',
-      title: 'Foundation Modules',
-      modules: [
+    "type": "c8y_certification_testSuite", // set by MS: type of the manged object
+    "version": "1.3",
+    "tests": [
         {
-          id: 'deviceInformation',
-          title: 'Device Information',
-          endpoint: 'deviceInformation',
-          mandatory: true, // true, false or obmitted (= false)
-          parts:[
-            id: 'parts',
-            title: 'device parts',
-            mandatory: true, // true, false or obmitted (= false)
-            capabilities: [
-              {
-                id: 'c8y_IsDevice',
-                title: 'c8y_IsDevice',
-                mandatory: true,
-              },
+            "id": "foundationModules",
+            "title": "Foundation Modules",
+            "modules": [
+                {
+                    "id": "deviceInformation",
+                    "title": "Device Information",
+                    "endpoint": "deviceInformation",
+                    "mandatory": true, // true, false or obmitted (= false)
+                    "type": "container",
+                    "capabilities": [
+                        {
+                            "id": "c8y_IsDevice",
+                            "title": "c8y_IsDevice",
+                            "mandatory": true
+                        }
+                    ]
+                }
+                {
+                    "id": "sendingOperationalData",
+                    "title": "Sending Operational Data",
+                    "endpoint": "sendingOperationalData",
+                    "mandatory": true, // true, false or obmitted (= false)
+                    "type": "part",
+                    "capabilities": [
+                        {
+                            "id": "c8y_TemperatureMeasurement",
+                            "title": "c8y_Temperature",
+                            "mandatory": true
+                        }
+                        {
+                            "id": "c8y_Event",
+                            "title": "c8y_Event",
+                            "mandatory": true
+                        }
+                        {
+                            "id": "c8y_Alarm",
+                            "title": "c8y_Alarm",
+                            "mandatory": true
+                        }
+                    ]
+                }
             ]
-          ]
-        },
-      ]
-    },
-  ]
+        }
+    ]
 }
 ```
 
@@ -57,45 +91,64 @@ The test run object is instantiated from the test suite data structure, by addin
 
 ```json5
 {
-  type: 'c8y_certification_testRun', // set by MS: type of the manged object
-  version: '1.2',
-  c8y_version: '1010.0.8',
-  testSuite: '123456',
-  certificate: '234567',
-  status: {
-    code: 'PENDING',
-  },
-  hashValue: '2e400e60b947152aec082aadcc1d820a', // set by MS: md5 hash value to make sure only SAG can change this
-  product: {
-    productName: 'BCM2708 000e', // set by user
-    productType: 'Device',
-    vendorName: 'Partner Company', // set by user
-    deviceId: '9656728', // set by MS: device id taken from the device managed object
-    parentId: '9656729', // set by MS: if there is a parent this should be the connection
-  },
-  deviceInformation: {
-    parent: 'foundationModules',
-    status: {
-      // set by MS: added to indicate the status of each capability
-      code: 'FAILED', // set by MS
+    "type": "c8y_certification_testRun", // set by MS: type of the manged object
+    "version": "1.3",
+    "c8y_version": "1010.0.8",
+    "testSuite": "123456",
+    "certificate": "234567",
+    "status": {
+        "code": "PENDING"
     },
-    parts: {
-      parent: 'deviceInformation',
-      status: {
-        // set by MS: added to indicate the status of each capability
-        code: 'FAILED' // set by MS
-      },
-      mandatory: true, // true, false or obmitted (= false)     
-      capabilities: {
-        c8y_IsDevice: {
-          status: {
-            code: 'FAILED',
-            text: 'The fragment <code>c8y_IsDevice</code> was not found in the inventory object of the device.', // HTML supported
-          },
+    "hashValue": "2e400e60b947152aec082aadcc1d820a", // set by MS: md5 hash value to make sure only SAG can change this
+    "product": {
+        "productName": "BCM2708 000e", // set by user
+        "productType": "Device",
+        "vendorName": "Partner Company", // set by user
+        "deviceId": "9656728", // set by MS: device id taken from the device managed object
+        "parentId": "9656729", // set by MS: if there is a parent this should be the connection
+    },
+    "deviceInformation": {
+        "parent": "foundationModules",
+        "status": { // set by MS: added to indicate the status of each capability
+            "code": "FAILED" // set by MS    
         },
-      },
-    },
-  },
+        "capabilities": {
+            "c8y_IsDevice": {
+                "type" : "container",
+                "status": {
+                    "code": "FAILED",
+                    "text": "The fragment <code>c8y_IsDevice</code> was not found in the inventory object of the device." // HTML supported
+                }
+            },
+      "sendingOperationalData": {
+        "parent": "foundationModules",
+        "status": { // set by MS: added to indicate the status of each capability
+            "code": "FAILED" // set by MS    
+        },
+        "capabilities": {
+            "c8y_TemperatureMeasurement": {
+                "type" : "part",
+                "status": {
+                    "code": "FAILED",
+                    "text": "The fragment <code>c8y_IsDevice</code> was not found in the inventory object of the device." // HTML supported
+                }
+            },
+            "c8y_Event": {
+                "type" : "part",
+                "status": {
+                    "code": "FAILED",
+                    "text": "The fragment <code>c8y_IsDevice</code> was not found in the inventory object of the device." // HTML supported
+                }
+            },
+            "c8y_Alarm": {
+                "type" : "part",
+                "status": {
+                    "code": "FAILED",
+                    "text": "The fragment <code>c8y_IsDevice</code> was not found in the inventory object of the device." // HTML supported
+                }
+            },
+        }
+    }
 }
 ```
 
@@ -123,62 +176,50 @@ This newly created object is immutable in the sense that all test results cannot
 
 ```json5
 {
-  type: 'c8y_certification_testCertificate', // set by MS: type of the manged object
-  version: '1.0',
-  hashValue: '2e400e60b947152aec082aadcc1d820a',
-  product: {
-    productName: 'BCM2708 000e',
-    vendorName: 'Partner Company',
-    deviceId: '9656728',
-    parentId: '9656729'
-  },
-  certificate: {
-    // set by MS: added information for certificate
-    creationDate: '2021-08-10T05:54:38.107Z', // set by MS: date of certification
-    c8yVersion: '1010.0.8', // set by MS: C8Y backend version at time of certification
-    pdfDocument: 'https://t10452223.eu-latest.cumulocity.com/inventory/binaries/7101509', // set by MS: Links to the stored document in the blob storage
-    status: {
-      // set by MS: status of the certificate, see certificate life cycle
-      code: 'VALID', // set by MS: overall test status
-      text: 'Certification is valid', // set by MS: long text of overall test status
+    "type": "c8y_certification_testCertificate", // set by MS: type of the manged object
+    "version": "1.0",
+    "hashValue": "2e400e60b947152aec082aadcc1d820a",
+    "product": {
+        "productName": "BCM2708 000e",
+        "vendorName": "Partner Company",
+        "deviceId": "9656728",
+        "parentId": "9656729",
+    },
+    "certificate": { // set by MS: added information for certificate
+        "creationDate": "2021-08-10T05:54:38.107Z", // set by MS: date of certification
+        "c8yVersion": "1010.0.8", // set by MS: C8Y backend version at time of certification
+        "pdfDocument": "https://t10452223.eu-latest.cumulocity.com/inventory/binaries/7101509", // set by MS: Links to the stored document in the blob storage 
+        "status": { // set by MS: status of the certificate, see certificate life cycle
+            "code": "VALID", // set by MS: overall test status
+            "text": "Certification is valid" // set by MS: long text of overall test status
+        }
+    },
+    "deviceInformation": {
+        "parent": "foundationModules",
+        "title": "Device Information",
+        "endpoint": "deviceInformation",
+        "status": {
+            "code": "FAILED"   
+        }
+    },
+    "c8y_IsDevice": {
+        "parent": "deviceInformation",
+        "title": "c8y_IsDevice",
+        "mandatory": true,
+        "status": {
+            "code": "FAILED",
+            "text": "The fragment 'c8y_IsDevice' was not found in the inventory object of the device"
+        }
+    },
+    "c8y_TemperatureMeasurement": {
+        "parent": "sendingOperationalData",
+        "title": "c8y_TemperatureMeasurement",
+        "mandatory": true,
+        "status": {
+            "code": "FAILED",
+            "text": "The fragment 'c8y_IsDevice' was not found in the inventory object of the device"
+        }
     }
-  },
-  tests: [
-    {
-      id: 'foundationModules',
-      title: 'Foundation Modules',
-      modules: [
-        {
-          id: 'deviceInformation',
-          title: 'Device Information',
-          mandatory: true, // true, false or obmitted (= false)
-          status:{
-            code: 'FAILED'
-          },
-          parts: [
-            {
-              id: 'deviceParts',
-              title: 'device parts',
-              mandatory: true, // true, false or obmitted (= false)
-              status: { 
-                code: 'FAILED'
-              },
-              capabilities: [
-                {
-                  id: 'c8y_IsDevice',
-                  title: 'c8y_IsDevice',
-                  mandatory: true,
-                  status: { 
-                    code: 'FAILED'
-                  },
-                },
-              ]
-            }
-          ]
-        },
-      ]
-    }
-  ]
 }
 ```
 
