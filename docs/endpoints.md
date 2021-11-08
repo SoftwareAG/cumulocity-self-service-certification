@@ -4,7 +4,7 @@
 
 This endpoint shall trigger all tests for a device. Call Certification Endpoint (General)
 
-GET `{{baseUrl}}/gateway-certification/perform_certification/{testRunID}?d={deviceId}`
+GET `{{baseUrl}}/service/gateway-certification/perform_certification/{testRunID}?d={deviceId}`
 
 ---
 
@@ -17,7 +17,7 @@ This endpoint will give you the latest Testsuites
 GET `{{baseUrl}}/inventory/managedObjects?pageSize=1&query=$filter=(type eq 'c8y_certification_testSuite')$orderby=lastUpdated desc`
 
 This endpoint will create a new Testsuite
-POST `{{baseUrl}}/inventory/managedObjects/`
+POST `{{baseUrl}}/inventory/managedObjects/testsuite`
 
 
 ---
