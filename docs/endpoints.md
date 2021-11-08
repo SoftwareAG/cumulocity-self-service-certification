@@ -37,11 +37,11 @@ This endpoint will create a new Full Certification Run
 POST `{{baseUrl}}/service/gateway-certification/test_run` with the body for the POST request as:
 
 `{
- "tenant_id": "tenant_id",                          ---> mandatory
- "device_id": "device_id",                          ---> mandatory
- "vendor_name": "vendor_name",
- "product_name": "product_name",
- "product_type": "product_type"
+ "tenant_id": "tenant_id", </br>                          ---> mandatory
+ "device_id": "device_id", </br>                         ---> mandatory
+ "vendor_name": "vendor_name", </br>
+ "product_name": "product_name", </br>
+ "product_type": "product_type" </br>
  }`
 
 
