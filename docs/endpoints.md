@@ -34,7 +34,15 @@ This endpoint will give you all Testruns - with Partial Name
 GET `{{baseUrl}}/inventory/managedObjects?withTotalPages=true&pageSize=10&currentPage=1&query=$filter=(type eq 'c8y_certification_testRun' and name eq '*DIRK*')$orderby=lastUpdated asc`
 
 This endpoint will create a new Full Certification Run
-POST `{{baseUrl}}/inventory/managedObjects/`
+POST `{{baseUrl}}/service/gateway-certification/test_run` with the body for the POST request as:
+
+`{
+ "tenant_id": "tenant_id",                          ---> mandatory
+ "device_id": "device_id",                          ---> mandatory
+ "vendor_name": "vendor_name",
+ "product_name": "product_name",
+ "product_type": "product_type"
+ }`
 
 
 This endpoint will update a certification run
@@ -52,5 +60,8 @@ This endpoint will give you all Testcertificates - ordered by updated
 GET `{{baseUrl}}/inventory/managedObjects?withTotalPages=true&pageSize=1&currentPage=1&query=$filter=type eq 'c8y_certification_testCertificate'$orderby=creationTime asc`
 
 This endpoint will give you all Testcertificates - with Partial Name
+
+This endpoint will give generate test_certificate from test_run ID
+GET `{{baseUrl}}/service/gateway-certification/test_certificate/{testRunID}?t={tenantID}`
 
 ---
