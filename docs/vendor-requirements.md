@@ -40,7 +40,7 @@ Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the
 
 ## Device Information
 
-For details and examples, compare [metadata](https://cumulocity.com/api/#section/Device-management-library) section of documentation as well as the detail sections below.
+For details and examples, compare [metadata](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Metadata) section of documentation as well as the detail sections below.
 
 | Fragment                     | Meaning in Device Partner Portal                                                                          | Mandatory                                                                                                                                                   |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -159,7 +159,7 @@ Example structure in device inventory:
 
 ### c8y_RequiredAvailability
 
-For details and examples, compare [device connectivity](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-availability) section of the documentation.
+For details and examples, compare [device availability](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-availability) section of the documentation.
 
 | Fragment           | Mandatory |
 | ------------------ | --------- |
@@ -224,7 +224,7 @@ It is only mandatory to send either measurements, or events, or alarms in order 
 
 ### Measurements
 
-For details and examples, compare [measurements](https://cumulocity.com/api/#tag/Measurements) section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
+For details and examples, compare [measurements](https://cumulocity.com/api/10.10.0/#operation/postMeasurementCollectionResource) section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
 
 The device creates measurements with the following content:
 | Fragment                    | Content                                                                                                    | Mandatory for Measurements |
@@ -266,7 +266,7 @@ The following _Measurement Fragments_ are standard measurement fragments in Cumu
 
 ### Events
 
-For details and examples, compare [events](https://cumulocity.com/api/#tag/Events) section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
+For details and examples, compare [events](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource) section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
 
 The device creates events with the following content:
 | Fragment | Content                                  | Mandatory for Events |
@@ -291,7 +291,7 @@ Example POST body:
 
 ### Alarms
 
-For details and examples, compare [alarms](https://cumulocity.com/api/#tag/Alarms) section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
+For details and examples, compare [alarms](https://cumulocity.com/api/10.10.0/#operation/postAlarmCollectionResource) section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
 
 The device creates alarms with the following content:
 | Fragment   | Content                                                                                                                                                | Mandatory for Alarms |
@@ -339,7 +339,7 @@ Example structure in device inventory:
 
 ## Gateways
 
-For details and examples, compare [child operations](https://cumulocity.com/api/#tag/Child-operations) section of the documentation.
+For details and examples, compare [child operations](https://cumulocity.com/api/10.10.0/#tag/Child-operations) section of the documentation.
 
 ### Child Device Types
 
@@ -372,7 +372,7 @@ Example structure in device inventory:
 
 ## Log File Retrieval
 
-Device capability to upload (filtered) log files to C8Y. For details and examples, compare `c8y_LogfileRequest` section in the [documentation](https://cumulocity.com/api/#section/Device-management-library/Miscellaneous).
+Device capability to upload (filtered) log files to C8Y. For details and examples, compare chapter `c8y_LogfileRequest` of section [miscellaneous](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Miscellaneous) in the documentation.
 
 The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
 
@@ -423,7 +423,7 @@ Device capability that enables text- and / or profile-based device configuration
 Text based configuration is the more basic approach. It provides a plain text box in the UI to retrieve, edit, and send a configuration text to the device.
 The text is send as one string, however, it can be structured using json, xml, key-value pairs or any other markup that the device is able to parse.
 File based configuration allows to have multiple _types_ of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).  
-For details and examples, compare [configuration management](https://cumulocity.com/api/#section/Device-management-library/Configuration-management) section in the documentation.
+For details and examples, compare [configuration management](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Configuration-management) section in the documentation.
 
 For a successful certification of the Device Configuration module, Text Based Configuration or File Based Configuration or both have to be implemented.
 The certificate will state which configuration methods is supported as information.
@@ -554,7 +554,7 @@ When the device receives the operation `c8y_UploadConfigFile`, the following ste
 
 ## Managing Device Software
 
-Device capability to manage and deploy software packages to the device. For details and examples, compare `software` section in the [documentation](https://cumulocity.com/api/#section/Device-management-library/Device-information).
+Device capability to manage and deploy software packages to the device. For details and examples, compare [c8y_SoftwareList](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-information) section in the documentation .
 
 Note: _Firmware Management_ and _Software Management_ are handled separately in Cumulocity IoT and follow different concepts. A device can support one ore both capabilities.
 
@@ -633,7 +633,7 @@ When the device receives the operation `c8y_SoftwareUpdate`, the following steps
 
 ## Managing Device Firmware
 
-Device capability that enables firmware management. For details and examples, compare `device information` section in the [documentation](https://cumulocity.com/api/#section/Device-management-library/Device-information).
+Device capability that enables firmware management. For details and examples, compare `device information` section in the [documentation](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-information).
 
 Note: _Firmware Management_ and _Software Management_ are handled separately in Cumulocity IoT and follow different concepts. A device can support one ore both capabilities.
 
@@ -759,7 +759,7 @@ When the device receives operation `c8y_DeviceProfile` it will execute the follo
 
 ## Restart
 
-Device capability to restart the device. For details and examples, compare [miscellaneous](https://cumulocity.com/api/#section/Device-management-library/Miscellaneous) section of the documentation.
+Device capability to restart the device. For details and examples, compare [miscellaneous](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Miscellaneous) section of the documentation.
 
 The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
 
@@ -820,7 +820,7 @@ The device vendor can decide if all or a useful subset of measurements are send 
 
 ## Shell
 
-Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. For details and examples, compare [miscellaneous](https://cumulocity.com/api/#section/Device-management-library/Miscellaneous) section of the documentation.
+Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. For details and examples, compare [miscellaneous](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Miscellaneous) section of the documentation.
 
 The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
 
@@ -929,7 +929,7 @@ When the device receives the operation `c8y_RemoteAccessConnect`, the following 
 
 ## Location & Tracking
 
-Device capability to display and update location information. For details and examples, compare [location capabilities](https://cumulocity.com/api/#section/Sensor-library/Location-capabilities) section of the documentation.
+Device capability to display and update location information. For details and examples, compare [location capabilities](https://cumulocity.com/api/10.10.0/#section/Sensor-library/Location-capabilities) section of the documentation.
 
 The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
 
@@ -983,5 +983,5 @@ Example location update event:
 | 30/09/2021 | Added MD file change log                                                                                                                                                                                                            | minor    |
 | 22/10/2021 | Added cypher suites information                                                                                                                                                                                                           | minor    |
 | 01/11/2021 | shell: Example added;  measurements section: Naming convention added; sending operational data: table added with mandatory information; Device Information: com_cumulocity_model_agent mandatory rule changed and externalIds added | medium   |
-| 03/11/2021 | `com_cumulocity_model_agent` added as mandatory for each optional agent module that relies on receiving operations; Moved supported child device types to optional modules;  | medium   |
-
+| 03/11/2021 | `com_cumulocity_model_agent` added as mandatory for each optional agent module that relies on receiving operations; Moved supported child device types to optional modules;  | major   |
+| 08/11/2021 | Updated all broken links  | minor   |
