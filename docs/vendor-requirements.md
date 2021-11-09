@@ -4,6 +4,39 @@ The device certification process requires the device to follow integration best 
 This means that more fields are mandatory for a certified device compared to platform minium requirements.
 In the following section, mandatory information and behavior is described.
 
+
+## Currently Testable Device Capabilities of Self-Service Certification Microservice
+
+- [ ] Foundation Modules 
+  - [ ] Device Information
+      - [x] type
+      - [ ] c8y_Agent
+      - [X] c8y_Hardware
+      - [X] c8y_Firmware
+      - [X] c8y_RequiredAvailability
+      - [X] c8y_SupportedOperations
+  - [X] External ID
+  - [X] Sending Operational Data
+    - [X] Measurements
+    - [X] Events
+    - [X] Alarms
+- [ ] Optional Modules
+  - [X] Gateways
+    - [X] Child Device Types
+  - [X] Log File Retrieval
+  - [X] Device Configuration
+    - [X] Text Based Configuration
+    - [X] File Based Configuration
+  - [X] Managing Device Software
+  - [X] Managing Device Firmware
+  - [X] Managing Device Firmware
+  - [X] Device Profile
+  - [X] Restart
+  - [ ] Measurement Request
+  - [ ] Shell
+  - [ ] Cloud Remote Access
+  - [ ] Location & Tracking
+
 # Foundation Modules (Mandatory)
 
 **Status: Reviewed and Ready**
@@ -985,4 +1018,4 @@ Example location update event:
 | 01/11/2021 | shell: Example added;  measurements section: Naming convention added; sending operational data: table added with mandatory information; Device Information: com_cumulocity_model_agent mandatory rule changed and externalIds added | medium   |
 | 03/11/2021 | `com_cumulocity_model_agent` added as mandatory for each optional agent module that relies on receiving operations; Moved supported child device types to optional modules;  | major   |
 | 08/11/2021 | Updated broken links  | minor   |
-| 09/11/2021 | Updated broken links  | minor   |
+| 09/11/2021 | Updated broken links, added Currently Supported Device Capabilities of Self-Service Certification Microservice  | minor   |
