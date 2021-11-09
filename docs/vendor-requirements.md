@@ -410,11 +410,11 @@ When the device receives the operation `c8y_LogfileRequest`, the following steps
 
 | Step | Action                                                                                                                                     | Documentation                                                                         |
 | ---- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                       | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API) |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                       | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                                                                  | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 | 2.   | Internally retrieve log file and filter w.r.t. criteria found in operation                                                                 |                                                                                       |
-| 3.   | Create an event with `"type": "c8y_LogfileRequest"`                                                                                        | [Create event](https://cumulocity.com/api/#operation/postEventCollectionResource)     |
-| 4.   | Upload the log file as attachment to the event                                                                                             | [Attach file to event](https://cumulocity.com/api/#operation/postEventBinaryResource) |
+| 3.   | Create an event with `"type": "c8y_LogfileRequest"`                                                                                        | [Create event](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource)     |
+| 4.   | Upload the log file as attachment to the event                                                                                             | [Attach file to event](https://cumulocity.com/api/10.10.0/#operation/postEventBinaryResource) |
 | 5.   | Update operation accordingly `"status": "SUCCESSFUL", "c8y_LogfileRequest": {"file": "https://<TENANT_DOMAIN>/event/events/{id}/binaries"` | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 
 ## Device Configuration
@@ -466,7 +466,7 @@ When the device receives the operation `c8y_Configuration`, the following steps 
 
 | Step | Action                                                               | Documentation                                                                         |
 | ---- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"` | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API) |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"` | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                            | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 | 2.   | Internally interpret transmitted string and execute configuration    |                                                                                       |
 | 3.   | Update operation accordingly `"status": "SUCCESSFUL"`                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
@@ -489,9 +489,9 @@ When the device receives the operation `c8y_SendConfiguration`, the following st
 
 | Step | Action                                                                                                          | Documentation                                                                           |
 | ---- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                            | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API)   |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                            | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API)   |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                                       | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)          |
-| 2.   | Internally get current configuration and update the fragment `c8y_Configuration` of the device inventory object | [Update managed object](https://cumulocity.com/api/#operation/putManagedObjectResource) |
+| 2.   | Internally get current configuration and update the fragment `c8y_Configuration` of the device inventory object | [Update managed object](https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource) |
 | 3.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                           | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)          |
 
 ### File Based Configuration
@@ -530,7 +530,7 @@ When the device receives the operation `c8y_DownloadConfigFile`, the following s
 
 | Step | Action                                                               | Documentation                                                                         |
 | ---- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"` | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API) |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"` | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                            | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 | 2.   | Download referenced binary and internally apply configuration        |                                                                                       |
 | 3.   | Update operation `"status": "SUCCESSFUL"`                            | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
@@ -545,11 +545,11 @@ When the device receives the operation `c8y_UploadConfigFile`, the following ste
 
 | Step | Action                                                                                                                  | Documentation                                                                         |
 | ---- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                    | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API) |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                    | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                                               | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 | 2.   | Internally retrieve the configuration type requested in operation e.g. `"c8y_UploadConfigFile": {"type": "someConfig"}` |                                                                                       |
-| 3.   | Create an event with the same `type` e.g. `"type": "someConfig"`                                                        | [Create event](https://cumulocity.com/api/#operation/postEventCollectionResource)     |
-| 4.   | Upload the configuration as attachment to the event                                                                     | [Attach file to event](https://cumulocity.com/api/#operation/postEventBinaryResource) |
+| 3.   | Create an event with the same `type` e.g. `"type": "someConfig"`                                                        | [Create event](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource)     |
+| 4.   | Upload the configuration as attachment to the event                                                                     | [Attach file to event](https://cumulocity.com/api/10.10.0/#operation/postEventBinaryResource) |
 | 5.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                   | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 
 ## Managing Device Software
@@ -625,10 +625,10 @@ When the device receives the operation `c8y_SoftwareUpdate`, the following steps
 
 | Step | Action                                                                   | Documentation                                                                           |
 | ---- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`     | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API)   |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`     | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API)   |
 | 1.   | Update operation `"status" : "EXECUTING"`                                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)          |
 | 2.   | Execute software install / uninstall tasks described in the operation    |                                                                                         |
-| 3.   | Update `c8y_SoftwareList` fragment in the inventory object of the device | [Update managed object](https://cumulocity.com/api/#operation/putManagedObjectResource) |
+| 3.   | Update `c8y_SoftwareList` fragment in the inventory object of the device | [Update managed object](https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource) |
 | 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                    | [Update Operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)          |
 
 ## Managing Device Firmware
@@ -689,9 +689,9 @@ Example operation sent to the device:
 When the device receives the operation having `c8y_Firmware`, the following steps are executed:
 | Step | Action                                                                                                                                                                                                                                                                                                                       | Documentation                                                                                          |
 | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                                                                                                                                                                                                         | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API)                  |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                                                                                                                                                                                                         | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API)                  |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                                                                                                                                                                                                                                                    | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)                         |
-| 2.   | Compare name and version stored in the fragment `c8y_Firmware` in the inventory object of the device with the name and version stored in the received operation fragment `c8y_Firmware`. If the name and/or version are differing download from the (device specific) firmware repository referenced in the url and install. | [Device information](https://cumulocity.com/api/#section/Device-management-library/Device-information) |
+| 2.   | Compare name and version stored in the fragment `c8y_Firmware` in the inventory object of the device with the name and version stored in the received operation fragment `c8y_Firmware`. If the name and/or version are differing download from the (device specific) firmware repository referenced in the url and install. | [Device information](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-information) |
 | 3.   | Update the fragment `c8y_Firmware` of the inventory object of the device.                                                                                                                                                                                                                                                    |                                                                                                        |
 | 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                                                                                                                                                                                                                        | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)                         |
 
@@ -751,7 +751,7 @@ When the device receives operation `c8y_DeviceProfile` it will execute the follo
 
 | Step | Action                                                                                                                                                                                               | Documentation                                                                         |
 | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | --- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                                                                                 | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API) |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                                                                                 | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                                                                                                                            | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 | 2.   | Use the information stored in the operation `c8y_DeviceProfile` regarding software, firmware and configuration to execute changes as described in respective sections.                               |
 | 3.   | Update the fragment `c8y_Profile` of the inventory object of the device by adding the nested fragments `"profileName”:"Device_Profile"`, `"profileId": "60238"` and `"profileExecuted": true/false`. |                                                                                       |     |
@@ -780,12 +780,12 @@ When the device receives the operation `c8y_Restart` the following steps are exe
 
 | Step | Action                                                                                                                                             | Documentation                                                                                                                                                           |
 | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0.   | Listen for operations created by platform with `"status" : "PENDING"`                                                                              | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API)                                                                                   |
+| 0.   | Listen for operations created by platform with `"status" : "PENDING"`                                                                              | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API)                                                                                   |
 | 1.   | Update operation `c8y_Restart` to `"status" : "EXECUTING"`                                                                                         | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)                                                                                          |
 | 2.   | Restart the device                                                                                                                                 |                                                                                                                                                                         |
-| 3.   | Query all operations in `"status" : "EXECUTING"` to continue processing them                                                                       | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API)                                                                                   |
+| 3.   | Query all operations in `"status" : "EXECUTING"` to continue processing them                                                                       | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API)                                                                                   |
 | 4.   | Query operations by agent ID and `"status" : "EXECUTING"` to clean up them. This includes the update of `c8y_Restart` to `"status" : "SUCCESSFUL"` | [Device Integration](https://cumulocity.com/guides/device-sdk/rest/#device-integration), [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource) |
-| 5.   | Listen to new operations created in Cumulocity IoT                                                                                                 | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API)                                                                                   |
+| 5.   | Listen to new operations created in Cumulocity IoT                                                                                                 | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API)                                                                                   |
 
 ## Measurement Request
 
@@ -813,9 +813,9 @@ The device vendor can decide if all or a useful subset of measurements are send 
 
 | Step | Action                                                               | Documentation                                                                                 |
 | ---- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"` | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API)         |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"` | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API)         |
 | 1.   | Update operation `"status" : "EXECUTING"`                            | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)                |
-| 2.   | Send all or a useful subset of measurements                          | [Create measurement](https://cumulocity.com/api/#operation/postMeasurementCollectionResource) |
+| 2.   | Send all or a useful subset of measurements                          | [Create measurement](https://cumulocity.com/api/10.10.0/#operation/postMeasurementCollectionResource) |
 | 3.   | Update operation `"status": "SUCCESSFUL"`                            | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)                |
 
 ## Shell
@@ -849,7 +849,7 @@ When the device receives the operation `c8y_Command`, the following steps are ex
 
 | Step | Action                                                                                   | Documentation                                                                         |
 | ---- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                     | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API) |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                     | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 | 2.   | Locally execute the command and add the result to the operation in the fragment `result` | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 | 3.   | Update operation `"status": "SUCCESSFUL"`                                                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
@@ -919,7 +919,7 @@ When the device receives the operation `c8y_RemoteAccessConnect`, the following 
 
 | Step | Action                                                                                                                                  | Documentation                                                                         |
 | ---- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                    | [Real-time notifications](https://cumulocity.com/api/#tag/Real-time-notification-API) |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                    | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                                                               | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 | 2.   | Connect to provided `hostname` and `port` using TCP                                                                                     |                                                                                       |
 | 3.   | Using the `connectionKey` connect to device websocket endpoint of the Remote Access microservice: `wss:///service/remoteaccess/device/` |                                                                                       |
@@ -956,8 +956,8 @@ Whenever the location shell be updated, the device executes the following steps:
 
 | Step | Action                                               | Documentation                                                                           |
 | ---- | ---------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| 1.   | Send a position update event                         | [Create event](https://cumulocity.com/api/#operation/postEventCollectionResource)       |
-| 2.   | Update the c8y_Position fragment in device inventory | [Update managed object](https://cumulocity.com/api/#operation/putManagedObjectResource) |
+| 1.   | Send a position update event                         | [Create event](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource)       |
+| 2.   | Update the c8y_Position fragment in device inventory | [Update managed object](https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource) |
 
 Example location update event:
 
@@ -984,4 +984,5 @@ Example location update event:
 | 22/10/2021 | Added cypher suites information                                                                                                                                                                                                           | minor    |
 | 01/11/2021 | shell: Example added;  measurements section: Naming convention added; sending operational data: table added with mandatory information; Device Information: com_cumulocity_model_agent mandatory rule changed and externalIds added | medium   |
 | 03/11/2021 | `com_cumulocity_model_agent` added as mandatory for each optional agent module that relies on receiving operations; Moved supported child device types to optional modules;  | major   |
-| 08/11/2021 | Updated all broken links  | minor   |
+| 08/11/2021 | Updated broken links  | minor   |
+| 09/11/2021 | Updated broken links  | minor   |
