@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>vendor-requirements.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="vendor-device-certification-requirements">Vendor Device Certification Requirements</h1>
+<p>The device certification process requires the device to follow integration best practices.
+This means that more fields are mandatory for a certified device compared to platform minium requirements.
+In the following section, mandatory information and behavior is described.</p>
+<h1 id="foundation-modules-mandatory">Foundation Modules (Mandatory)</h1>
+<p><strong>Status: Reviewed and Ready</strong></p>
+<h2 id="device-behavior">Device Behavior</h2>
+<p>When started, the device follows the process flow defines for REST or MQTT based integration respectively.</p>
+<p><strong>Please read and follow one of these guides:</strong></p>
+<p>For <a href="https://cumulocity.com/guides/device-sdk/rest/#device-integration">REST based integrations</a>:
+<img src="https://cumulocity.com/guides/images/rest/startupphase.png" alt="Startup REST based"></p>
+<p>For <a href="https://cumulocity.com/guides/device-sdk/mqtt/#device-integration">MQTT based integrations</a> (using Smart-Rest 2 is recommended):
+<img src="https://cumulocity.com/guides/images/mqtt/mqttDeviceIntegration.png" alt="Startup MQTT based"></p>
+<p>Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the following cypher suits from release <a href="https://cumulocity.com/guides/releasenotes/release-10-9-0/announcements-10-9-0/">Release 10.10</a>:</p>
+<ul>
+<li>rsa_pkcs1_sha256</li>
+<li>dsa_sha256</li>
+<li>ecdsa_secp256r1_sha256</li>
+<li>rsa_pkcs1_sha384</li>
+<li>ecdsa_secp384r1_sha384</li>
+<li>rsa_pkcs1_sha512</li>
+<li>ecdsa_secp521r1_sha512</li>
+<li>rsa_pss_rsae_sha256</li>
+<li>rsa_pss_rsae_sha384</li>
+<li>rsa_pss_rsae_sha512</li>
+<li>ed25519 ed448</li>
+<li>rsa_pss_pss_sha256</li>
+<li>rsa_pss_pss_sha384</li>
+<li>rsa_pss_pss_sha512</li>
+</ul>
+<h2 id="device-information">Device Information</h2>
+<p>For details and examples, compare <a href="https://cumulocity.com/api/10.10.0/#section/Device-management-library/Metadata">metadata</a> section of documentation as well as the detail sections below.</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Meaning in Device Partner Portal</th>
+<th>Mandatory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c8y_IsDevice</code></td>
+<td>Empty fragment. Declares a Managed Object as a Device</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>com_cumulocity_model_Agent</code></td>
+<td>Empty fragment. Declares that the device is able to receive operations</td>
+<td>Yes, for root devices and gateways that support operations; No, for devices and gateways that don't support operations; Must not be used for child devices;</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>Sets the name of the device used e.g. in 'all devices' and 'device info' views</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Functional type of device e.g. water meter, pump, Gateway, environmental sensor</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_Hardware</code></td>
+<td>Hardware information about the device</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_Firmware</code></td>
+<td>Firmware information about the device</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_Agent</code></td>
+<td>Information about the agent run on the device</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_RequiredAvailability</code></td>
+<td>Minimal communication interval to determine if device is offline</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedOperations</code></td>
+<td>Many optional operations are directly triggering the dynamic UI by invoking the respective operation tabs</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>externalIds</code></td>
+<td>Used to identify a device with a unique information from the physical world</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_IsDevice&quot;: {},
+&quot;com_cumulocity_model_Agent&quot;: {},
+&quot;name&quot;: &quot;edge-agent-eabdcf5d344b4a52a4ffab13fe3d11cb&quot;,
+&quot;type&quot;: &quot;c8y_EdgeAgent&quot;,
+&quot;c8y_Hardware&quot;: {
+    &quot;model&quot;: &quot;BCM2708&quot;,
+    &quot;revision&quot;: &quot;000e&quot;,
+    &quot;serialNumber&quot;: &quot;00000000e2f5ad4d&quot;
+},
+&quot;c8y_Firmware&quot;: {
+    &quot;name&quot;: &quot;raspberrypi-bootloader&quot;,
+    &quot;version&quot;: &quot;1.20140107-1&quot;,
+    &quot;url&quot;: &quot;31aab9856861b1a587e2094690c2f6e272712cb1&quot;
+},
+&quot;c8y_RequiredAvailability&quot;: {
+    &quot;responseInterval&quot;: 6
+},
+&quot;c8y_SupportedOperations&quot;: [
+    &quot;c8y_Software&quot;,
+    &quot;c8y_Firmware&quot;
+]
+</div></code></pre>
+<h3 id="type">type</h3>
+<p>The fragment <code>type</code> can be interpreted as <em>device class</em>. Meaning, devices with the same <code>type</code> can receive the same types of configuration, software, firmware, and operations.
+The Cumulocity IoT UI uses the device <code>type</code> often for filtering purposes like sending a software package to all devices of one specific <code>type</code>. Based on the device <code>type</code> Cumulocity can assign Dashboards to the same <code>type</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Mandatory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;type&quot;: &quot;c8y_EdgeAgent&quot;
+</div></code></pre>
+<h3 id="c8yhardware">c8y_Hardware</h3>
+<p>The device certificate will be issued for device defined by: <code>c8y_Hardware.model</code>, <code>c8y_Hardware.revision</code>, <code>c8y_Firmware.name</code>, <code>c8y_Firmware.version</code>, <code>c8y_Agent.name</code>, and <code>c8y_Agent.version</code>.
+These fragments will also be used in future versions of Device Partner Portal (display one &quot;Device&quot; entry in the overview device list per <code>c8y_Hardware.model</code> and a dropdown in the device detail view for each <code>c8y_Hardware.revision</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Meaning in Device Partner Portal</th>
+<th>Mandatory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>model</code></td>
+<td>Device in list view</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>revision</code></td>
+<td>Dropdown inside device detail view to select device revision or version</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>serialNumber</code></td>
+<td>Not used in Device Partner Portal</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_Hardware&quot;: {
+    &quot;model&quot;: &quot;BCM2708&quot;,
+    &quot;revision&quot;: &quot;000e&quot;,
+    &quot;serialNumber&quot;: &quot;00000000e2f5ad4d&quot;
+}
+</div></code></pre>
+<h3 id="c8yfirmware">c8y_Firmware</h3>
+<p>The device certificate will be issued for device defined by: <code>c8y_Hardware.model</code>, <code>c8y_Hardware.revision</code>, <code>c8y_Firmware.name</code>, <code>c8y_Firmware.version</code>, <code>c8y_Agent.name</code>, and <code>c8y_Agent.version</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Mandatory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_Firmware&quot;: {
+    &quot;name&quot;: &quot;raspberrypi-bootloader&quot;,
+    &quot;version&quot;: &quot;1.20140107-1&quot;,
+    &quot;url&quot;: &quot;31aab9856861b1a587e2094690c2f6e272712cb1&quot;
+}
+</div></code></pre>
+<h3 id="c8yagent">c8y_Agent</h3>
+<p>The device certificate will be issued for device defined by: <code>c8y_Hardware.model</code>, <code>c8y_Hardware.revision</code>, <code>c8y_Firmware.name</code>, <code>c8y_Firmware.version</code>, <code>c8y_Agent.name</code>, and <code>c8y_Agent.version</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Mandatory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_Agent&quot;: {
+    &quot;name&quot;: &quot;myCustomAgent&quot;,
+    &quot;version&quot;: &quot;1.2.34&quot;,
+    &quot;url&quot;: &quot;https//link-to-agent-repo.url&quot;
+}
+</div></code></pre>
+<h3 id="c8yrequiredavailability">c8y_RequiredAvailability</h3>
+<p>For details and examples, compare <a href="https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-availability">device availability</a> section of the documentation.</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Mandatory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>responseInterval</code></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_RequiredAvailability&quot;: {
+    &quot;responseInterval&quot;: 6
+}
+</div></code></pre>
+<h3 id="c8ysupportedoperations">c8y_SupportedOperations</h3>
+<p>The fragment <code>c8y_SupportedOperations</code> is used to identify which operations (and hence certifiable <a href="#optional-modules">optional modules</a>) are supported by the device.
+This fragment is optional. If not present, no optional modules will be certified.</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Mandatory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c8y_SupportedOperations</code></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_SupportedOperations&quot;: [
+    &quot;c8y_Software&quot;,
+    &quot;c8y_Firmware&quot;
+]
+</div></code></pre>
+<h2 id="external-id">External ID</h2>
+<p>For details and examples, compare <a href="https://cumulocity.com/api/10.10.0/#operation/postExternalIDCollectionResource">external id</a> section of the documentation.</p>
+<p>Used to identify the device in Cumulocity by its unique serial number, MAC, IMEI or similar unique identification string. If you don't want to specify a type, its recommend to use <code>c8y_Serial</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Mandatory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>externalId</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in external id managed object (this information is not stored in the device inventory):</p>
+<pre class="hljs"><code><div>&quot;externalIds&quot;: [
+        {
+            &quot;externalId&quot;: &quot;edge-agent-eabdcf5d344b4a52a4ffab13fe3d11cb&quot;,
+            &quot;type&quot;: &quot;c8y_Serial&quot;
+        }
+    ]
+</div></code></pre>
+<h2 id="sending-operational-data">Sending Operational Data</h2>
+<p>Sending measurements, events, and alarms are basic capabilities of any IoT enabled device. Therefore vendors should aim to support all three. However, there might be some instance where devices only send events (e.g. basic switches) or only measurements (e.g. basic sensor).
+It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.</p>
+<table>
+<thead>
+<tr>
+<th>Functionality</th>
+<th>Content</th>
+<th>Mandatory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Measurements (M), Events (E), Alarms (A)</td>
+<td>Information send from the device to the platform</td>
+<td>Yes, at least one of the three</td>
+</tr>
+</tbody>
+</table>
+<h3 id="measurements">Measurements</h3>
+<p>For details and examples, compare <a href="https://cumulocity.com/api/10.10.0/#operation/postMeasurementCollectionResource">measurements</a> section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.</p>
+<p>The device creates measurements with the following content:</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Mandatory for Measurements</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td>Device ID</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Type of measurement</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>Date and time when the measurement was made</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Measurement Fragment</td>
+<td>The category of measurement</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Measurement Fragment Series</td>
+<td>The name of the measurement series. Contains at least the <code>value</code> fragment, optionally the <code>unit</code> fragment</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Measurement names should be written in camel-case. Cumulocity IoT UI inserts a blank space between a lower-case and an upper-case letter. Two or more consecutive upper-case letters are not separated with blank spaces. The UI also hides the prefix of a measurement name that is ending with a &quot;_&quot; (underline) symbol.</p>
+<p>Example POST body:</p>
+<pre class="hljs"><code><div>{
+  &quot;source&quot;: {
+    &quot;id&quot;: &quot;251982&quot;,
+  },
+  &quot;type&quot;: &quot;c8y_TemperatureMeasurement&quot;,
+  &quot;time&quot;: &quot;2021-10-19T12:03:27.845Z&quot;,
+  &quot;c8y_Steam&quot;: {
+    // Measurement Fragment
+    &quot;Temperature&quot;: {
+      // Measurement Fragment Series
+      &quot;unit&quot;: &quot;C&quot;,
+      &quot;value&quot;: &quot;100&quot;,
+    },
+  },
+}
+</div></code></pre>
+<p>The <em>Measurement Fragment</em> and <em>Measurement Fragment Series</em> are used in the Cumulocity IoT UI in the following way:
+<img src="file:///c:/Users/chrscha/OneDrive - Software AG/Documents/GitHub/cumulocity-self-service-certification/docs/media/measurement-fragmentand-series-in-ui.png" alt="Measurement Fragment and Series in UI"></p>
+<p>The following <em>Measurement Fragments</em> are standard measurement fragments in Cumulocity IoT:
+<code>c8y_AccelerationMeasurement</code>, <code>c8y_Battery</code>, <code>c8y_CPUMeasurement</code>, <code>c8y_CurrentMeasurement</code>, <code>c8y_DistanceMeasurement</code>, <code>c8y_HumidityMeasurement</code>, <code>c8y_LightMeasurement</code>, <code>c8y_MeasurementPollFrequencyOperation</code>, <code>c8y_MeasurementRequestOperation</code>, <code>c8y_MemoryMeasurement</code>, <code>c8y_MotionMeasurement</code>, <code>c8y_MoistureMeasurement</code>, <code>c8y_SignalStrength</code>, <code>c8y_SinglePhaseEnergyMeasurement</code>, <code>c8y_Steam</code>, <code>c8y_Temperature</code>, <code>c8y_TemperatureMeasurement</code>, <code>c8y_ThreePhaseEnergyMeasurement</code>, <code>c8y_VoltageMeasurement</code>,</p>
+<h3 id="events">Events</h3>
+<p>For details and examples, compare <a href="https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource">events</a> section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.</p>
+<p>The device creates events with the following content:</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Mandatory for Events</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td>Device ID</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Type of event</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>Date and time when the event was created</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td>Description of the event</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Example POST body:</p>
+<pre class="hljs"><code><div>{
+  &quot;source&quot;: {
+    &quot;id&quot;: &quot;251982&quot;,
+  },
+  &quot;type&quot;: &quot;Intrusion detection&quot;,
+  &quot;text&quot;: &quot;Door sensor was triggered&quot;,
+  &quot;time&quot;: &quot;2021-10-19T12:03:27.845Z&quot;,
+}
+</div></code></pre>
+<h3 id="alarms">Alarms</h3>
+<p>For details and examples, compare <a href="https://cumulocity.com/api/10.10.0/#operation/postAlarmCollectionResource">alarms</a> section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.</p>
+<p>The device creates alarms with the following content:</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Mandatory for Alarms</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td>Device ID</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Type of alarm</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>Date and time when the alarm was created</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td>Description of the alarm</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>severity</code></td>
+<td>One of the following severities: <code>CRITICAL</code>, <code>MAJOR</code>, <code>MINOR</code>, <code>WARNING</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>ACTIVE</code> or <code>CLEARED</code>. If not specified, a new alarm will be created as <code>ACTIVE</code>. The state <code>ACKNOWLEDGED</code> is only set by the user, not by the device.</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Example POST body:</p>
+<pre class="hljs"><code><div>{
+  &quot;source&quot;: {
+    &quot;id&quot;: &quot;251982&quot;,
+  },
+  &quot;type&quot;: &quot;Operational State Alarms&quot;,
+  &quot;text&quot;: &quot;Machine stopped unexpectedly with exit reason 3&quot;,
+  &quot;severity&quot;: &quot;MAJOR&quot;,
+  &quot;status&quot;: &quot;ACTIVE&quot;,
+  &quot;time&quot;: &quot;2021-10-19T12:03:27.845Z&quot;,
+}
+</div></code></pre>
+<h1 id="optional-modules">Optional Modules</h1>
+<p>All sections below are <strong>optional</strong>. If a device partner decides to certify optional modules, they are documented in the certificate and shown on the device partner portal.
+Customer can filter and search for devices that support certain modules. Therefore, it is recommended to certify all capabilities (aka. &quot;Optional Modules&quot;) offered by the device.
+The Modules are listed below in descending order of importance based on Software AG's experience.
+To indicate that a device wants to certify an Optional Module, it has to add the respective element to the list of supported operations in the inventory object of the device. All optional modules that recieve operations require the fragment  <code>com_cumulocity_model_Agent</code> to be present in the inventory as described in <a href="#device-information">Device Information</a>.</p>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_SupportedOperations&quot;: [
+    &quot;c8y_LogfileRequest&quot;,
+    &quot;c8y_Configuration&quot;,
+    &quot;c8y_SendConfiguration&quot;
+]
+</div></code></pre>
+<h2 id="gateways">Gateways</h2>
+<p>For details and examples, compare <a href="https://cumulocity.com/api/10.10.0/#tag/Child-operations">child operations</a> section of the documentation.</p>
+<h3 id="child-device-types">Child Device Types</h3>
+<p>Cumulocity uses the concept of <em>child device types</em> to distinguish the capabilities of child devices <em>behind</em> a gateway device.
+For example, a child device connected via a simple analog wire connection (like a temperature sensor) may only be able to send measurements (the temperature),
+while a child device connected via OPC-UA is able to send measurements, events, alarms, and log files in addition to the ability to process incoming requests to upgrade its firmware.
+In this case, the child device type <code>Analog</code> is only supporting the minimum requirements for certification without any <em>optional modules</em>.
+The child device type <code>OPC-UA</code> is supporting the <em>foundation modules</em> as well at the optional modules <code>Logs</code> and <code>Firmware</code>.</p>
+<p>Child device types can be freely named, however, here are some examples as orientation:.</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Required for optional module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c8y_SupportedChildDeviceTypes</code></td>
+<td>List contains supported child device types</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_SupportedChildDeviceTypes&quot;: [
+    &quot;Analog&quot;,
+    &quot;Canbus&quot;,
+    &quot;CanOpen&quot;,
+    &quot;Modbus&quot;,
+    &quot;OPCUA&quot;,
+    &quot;Profibus&quot;,
+    &quot;Sigfox&quot;,
+    &quot;SNMP&quot;
+]
+</div></code></pre>
+<h2 id="log-file-retrieval">Log File Retrieval</h2>
+<p>Device capability to upload (filtered) log files to C8Y. For details and examples, compare chapter <code>c8y_LogfileRequest</code> of section <a href="https://cumulocity.com/api/10.10.0/#section/Device-management-library/Miscellaneous">miscellaneous</a> in the documentation.</p>
+<p>The following fragments are related to the optional device capability with a remark if they are required for the capability to work:</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Required for optional module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>com_cumulocity_model_Agent</code></td>
+<td>Must be present in the inventory; Enables a device to receive operations</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedOperations</code></td>
+<td>List contains element <code>c8y_LogfileRequest</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedLogs</code></td>
+<td>List of supported log file types</td>
+<td>Yes (at least 1 type)</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_SupportedOperations&quot;: [
+    &quot;c8y_LogfileRequest&quot;
+],
+&quot;c8y_SupportedLogs&quot;: [
+    &quot;syslog&quot;,
+    &quot;dmesg&quot;
+]
+</div></code></pre>
+<p>Example operation sent to the device:</p>
+<pre class="hljs"><code><div>&quot;c8y_LogfileRequest&quot;: {
+    &quot;logFile&quot;: &quot;syslog&quot;,
+    &quot;dateFrom&quot;: &quot;2016-01-27T13:45:24+0100&quot;,
+    &quot;dateTo&quot;: &quot;2016-01-28T13:45:24+0100&quot;,
+    &quot;searchText&quot;: &quot;sms&quot;,
+    &quot;maximumLines&quot;: 1000
+}
+</div></code></pre>
+<p>When the device receives the operation <code>c8y_LogfileRequest</code>, the following steps are executed:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.</td>
+<td>Listen for operation created by platform with <code>&quot;status&quot; : &quot;PENDING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API">Real-time notifications</a></td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Update operation <code>&quot;status&quot; : &quot;EXECUTING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Internally retrieve log file and filter w.r.t. criteria found in operation</td>
+<td></td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Create an event with <code>&quot;type&quot;: &quot;c8y_LogfileRequest&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource">Create event</a></td>
+</tr>
+<tr>
+<td>4.</td>
+<td>Upload the log file as attachment to the event</td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/postEventBinaryResource">Attach file to event</a></td>
+</tr>
+<tr>
+<td>5.</td>
+<td>Update operation accordingly <code>&quot;status&quot;: &quot;SUCCESSFUL&quot;, &quot;c8y_LogfileRequest&quot;: {&quot;file&quot;: &quot;https://&lt;TENANT_DOMAIN&gt;/event/events/{id}/binaries&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="device-configuration">Device Configuration</h2>
+<p>Device capability that enables text- and / or profile-based device configuration.
+Text based configuration is the more basic approach. It provides a plain text box in the UI to retrieve, edit, and send a configuration text to the device.
+The text is send as one string, however, it can be structured using json, xml, key-value pairs or any other markup that the device is able to parse.
+File based configuration allows to have multiple <em>types</em> of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).<br>
+For details and examples, compare <a href="https://cumulocity.com/api/10.10.0/#section/Device-management-library/Configuration-management">configuration management</a> section in the documentation.</p>
+<p>For a successful certification of the Device Configuration module, Text Based Configuration or File Based Configuration or both have to be implemented.
+The certificate will state which configuration methods is supported as information.</p>
+<h3 id="text-based-configuration">Text Based Configuration</h3>
+<p>The following fragments are related to the optional device capability with a remark if they are required for the capability to work:</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Required for optional module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>com_cumulocity_model_Agent</code></td>
+<td>Must be present in the inventory; Enables a device to receive operations</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedOperations</code></td>
+<td>List contains element <code>c8y_Configuration</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedOperations</code></td>
+<td>List contains element <code>c8y_SendConfiguration</code></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_SupportedOperations&quot;: [
+    &quot;c8y_Configuration&quot;,
+    &quot;c8y_SendConfiguration&quot;
+],
+&quot;c8y_SendConfiguration&quot;: {}
+</div></code></pre>
+<p>Example operation <code>c8y_Configuration: {}</code> as it is sent to the device:</p>
+<pre class="hljs"><code><div>    &quot;creationTime&quot;: &quot;2021-09-20T13:10:25.933Z&quot;,
+    &quot;deviceId&quot;: &quot;181119&quot;,
+    &quot;self&quot;: &quot;https://t635974191.eu-latest.cumulocity.com/devicecontrol/operations/440452&quot;,
+    &quot;id&quot;: &quot;440452&quot;,
+    &quot;status&quot;: &quot;PENDING&quot;,
+    &quot;c8y_Configuration&quot;: {
+        &quot;config&quot;: &quot;test&quot;
+    },
+    &quot;description&quot;: &quot;Configuration update&quot;
+</div></code></pre>
+<p>When the device receives the operation <code>c8y_Configuration</code>, the following steps are executed:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.</td>
+<td>Listen for operation created by platform with <code>&quot;status&quot; : &quot;PENDING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API">Real-time notifications</a></td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Update operation <code>&quot;status&quot; : &quot;EXECUTING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Internally interpret transmitted string and execute configuration</td>
+<td></td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Update operation accordingly <code>&quot;status&quot;: &quot;SUCCESSFUL&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+</tbody>
+</table>
+<p>Example operation <code>c8y_SendConfiguration: {}</code> as it is sent to the device:</p>
+<pre class="hljs"><code><div>creationTime: &quot;2021-09-20T13:53:29.419Z&quot;, deviceName: &quot;123456789&quot;, deviceId: &quot;440366&quot;,…
+c8y_SendConfiguration: {}
+creationTime: &quot;2021-09-20T13:53:29.419Z&quot;
+description: &quot;Requested current configuration&quot;
+deviceId: &quot;440366&quot;
+deviceName: &quot;123456789&quot;
+id: &quot;440472&quot;
+self: &quot;https://t635974191.eu-latest.cumulocity.com/devicecontrol/operations/440472&quot;
+status: &quot;PENDING&quot;
+</div></code></pre>
+<p>When the device receives the operation <code>c8y_SendConfiguration</code>, the following steps are executed:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.</td>
+<td>Listen for operation created by platform with <code>&quot;status&quot; : &quot;PENDING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API">Real-time notifications</a></td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Update operation <code>&quot;status&quot; : &quot;EXECUTING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Internally get current configuration and update the fragment <code>c8y_Configuration</code> of the device inventory object</td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource">Update managed object</a></td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Update operation accordingly <code>&quot;status&quot;: &quot;SUCCESSFUL&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="file-based-configuration">File Based Configuration</h3>
+<p>The following fragments are related to the optional device capability with a remark if they are required for the capability to work:</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Required for optional module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>com_cumulocity_model_Agent</code></td>
+<td>Must be present in the inventory; Enables a device to receive operations</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedOperations</code></td>
+<td>List contains element <code>c8y_DownloadConfigFile</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedOperations</code></td>
+<td>List contains element <code>c8y_UploadConfigFile</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedConfigurations</code></td>
+<td>List of supported configuration file types</td>
+<td>Yes (at least 1 type)</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_SupportedOperations&quot;: [
+    &quot;c8y_DownloadConfigFile&quot;,
+    &quot;c8y_UploadConfigFile&quot;
+    ],
+&quot;c8y_SupportedConfigurations&quot;:[
+    &quot;config1&quot;,
+    &quot;config2&quot;
+    ]
+</div></code></pre>
+<p>Example operation sent to the device for <code>c8y_DownloadConfigFile</code>:</p>
+<pre class="hljs"><code><div>&quot;c8y_DownloadConfigFile&quot;: {
+    &quot;url&quot;: &quot;&lt;download url&gt;&quot;
+}
+</div></code></pre>
+<p>When the device receives the operation <code>c8y_DownloadConfigFile</code>, the following steps are executed:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.</td>
+<td>Listen for operation created by platform with <code>&quot;status&quot; : &quot;PENDING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API">Real-time notifications</a></td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Update operation <code>&quot;status&quot; : &quot;EXECUTING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Download referenced binary and internally apply configuration</td>
+<td></td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Update operation <code>&quot;status&quot;: &quot;SUCCESSFUL&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+</tbody>
+</table>
+<p>Example operation sent to the device for <code>c8y_UploadConfigFile</code>:</p>
+<pre class="hljs"><code><div>&quot;c8y_UploadConfigFile&quot;:{}
+</div></code></pre>
+<p>When the device receives the operation <code>c8y_UploadConfigFile</code>, the following steps are executed:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.</td>
+<td>Listen for operation created by platform with <code>&quot;status&quot; : &quot;PENDING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API">Real-time notifications</a></td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Update operation <code>&quot;status&quot; : &quot;EXECUTING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Internally retrieve the configuration type requested in operation e.g. <code>&quot;c8y_UploadConfigFile&quot;: {&quot;type&quot;: &quot;someConfig&quot;}</code></td>
+<td></td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Create an event with the same <code>type</code> e.g. <code>&quot;type&quot;: &quot;someConfig&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource">Create event</a></td>
+</tr>
+<tr>
+<td>4.</td>
+<td>Upload the configuration as attachment to the event</td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/postEventBinaryResource">Attach file to event</a></td>
+</tr>
+<tr>
+<td>5.</td>
+<td>Update operation accordingly <code>&quot;status&quot;: &quot;SUCCESSFUL&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="managing-device-software">Managing Device Software</h2>
+<p>Device capability to manage and deploy software packages to the device. For details and examples, compare <a href="https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-information">c8y_SoftwareList</a> section in the documentation .</p>
+<p>Note: <em>Firmware Management</em> and <em>Software Management</em> are handled separately in Cumulocity IoT and follow different concepts. A device can support one ore both capabilities.</p>
+<p><strong>Firmware</strong></p>
+<ul>
+<li>The firmware is the base operating system of a device</li>
+<li>A device can only have 1 firmware installed at a time</li>
+<li>When the firmware is changed, the device usually flashes itself</li>
+<li>Usually used by small / embedded devices</li>
+</ul>
+<p><strong>Software</strong></p>
+<ul>
+<li>Software is an optional component executed on the device</li>
+<li>A device can have multiple software installed at a time</li>
+<li>Software can be installed or removed independently of other software and the firmware</li>
+<li>Usually used by larger / more powerfully devices</li>
+</ul>
+<p><strong>Info:</strong> <code>&quot;c8y_SupportedOperations&quot;: [&quot;c8y_SoftwareList&quot;]</code> (not to be confused with the <em>inventory fragment</em> <code>c8y_SoftwareList</code>) and <code>&quot;c8y_SupportedOperations&quot;: [&quot;c8y_Software&quot;]</code> are deprecated and should not be used for new agent implementations.</p>
+<p>The following fragments are related to the optional device capability with a remark if they are required for the capability to work:</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Required for optional module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>com_cumulocity_model_Agent</code></td>
+<td>Must be present in the inventory; Enables a device to receive operations</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedOperations</code></td>
+<td>List contains element <code>c8y_SoftwareUpdate</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SoftwareList</code></td>
+<td>List of currently installed software on the device</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_SupportedOperations&quot;: [
+    &quot;c8y_SoftwareUpdate&quot;
+],
+&quot;c8y_SoftwareList&quot;: [
+    {
+        &quot;name&quot;: &quot;Software A&quot;,
+        &quot;version&quot;: &quot;1.0.1&quot;,
+        &quot;url&quot;: &quot;www.some-external-url.com&quot;
+    },
+    {
+        &quot;name&quot;: &quot;Software B&quot;,
+        &quot;version&quot;: &quot;2.1.0&quot;,
+        &quot;url&quot;: &quot;mytenant.cumulocity.com/inventory/binaries/12345&quot;
+    }
+]
+</div></code></pre>
+<p>Example operation sent to the device:</p>
+<pre class="hljs"><code><div>&quot;c8y_SoftwareUpdate&quot;: [
+    {
+        &quot;name&quot;: &quot;mySoftware1&quot;,
+        &quot;version&quot;: &quot;1.0.0&quot;,
+        &quot;url&quot;: &quot;http://www.example.com&quot;,
+        &quot;action&quot;: &quot;install&quot;
+    },
+    {
+        &quot;name&quot;: &quot;mySoftware2&quot;,
+        &quot;version&quot;: &quot;1.1.0&quot;,
+        &quot;url&quot;: &quot;http://www.example.com&quot;,
+        &quot;action&quot;: &quot;install&quot;
+    }
+]
+</div></code></pre>
+<p>When the device receives the operation <code>c8y_SoftwareUpdate</code>, the following steps are executed:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.</td>
+<td>Listen for operation created by platform with <code>&quot;status&quot; : &quot;PENDING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API">Real-time notifications</a></td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Update operation <code>&quot;status&quot; : &quot;EXECUTING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Execute software install / uninstall tasks described in the operation</td>
+<td></td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Update <code>c8y_SoftwareList</code> fragment in the inventory object of the device</td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource">Update managed object</a></td>
+</tr>
+<tr>
+<td>4.</td>
+<td>Update operation accordingly <code>&quot;status&quot;: &quot;SUCCESSFUL&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update Operation</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="managing-device-firmware">Managing Device Firmware</h2>
+<p>Device capability that enables firmware management. For details and examples, compare <code>device information</code> section in the <a href="https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-information">documentation</a>.</p>
+<p>Note: <em>Firmware Management</em> and <em>Software Management</em> are handled separately in Cumulocity IoT and follow different concepts. A device can support one ore both capabilities.</p>
+<p><strong>Firmware</strong></p>
+<ul>
+<li>The firmware is the base operating system of a device</li>
+<li>A device can only have 1 firmware installed at a time</li>
+<li>When the firmware is changed, the device usually flashes itself</li>
+<li>Usually used by small / embedded devices</li>
+</ul>
+<p><strong>Software</strong></p>
+<ul>
+<li>Software is an optional component executed on the device</li>
+<li>A device can have multiple software installed ata time</li>
+<li>Software can be installed or removed independently of other software and the firmware</li>
+<li>Usually used by larger / more powerfully devices</li>
+</ul>
+<p>The following fragments are related to the optional device capability with a remark if they are required for the capability to work:</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Required for optional module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>com_cumulocity_model_Agent</code></td>
+<td>Must be present in the inventory; Enables a device to receive operations</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedOperations</code></td>
+<td>List contains element <code>c8y_Firmware</code></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Firmware tab will be visible on the device page only if <code>c8y_Firmware</code> is listed in the device’s supported operations.</p>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_SupportedOperations&quot;: [
+    &quot;c8y_Firmware&quot;
+]
+
+&quot;c8y_Firmware&quot;: {
+    &quot;name&quot;: &quot;raspberrypi-bootloader&quot;,
+    &quot;version&quot;: &quot;1.20140107-1&quot;,
+    &quot;url&quot;: &quot;31aab9856861b1a587e2094690c2f6e272712cb1&quot;
+}
+</div></code></pre>
+<p>Example operation sent to the device:</p>
+<pre class="hljs"><code><div>&quot;c8y_Firmware&quot;: {
+    &quot;name&quot;: &quot;firmware_a&quot;,
+    &quot;version&quot;: &quot;2.0.24.3&quot;,
+    &quot;dependency&quot;: &quot;2.0.23.0&quot;,
+    &quot;url&quot;: &quot; &quot;,
+    &quot;isPatch&quot;: true
+}
+</div></code></pre>
+<p>When the device receives the operation having <code>c8y_Firmware</code>, the following steps are executed:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.</td>
+<td>Listen for operation created by platform with <code>&quot;status&quot; : &quot;PENDING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API">Real-time notifications</a></td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Update operation <code>&quot;status&quot; : &quot;EXECUTING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Compare name and version stored in the fragment <code>c8y_Firmware</code> in the inventory object of the device with the name and version stored in the received operation fragment <code>c8y_Firmware</code>. If the name and/or version are differing download from the (device specific) firmware repository referenced in the url and install.</td>
+<td><a href="https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-information">Device information</a></td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Update the fragment <code>c8y_Firmware</code> of the inventory object of the device.</td>
+<td></td>
+</tr>
+<tr>
+<td>4.</td>
+<td>Update operation accordingly <code>&quot;status&quot;: &quot;SUCCESSFUL&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="device-profile">Device Profile</h2>
+<p>Device capability to manage device profiles. Device profiles represent a combination of a firmware version, one or multiple software packages and one or multiple configuration files which can be deployed on a device. Based on device profiles, users can deploy a specific target configuration on devices by using bulk operations. For details and examples, compare <code>Managing device data</code> section in the <a href="https://cumulocity.com/guides/users-guide/device-management/#managing-device-data">documentation</a>.</p>
+<p>The following fragments are related to the optional device capability with a remark if they are required for the capability to work:</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Required for optional module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>com_cumulocity_model_Agent</code></td>
+<td>Must be present in the inventory; Enables a device to receive operations</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedOperations</code></td>
+<td>List contains element <code>c8y_DeviceProfile</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_Profile</code></td>
+<td>List contains element <code>profileName</code>, <code>profileId</code>, and <code>profileExecuted</code></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Device profile tab will be visible on the device page only if <code>c8y_DeviceProfile</code> is listed in the device’s supported operations.</p>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_SupportedOperations&quot;: [
+    &quot;c8y_DeviceProfile&quot;
+]
+&quot;c8y_Profile&quot;: {
+    &quot;profileName&quot;: &quot;Device_Profile&quot;,
+    &quot;profileId&quot;: &quot;60238&quot;,
+    &quot;profileExecuted&quot;: true
+}
+</div></code></pre>
+<p>Example operation sent to the device:</p>
+<pre class="hljs"><code><div>&quot;c8y_DeviceProfile&quot;: {
+    &quot;software&quot;: [
+        {
+            &quot;name&quot;: &quot;asd&quot;,
+            &quot;action&quot;: &quot;install&quot;,
+            &quot;version&quot;: &quot;1.0&quot;,
+            &quot;url&quot;: &quot;aURL&quot;
+        }
+    ],
+    &quot;configuration&quot;: [],
+    &quot;firmware&quot;: {
+        &quot;name&quot;: &quot;aName&quot;,
+        &quot;version&quot;: &quot;aVersion&quot;,
+        &quot;url&quot;: &quot;aURL&quot;
+    },
+    &quot;description&quot;: &quot;Assign device profile Device_Profile to device Device_Name&quot;,
+    &quot;deviceId&quot;: &quot;437604&quot;,
+    &quot;profileId&quot;: &quot;60238&quot;,
+    &quot;profileName&quot;: &quot;Device_Profile&quot;
+}
+</div></code></pre>
+<p>When the device receives operation <code>c8y_DeviceProfile</code> it will execute the following steps:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.</td>
+<td>Listen for operation created by platform with <code>&quot;status&quot; : &quot;PENDING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API">Real-time notifications</a></td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Update operation <code>&quot;status&quot; : &quot;EXECUTING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Use the information stored in the operation <code>c8y_DeviceProfile</code> regarding software, firmware and configuration to execute changes as described in respective sections.</td>
+<td></td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Update the fragment <code>c8y_Profile</code> of the inventory object of the device by adding the nested fragments <code>&quot;profileName”:&quot;Device_Profile&quot;</code>, <code>&quot;profileId&quot;: &quot;60238&quot;</code> and <code>&quot;profileExecuted&quot;: true/false</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Update operation accordingly <code>&quot;status&quot;: &quot;SUCCESSFUL&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="restart">Restart</h2>
+<p>Device capability to restart the device. For details and examples, compare <a href="https://cumulocity.com/api/10.10.0/#section/Device-management-library/Miscellaneous">miscellaneous</a> section of the documentation.</p>
+<p>The following fragments are related to the optional device capability with a remark if they are required for the capability to work:</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Required for optional module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>com_cumulocity_model_Agent</code></td>
+<td>Must be present in the inventory; Enables a device to receive operations</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedOperations</code></td>
+<td>List contains element <code>c8y_Restart</code></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_SupportedOperations&quot;: [
+    &quot;c8y_Restart&quot;
+]
+</div></code></pre>
+<p>When the device receives the operation <code>c8y_Restart</code> the following steps are executed:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.</td>
+<td>Listen for operations created by platform with <code>&quot;status&quot; : &quot;PENDING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API">Real-time notifications</a></td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Update operation <code>c8y_Restart</code> to <code>&quot;status&quot; : &quot;EXECUTING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Restart the device</td>
+<td></td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Query all operations in <code>&quot;status&quot; : &quot;EXECUTING&quot;</code> to continue processing them</td>
+<td><a href="https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API">Real-time notifications</a></td>
+</tr>
+<tr>
+<td>4.</td>
+<td>Query operations by agent ID and <code>&quot;status&quot; : &quot;EXECUTING&quot;</code> to clean up them. This includes the update of <code>c8y_Restart</code> to <code>&quot;status&quot; : &quot;SUCCESSFUL&quot;</code></td>
+<td><a href="https://cumulocity.com/guides/device-sdk/rest/#device-integration">Device Integration</a>, <a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>5.</td>
+<td>Listen to new operations created in Cumulocity IoT</td>
+<td><a href="https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API">Real-time notifications</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="measurement-request">Measurement Request</h2>
+<p>Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequency.</p>
+<p>The following fragments are related to the optional device capability with a remark if they are required for the capability to work:</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Required for optional module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>com_cumulocity_model_Agent</code></td>
+<td>Must be present in the inventory; Enables a device to receive operations</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedOperations</code></td>
+<td>List contains element <code>c8y_MeasurementRequestOperation</code></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_SupportedOperations&quot;: [
+    &quot;c8y_MeasurementRequestOperation&quot;
+]
+</div></code></pre>
+<p>When the device receives the operation <code>c8y_MeasurementRequestOperation: {&quot;requestName&quot;: &quot;LOG&quot;}</code> the following steps are executed:</p>
+<p><strong>Note:</strong> For legacy reasons, the <code>c8y_MeasurementRequestOperation</code> operation contains the fragment <code>&quot;requestName&quot;: &quot;LOG&quot;</code>. This is to be ignored by the device.
+The device vendor can decide if all or a useful subset of measurements are send as response to this operation.</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.</td>
+<td>Listen for operation created by platform with <code>&quot;status&quot; : &quot;PENDING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API">Real-time notifications</a></td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Update operation <code>&quot;status&quot; : &quot;EXECUTING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Send all or a useful subset of measurements</td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/postMeasurementCollectionResource">Create measurement</a></td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Update operation <code>&quot;status&quot;: &quot;SUCCESSFUL&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="shell">Shell</h2>
+<p>Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. For details and examples, compare <a href="https://cumulocity.com/api/10.10.0/#section/Device-management-library/Miscellaneous">miscellaneous</a> section of the documentation.</p>
+<p>The following fragments are related to the optional device capability with a remark if they are required for the capability to work:</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Required for optional module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>com_cumulocity_model_Agent</code></td>
+<td>Must be present in the inventory; Enables a device to receive operations</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedOperations</code></td>
+<td>List contains element <code>c8y_Command</code></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_SupportedOperations&quot;: [
+    &quot;c8y_Command&quot;
+]
+</div></code></pre>
+<p>Example operation sent to the device for <code>c8y_Command</code>:</p>
+<pre class="hljs"><code><div>&quot;c8y_Command&quot;: {
+    &quot;text&quot;: &quot;get uboot.sn&quot;
+}
+</div></code></pre>
+<p>When the device receives the operation <code>c8y_Command</code>, the following steps are executed:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.</td>
+<td>Listen for operation created by platform with <code>&quot;status&quot; : &quot;PENDING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API">Real-time notifications</a></td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Update operation <code>&quot;status&quot; : &quot;EXECUTING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Locally execute the command and add the result to the operation in the fragment <code>result</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Update operation <code>&quot;status&quot;: &quot;SUCCESSFUL&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+</tbody>
+</table>
+<p>Example operation after it has been executed and fragment <code>result</code> has been added to <code>c8y_Command</code>:</p>
+<pre class="hljs"><code><div>&quot;c8y_Command&quot;: {
+    &quot;text&quot;: &quot;get uboot.sn&quot;,
+    &quot;result&quot;: &quot;123456&quot;
+}
+</div></code></pre>
+<h2 id="cloud-remote-access">Cloud Remote Access</h2>
+<p><strong>Document Section is still under development</strong></p>
+<p>Device capability to initiate a remote connection via VNC or SSH. For details and examples, compare <a href="https://cumulocity.com/guides/cloud-remote-access/cra-api/">Cloud Remote Access</a> section of the documentation.</p>
+<p><strong>Note:</strong> The connection type <code>Telnet</code> is considered insecure, therefore it is deprecated and should not be used for new implementations. Please use VNC or SSH instead.</p>
+<p>The following fragments are related to the optional device capability with a remark if they are required for the capability to work:</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Required for optional module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>com_cumulocity_model_Agent</code></td>
+<td>Must be present in the inventory; Enables a device to receive operations</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_SupportedOperations</code></td>
+<td>List contains element <code>c8y_RemoteAccessConnect</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_RemoteAccessList</code></td>
+<td>List of supported remote access types</td>
+<td>Yes (at least 1 type)</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_SupportedOperations&quot;: [
+    &quot;c8y_RemoteAccessConnect&quot;
+]
+&quot;c8y_RemoteAccessList&quot;: [
+    {
+        &quot;Id&quot;: 3234,
+        &quot;name&quot;: &quot;My Connection&quot;,
+        &quot;hostname&quot;: &quot;10.0.0.67&quot;,
+        &quot;port&quot;: 5900,
+        &quot;protocol&quot;: &quot;VNC&quot;,
+        &quot;credentials&quot;: {
+            &quot;username&quot;: &quot;someUser&quot;,
+            &quot;password&quot;:  &quot;{cipher
+        }SwRUVOR0gKHmPUuKLulIIM3EMGvxFTg22had6b&quot;,
+	&quot;privateKey&quot;: null,
+        &quot;publicKey&quot;: null,
+        &quot;hostKey&quot;: null,
+        &quot;type&quot;: &quot;PASS_ONLY&quot;
+    }
+}
+]
+</div></code></pre>
+<p>Example operation sent to the device for <code>c8y_RemoteAccessConnect</code>:</p>
+<pre class="hljs"><code><div>&quot;c8y_RemoteAccessConnect&quot;: {
+    &quot;hostname&quot;: &quot;10.0.0.67&quot;, // Endpoint on local network to connect to
+    &quot;port&quot;: 5900, // Port to be used on local network endpoint
+    &quot;connectionKey&quot;: &quot;eb5e9d13-1caa-486b-bdda-130ca0d87df8&quot; // Shared secret to authenticate the connection request from device side
+}
+</div></code></pre>
+<p>When the device receives the operation <code>c8y_RemoteAccessConnect</code>, the following steps are executed:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.</td>
+<td>Listen for operation created by platform with <code>&quot;status&quot; : &quot;PENDING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API">Real-time notifications</a></td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Update operation <code>&quot;status&quot; : &quot;EXECUTING&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Connect to provided <code>hostname</code> and <code>port</code> using TCP</td>
+<td></td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Using the <code>connectionKey</code> connect to device websocket endpoint of the Remote Access microservice: <code>wss:///service/remoteaccess/device/</code></td>
+<td></td>
+</tr>
+<tr>
+<td>4.</td>
+<td>Update operation <code>&quot;status&quot;: &quot;SUCCESSFUL&quot;</code></td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/getOperationResource">Update operation</a></td>
+</tr>
+<tr>
+<td>5.</td>
+<td>Start forwarding binary packets between the TCP connection and the websocket in both directions</td>
+<td></td>
+</tr>
+<tr>
+<td>6.</td>
+<td>Whenever one of these connections is terminated the device considers the session as ended and will also terminate the second connection</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="location--tracking">Location &amp; Tracking</h2>
+<p>Device capability to display and update location information. For details and examples, compare <a href="https://cumulocity.com/api/10.10.0/#section/Sensor-library/Location-capabilities">location capabilities</a> section of the documentation.</p>
+<p>The following fragments are related to the optional device capability with a remark if they are required for the capability to work:</p>
+<table>
+<thead>
+<tr>
+<th>Fragment</th>
+<th>Content</th>
+<th>Required for optional module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c8y_Position</code></td>
+<td>Position information of the device</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_Position.lat</code></td>
+<td>Latitude</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_Position.lng</code></td>
+<td>Longitude</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>c8y_Position.alt</code></td>
+<td>Altitude in meters</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>c8y_Position.trackingProtocol</code></td>
+<td>Technology used for position acquisition (e.g. GPS, Galileo, TELIC)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>c8y_Position.reportReason</code></td>
+<td>Reason why the position update was send (e.g. triggered by schedule, action)</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Example structure in device inventory:</p>
+<pre class="hljs"><code><div>&quot;c8y_Position&quot;: {
+    &quot;lat&quot;: 51.211977,
+    &quot;lng&quot;: 6.15173,
+    &quot;alt&quot;: 67,
+}
+</div></code></pre>
+<p>Whenever the location shell be updated, the device executes the following steps:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.</td>
+<td>Send a position update event</td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource">Create event</a></td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Update the c8y_Position fragment in device inventory</td>
+<td><a href="https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource">Update managed object</a></td>
+</tr>
+</tbody>
+</table>
+<p>Example location update event:</p>
+<pre class="hljs"><code><div>{
+  &quot;source&quot;: {
+    &quot;id&quot;: 4036, // device ID for which you want to update the position
+  },
+  &quot;type&quot;: &quot;c8y_LocationUpdate&quot;, // must be c8y_LocationUpdate
+  &quot;text&quot;: &quot;Location updated&quot;, // field mandatory but content can be changed
+  &quot;time&quot;: &quot;2021-09-07T14:04:27.845Z'&quot;,
+  &quot;c8y_Position&quot;: {
+    &quot;lat&quot;: 51.211977,
+    &quot;lng&quot;: 6.15173,
+    &quot;alt&quot;: 67,
+  },
+}
+</div></code></pre>
+<p>##MD file change Log</p>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Chapter</th>
+<th>Severity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30/09/2021</td>
+<td>Added MD file change log</td>
+<td>minor</td>
+</tr>
+<tr>
+<td>22/10/2021</td>
+<td>Added cypher suites information</td>
+<td>minor</td>
+</tr>
+<tr>
+<td>01/11/2021</td>
+<td>shell: Example added;  measurements section: Naming convention added; sending operational data: table added with mandatory information; Device Information: com_cumulocity_model_agent mandatory rule changed and externalIds added</td>
+<td>medium</td>
+</tr>
+<tr>
+<td>03/11/2021</td>
+<td><code>com_cumulocity_model_agent</code> added as mandatory for each optional agent module that relies on receiving operations; Moved supported child device types to optional modules;</td>
+<td>major</td>
+</tr>
+<tr>
+<td>08/11/2021</td>
+<td>Updated broken links</td>
+<td>minor</td>
+</tr>
+<tr>
+<td>09/11/2021</td>
+<td>Updated broken links</td>
+<td>minor</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
