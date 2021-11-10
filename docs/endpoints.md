@@ -19,6 +19,9 @@ GET `{{baseUrl}}/inventory/managedObjects?pageSize=1&query=$filter=(type eq 'c8y
 This endpoint will create a new Testsuite
 POST `{{baseUrl}}/inventory/managedObjects/testsuite`
 
+This endpoint will distribute Testsuite from enterprise tenant to all subtenants that are subscribed for Gateway-Certification microservice.
+GET `{{baseUrl}}/service/gateway-certification/testsuite
+
 
 ---
 
