@@ -1,6 +1,5 @@
 # Documentation
 
-1. [Concept Probe](./concept-probe.md)
 1. [Endpoints](./endpoints.md)
 1. [Information Model](./information-model.md)
 1. [Vendor Requirements](./vendor-requirements.md)
