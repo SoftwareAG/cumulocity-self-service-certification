@@ -649,7 +649,13 @@ Example operation sent to the device:
         "name": "mySoftware2",
         "version": "1.1.0",
         "url": "http://www.example.com",
-        "action": "install"
+        "action": "update"
+    },
+        {
+        "name": "mySoftware2",
+        "version": "1.1.0",
+        "url": "http://www.example.com",
+        "action": "uninstall"
     }
 ]
 ```
@@ -660,7 +666,7 @@ When the device receives the operation `c8y_SoftwareUpdate`, the following steps
 | ---- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
 | 0.   | Listen for operation created by platform with `"status" : "PENDING"`     | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API)   |
 | 1.   | Update operation `"status" : "EXECUTING"`                                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)          |
-| 2.   | Execute software install / uninstall tasks described in the operation    |                                                                                         |
+| 2.   | Execute the given `"action"` (install, update, uninstall) specified by the operation `c8y_SoftwareUpdate` |                                                                                         |
 | 3.   | Update `c8y_SoftwareList` fragment in the inventory object of the device | [Update managed object](https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource) |
 | 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                    | [Update Operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)          |
 
