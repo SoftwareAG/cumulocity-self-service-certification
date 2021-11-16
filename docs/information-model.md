@@ -102,8 +102,7 @@ The test run object is instantiated from the test suite data structure, by addin
     "parentId": "9656729", // set by MS: if there is a parent this should be the connection
   },
   // module listing -->
-  {
-    "id": "deviceInformation",
+  "deviceInformation": {
     "parent": "foundationModules",
     "status": { // set by MS: added to indicate the status of each capability
       "code": "FAILED", // set by MS
@@ -121,9 +120,14 @@ The test run object is instantiated from the test suite data structure, by addin
       },
     ],
   },
-  // container modules are obmitted, their child-modules are listed
-  {
-    "id": "operationDataMeasurements",
+  // parts (container: true modules) only reflect their status
+  "sendingOperationalData": {
+    "status": { // set by MS: added to indicate the status of each capability
+      "code": "FAILED", // set by MS
+    },
+  },
+  // part children are listed as before 
+  "operationDataMeasurements": {
     "parent": "sendingOperationalData",
     "status": { // set by MS: added to indicate the status of each capability
       "code": "FAILED", // set by MS
