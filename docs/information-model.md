@@ -27,8 +27,8 @@ The `c8y_certification_testSuite` object is represented in the following json fo
           // - listing children on fragment `capabilities`.
           "id": "deviceInformation",
           "title": "Device Information",
-          "mandatory": true, // boolean or obmitted (= false)
-          "container": false, // boolean or obmitted (= false),
+          "mandatory": true, // boolean or omitted (= false)
+          "container": false, // boolean or omitted (= false),
           "capabilities": [
             {
               "id": "c8y_IsDevice",
@@ -50,7 +50,6 @@ The `c8y_certification_testSuite` object is represented in the following json fo
             {
               "id": "operationDataMeasurements",
               "title": "Measurements",
-              "type": "container",
               "capabilities": [
                 {
                   "id": "operationDataMeasurements_Source",
@@ -108,7 +107,7 @@ The test run object is instantiated from the test suite data structure, by addin
       "code": "FAILED", // set by MS
       // text is not required/used for modules
     },
-    "mandatory": true, // boolean or obmitted (= false)
+    "mandatory": true, // boolean or omitted (= false)
     "capabilities": [
       {
         "id": "c8y_IsDevice",
