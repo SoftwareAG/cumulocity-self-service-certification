@@ -1,8 +1,40 @@
 # Optional Capabilities for Vendor Device Certification
 
 The device certification process requires the device to follow integration best practices.
-This means that more fields are mandatory for a certified device compared to platform minium requirements.
-In the following section, optional capabilities and behavior are described.
+This means that more fields are mandatory for a certified device compared to platform minium requirements. 
+In the following section, optional capabilities and behavior are described. The optional capabilities require the [Mandatory Capabilites for Vendor Device Certification](#https://github.com/SoftwareAG/cumulocity-self-service-certification/blob/main/docs/vendor-requirements-MandatoryCapabilities.md)
+
+- [x] Foundation Capabilities 
+      - [x] c8y_Agent
+  - [x] Device Information
+      - [x] c8y_IsDevice
+      - [x] name
+      - [x] type
+      - [X] c8y_Hardware
+      - [X] c8y_Firmware
+      - [X] c8y_RequiredAvailability
+      - [X] c8y_SupportedOperations
+  - [X] External ID
+  - [X] Sending Operational Data
+    - [X] Measurements
+    - [X] Events
+    - [X] Alarms
+- [ ] Optional Capabilities
+  - [X] Gateways
+    - [X] Child Device Types
+  - [X] Log File Retrieval
+  - [X] Device Configuration
+    - [X] Text Based Configuration
+    - [X] File Based Configuration
+  - [X] Managing Device Software
+  - [X] Managing Device Firmware
+  - [X] Managing Device Firmware
+  - [X] Device Profile
+  - [X] Restart
+  - [ ] Measurement Request
+  - [ ] Shell
+  - [ ] Cloud Remote Access
+  - [x] Location & Tracking
 
 # Optional Capabilities
 

@@ -2,15 +2,17 @@
 
 The device certification process requires the device to follow integration best practices.
 This means that more fields are mandatory for a certified device compared to platform minium requirements.
-In the following section, mandatory capabilities and behavior are described.
+In the following section, mandatory capabilities and behavior are described. The optional capabilities are part of a different document [Optional Capabilities for Vendor Device Certification](#https://github.com/SoftwareAG/cumulocity-self-service-certification/blob/main/docs/vendor-requirements-OptionalCapabilities.md).
 
 
 ## Currently Testable Device Capabilities of Self-Service Certification Microservice
 
-- [ ] Foundation Modules 
-  - [ ] Device Information
+- [x] Foundation Capabilities 
+      - [x] c8y_Agent
+  - [x] Device Information
+      - [x] c8y_IsDevice
+      - [x] name
       - [x] type
-      - [ ] c8y_Agent
       - [X] c8y_Hardware
       - [X] c8y_Firmware
       - [X] c8y_RequiredAvailability
@@ -20,7 +22,7 @@ In the following section, mandatory capabilities and behavior are described.
     - [X] Measurements
     - [X] Events
     - [X] Alarms
-- [ ] Optional Modules
+- [ ] Optional Capabilities
   - [X] Gateways
     - [X] Child Device Types
   - [X] Log File Retrieval
@@ -40,7 +42,7 @@ In the following section, mandatory capabilities and behavior are described.
 # Mandatory Capabilities
 
 **Status: Reviewed and Ready**
-The chapter [Device Behavior](#device-behavior) describes how a connector / agent that runs on a device registers to Cumulocity IoT. It must send a mandatory minimum of information to be certifiable covered in the section [Foundation Model Fragments](#foundation-model-fragments). 
+The chapter [Device Behavior](#device-behavior) describes how a connector / agent that runs on a device registers to Cumulocity IoT. It must send a mandatory minimum of information to be certifiable covered in the section [Mandatory Capability Fragments](#mandatory-capability-fragments). 
 
 
 ## Device Behavior
