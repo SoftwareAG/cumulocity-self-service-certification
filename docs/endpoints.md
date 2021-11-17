@@ -16,9 +16,6 @@ GET `{{baseUrl}}/inventory/managedObjects?type=c8y_certification_testSuite`
 This endpoint will give you the latest Testsuites
 GET `{{baseUrl}}/inventory/managedObjects?pageSize=1&query=$filter=(type eq 'c8y_certification_testSuite')$orderby=lastUpdated desc`
 
-This endpoint will create a new Testsuite
-POST `{{baseUrl}}/inventory/managedObjects/testsuite`
-
 This endpoint will distribute Testsuite from enterprise tenant to all subtenants that are subscribed for Gateway-Certification microservice.
 GET `{{baseUrl}}/service/gateway-certification/testsuite`
 
