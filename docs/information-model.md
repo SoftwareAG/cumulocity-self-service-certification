@@ -121,6 +121,7 @@ The test run object is instantiated from the test suite data structure, by addin
   },
   // parts (container: true modules) only reflect their status
   "sendingOperationalData": {
+    "parent": "foundationModules",
     "status": { // set by MS: added to indicate the status of each capability
       "code": "FAILED", // set by MS
     },
