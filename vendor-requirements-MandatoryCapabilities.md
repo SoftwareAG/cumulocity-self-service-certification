@@ -1,8 +1,8 @@
-# Vendor Device Certification Requirements
+# Mandatory Capabilites for Vendor Device Certification
 
 The device certification process requires the device to follow integration best practices.
 This means that more fields are mandatory for a certified device compared to platform minium requirements.
-In the following section, mandatory information and behavior is described.
+In the following section, mandatory capabilities and behavior are described.
 
 
 ## Currently Testable Device Capabilities of Self-Service Certification Microservice
@@ -35,7 +35,7 @@ In the following section, mandatory information and behavior is described.
   - [ ] Measurement Request
   - [ ] Shell
   - [ ] Cloud Remote Access
-  - [ ] Location & Tracking
+  - [x] Location & Tracking
 
 # Mandatory Capabilities
 
@@ -75,7 +75,7 @@ Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the
 * rsa_pss_pss_sha512
 
 
-## Foundation Module Fragments
+## Mandatory Capability Fragments
 
 For details and examples, compare [metadata](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Metadata) section of documentation as well as the detail sections below.
 
@@ -361,7 +361,7 @@ Example POST body:
 | 30/09/2021 | Added MD file change log                                                                                                                                                                                                            | minor    |
 | 22/10/2021 | Added cypher suites information                                                                                                                                                                                                           | medium    |
 | 01/11/2021 | measurements section: Naming convention added; sending operational data: table added with mandatory information; Device Information: com_cumulocity_model_agent mandatory rule changed and externalIds added | medium   |
-| 03/11/2021 | `com_cumulocity_model_agent` added as mandatory for each optional agent module that relies on receiving operations; Moved supported child device types to optional modules;  | major   |
+| 03/11/2021 | `com_cumulocity_model_agent` added as mandatory for each optional agent capability that relies on receiving operations; Moved supported child device types to optional capabilites;  | major   |
 | 08/11/2021 | Updated broken links  | minor   |
 | 09/11/2021 | Updated broken links, added Currently Supported Device Capabilities of Self-Service Certification Microservice  | minor   |
 | 10/11/2021 | Added some common measurement names for reference  | minor   |
