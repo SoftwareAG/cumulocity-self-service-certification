@@ -4,21 +4,7 @@ The device certification process requires the device to follow integration best 
 This means that more fields are mandatory for a certified device compared to platform minium requirements. 
 In the following section, optional capabilities and behavior are described. The optional capabilities require the [Mandatory Capabilites for Vendor Device Certification](#https://github.com/SoftwareAG/cumulocity-self-service-certification/blob/main/docs/vendor-requirements-MandatoryCapabilities.md)
 
-- [x] Foundation Capabilities 
-      - [x] c8y_Agent
-  - [x] Device Information
-      - [x] c8y_IsDevice
-      - [x] name
-      - [x] type
-      - [X] c8y_Hardware
-      - [X] c8y_Firmware
-      - [X] c8y_RequiredAvailability
-      - [X] c8y_SupportedOperations
-  - [X] External ID
-  - [X] Sending Operational Data
-    - [X] Measurements
-    - [X] Events
-    - [X] Alarms
+
 - [ ] Optional Capabilities
   - [X] Gateways
     - [X] Child Device Types
@@ -41,7 +27,7 @@ In the following section, optional capabilities and behavior are described. The 
 All sections below are **optional**. If a device partner decides to certify Optional Capabilities, they are documented in the certificate and shown on the device partner portal.
 Customer can filter and search for devices that support certain capabilities. Therefore, it is recommended to certify all capabilities (aka. "Optional Capabilities") offered by the device.
 The capabilities are listed below in descending order of importance based on Software AG's experience.
-To indicate that a device wants to certify an Optional Capabilities, it has to add the respective element to the list of supported operations in the inventory object of the device. All Optional Capabilities that receive operations require the fragment  `com_cumulocity_model_Agent` to be present in the device managed object in the inventory as described in [Foundation Capability Fragments](#foundation-module-fragments). 
+To indicate that a device wants to certify an Optional Capabilities, it has to add the respective element to the list of supported operations in the inventory object of the device. All Optional Capabilities that receive operations require the fragment  `com_cumulocity_model_Agent` to be present in the device managed object in the inventory as.
 
 | Fragment                        | Content                                    | Required for optional capability |
 | ------------------------------- | ------------------------------------------ | ---------------------------- |

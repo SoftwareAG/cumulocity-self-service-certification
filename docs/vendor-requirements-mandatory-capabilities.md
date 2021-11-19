@@ -22,22 +22,6 @@ In the following section, mandatory capabilities and behavior are described. The
     - [X] Measurements
     - [X] Events
     - [X] Alarms
-- [ ] Optional Capabilities
-  - [X] Gateways
-    - [X] Child Device Types
-  - [X] Log File Retrieval
-  - [X] Device Configuration
-    - [X] Text Based Configuration
-    - [X] File Based Configuration
-  - [X] Managing Device Software
-  - [X] Managing Device Firmware
-  - [X] Managing Device Firmware
-  - [X] Device Profile
-  - [X] Restart
-  - [ ] Measurement Request
-  - [ ] Shell
-  - [ ] Cloud Remote Access
-  - [x] Location & Tracking
 
 # Mandatory Capabilities
 
