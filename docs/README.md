@@ -2,8 +2,8 @@
 
 1. [Endpoints](./endpoints.md)
 2. [Information Model](./information-model.md)
-4. [Vendor Requirements Mandatory Capabilities](./vendor-requirements-mandatory-capabilities.md)
-5. [Vendor Requirements Optional Capabilities](./vendor-requirements-optional-capabilities.md)
+4. [Vendor Requirements](./vendor-requirements.md)
+
 
 ## Diagrams & Graphics
 
