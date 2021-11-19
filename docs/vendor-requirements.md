@@ -1,49 +1,18 @@
-# Vendor Device Certification Requirements
+# Foundation Capabilities (mandatory) for Vendor Device Certification
 
 The device certification process requires the device to follow integration best practices.
 This means that more fields are mandatory for a certified device compared to platform minium requirements.
-In the following section, mandatory information and behavior is described.
+In the following section, mandatory capabilities and behavior are described. The extended capabilities are part of the second section in this document  [Extended Capabilities for Vendor Device Certification](#extended-capabilities-for-vendor-device-certification).
 
-
-## Currently Testable Device Capabilities of Self-Service Certification Microservice
-
-- [ ] Foundation Modules 
-  - [ ] Device Information
-      - [x] type
-      - [ ] c8y_Agent
-      - [X] c8y_Hardware
-      - [X] c8y_Firmware
-      - [X] c8y_RequiredAvailability
-      - [X] c8y_SupportedOperations
-  - [X] External ID
-  - [X] Sending Operational Data
-    - [X] Measurements
-    - [X] Events
-    - [X] Alarms
-- [ ] Optional Modules
-  - [X] Gateways
-    - [X] Child Device Types
-  - [X] Log File Retrieval
-  - [X] Device Configuration
-    - [X] Text Based Configuration
-    - [X] File Based Configuration
-  - [X] Managing Device Software
-  - [X] Managing Device Firmware
-  - [X] Managing Device Firmware
-  - [X] Device Profile
-  - [X] Restart
-  - [ ] Measurement Request
-  - [ ] Shell
-  - [ ] Cloud Remote Access
-  - [ ] Location & Tracking
-
-# Foundation Modules (Mandatory)
+# Device Registration
 
 **Status: Reviewed and Ready**
+The chapter [Device Behavior](#device-behavior) describes how a connector / agent that runs on a device registers to Cumulocity IoT. It must send a mandatory minimum of information to be certifiable covered in the section [Foundation Capabilities](#foundation-capabilities-mandatory). 
+
 
 ## Device Behavior
 
-When started, the device follows the process flow defines for REST or MQTT based integration respectively.
+When  started, the device follows the process flow defines for REST or MQTT based integration respectively.
 
 **Please read and follow one of these guides:**
 
@@ -52,6 +21,8 @@ For [REST based integrations](https://cumulocity.com/guides/device-sdk/rest/#dev
 
 For [MQTT based integrations](https://cumulocity.com/guides/device-sdk/mqtt/#device-integration) (using Smart-Rest 2 is recommended):
 ![Startup MQTT based](https://cumulocity.com/guides/images/mqtt/mqttDeviceIntegration.png)
+
+**Cypehr Suits:**
 
 Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the following cypher suits from release [Release 10.10](https://cumulocity.com/guides/releasenotes/release-10-9-0/announcements-10-9-0/):
 
@@ -71,47 +42,101 @@ Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the
 * rsa_pss_pss_sha512
 
 
-## Device Information
+# Foundation Capabilities (mandatory)
 
 For details and examples, compare [metadata](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Metadata) section of documentation as well as the detail sections below.
 
 | Fragment                     | Meaning in Device Partner Portal                                                                          | Mandatory                                                                                                                                                   |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `c8y_IsDevice`               | Empty fragment. Declares a Managed Object as a Device                                                     | Yes                                                                                                                                                         |
-| `com_cumulocity_model_Agent` | Empty fragment. Declares that the device is able to receive operations                                    | Yes, for root devices and gateways that support operations; No, for devices and gateways that don't support operations; Must not be used for child devices; |
+| `c8y_Agent`                  | Information about the agent run on the device                                                            | Yes        |
+| `c8y_IsDevice`               | Empty fragment. Declares a Managed Object as a Device                                                     | Yes                                                                                            |
 | `name`                       | Sets the name of the device used e.g. in 'all devices' and 'device info' views                            | Yes                                                                                                                                                         |
-| `type`                       | Functional type of device e.g. water meter, pump, Gateway, environmental sensor                           | Yes                                                                                                                                                         |
-| `c8y_Hardware`               | Hardware information about the device                                                                     | Yes                                                                                                                                                         |
-| `c8y_Firmware`               | Firmware information about the device                                                                     | Yes                                                                                                                                                         |
-| `c8y_Agent`                  | Information about the agent run on the device                                                            | Yes                                                                                                                                                         |
-| `c8y_RequiredAvailability`   | Minimal communication interval to determine if device is offline                                          | No                                                                                                                                                          |
-| `c8y_SupportedOperations`    | Many optional operations are directly triggering the dynamic UI by invoking the respective operation tabs | No                                                                                                                                                          |
-| `externalIds`                | Used to identify a device with a unique information from the physical world                               | Yes                                                                                                                                                         |
+| `type`                       | Functional type of device e.g. water meter, pump, Gateway, environmental sensor                           | Yes                                                                                         |
+| `c8y_RequiredAvailability`   | Minimal communication interval to determine if device is offline                                          | No        |
+| `c8y_Firmware`               | Firmware information about the device                                                                     | Yes                                                                                                              |
+| `c8y_Hardware`               | Hardware information about the device                                                                     | Yes                                                                                                                                                        |
+| `externalIds`                | Used to identify a device with a unique information from the physical world                               | Yes    |                                                         
+    
 
-Example structure in device inventory:
+Information about one physical device is stored within multiple managed objects. Cumulocity IoT stores all general device information as one managed object in its inventory. The following json structure represents a typical managed object of a device in the inventory (`GET {{url}}/inventory/managedObjects/{{deviceId}}`):
 
 ```json5
 "c8y_IsDevice": {},
 "com_cumulocity_model_Agent": {},
 "name": "edge-agent-eabdcf5d344b4a52a4ffab13fe3d11cb",
 "type": "c8y_EdgeAgent",
-"c8y_Hardware": {
-    "model": "BCM2708",
-    "revision": "000e",
-    "serialNumber": "00000000e2f5ad4d"
+"c8y_Agent": {
+    "name": "DeviceAgent",
+    "version": "1.0",
+    "url": ""
+},
+"c8y_RequiredAvailability": {
+    "responseInterval": 6
 },
 "c8y_Firmware": {
     "name": "raspberrypi-bootloader",
     "version": "1.20140107-1",
     "url": "31aab9856861b1a587e2094690c2f6e272712cb1"
 },
-"c8y_RequiredAvailability": {
-    "responseInterval": 6
-},
-"c8y_SupportedOperations": [
-    "c8y_Software",
-    "c8y_Firmware"
-]
+"c8y_Hardware": {
+    "model": "BCM2708",
+    "revision": "000e",
+    "serialNumber": "00000000e2f5ad4d"
+}
+```
+## Agent Information
+The fragments `c8y_Agent` must be present in the device managed object stored in the inventory.
+
+### c8y_Agent
+
+The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
+
+| Fragment  | Mandatory |
+| --------- | --------- |
+| `name`    | Yes       |
+| `version` | Yes       |
+| `url`     | No        |
+
+Example structure in device inventory:
+
+```json5
+"c8y_Agent": {
+    "name": "myCustomAgent",
+    "version": "1.2.34",
+    "url": "https//link-to-agent-repo.url"
+}
+```
+
+## Device Information
+
+The fragments `c8y_IsDevice`, `name`, `type`, `c8y_RequiredAvailability`, `c8y_Firmware`, and `c8y_Hardware` must be present in the managed object of the device stored in the inventory. 
+
+### name
+
+The Cumulocity IoT UI uses the device `name`.  `name` sets the name of the device used e.g. in 'all devices' and 'device info' views.
+
+| Fragment | Mandatory |
+| -------- | --------- |
+| `name`   | Yes       |
+
+Example structure in device inventory:
+
+```json5
+"name": "ExampleDeviceName"
+```
+
+### c8y_IsDevice
+
+`c8y_IsDevice` is an empty fragment that declares a Managed Object as a device.
+
+| Fragment | Mandatory |
+| -------- | --------- |
+| `c8y_IsDevice`   | Yes       |
+
+Example structure in device inventory:
+
+```json5
+"c8y_IsDevice": {} 
 ```
 
 ### type
@@ -129,6 +154,21 @@ Example structure in device inventory:
 "type": "c8y_EdgeAgent"
 ```
 
+### c8y_RequiredAvailability
+
+Minimal communication interval to determine if device is offline. For details and examples, compare [device availability](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-availability) section of the documentation.
+
+| Fragment           | Mandatory |
+| ------------------ | --------- |
+| `responseInterval` | No        |
+
+Example structure in device inventory:
+
+```json5
+"c8y_RequiredAvailability": {
+    "responseInterval": 6
+}
+```
 ### c8y_Hardware
 
 The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
@@ -170,61 +210,10 @@ Example structure in device inventory:
 }
 ```
 
-### c8y_Agent
-
-The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
-
-| Fragment  | Mandatory |
-| --------- | --------- |
-| `name`    | Yes       |
-| `version` | Yes       |
-| `url`     | No        |
-
-Example structure in device inventory:
-
-```json5
-"c8y_Agent": {
-    "name": "myCustomAgent",
-    "version": "1.2.34",
-    "url": "https//link-to-agent-repo.url"
-}
-```
-
-### c8y_RequiredAvailability
-
-For details and examples, compare [device availability](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-availability) section of the documentation.
-
-| Fragment           | Mandatory |
-| ------------------ | --------- |
-| `responseInterval` | No        |
-
-Example structure in device inventory:
-
-```json5
-"c8y_RequiredAvailability": {
-    "responseInterval": 6
-}
-```
-
-### c8y_SupportedOperations
-
-The fragment `c8y_SupportedOperations` is used to identify which operations (and hence certifiable [optional modules](#optional-modules)) are supported by the device.
-This fragment is optional. If not present, no optional modules will be certified.
-
-| Fragment                  | Mandatory |
-| ------------------------- | --------- |
-| `c8y_SupportedOperations` | No        |
-
-Example structure in device inventory:
-
-```json5
-"c8y_SupportedOperations": [
-    "c8y_Software",
-    "c8y_Firmware"
-]
-```
-
 ## External ID
+
+
+The External ID is displayed by the UI in the tab "Identity". The fragments `externalId` and `type` must be present in the managed object of the device using the identity API. NOTE: The externalID is not stored in the device managed object using the inventory API.
 
 For details and examples, compare [external id](https://cumulocity.com/api/10.10.0/#operation/postExternalIDCollectionResource) section of the documentation.
 
@@ -235,15 +224,13 @@ Used to identify the device in Cumulocity by its unique serial number, MAC, IMEI
 | `externalId` | Yes       |
 | `type`       | Yes       |
 
-Example structure in external id managed object (this information is not stored in the device inventory):
+Example structure in external id managed object (this information is stored in the identity managed object, not in the inventory managed object):
 
 ```json5
-"externalIds": [
-        {
-            "externalId": "edge-agent-eabdcf5d344b4a52a4ffab13fe3d11cb",
-            "type": "c8y_Serial"
-        }
-    ]
+{
+  "externalId": "simulator_145074_0",
+  "type": "c8y_Serial"
+}
 ```
 
 ## Sending Operational Data
@@ -351,24 +338,122 @@ Example POST body:
 }
 ```
 
+# Extended Capabilities for Vendor Device Certification
+
+The device certification process requires the device to follow integration best practices.
+This means that more fields are mandatory for a certified device compared to platform minium requirements. 
+In the following section, Extended Capabilities and behavior are described. The Extended Capabilities require the [Foundation Capabilites for Vendor Device Certification](#foundation-capabilities-mandatory-for-vendor-device-certification)
 
 
-# Optional Modules
+# Extended Capabilities
 
-All sections below are **optional**. If a device partner decides to certify optional modules, they are documented in the certificate and shown on the device partner portal.
-Customer can filter and search for devices that support certain modules. Therefore, it is recommended to certify all capabilities (aka. "Optional Modules") offered by the device.
-The Modules are listed below in descending order of importance based on Software AG's experience.
-To indicate that a device wants to certify an Optional Module, it has to add the respective element to the list of supported operations in the inventory object of the device. All optional modules that recieve operations require the fragment  `com_cumulocity_model_Agent` to be present in the inventory as described in [Device Information](#device-information). 
+All sections below are **optional**. If a device partner decides to certify Extended Capabilities, they are documented in the certificate and shown on the device partner portal.
+Customer can filter and search for devices that support certain capabilities. Therefore, it is recommended to certify all capabilities (aka. "Extended Capabilities") offered by the device.
+The capabilities are listed below in descending order of importance based on Software AG's experience.
+To indicate that a device wants to certify an Extended Capabilities, it has to add the respective element to the list of supported operations in the inventory object of the device. All Extended Capabilities that receive operations require the fragment  `com_cumulocity_model_Agent` to be present in the device managed object in the inventory as.
 
-Example structure in device inventory:
+| Fragment / Extended Capability                        | Content                                    | Required for extended capability |
+| ------------------------------- | ------------------------------------------ | ---------------------------- |
+| `c8y_SupportedOperations`    | Many extended operations are directly triggering the dynamic UI by invoking the respective operation tabs | Yes, if the Extended Capability is an operation      | 
+| `com_cumulocity_model_Agent` | Empty fragment. Declares that the device is able to receive operations                                    | Yes, for root devices and gateways that support operations; No, for devices and gateways that don't support operations; Must not be used for child devices; |
+| `Gateways` | Cumulocity uses the concept of child device types to distinguish the capabilities of child devices behind a gateway device. | is an Extended Capability |
+| `Log File Retrieval` | Device capability to upload (filtered) log files to C8Y.  | is an Extended Capability |
+| `Device Configuration` | Device capability that enables text- and / or profile-based device configuration. Text based configuration is the more basic approach. File based configuration allows to have multiple types of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).|is an Extended Capability|
+| `Managing Device Software` | Device capability that enables software management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
+| `Managing Device Firmware` | Device capability that enables firmware management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
+| `Device Profile` | Device capability to manage device profiles. Device profiles represent a combination of a firmware version, one or multiple software packages and one or multiple configuration files which can be deployed on a device. | is an Extended Capability |
+| `Restart` | Device capability to restart the device | is an Extended Capability |
+| `Measurement Request` | Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently. | is an Extended Capability |
+| `Shell` | Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. | is an Extended Capability |
+| `Cloud Remote Access` | Device capability to initiate a remote connection via VNC or SSH. | is an Extended Capability |
+| `Location & Tracking` | Device capability to display and update location information. | is an Extended Capability |
+
+
+
+
+Example structure of the device Managed Object in the inventory:
+
 
 ```json5
+"c8y_IsDevice": {},
+"com_cumulocity_model_Agent": {},
+"name": "edge-agent-eabdcf5d344b4a52a4ffab13fe3d11cb",
+"type": "c8y_EdgeAgent",
+"c8y_Agent": {
+    "name": "DeviceAgent",
+    "version": "1.0",
+    "url": ""
+},
+"c8y_RequiredAvailability": {
+    "responseInterval": 6
+},
+"c8y_Firmware": {
+    "name": "raspberrypi-bootloader",
+    "version": "1.20140107-1",
+    "url": "31aab9856861b1a587e2094690c2f6e272712cb1"
+},
+"c8y_Hardware": {
+    "model": "BCM2708",
+    "revision": "000e",
+    "serialNumber": "00000000e2f5ad4d"
+},
 "c8y_SupportedOperations": [
+    "c8y_Software",
+    "c8y_Firmware",
     "c8y_LogfileRequest",
     "c8y_Configuration",
     "c8y_SendConfiguration"
+],
+"c8y_Position": {
+        "lng": 8.6449,
+        "lat": 49.819199
+},
+"c8y_SoftwareList": [{
+    "name": "adduser",
+    "version": "3.118",
+    "url": ""
+}],
+"c8y_Configuration": {
+    "config": "mqtt.url=mqtt.eu-latest.cumulocity.com\nmqtt.port=8883\nmqtt.tls=true\nmqtt.cert_auth=false\nmqtt.client_cert=/root/.cumulocity/certs/chain-cert.pem\nmqtt.client_key=/root/.cumulocity/certs/device-cert-private-key.pem\nmqtt.cacert=/etc/ssl/certs/ca-certificates.crt\nmqtt.ping.interval.seconds=60\nagent.name=dm-example-device\nagent.type=c8y_dm_example_device\nagent.main.loop.interval.seconds=10\nagent.requiredinterval=10\nagent.loglevel=INFO"
+},
+"c8y_SupportedLogs": [
+        "agentlog"
 ]
 ```
+
+### c8y_SupportedOperations
+
+The fragment `c8y_SupportedOperations` is used to identify which operations (and hence certifiable [Extended Capabilities](#extended-capabilities)) are supported by the device.
+This fragment is optional. If not present, the Extended Capabilities will not be certified.
+
+| Fragment                  | Mandatory |
+| ------------------------- | --------- |
+| `c8y_SupportedOperations` | No        |
+
+Example structure in the device managed object using the inventory API:
+
+```json5
+"c8y_SupportedOperations": [
+    "c8y_Software",
+    "c8y_Firmware"
+]
+```
+
+### com_cumulocity_model_Agent
+
+The fragment `com_cumulocity_model_Agent` is an empty fragment. It declares that the device is able to receive operations [Extended Capabilities](#extended-capabilities)).
+This fragment is optional. If not present, the Extended Capabilities will not be certified.
+
+| Fragment                  | Mandatory |
+| ------------------------- | --------- |
+| `com_cumulocity_model_Agent` | No        |
+
+Example structure in the device managed object using the inventory API:
+
+```json5
+"com_cumulocity_model_Agent": {}
+```
+
 
 ## Gateways
 
@@ -379,14 +464,15 @@ For details and examples, compare [child operations](https://cumulocity.com/api/
 Cumulocity uses the concept of _child device types_ to distinguish the capabilities of child devices _behind_ a gateway device.
 For example, a child device connected via a simple analog wire connection (like a temperature sensor) may only be able to send measurements (the temperature),
 while a child device connected via OPC-UA is able to send measurements, events, alarms, and log files in addition to the ability to process incoming requests to upgrade its firmware.
-In this case, the child device type `Analog` is only supporting the minimum requirements for certification without any _optional modules_.
-The child device type `OPC-UA` is supporting the _foundation modules_ as well at the optional modules `Logs` and `Firmware`.
+In this case, the child device type `Analog` is only supporting the minimum requirements for certification without any _extended capabilities_.
+The child device type `OPC-UA` is supporting the _foundation capabilities_ as well at the Extended Capabilities `Logs` and `Firmware`.
 
 Child device types can be freely named, however, here are some examples as orientation:.
 
-| Fragment                        | Content                                    | Required for optional module |
+| Fragment                        | Content                                    | Required for extended capability |
 | ------------------------------- | ------------------------------------------ | ---------------------------- |
 | `c8y_SupportedChildDeviceTypes` | List contains supported child device types | Yes        |
+
 
 Example structure in device inventory:
 
@@ -407,13 +493,13 @@ Example structure in device inventory:
 
 Device capability to upload (filtered) log files to C8Y. For details and examples, compare chapter `c8y_LogfileRequest` of section [miscellaneous](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Miscellaneous) in the documentation.
 
-The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
-| Fragment                  | Content                                    | Required for optional module |
+| Fragment                  | Content                                    | Required for extended capability |
 | ------------------------- | ------------------------------------------ | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Enables a device to receive operations; Must be present in the device manged object in the inventory; | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_LogfileRequest` | Yes                          |
-| `c8y_SupportedLogs`       | List of supported log file types           | Yes (at least 1 type)        |
+| `c8y_SupportedLogs`       | List of supported log file types; Must be present in the device manged object in the inventory;           | Yes (at least 1 type)        |
 
 Example structure in device inventory:
 
@@ -458,14 +544,14 @@ The text is send as one string, however, it can be structured using json, xml, k
 File based configuration allows to have multiple _types_ of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).  
 For details and examples, compare [configuration management](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Configuration-management) section in the documentation.
 
-For a successful certification of the Device Configuration module, Text Based Configuration or File Based Configuration or both have to be implemented.
+For a successful certification of the Device Configuration capability, Text Based Configuration or File Based Configuration or both have to be implemented.
 The certificate will state which configuration methods is supported as information.
 
 ### Text Based Configuration
 
-The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
-| Fragment                  | Content                                       | Required for optional module |
+| Fragment                  | Content                                       | Required for extended capability |
 | ------------------------- | --------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Configuration`     | Yes                          |
@@ -529,9 +615,9 @@ When the device receives the operation `c8y_SendConfiguration`, the following st
 
 ### File Based Configuration
 
-The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
+The following fragments are related to the Extended  Capability with a remark if they are required for the capability to work:
 
-| Fragment                      | Content                                        | Required for optional module |
+| Fragment                      | Content                                        | Required for extended capability |
 | ----------------------------- | ---------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations`     | List contains element `c8y_DownloadConfigFile` | Yes                          |
@@ -600,16 +686,16 @@ Note: _Firmware Management_ and _Software Management_ are handled separately in 
 
 **Software**
 
-- Software is an optional component executed on the device
+- Software is an extended component executed on the device
 - A device can have multiple software installed at a time
 - Software can be installed or removed independently of other software and the firmware
 - Usually used by larger / more powerfully devices
 
 **Info:** `"c8y_SupportedOperations": ["c8y_SoftwareList"]` (not to be confused with the _inventory fragment_ `c8y_SoftwareList`) and `"c8y_SupportedOperations": ["c8y_Software"]` are deprecated and should not be used for new agent implementations.
 
-The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
-| Fragment                  | Content                                            | Required for optional module |
+| Fragment                  | Content                                            | Required for extended capability |
 | ------------------------- | -------------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_SoftwareUpdate`         | Yes                          |
@@ -685,14 +771,14 @@ Note: _Firmware Management_ and _Software Management_ are handled separately in 
 
 **Software**
 
-- Software is an optional component executed on the device
+- Software is an extended component executed on the device
 - A device can have multiple software installed ata time
 - Software can be installed or removed independently of other software and the firmware
 - Usually used by larger / more powerfully devices
 
-The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
-| Fragment                  | Content                              | Required for optional module |
+| Fragment                  | Content                              | Required for extended capability |
 | ------------------------- | ------------------------------------ | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Firmware` | Yes                          |
@@ -738,9 +824,9 @@ When the device receives the operation having `c8y_Firmware`, the following step
 
 Device capability to manage device profiles. Device profiles represent a combination of a firmware version, one or multiple software packages and one or multiple configuration files which can be deployed on a device. Based on device profiles, users can deploy a specific target configuration on devices by using bulk operations. For details and examples, compare `Managing device data` section in the [documentation](https://cumulocity.com/guides/users-guide/device-management/#managing-device-data).
 
-The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
-| Fragment                  | Content                                                                 | Required for optional module |
+| Fragment                  | Content                                                                 | Required for extended capability |
 | ------------------------- | ----------------------------------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_DeviceProfile`                               | Yes                          |
@@ -800,9 +886,9 @@ When the device receives operation `c8y_DeviceProfile` it will execute the follo
 
 Device capability to restart the device. For details and examples, compare [miscellaneous](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Miscellaneous) section of the documentation.
 
-The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
-| Fragment                  | Content                             | Required for optional module |
+| Fragment                  | Content                             | Required for extended capability |
 | ------------------------- | ----------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Restart` | Yes                          |
@@ -828,11 +914,11 @@ When the device receives the operation `c8y_Restart` the following steps are exe
 
 ## Measurement Request
 
-Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequency.
+Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently.
 
-The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
-| Fragment                  | Content                                                 | Required for optional module |
+| Fragment                  | Content                                                 | Required for extended capability |
 | ------------------------- | ------------------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_MeasurementRequestOperation` | Yes                          |
@@ -861,9 +947,9 @@ The device vendor can decide if all or a useful subset of measurements are send 
 
 Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. For details and examples, compare [miscellaneous](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Miscellaneous) section of the documentation.
 
-The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
-| Fragment                  | Content                             | Required for optional module |
+| Fragment                  | Content                             | Required for extended capability |
 | ------------------------- | ----------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Command` | Yes                          |
@@ -910,9 +996,9 @@ Device capability to initiate a remote connection via VNC or SSH. For details an
 
 **Note:** The connection type `Telnet` is considered insecure, therefore it is deprecated and should not be used for new implementations. Please use VNC or SSH instead.
 
-The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
-| Fragment                  | Content                                         | Required for optional module |
+| Fragment                  | Content                                         | Required for extended capability |
 | ------------------------- | ----------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_RemoteAccessConnect` | Yes                          |
@@ -970,9 +1056,9 @@ When the device receives the operation `c8y_RemoteAccessConnect`, the following 
 
 Device capability to display and update location information. For details and examples, compare [location capabilities](https://cumulocity.com/api/10.10.0/#section/Sensor-library/Location-capabilities) section of the documentation.
 
-The following fragments are related to the optional device capability with a remark if they are required for the capability to work:
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
-| Fragment                        | Content                                                                      | Required for optional module |
+| Fragment                        | Content                                                                      | Required for extended capability |
 | ------------------------------- | ---------------------------------------------------------------------------- | ---------------------------- |
 | `c8y_Position`                  | Position information of the device                                           | Yes                          |
 | `c8y_Position.lat`              | Latitude                                                                     | Yes                          |
@@ -1016,13 +1102,61 @@ Example location update event:
 }
 ```
 
+## Currently Testable Device Capabilities of Self-Service Certification Microservice
+- [x] Foundation Capabilities 
+    - [x] c8y_Agent
+  - [x] Device Information
+      - [x] c8y_IsDevice
+      - [x] name
+      - [x] type
+      - [X] c8y_Hardware
+      - [X] c8y_Firmware
+      - [X] c8y_RequiredAvailability
+      - [X] c8y_SupportedOperations
+  - [X] External ID
+  - [X] Sending Operational Data
+    - [X] Measurements
+    - [X] Events
+    - [X] Alarms
+
+- [ ] Extended Capabilities
+  - [X] Gateways
+    - [X] Child Device Types
+  - [X] Log File Retrieval
+  - [X] Device Configuration
+    - [X] Text Based Configuration
+    - [X] File Based Configuration
+  - [X] Managing Device Software
+  - [X] Managing Device Firmware
+  - [X] Managing Device Firmware
+  - [X] Device Profile
+  - [X] Restart
+  - [ ] Measurement Request
+  - [ ] Shell
+  - [ ] Cloud Remote Access
+  - [x] Location & Tracking
+
+
+
 ##MD file change Log
 | Date       | Chapter                                                                                                                                                                                                                             | Severity |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | 30/09/2021 | Added MD file change log                                                                                                                                                                                                            | minor    |
-| 22/10/2021 | Added cypher suites information                                                                                                                                                                                                           | minor    |
-| 01/11/2021 | shell: Example added;  measurements section: Naming convention added; sending operational data: table added with mandatory information; Device Information: com_cumulocity_model_agent mandatory rule changed and externalIds added | medium   |
-| 03/11/2021 | `com_cumulocity_model_agent` added as mandatory for each optional agent module that relies on receiving operations; Moved supported child device types to optional modules;  | major   |
+| 22/10/2021 | Added cypher suites information                                                                                                                                                                                                           | medium    |
+| 01/11/2021 | measurements section: Naming convention added; sending operational data: table added with mandatory information; Device Information: com_cumulocity_model_agent mandatory rule changed and externalIds added | medium   |
+| 03/11/2021 | `com_cumulocity_model_agent` added as mandatory for each extended agent capability that relies on receiving operations; Moved supported child device types to extended capabilites;  | major   |
 | 08/11/2021 | Updated broken links  | minor   |
 | 09/11/2021 | Updated broken links, added Currently Supported Device Capabilities of Self-Service Certification Microservice  | minor   |
 | 10/11/2021 | Added some common measurement names for reference  | minor   |
+| 15/11/2021 | Changed structure  | minor   |
+
+
+| Date       | Chapter                                                                                                                                                                                                                             | Severity |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| 30/09/2021 | Added MD file change log                                                                                                                                                                                                            | minor    |
+| 01/11/2021 | shell: Example added | minor   |
+| 03/11/2021 | `com_cumulocity_model_agent` added as mandatory for each extended agent capability that relies on receiving operations; Moved supported child device types to Extended Capabilities;  | major   |
+| 08/11/2021 | Updated broken links  | minor   |
+| 09/11/2021 | Updated broken links, added Currently Supported Device Capabilities of Self-Service Certification Microservice  | minor   |
+| 15/11/2021 | Changed structure  | minor   |
+
