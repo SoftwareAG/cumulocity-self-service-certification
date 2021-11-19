@@ -97,7 +97,7 @@ The device certificate will be issued for device defined by: `c8y_Hardware.model
 | `version` | Yes       |
 | `url`     | No        |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_Agent": {
@@ -119,7 +119,7 @@ The Cumulocity IoT UI uses the device `name`.  `name` sets the name of the devic
 | -------- | --------- |
 | `name`   | Yes       |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "name": "ExampleDeviceName"
@@ -133,7 +133,7 @@ Example structure in device inventory:
 | -------- | --------- |
 | `c8y_IsDevice`   | Yes       |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_IsDevice": {} 
@@ -148,7 +148,7 @@ The Cumulocity IoT UI uses the device `type` often for filtering purposes like s
 | -------- | --------- |
 | `type`   | Yes       |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "type": "c8y_EdgeAgent"
@@ -162,7 +162,7 @@ Minimal communication interval to determine if device is offline. For details an
 | ------------------ | --------- |
 | `responseInterval` | No        |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_RequiredAvailability": {
@@ -180,7 +180,7 @@ These fragments will also be used in future versions of Device Partner Portal (d
 | `revision`     | Dropdown inside device detail view to select device revision or version | Yes       |
 | `serialNumber` | Not used in Device Partner Portal                                       | Yes       |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_Hardware": {
@@ -200,7 +200,7 @@ The device certificate will be issued for device defined by: `c8y_Hardware.model
 | `version` | Yes       |
 | `url`     | No        |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_Firmware": {
@@ -474,7 +474,7 @@ Child device types can be freely named, however, here are some examples as orien
 | `c8y_SupportedChildDeviceTypes` | List contains supported child device types | Yes        |
 
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_SupportedChildDeviceTypes": [
@@ -501,7 +501,7 @@ The following fragments are related to the extended device capability with a rem
 | `c8y_SupportedOperations` | List contains element `c8y_LogfileRequest` | Yes                          |
 | `c8y_SupportedLogs`       | List of supported log file types; Must be present in the device manged object in the inventory;           | Yes (at least 1 type)        |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -557,7 +557,7 @@ The following fragments are related to the extended device capability with a rem
 | `c8y_SupportedOperations` | List contains element `c8y_Configuration`     | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_SendConfiguration` | Yes                          |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -624,7 +624,7 @@ The following fragments are related to the Extended  Capability with a remark if
 | `c8y_SupportedOperations`     | List contains element `c8y_UploadConfigFile`   | Yes                          |
 | `c8y_SupportedConfigurations` | List of supported configuration file types     | Yes (at least 1 type)        |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -701,7 +701,7 @@ The following fragments are related to the extended device capability with a rem
 | `c8y_SupportedOperations` | List contains element `c8y_SoftwareUpdate`         | Yes                          |
 | `c8y_SoftwareList`        | List of currently installed software on the device | Yes                          |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -785,7 +785,7 @@ The following fragments are related to the extended device capability with a rem
 
 Firmware tab will be visible on the device page only if `c8y_Firmware` is listed in the device’s supported operations.
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -834,7 +834,7 @@ The following fragments are related to the extended device capability with a rem
 
 Device profile tab will be visible on the device page only if `c8y_DeviceProfile` is listed in the device’s supported operations.
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -893,7 +893,7 @@ The following fragments are related to the extended device capability with a rem
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Restart` | Yes                          |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -923,7 +923,7 @@ The following fragments are related to the extended device capability with a rem
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_MeasurementRequestOperation` | Yes                          |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -954,7 +954,7 @@ The following fragments are related to the extended device capability with a rem
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Command` | Yes                          |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -1004,7 +1004,7 @@ The following fragments are related to the extended device capability with a rem
 | `c8y_SupportedOperations` | List contains element `c8y_RemoteAccessConnect` | Yes                          |
 | `c8y_RemoteAccessList`    | List of supported remote access types           | Yes (at least 1 type)        |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -1067,7 +1067,7 @@ The following fragments are related to the extended device capability with a rem
 | `c8y_Position.trackingProtocol` | Technology used for position acquisition (e.g. GPS, Galileo, TELIC)          | No                           |
 | `c8y_Position.reportReason`     | Reason why the position update was send (e.g. triggered by schedule, action) | No                           |
 
-Example structure in device inventory:
+Example structure in device managed object using the inventory API:
 
 ```json5
 "c8y_Position": {
