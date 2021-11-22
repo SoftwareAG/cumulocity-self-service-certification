@@ -1,13 +1,13 @@
-# Foundation Capabilities (mandatory) for Vendor Device Certification
+# Vendor Requirements for Device Certification
 
 The device certification process requires the device to follow integration best practices.
 This means that more fields are mandatory for a certified device compared to platform minium requirements.
-In the following section, mandatory capabilities and behavior are described. The extended capabilities are part of the second section in this document  [Extended Capabilities for Vendor Device Certification](#extended-capabilities-for-vendor-device-certification).
+In the following section, [Device Registration](#device-registration), the explains the registration processes for connectors using either the MQTT API and REST API. The device certification process requires the device to follow integration best practices. This means that more fields are mandatory for a certified device compared to platform minium requirements. The mandatory capabilities are described in section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). All more advanced capabilities are part of the section [Extended Capabilities](#extended-capabilities-for-vendor-device-certification).
 
 # Device Registration
 
 **Status: Reviewed and Ready**
-The chapter [Device Behavior](#device-behavior) describes how a connector / agent that runs on a device registers to Cumulocity IoT. It must send a mandatory minimum of information to be certifiable covered in the section [Foundation Capabilities](#foundation-capabilities-mandatory). 
+The chapter [Device Behavior](#device-behavior) describes how a connector / agent that runs on a device registers to Cumulocity IoT. It must send a mandatory minimum of information to be certifiable covered in the section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). 
 
 
 ## Device Behavior
@@ -42,7 +42,7 @@ Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the
 * rsa_pss_pss_sha512
 
 
-# Foundation Capabilities (mandatory)
+# Foundation Capabilities for Vendor Device Certification (mandatory)
 
 For details and examples, compare [metadata](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Metadata) section of documentation as well as the detail sections below.
 
@@ -58,7 +58,7 @@ For details and examples, compare [metadata](https://cumulocity.com/api/10.10.0/
 | `externalIds`                | Used to identify a device with a unique information from the physical world                               | Yes    |                                                         
     
 
-Information about one physical device is stored within multiple managed objects. Cumulocity IoT stores all general device information as one managed object in its inventory. The following json structure represents a typical managed object of a device in the inventory (`GET {{url}}/inventory/managedObjects/{{deviceId}}`):
+Information about one physical device is stored within multiple managed objects. Cumulocity IoT stores all general device information as one managed object in its inventory. The following json structure represents a typical managed object of a device using in the inventory API (`GET {{url}}/inventory/managedObjects/{{deviceId}}`):
 
 ```json5
 "c8y_IsDevice": {},
@@ -338,11 +338,11 @@ Example POST body:
 }
 ```
 
-# Extended Capabilities for Vendor Device Certification
+# Extended Capabilities for Vendor Device Certification (optional)
 
 The device certification process requires the device to follow integration best practices.
 This means that more fields are mandatory for a certified device compared to platform minium requirements. 
-In the following section, Extended Capabilities and behavior are described. The Extended Capabilities require the [Foundation Capabilites for Vendor Device Certification](#foundation-capabilities-mandatory-for-vendor-device-certification)
+In the following section, Extended Capabilities and behavior are described. The Extended Capabilities require the [Foundation Capabilities for Vendor Device Certification (mandatory)](#foundation-capabilities-for-vendor-device-certification-mandatory)
 
 
 # Extended Capabilities
@@ -356,22 +356,22 @@ To indicate that a device wants to certify an Extended Capabilities, it has to a
 | ------------------------------- | ------------------------------------------ | ---------------------------- |
 | `c8y_SupportedOperations`    | Many extended operations are directly triggering the dynamic UI by invoking the respective operation tabs | Yes, if the Extended Capability is an operation      | 
 | `com_cumulocity_model_Agent` | Empty fragment. Declares that the device is able to receive operations                                    | Yes, for root devices and gateways that support operations; No, for devices and gateways that don't support operations; Must not be used for child devices; |
-| `Gateways` | Cumulocity uses the concept of child device types to distinguish the capabilities of child devices behind a gateway device. | is an Extended Capability |
-| `Log File Retrieval` | Device capability to upload (filtered) log files to C8Y.  | is an Extended Capability |
-| `Device Configuration` | Device capability that enables text- and / or profile-based device configuration. Text based configuration is the more basic approach. File based configuration allows to have multiple types of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).|is an Extended Capability|
-| `Managing Device Software` | Device capability that enables software management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
-| `Managing Device Firmware` | Device capability that enables firmware management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
-| `Device Profile` | Device capability to manage device profiles. Device profiles represent a combination of a firmware version, one or multiple software packages and one or multiple configuration files which can be deployed on a device. | is an Extended Capability |
-| `Restart` | Device capability to restart the device | is an Extended Capability |
-| `Measurement Request` | Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently. | is an Extended Capability |
-| `Shell` | Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. | is an Extended Capability |
-| `Cloud Remote Access` | Device capability to initiate a remote connection via VNC or SSH. | is an Extended Capability |
-| `Location & Tracking` | Device capability to display and update location information. | is an Extended Capability |
+| [Gateways](#gateways) | Cumulocity uses the concept of child device types to distinguish the capabilities of child devices behind a gateway device.  | is an Extended Capability |
+| [Log File Retrieval](#log-file-retrieval) | Device capability to upload (filtered) log files to C8Y.   | is an Extended Capability |
+| [Device Configuration](#device-configuration) | Device capability that enables text- and / or profile-based device configuration. Text based configuration is the more basic approach. File based configuration allows to have multiple types of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).  |is an Extended Capability|
+| [Managing Device Software](#managing-device-software) | Device capability that enables software management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
+| [Managing Device Firmware](#managing-device-firmware) | Device capability that enables firmware management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
+| [Device Profile](#device-profile) | Device capability to manage device profiles. Device profiles represent a combination of a firmware version, one or multiple software packages and one or multiple configuration files which can be deployed on a device. | is an Extended Capability |
+| [Restart](#restart) | Device capability to restart the device | is an Extended Capability |
+| [Measurement Request](#measurement-request) | Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently. | is an Extended Capability |
+| [Sell](#shell) | Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. | is an Extended Capability |
+| [Cloud Remote Access](#cloud-remote-access) | Device capability to initiate a remote connection via VNC or SSH. | is an Extended Capability |
+| [Location & Tracking](#location-tracking) | Device capability to display and update location information. | is an Extended Capability |
 
 
 
 
-Example structure of the device Managed Object in the inventory:
+The following json structure represents a typical managed object of a device using in the inventory API (`GET {{url}}/inventory/managedObjects/{{deviceId}}`):
 
 
 ```json5
@@ -1137,26 +1137,15 @@ Example location update event:
   - [x] Location & Tracking
 
 
-
 ##MD file change Log
 | Date       | Chapter                                                                                                                                                                                                                             | Severity |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| 30/09/2021 | Added MD file change log                                                                                                                                                                                                            | minor    |
-| 22/10/2021 | Added cypher suites information                                                                                                                                                                                                           | medium    |
-| 01/11/2021 | measurements section: Naming convention added; sending operational data: table added with mandatory information; Device Information: com_cumulocity_model_agent mandatory rule changed and externalIds added | medium   |
-| 03/11/2021 | `com_cumulocity_model_agent` added as mandatory for each extended agent capability that relies on receiving operations; Moved supported child device types to extended capabilites;  | major   |
+| 30/09/2021 | Added MD file change log        | minor    |
+| 22/10/2021 | Added cypher suites information   | medium    |
+| 01/11/2021 | shell: Example added, measurements section: Naming convention added; sending operational data: table added with mandatory information; Device Information: com_cumulocity_model_agent mandatory rule changed and externalIds added | medium   |
+| 03/11/2021 | `com_cumulocity_model_agent` added as mandatory for each extended agent capability that relies on receiving operations; Moved supported child device types to extended capabilities;  | major   |
 | 08/11/2021 | Updated broken links  | minor   |
 | 09/11/2021 | Updated broken links, added Currently Supported Device Capabilities of Self-Service Certification Microservice  | minor   |
 | 10/11/2021 | Added some common measurement names for reference  | minor   |
-| 15/11/2021 | Changed structure  | minor   |
-
-
-| Date       | Chapter                                                                                                                                                                                                                             | Severity |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| 30/09/2021 | Added MD file change log                                                                                                                                                                                                            | minor    |
-| 01/11/2021 | shell: Example added | minor   |
-| 03/11/2021 | `com_cumulocity_model_agent` added as mandatory for each extended agent capability that relies on receiving operations; Moved supported child device types to Extended Capabilities;  | major   |
-| 08/11/2021 | Updated broken links  | minor   |
-| 09/11/2021 | Updated broken links, added Currently Supported Device Capabilities of Self-Service Certification Microservice  | minor   |
-| 15/11/2021 | Changed structure  | minor   |
-
+| 15/11/2021 | Changed structure  | medium   |
+| 22/11/2021 | Examples of managed objects using the inventory API made clearer; "Optional modules" renamed to "Extended Capabilities", Overview table of all "Extended Capabilities" created.  | medium   |
