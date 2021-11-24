@@ -409,8 +409,8 @@ The following json structure represents a typical managed object of a device usi
         "lat": 49.819199
 },
 "c8y_SoftwareList": [{
-    "name": "adduser",
-    "version": "3.118",
+    "name": "pi",
+    "version": "3.1418",
     "url": ""
 }],
 "c8y_Configuration": {
