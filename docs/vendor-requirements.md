@@ -364,7 +364,7 @@ To indicate that a device wants to certify an Extended Capabilities, it has to a
 | [Device Profile](#device-profile) | Device capability to manage device profiles. Device profiles represent a combination of a firmware version, one or multiple software packages and one or multiple configuration files which can be deployed on a device. | is an Extended Capability |
 | [Restart](#restart) | Device capability to restart the device | is an Extended Capability |
 | [Measurement Request](#measurement-request) | Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently. | is an Extended Capability |
-| [Sell](#shell) | Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. | is an Extended Capability |
+| [Shell](#shell) | Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. | is an Extended Capability |
 | [Cloud Remote Access](#cloud-remote-access) | Device capability to initiate a remote connection via VNC or SSH. | is an Extended Capability |
 | [Location & Tracking](#location-tracking) | Device capability to display and update location information. | is an Extended Capability |
 
