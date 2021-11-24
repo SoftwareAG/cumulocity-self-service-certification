@@ -874,8 +874,8 @@ Example operation sent to the device:
 
 When the device receives operation `c8y_DeviceProfile` it will execute the following steps:
 
-| Step | Action                                                                                                                                                                                               | Documentation                                                                         |
-| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | --- |
+| Step | Action | Documentation |
+| ---- | ------ | ------------- |
 | 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                                                                                 | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                                                                                                                            | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 | 2.   | Use the information stored in the operation `c8y_DeviceProfile` regarding software, firmware and configuration to execute changes as described in respective sections.                               |
