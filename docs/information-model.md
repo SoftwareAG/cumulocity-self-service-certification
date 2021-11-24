@@ -293,7 +293,8 @@ A separate microservice compares the `certificate.creationDate` regulars against
 Additionally, an administrator can manually set the state to `REVOKED`, e.g. if a company leaves to partner program or incompliance is detected.
 
 ## Change log
-
+- 2021-11-23 // I. Iliev
+  add 'status' in the JSON structure of 'sendingOperationalData'
 - 2021-11-04 // D. Peter
   adjusted datamodel to incoporate an optional grouping level between module and capability
   - added fragment `container` to modules
