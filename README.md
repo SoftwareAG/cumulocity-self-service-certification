@@ -13,7 +13,15 @@ This repository provides documentation about the certification tool offered by S
 
 The integration of the hardware has to fulfill the foundation capabilities to be certifyable. The certification tool can be used to test and certify any other capability exceeding the foundation capabilities. The detailed technical description of the integration can be found in the document [Vendor Requirements](./docs/vendor-requirements.md). It covers the registration process, the foundation capabilities, and most of the extended capabilities that are supported by Cumulocity IoTs device management. 
 
-## Documentation
+The files [Endpoints](./docs/endpoints.md) and [Information Model](./docs/information-model.md) provide inside information on the tool. Interested readers can consume this information to get a deeper understanding of the tool.
+
+
+## Diagrams & Graphics
+
+1. [Measurement Fragmentand Series in C8Y-UI](media/measurement-fragmentand-series-in-ui.png)
+2. [Information Model](./media/information-model.drawio.svg)
+
+## Documentation Overview
 
 [Documentation ](./docs/README.md)
 
