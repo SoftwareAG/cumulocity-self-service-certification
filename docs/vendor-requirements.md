@@ -41,6 +41,10 @@ Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the
 * rsa_pss_pss_sha384
 * rsa_pss_pss_sha512
 
+## Definition of Products and Devices 
+
+A connector that is run on a piece of hardware and registered on Cumulocity IoT is a device. They are listed in the "Device Management" tab. It is defined by its unique characteristics of the Agent (connector), the hardware and the firmware. A piece of hardware with a newer firmware version will therefore be a new device.
+A product on the other hand, is a manually defined aggregation of devices that are the same from a sales perspective. 
 
 # Foundation Capabilities for Vendor Device Certification (mandatory)
 
@@ -169,7 +173,7 @@ Example structure in device managed object using the inventory API:
     "responseInterval": 6
 }
 ```
-### c8y_Hardware
+### Hardware information - c8y_Hardware
 
 The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
 These fragments will also be used in future versions of Device Partner Portal (display one "Device" entry in the overview device list per `c8y_Hardware.model` and a dropdown in the device detail view for each `c8y_Hardware.revision`).
@@ -190,7 +194,7 @@ Example structure in device managed object using the inventory API:
 }
 ```
 
-### c8y_Firmware
+### Firmware information - c8y_Firmware
 
 The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
 
@@ -1149,6 +1153,8 @@ Example location update event:
 | 10/11/2021 | Added some common measurement names for reference  | minor   |
 | 15/11/2021 | Changed structure  | medium   |
 | 22/11/2021 | Examples of managed objects using the inventory API made clearer; "Optional modules" renamed to "Extended Capabilities", Overview table of all "Extended Capabilities" created.  | medium   |
+| 29/11/2021 | Added a product definition  | minor   |
+
 =======
 # Vendor Device Certification Requirements
 
