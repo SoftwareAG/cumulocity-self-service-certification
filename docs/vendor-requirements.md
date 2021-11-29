@@ -351,10 +351,7 @@ Example POST body:
 
 The device certification process requires the device to follow integration best practices.
 This means that more fields are mandatory for a certified device compared to platform minium requirements. 
-In the following section, Extended Capabilities and behavior are described. The Extended Capabilities require the [Foundation Capabilities for Vendor Device Certification (mandatory)](#foundation-capabilities-for-vendor-device-certification-mandatory)
-
-
-# Extended Capabilities
+In this section Extended Capabilities and expected device behaviour are described. The Extended Capabilities require the [Foundation Capabilities for Vendor Device Certification (mandatory)](#foundation-capabilities-for-vendor-device-certification-mandatory)
 
 All sections below are **optional**. If a device partner decides to certify Extended Capabilities, they are documented in the certificate and shown on the device partner portal.
 Customer can filter and search for devices that support certain capabilities. Therefore, it is recommended to certify all capabilities (aka. "Extended Capabilities") offered by the device.
