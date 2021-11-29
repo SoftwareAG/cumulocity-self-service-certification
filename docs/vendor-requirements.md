@@ -1157,35 +1157,4 @@ This means that more fields are mandatory for a certified device compared to pla
 In the following section, mandatory information and behavior is described.
 
 
-## Currently Testable Device Capabilities of Self-Service Certification Microservice
-
-- [ ] Foundation Modules 
-  - [ ] Device Information
-      - [x] type
-      - [ ] c8y_Agent
-      - [X] c8y_Hardware
-      - [X] c8y_Firmware
-      - [X] c8y_RequiredAvailability
-      - [X] c8y_SupportedOperations
-  - [X] External ID
-  - [X] Sending Operational Data
-    - [X] Measurements
-    - [X] Events
-    - [X] Alarms
-- [ ] Optional Modules
-  - [X] Gateways
-    - [X] Child Device Types
-  - [X] Log File Retrieval
-  - [X] Device Configuration
-    - [X] Text Based Configuration
-    - [X] File Based Configuration
-  - [X] Managing Device Software
-  - [X] Managing Device Firmware
-  - [X] Managing Device Firmware
-  - [X] Device Profile
-  - [X] Restart
-  - [ ] Measurement Request
-  - [ ] Shell
-  - [ ] Cloud Remote Access
-  - [ ] Location & Tracking
 
