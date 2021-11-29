@@ -2,7 +2,7 @@
 
 The device certification process requires the device to follow integration best practices.
 This means that more fields are mandatory for a certified device compared to platform minium requirements.
-In the following section, [Device Registration](#device-registration), the explains the registration processes for connectors using either the MQTT API and REST API. The device certification process requires the device to follow integration best practices. This means that more fields are mandatory for a certified device compared to platform minium requirements. The mandatory capabilities are described in section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). All more advanced capabilities are part of the section [Extended Capabilities](#extended-capabilities-for-vendor-device-certification).
+In the following section, [Device Registration](#device-registration), the explains the registration processes for connectors using either the MQTT API and REST API. The device certification process requires the device to follow integration best practices. This means that more fields are mandatory for a certified device compared to platform minium requirements. The mandatory capabilities are described in section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). All more advanced capabilities are part of the section [Extended Capabilities](#extended-capabilities-for-vendor-device-certification-optional).
 
 # Device Registration
 
