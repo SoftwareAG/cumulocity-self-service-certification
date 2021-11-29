@@ -174,10 +174,12 @@ Example structure in device managed object using the inventory API:
     "responseInterval": 6
 }
 ```
-### Hardware Information
+## Hardware Information
 
 Hardware information can bes stored within  the fragment `c8y_Hardware` that is part of the device managed object using the inventory API. The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
 These fragments will also be used in future versions of Device Partner Portal (display one "Device" entry in the overview device list per `c8y_Hardware.model` and a dropdown in the device detail view for each `c8y_Hardware.revision`).
+
+### c8y_Hardware
 
 | Fragment       | Meaning in Device Partner Portal                                        | Mandatory |
 | -------------- | ----------------------------------------------------------------------- | --------- |
@@ -195,9 +197,11 @@ Example structure in device managed object using the inventory API:
 }
 ```
 
-### Firmware Information
+## Firmware Information
 
 Firmware information can bes stored within  the fragment `c8y_Firmware` that is part of the device managed object using the inventory API. The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
+
+### c8y_Firmware
 
 | Fragment  | Mandatory |
 | --------- | --------- |
