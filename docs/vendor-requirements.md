@@ -364,8 +364,8 @@ To indicate that a device wants to certify an Extended Capabilities, it has to a
 | [Child Device Management](#child-device-management) | Cumulocity uses the concept of child device types to distinguish the capabilities of child devices behind a gateway device.  | is an Extended Capability |
 | [Log File Retrieval](#log-file-retrieval) | Device capability to upload (filtered) log files to C8Y.   | is an Extended Capability |
 | [Device Configuration](#device-configuration) | Device capability that enables text- and / or profile-based device configuration. Text based configuration is the more basic approach. File based configuration allows to have multiple types of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).  |is an Extended Capability|
-| [Managing Device Software](#managing-device-software) | Device capability that enables software management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
-| [Managing Device Firmware](#managing-device-firmware) | Device capability that enables firmware management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
+| [Software Management](#software-management) | Device capability that enables software management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
+| [Firmware Management](#firmware-management) | Device capability that enables firmware management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
 | [Device Profile](#device-profile) | Device capability to manage device profiles. Device profiles represent a combination of a firmware version, one or multiple software packages and one or multiple configuration files which can be deployed on a device. | is an Extended Capability |
 | [Restart](#restart) | Device capability to restart the device | is an Extended Capability |
 | [Measurement Request](#measurement-request) | Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently. | is an Extended Capability |
@@ -676,7 +676,7 @@ When the device receives the operation `c8y_UploadConfigFile`, the following ste
 | 4.   | Upload the configuration as attachment to the event                                                                     | [Attach file to event](https://cumulocity.com/api/10.10.0/#operation/postEventBinaryResource) |
 | 5.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                   | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 
-## Managing Device Software
+## Software Management
 
 Device capability to manage and deploy software packages to the device. For details and examples, compare [c8y_SoftwareList](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-information) section in the documentation .
 
