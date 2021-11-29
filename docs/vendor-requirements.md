@@ -2,7 +2,7 @@
 
 The device certification process requires the device to follow integration best practices.
 This means that more fields are mandatory for a certified device compared to platform minium requirements.
-In the following section, [Device Registration](#device-registration), the explains the registration processes for connectors using either the MQTT API and REST API. The device certification process requires the device to follow integration best practices. This means that more fields are mandatory for a certified device compared to platform minium requirements. The mandatory capabilities are described in section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). All more advanced capabilities are part of the section [Extended Capabilities](#extended-capabilities-for-vendor-device-certification).
+In the following section, [Device Registration](#device-registration), the explains the registration processes for connectors using either the MQTT API and REST API. The device certification process requires the device to follow integration best practices. This means that more fields are mandatory for a certified device compared to platform minium requirements. The mandatory capabilities are described in section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). All more advanced capabilities are part of the section [Extended Capabilities](#extended-capabilities-for-vendor-device-certification-optional).
 
 # Device Registration
 
@@ -41,12 +41,17 @@ Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the
 * rsa_pss_pss_sha384
 * rsa_pss_pss_sha512
 
+## Certification of Devices and Aggregation as Products
+
+When a connector registers on Cumulocity IoT, it becomes a device listed in the "Device Management" tab. When using the self-certification tool, one certificate can be created for each combination of the connector (c8y_Agent), the Hardware (c8y_Hardware) and the Firmware (c8y_Firmware). If any of these values changes, a new device-certificate can be created. The Cumulocity IoT device certification API makes the certification information available for our [Device Partner Portal](#https://devicepartnerportal.softwareag.com/). Entries on the Device Partner Portal represent devices from a sales/user perspective - we call that a product. Products can only be segregated by their names. To link the product from the Device Partner Portal with the more granual differentiation of a device on Cumulocity IoT, we have incorporated this as manual step within the Cumulocity IoT certification tool. Device certificates therefore need to be clustered to products, so all the device certificates related to that product then be displayed under the same product on the Device Partner Portal (product to device relation is 1:n). 
+
+
 
 # Foundation Capabilities for Vendor Device Certification (mandatory)
 
 For details and examples, compare [metadata](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Metadata) section of documentation as well as the detail sections below.
 
-| Fragment                     | Meaning in Device Partner Portal                                                                          | Mandatory                                                                                                                                                   |
+| Fragment                     | Description                                                                         | Mandatory                                                                                                                                                   |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `c8y_Agent`                  | Information about the agent run on the device                                                            | Yes        |
 | `c8y_IsDevice`               | Empty fragment. Declares a Managed Object as a Device                                                     | Yes                                                                                            |
@@ -107,7 +112,7 @@ Example structure in device managed object using the inventory API:
 }
 ```
 
-## Device Information
+## Basic Device Information
 
 The fragments `c8y_IsDevice`, `name`, `type`, `c8y_RequiredAvailability`, `c8y_Firmware`, and `c8y_Hardware` must be present in the managed object of the device stored in the inventory. 
 
@@ -169,10 +174,12 @@ Example structure in device managed object using the inventory API:
     "responseInterval": 6
 }
 ```
-### c8y_Hardware
+## Hardware Information
 
-The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
+Hardware information can bes stored within  the fragment `c8y_Hardware` that is part of the device managed object using the inventory API. The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
 These fragments will also be used in future versions of Device Partner Portal (display one "Device" entry in the overview device list per `c8y_Hardware.model` and a dropdown in the device detail view for each `c8y_Hardware.revision`).
+
+### c8y_Hardware
 
 | Fragment       | Meaning in Device Partner Portal                                        | Mandatory |
 | -------------- | ----------------------------------------------------------------------- | --------- |
@@ -190,9 +197,11 @@ Example structure in device managed object using the inventory API:
 }
 ```
 
-### c8y_Firmware
+## Firmware Information
 
-The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
+Firmware information can bes stored within  the fragment `c8y_Firmware` that is part of the device managed object using the inventory API. The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
+
+### c8y_Firmware
 
 | Fragment  | Mandatory |
 | --------- | --------- |
@@ -342,10 +351,7 @@ Example POST body:
 
 The device certification process requires the device to follow integration best practices.
 This means that more fields are mandatory for a certified device compared to platform minium requirements. 
-In the following section, Extended Capabilities and behavior are described. The Extended Capabilities require the [Foundation Capabilities for Vendor Device Certification (mandatory)](#foundation-capabilities-for-vendor-device-certification-mandatory)
-
-
-# Extended Capabilities
+In this section Extended Capabilities and expected device behaviour are described. The Extended Capabilities require the [Foundation Capabilities for Vendor Device Certification (mandatory)](#foundation-capabilities-for-vendor-device-certification-mandatory)
 
 All sections below are **optional**. If a device partner decides to certify Extended Capabilities, they are documented in the certificate and shown on the device partner portal.
 Customer can filter and search for devices that support certain capabilities. Therefore, it is recommended to certify all capabilities (aka. "Extended Capabilities") offered by the device.
@@ -356,11 +362,11 @@ To indicate that a device wants to certify an Extended Capabilities, it has to a
 | ------------------------------- | ------------------------------------------ | ---------------------------- |
 | `c8y_SupportedOperations`    | Many extended operations are directly triggering the dynamic UI by invoking the respective operation tabs | Yes, if the Extended Capability is an operation      | 
 | `com_cumulocity_model_Agent` | Empty fragment. Declares that the device is able to receive operations                                    | Yes, for root devices and gateways that support operations; No, for devices and gateways that don't support operations; Must not be used for child devices; |
-| [Gateways](#gateways) | Cumulocity uses the concept of child device types to distinguish the capabilities of child devices behind a gateway device.  | is an Extended Capability |
+| [Child Device Management](#child-device-management) | Cumulocity uses the concept of child device types to distinguish the capabilities of child devices behind a gateway device.  | is an Extended Capability |
 | [Log File Retrieval](#log-file-retrieval) | Device capability to upload (filtered) log files to C8Y.   | is an Extended Capability |
 | [Device Configuration](#device-configuration) | Device capability that enables text- and / or profile-based device configuration. Text based configuration is the more basic approach. File based configuration allows to have multiple types of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).  |is an Extended Capability|
-| [Managing Device Software](#managing-device-software) | Device capability that enables software management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
-| [Managing Device Firmware](#managing-device-firmware) | Device capability that enables firmware management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
+| [Software Management](#software-management) | Device capability that enables software management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
+| [Firmware Management](#firmware-management) | Device capability that enables firmware management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
 | [Device Profile](#device-profile) | Device capability to manage device profiles. Device profiles represent a combination of a firmware version, one or multiple software packages and one or multiple configuration files which can be deployed on a device. | is an Extended Capability |
 | [Restart](#restart) | Device capability to restart the device | is an Extended Capability |
 | [Measurement Request](#measurement-request) | Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently. | is an Extended Capability |
@@ -455,9 +461,9 @@ Example structure in the device managed object using the inventory API:
 ```
 
 
-## Gateways
+## Child Device Management
 
-For details and examples, compare [child operations](https://cumulocity.com/api/10.10.0/#tag/Child-operations) section of the documentation.
+For details and examples, compare [child operations](https://cumulocity.com/api/10.10.0/#tag/Child-operations) section of the documentation. The `type` of the root device is recommended to be `Gateway`.
 
 ### Child Device Types
 
@@ -671,7 +677,7 @@ When the device receives the operation `c8y_UploadConfigFile`, the following ste
 | 4.   | Upload the configuration as attachment to the event                                                                     | [Attach file to event](https://cumulocity.com/api/10.10.0/#operation/postEventBinaryResource) |
 | 5.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                   | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 
-## Managing Device Software
+## Software Management
 
 Device capability to manage and deploy software packages to the device. For details and examples, compare [c8y_SoftwareList](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-information) section in the documentation .
 
@@ -756,7 +762,7 @@ When the device receives the operation `c8y_SoftwareUpdate`, the following steps
 | 3.   | Update `c8y_SoftwareList` fragment in the inventory object of the device | [Update managed object](https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource) |
 | 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                    | [Update Operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)          |
 
-## Managing Device Firmware
+## Firmware Management
 
 Device capability that enables firmware management. For details and examples, compare `device information` section in the [documentation](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-information).
 
@@ -1120,7 +1126,7 @@ Example location update event:
     - [X] Alarms
 
 - [ ] Extended Capabilities
-  - [X] Gateways
+  - [X] Child Device Management
     - [X] Child Device Types
   - [X] Log File Retrieval
   - [X] Device Configuration
@@ -1149,6 +1155,8 @@ Example location update event:
 | 10/11/2021 | Added some common measurement names for reference  | minor   |
 | 15/11/2021 | Changed structure  | medium   |
 | 22/11/2021 | Examples of managed objects using the inventory API made clearer; "Optional modules" renamed to "Extended Capabilities", Overview table of all "Extended Capabilities" created.  | medium   |
+| 29/11/2021 | Added a product definition  | minor   |
+
 =======
 # Vendor Device Certification Requirements
 
@@ -1157,35 +1165,4 @@ This means that more fields are mandatory for a certified device compared to pla
 In the following section, mandatory information and behavior is described.
 
 
-## Currently Testable Device Capabilities of Self-Service Certification Microservice
-
-- [ ] Foundation Modules 
-  - [ ] Device Information
-      - [x] type
-      - [ ] c8y_Agent
-      - [X] c8y_Hardware
-      - [X] c8y_Firmware
-      - [X] c8y_RequiredAvailability
-      - [X] c8y_SupportedOperations
-  - [X] External ID
-  - [X] Sending Operational Data
-    - [X] Measurements
-    - [X] Events
-    - [X] Alarms
-- [ ] Optional Modules
-  - [X] Gateways
-    - [X] Child Device Types
-  - [X] Log File Retrieval
-  - [X] Device Configuration
-    - [X] Text Based Configuration
-    - [X] File Based Configuration
-  - [X] Managing Device Software
-  - [X] Managing Device Firmware
-  - [X] Managing Device Firmware
-  - [X] Device Profile
-  - [X] Restart
-  - [ ] Measurement Request
-  - [ ] Shell
-  - [ ] Cloud Remote Access
-  - [ ] Location & Tracking
 
