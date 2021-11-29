@@ -761,7 +761,7 @@ When the device receives the operation `c8y_SoftwareUpdate`, the following steps
 | 3.   | Update `c8y_SoftwareList` fragment in the inventory object of the device | [Update managed object](https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource) |
 | 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                    | [Update Operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)          |
 
-## Managing Device Firmware
+## Firmware Management
 
 Device capability that enables firmware management. For details and examples, compare `device information` section in the [documentation](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-information).
 
