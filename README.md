@@ -18,7 +18,7 @@ The files [Endpoints](./docs/endpoints.md) and [Information Model](./docs/inform
 
 ## Diagrams & Graphics
 
-1. [Measurement Fragmentand Series in C8Y-UI](media/measurement-fragmentand-series-in-ui.png)
+1. [Measurement Fragments and Series in C8Y-UI](media/measurement-fragmentand-series-in-ui.png)
 2. [Information Model](./media/information-model.drawio.svg)
 
 ## Documentation Overview
