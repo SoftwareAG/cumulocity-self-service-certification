@@ -41,16 +41,20 @@ Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the
 * rsa_pss_pss_sha384
 * rsa_pss_pss_sha512
 
-## Definition of Products and Devices 
+## Certification of Devices and Products 
 
-A connector that is run on a piece of hardware and registered on Cumulocity IoT is a device. They are listed in the "Device Management" tab. It is defined by its unique characteristics of the Agent (connector), the hardware and the firmware. A piece of hardware with a newer firmware version will therefore be a new device.
-A product on the other hand, is a manually defined aggregation of devices that are the same from a sales perspective. 
+When a connector registers on Cumulocity IoT, it becomes a device listed in the "Device Management" tab. When using the self-certification tool, one certificate can be created for each combination of the connector (c8y_Agent), the Hardware (c8y_Hardware) and the Firmware (c8y_Firmware). If any of these values changes, a new device-certificate can be created. The Cumulocity IoT device certification API makes the certification information available for our [Device Partner Portal](#https://devicepartnerportal.softwareag.com/). Entries on the Device Partner Portal represent devices from a sales/user perspective - we call that a product. Products can only be segregated by their names. To link the product from the Device Partner Portal with the more granual differentiation of a device on Cumulocity IoT, we have incorporated this as manual step within the Cumulocity IoT certification tool. Device certificates therefore need to be clustered to products, so all the device certificates related to that product then be displayed under the same product on the Device Partner Portal. 
+
+
+|                      | Description                                                                         | Mandatory                                                                                                                                                   |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `c8y_Agent`                  | Information about the agent run on the device                                                            | Yes        |
 
 # Foundation Capabilities for Vendor Device Certification (mandatory)
 
 For details and examples, compare [metadata](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Metadata) section of documentation as well as the detail sections below.
 
-| Fragment                     | Meaning in Device Partner Portal                                                                          | Mandatory                                                                                                                                                   |
+| Fragment                     | Description                                                                         | Mandatory                                                                                                                                                   |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `c8y_Agent`                  | Information about the agent run on the device                                                            | Yes        |
 | `c8y_IsDevice`               | Empty fragment. Declares a Managed Object as a Device                                                     | Yes                                                                                            |
