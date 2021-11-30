@@ -560,9 +560,10 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                       | Required for extended capability |
 | ------------------------- | --------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes        |
+| `c8y_Configuration` |  List of the current `config` of the device in the managed object of the inventory API     | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Configuration`     | Yes                          |
-| `c8y_SupportedOperations` | List contains element `c8y_SendConfiguration` | No, but recommended                          |
+| `c8y_SupportedOperations` | List contains element `c8y_SendConfiguration` | No, but recommended                  |
 
 Example structure in device managed object using the inventory API:
 
@@ -571,7 +572,9 @@ Example structure in device managed object using the inventory API:
     "c8y_Configuration",
     "c8y_SendConfiguration"
 ],
-"c8y_SendConfiguration": {}
+"c8y_Configuration": {
+        "config": "myParam: myValue\nmyOtherParam: myOtherValue"
+},
 ```
 
 Example operation `c8y_Configuration: {}` as it is sent to the device:
@@ -711,7 +714,7 @@ The following fragments are related to the extended device capability with a rem
 | ------------------------- | -------------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_SoftwareUpdate`         | Yes                          |
-| `c8y_SoftwareList`        | List of currently installed software on the device | Yes                          |
+| `c8y_SoftwareList`        | List of currently installed software on the device in the managed object of the inventory API | Yes                          |
 
 Example structure in device managed object using the inventory API:
 
