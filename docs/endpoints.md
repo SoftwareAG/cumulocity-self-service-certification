@@ -68,13 +68,13 @@ This endpoint will create a new Full Certification Run
 
 POST `{{baseUrl}}/service/gateway-certification/test_run` with the body for the POST request as:
 
-`{
+```json
+{
  "tenant_id": "tenant_id",                               
  "device_id": "device_id",                               
- "vendor_name": "vendor_name", 
- "product_name": "product_name", 
- "product_type": "product_type" 
- }`
+ "product_id": "product_id"
+ }
+```
 
 
 This endpoint will update a certification run
