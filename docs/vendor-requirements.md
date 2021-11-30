@@ -623,7 +623,7 @@ When the device receives the operation `c8y_SendConfiguration`, the following st
 | ---- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                            | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API)   |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                                       | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)          |
-| 2.   | Internally get current configuration and update the fragment `c8y_Configuration` of the device inventory object | [Update managed object](https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource) |
+| 2.   | Internally get current configuration and update the fragment `c8y_Configuration` of the device managed object using the inventory API | [Update managed object](https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource) |
 | 3.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                           | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)          |
 
 ### File Based Configuration
