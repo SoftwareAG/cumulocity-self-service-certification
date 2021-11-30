@@ -420,7 +420,7 @@ The following json structure represents a typical managed object of a device usi
     "url": ""
 }],
 "c8y_Configuration": {
-    "config": "mqtt.url=mqtt.eu-latest.cumulocity.com\nmqtt.port=8883\nmqtt.tls=true\nmqtt.cert_auth=false\nmqtt.client_cert=/root/.cumulocity/certs/chain-cert.pem\nmqtt.client_key=/root/.cumulocity/certs/device-cert-private-key.pem\nmqtt.cacert=/etc/ssl/certs/ca-certificates.crt\nmqtt.ping.interval.seconds=60\nagent.name=dm-example-device\nagent.type=c8y_dm_example_device\nagent.main.loop.interval.seconds=10\nagent.requiredinterval=10\nagent.loglevel=INFO"
+    "config": "mmyParam: myValue\nmyOtherParam: myOtherValue"
 },
 "c8y_SupportedLogs": [
         "agentlog"
@@ -544,16 +544,17 @@ When the device receives the operation `c8y_LogfileRequest`, the following steps
 
 ## Device Configuration
 
-Device capability that enables text- and / or profile-based device configuration.
-Text based configuration is the more basic approach. It provides a plain text box in the UI to retrieve, edit, and send a configuration text to the device.
-The text is send as one string, however, it can be structured using json, xml, key-value pairs or any other markup that the device is able to parse.
-File based configuration allows to have multiple _types_ of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).  
-For details and examples, compare [configuration management](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Configuration-management) section in the documentation.
+Device capability that enables text- and / or profile-based device configuration. They are similar concepts that allow the device to upload its configuration to the platform and users can install a new configuration on the device. The UI will automatically be available to use the implemented capability.
 
-For a successful certification of the Device Configuration capability, Text Based Configuration or File Based Configuration or both have to be implemented.
+
+For a successful certification of the Device Configuration capability, either Text Based Configuration or File Based Configuration or both have to be implemented.
 The certificate will state which configuration methods is supported as information.
 
 ### Text Based Configuration
+
+Text based configuration is the more basic approach. It provides a plain text box in the UI to retrieve, edit, and send a configuration text to the device. 
+The text is sent as one string using UTF-8 characters, however, it can be structured using json, xml, key-value pairs, [SmartRest data format](#https://cumulocity.com/guides/reference/smartrest/#data-format), or any other markup that the device is able to parse.
+The current configuration state of the device is communicated with the `c8y_Configuration` fragment in the device’s own managed object. It contains the complete configuration including all control characters as a string. It is recommended to use text based confugureation for small configurations that are human readable. 
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
@@ -561,7 +562,7 @@ The following fragments are related to the extended device capability with a rem
 | ------------------------- | --------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Configuration`     | Yes                          |
-| `c8y_SupportedOperations` | List contains element `c8y_SendConfiguration` | Yes                          |
+| `c8y_SupportedOperations` | List contains element `c8y_SendConfiguration` | No, but recommended                          |
 
 Example structure in device managed object using the inventory API:
 
@@ -582,7 +583,7 @@ Example operation `c8y_Configuration: {}` as it is sent to the device:
     "id": "440452",
     "status": "PENDING",
     "c8y_Configuration": {
-        "config": "test"
+        "config": "myParam: myValue\nmyOtherParam: myOtherValue"
     },
     "description": "Configuration update"
 ```
@@ -596,7 +597,10 @@ When the device receives the operation `c8y_Configuration`, the following steps 
 | 2.   | Internally interpret transmitted string and execute configuration    |                                                                                       |
 | 3.   | Update operation accordingly `"status": "SUCCESSFUL"`                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 
-Example operation `c8y_SendConfiguration: {}` as it is sent to the device:
+
+It is also recommended to upload the device configuration only on demand to reduce data transfer. The configuration upload can be triggerd from the UI by clicking , if the connector supports the operation `c8y_SendConfiguration`. 
+
+Example operation `c8y_SendConfiguration: {}` as it is sent to the device from Cumulocity IoT:
 
 ```json5
 creationTime: "2021-09-20T13:53:29.419Z", deviceName: "123456789", deviceId: "440366",…
@@ -621,6 +625,8 @@ When the device receives the operation `c8y_SendConfiguration`, the following st
 
 ### File Based Configuration
 
+File based configuration allows to have multiple _types_ of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).  
+For details and examples, compare [configuration management](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Configuration-management) section in the documentation.
 The following fragments are related to the Extended  Capability with a remark if they are required for the capability to work:
 
 | Fragment                      | Content                                        | Required for extended capability |
