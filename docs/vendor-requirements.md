@@ -503,7 +503,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                    | Required for extended capability |
 | ------------------------- | ------------------------------------------ | ---------------------------- |
-| `com_cumulocity_model_Agent` | Enables a device to receive operations; Must be present in the device manged object in the inventory; | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_LogfileRequest` | Yes                          |
 | `c8y_SupportedLogs`       | List of supported log file types; Must be present in the device manged object in the inventory;           | Yes (at least 1 type)        |
 
@@ -560,7 +560,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                       | Required for extended capability |
 | ------------------------- | --------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes        |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes        |
 | `c8y_Configuration` |  List of the current `config` of the device in the managed object of the inventory API     | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Configuration`     | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_SendConfiguration` | No, but recommended                  |
@@ -634,7 +634,7 @@ The following fragments are related to the Extended  Capability with a remark if
 
 | Fragment                      | Content                                        | Required for extended capability |
 | ----------------------------- | ---------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations`     | List contains element `c8y_DownloadConfigFile` | Yes                          |
 | `c8y_SupportedOperations`     | List contains element `c8y_UploadConfigFile`   | Yes                          |
 | `c8y_SupportedConfigurations` | List of supported configuration file types     | Yes (at least 1 type)        |
@@ -795,7 +795,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                              | Required for extended capability |
 | ------------------------- | ------------------------------------ | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Firmware` | Yes                          |
 
 Firmware tab will be visible on the device page only if `c8y_Firmware` is listed in the device’s supported operations.
@@ -843,7 +843,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                                                 | Required for extended capability |
 | ------------------------- | ----------------------------------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_DeviceProfile`                               | Yes                          |
 | `c8y_Profile`             | List contains element `profileName`, `profileId`, and `profileExecuted` | Yes                          |
 
@@ -905,7 +905,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                             | Required for extended capability |
 | ------------------------- | ----------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Restart` | Yes                          |
 
 Example structure in device managed object using the inventory API:
@@ -935,7 +935,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                                 | Required for extended capability |
 | ------------------------- | ------------------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_MeasurementRequestOperation` | Yes                          |
 
 Example structure in device managed object using the inventory API:
@@ -966,7 +966,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                             | Required for extended capability |
 | ------------------------- | ----------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Command` | Yes                          |
 
 Example structure in device managed object using the inventory API:
@@ -1015,7 +1015,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                         | Required for extended capability |
 | ------------------------- | ----------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_RemoteAccessConnect` | Yes                          |
 | `c8y_RemoteAccessList`    | List of supported remote access types           | Yes (at least 1 type)        |
 
