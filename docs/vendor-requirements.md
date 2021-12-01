@@ -1121,8 +1121,8 @@ Example location update event:
 - [x] Foundation Capabilities 
     - [x] c8y_Agent
   - [x] Device Information
-      - [x] c8y_IsDevice
-      - [x] name
+     - [x] c8y_IsDevice
+     - [x] name
       - [x] type
       - [X] c8y_Hardware
       - [X] c8y_Firmware
@@ -1138,13 +1138,12 @@ Example location update event:
   - [X] Child Device Management
     - [X] Child Device Types
   - [X] Log File Retrieval
-  - [X] Device Configuration
-    - [X] Text Based Configuration
-    - [X] File Based Configuration
+  - [ ] Device Configuration
+    - [ ] Text Based Configuration
+    - [ ] File Based Configuration
   - [X] Managing Device Software
   - [X] Managing Device Firmware
-  - [X] Managing Device Firmware
-  - [X] Device Profile
+  - [ ] Device Profile
   - [X] Restart
   - [ ] Measurement Request
   - [ ] Shell
@@ -1165,6 +1164,7 @@ Example location update event:
 | 15/11/2021 | Changed structure  | medium   |
 | 22/11/2021 | Examples of managed objects using the inventory API made clearer; "Optional modules" renamed to "Extended Capabilities", Overview table of all "Extended Capabilities" created.  | medium   |
 | 29/11/2021 | Added a product definition  | minor   |
+| 01/11/2021 | Inserted more precise formulation for info stored on the managed object using inventory API; Updated Currently Testable Device Capabilities  | minor   |
 
 =======
 # Vendor Device Certification Requirements
