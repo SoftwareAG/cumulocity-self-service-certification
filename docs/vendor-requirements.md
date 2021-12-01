@@ -554,7 +554,7 @@ The certificate will state which configuration methods is supported as informati
 
 Text based configuration is the more basic approach. It provides a plain text box in the UI to retrieve, edit, and send a configuration text to the device. 
 The text is sent as one string using UTF-8 characters, however, it can be structured using json, xml, key-value pairs, [SmartRest data format](#https://cumulocity.com/guides/reference/smartrest/#data-format), or any other markup that the device is able to parse.
-The current configuration state of the device is communicated with the `c8y_Configuration` fragment in the device’s own managed object. It contains the complete configuration including all control characters as a string. It is recommended to use text based confugureation for small configurations that are human readable. 
+The current configuration state of the device is communicated with the `c8y_Configuration` fragment in the device’s own managed object in the inventory. It contains the complete configuration including all control characters as a string. It is recommended to use text based confugureation for small configurations that are human readable. 
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
@@ -563,7 +563,7 @@ The following fragments are related to the extended device capability with a rem
 | `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes        |
 | `c8y_Configuration` |  List of the current `config` of the device in the managed object of the inventory API     | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Configuration`     | Yes                          |
-| `c8y_SupportedOperations` | List contains element `c8y_SendConfiguration` | No, but recommended                  |
+| `c8y_SupportedOperations` | List contains element `c8y_SendConfiguration` | No              |
 
 Example structure in device managed object using the inventory API:
 
@@ -601,7 +601,9 @@ When the device receives the operation `c8y_Configuration`, the following steps 
 | 3.   | Update operation accordingly `"status": "SUCCESSFUL"`                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 
 
-It is also recommended to upload the device configuration only on demand to reduce data transfer. The configuration upload can be triggerd from the UI by clicking , if the connector supports the operation `c8y_SendConfiguration`. 
+It is also recommended to upload the device configuration after every change. If the volume of data transfer from the device is limited, the configuration can be uploaded on demand. The configuration upload can be triggerd from the UI, if the connector supports the operation `c8y_SendConfiguration`. 
+
+BE AWARE: If the configuration upload is only triggered thorugh the UI and there is no automated upload, please consider the case, that of a user forgets to trigger the upload mechanism before sending a new configuration to the device. 
 
 Example operation `c8y_SendConfiguration: {}` as it is sent to the device from Cumulocity IoT:
 
@@ -1165,6 +1167,7 @@ Example location update event:
 | 22/11/2021 | Examples of managed objects using the inventory API made clearer; "Optional modules" renamed to "Extended Capabilities", Overview table of all "Extended Capabilities" created.  | medium   |
 | 29/11/2021 | Added a product definition  | minor   |
 | 01/11/2021 | Inserted more precise formulation for info stored on the managed object using inventory API; Updated Currently Testable Device Capabilities  | minor   |
+| 01/11/2021 | Text Based Configuration: The mandatory flag of the Supported Operation "c8y_SendConfiguration" was changed from "Yes" to "No"  | major   |
 
 =======
 # Vendor Device Certification Requirements
