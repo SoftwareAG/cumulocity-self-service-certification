@@ -991,7 +991,7 @@ When the device receives the operation `c8y_Command`, the following steps are ex
 | ---- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | 0.   | Listen for operation created by platform with `"status" : "PENDING"`                     | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
-| 2.   | Locally execute the command and add the result to the operation in the fragment `result` | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
+| 2.   | Locally execute the command and add the result to the operation in the fragment `result` | [Miscellaneaous/Shell Documentation](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Miscellaneous)        |
 | 3.   | Update operation `"status": "SUCCESSFUL"`                                                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 
 Example operation after it has been executed and fragment `result` has been added to `c8y_Command`:
