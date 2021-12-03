@@ -598,7 +598,8 @@ When the device receives the operation `c8y_Configuration`, the following steps 
 | 0.   | Listen for operation created by platform with `"status" : "PENDING"` | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                            | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 | 2.   | Internally interpret transmitted string and execute configuration    |                                                                                       |
-| 3.   | Update operation accordingly `"status": "SUCCESSFUL"`                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
+| 3.   | Update the fragment `c8y_Configuration` of the managed object in the inventory API so it represents the current configuration of the device    |                |
+| 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 
 
 It is also recommended to upload the device configuration after every change. If the volume of data transfer from the device is limited, the configuration can be uploaded on demand. The configuration upload can be triggerd from the UI, if the connector supports the operation `c8y_SendConfiguration`. 
@@ -1168,6 +1169,7 @@ Example location update event:
 | 29/11/2021 | Added a product definition  | minor   |
 | 01/11/2021 | Inserted more precise formulation for info stored on the managed object using inventory API; Updated Currently Testable Device Capabilities  | minor   |
 | 01/11/2021 | Text Based Configuration: The mandatory flag of the Supported Operation "c8y_SendConfiguration" was changed from "Yes" to "No"  | major   |
+| 03/11/2021 | Text Based Configuration: Inserted step 3 - update "c8y_Configuration" in inventory to relect current device configuration   | major   |
 
 =======
 # Vendor Device Certification Requirements
