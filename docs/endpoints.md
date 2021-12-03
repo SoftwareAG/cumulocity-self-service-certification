@@ -10,13 +10,24 @@ GET `{{baseUrl}}/service/gateway-certification/perform_certification/{testRunID}
 
 ## Products
 
-This endpoint will give you all products for a Vendor.
-
 GET `{{baseUrl}}/service/gateway-certification/NNN` **planned for release 2.0**
+
+This endpoint will give you all products for a Vendor.
 
 PUT `{{baseUrl}}/service/gateway-certification/NNN` **planned for release 2.0**
 
-POST `{{baseUrl}}/service/gateway-certification/NNN` **planned for release 2.0**
+POST `{{baseUrl}}/service/gateway-certification/product`
+
+This endpoint will create a new product managed object.
+Body message has to be like:
+```json
+{
+"vendor_name":"vendor",
+"product_name":"product",
+"product_type":"type",
+"tenant_id":"t12345678"
+}
+```
 
 DELETE `{{baseUrl}}/service/gateway-certification/NNN` **planned for release 2.0**
 
@@ -57,13 +68,13 @@ This endpoint will create a new Full Certification Run
 
 POST `{{baseUrl}}/service/gateway-certification/test_run` with the body for the POST request as:
 
-`{
+```json
+{
  "tenant_id": "tenant_id",                               
  "device_id": "device_id",                               
- "vendor_name": "vendor_name", 
- "product_name": "product_name", 
- "product_type": "product_type" 
- }`
+ "product_id": "product_id"
+ }
+```
 
 
 This endpoint will update a certification run

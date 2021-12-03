@@ -360,8 +360,8 @@ To indicate that a device wants to certify an Extended Capabilities, it has to a
 
 | Fragment / Extended Capability                        | Content                                    | Required for extended capability |
 | ------------------------------- | ------------------------------------------ | ---------------------------- |
-| `c8y_SupportedOperations`    | Many extended operations are directly triggering the dynamic UI by invoking the respective operation tabs | Yes, if the Extended Capability is an operation      | 
-| `com_cumulocity_model_Agent` | Empty fragment. Declares that the device is able to receive operations                                    | Yes, for root devices and gateways that support operations; No, for devices and gateways that don't support operations; Must not be used for child devices; |
+| [c8y_SupportedOperations](#c8y_supportedOperations)    | Many extended operations are directly triggering the dynamic UI by invoking the respective operation tabs | Yes, if the Extended Capability is an operation      | 
+| [com_cumulocity_model_Agent](#com_cumulocity_model_Agent) | Empty fragment. Declares that the device is able to receive operations                                    | Yes, for root devices and gateways that support operations; No, for devices and gateways that don't support operations; Must not be used for child devices; |
 | [Child Device Management](#child-device-management) | Cumulocity uses the concept of child device types to distinguish the capabilities of child devices behind a gateway device.  | is an Extended Capability |
 | [Log File Retrieval](#log-file-retrieval) | Device capability to upload (filtered) log files to C8Y.   | is an Extended Capability |
 | [Device Configuration](#device-configuration) | Device capability that enables text- and / or profile-based device configuration. Text based configuration is the more basic approach. File based configuration allows to have multiple types of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).  |is an Extended Capability|
@@ -420,7 +420,7 @@ The following json structure represents a typical managed object of a device usi
     "url": ""
 }],
 "c8y_Configuration": {
-    "config": "mqtt.url=mqtt.eu-latest.cumulocity.com\nmqtt.port=8883\nmqtt.tls=true\nmqtt.cert_auth=false\nmqtt.client_cert=/root/.cumulocity/certs/chain-cert.pem\nmqtt.client_key=/root/.cumulocity/certs/device-cert-private-key.pem\nmqtt.cacert=/etc/ssl/certs/ca-certificates.crt\nmqtt.ping.interval.seconds=60\nagent.name=dm-example-device\nagent.type=c8y_dm_example_device\nagent.main.loop.interval.seconds=10\nagent.requiredinterval=10\nagent.loglevel=INFO"
+    "config": "mmyParam: myValue\nmyOtherParam: myOtherValue"
 },
 "c8y_SupportedLogs": [
         "agentlog"
@@ -503,7 +503,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                    | Required for extended capability |
 | ------------------------- | ------------------------------------------ | ---------------------------- |
-| `com_cumulocity_model_Agent` | Enables a device to receive operations; Must be present in the device manged object in the inventory; | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_LogfileRequest` | Yes                          |
 | `c8y_SupportedLogs`       | List of supported log file types; Must be present in the device manged object in the inventory;           | Yes (at least 1 type)        |
 
@@ -544,24 +544,26 @@ When the device receives the operation `c8y_LogfileRequest`, the following steps
 
 ## Device Configuration
 
-Device capability that enables text- and / or profile-based device configuration.
-Text based configuration is the more basic approach. It provides a plain text box in the UI to retrieve, edit, and send a configuration text to the device.
-The text is send as one string, however, it can be structured using json, xml, key-value pairs or any other markup that the device is able to parse.
-File based configuration allows to have multiple _types_ of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).  
-For details and examples, compare [configuration management](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Configuration-management) section in the documentation.
+Device capability that enables text- and / or profile-based device configuration. They are similar concepts that allow the device to upload its configuration to the platform and users can install a new configuration on the device. The UI will automatically be available to use the implemented capability.
 
-For a successful certification of the Device Configuration capability, Text Based Configuration or File Based Configuration or both have to be implemented.
+
+For a successful certification of the Device Configuration capability, either Text Based Configuration or File Based Configuration or both have to be implemented.
 The certificate will state which configuration methods is supported as information.
 
 ### Text Based Configuration
+
+Text based configuration is the more basic approach. It provides a plain text box in the UI to retrieve, edit, and send a configuration text to the device. 
+The text is sent as one string using UTF-8 characters, however, it can be structured using json, xml, key-value pairs, [SmartRest data format](#https://cumulocity.com/guides/reference/smartrest/#data-format), or any other markup that the device is able to parse.
+The current configuration state of the device is communicated with the `c8y_Configuration` fragment in the device’s own managed object in the inventory. It contains the complete configuration including all control characters as a string. It is recommended to use text based confugureation for small configurations that are human readable. 
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
 | Fragment                  | Content                                       | Required for extended capability |
 | ------------------------- | --------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes        |
+| `c8y_Configuration` |  List of the current `config` of the device in the managed object of the inventory API     | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Configuration`     | Yes                          |
-| `c8y_SupportedOperations` | List contains element `c8y_SendConfiguration` | Yes                          |
+| `c8y_SupportedOperations` | List contains element `c8y_SendConfiguration` | No              |
 
 Example structure in device managed object using the inventory API:
 
@@ -570,7 +572,9 @@ Example structure in device managed object using the inventory API:
     "c8y_Configuration",
     "c8y_SendConfiguration"
 ],
-"c8y_SendConfiguration": {}
+"c8y_Configuration": {
+        "config": "myParam: myValue\nmyOtherParam: myOtherValue"
+},
 ```
 
 Example operation `c8y_Configuration: {}` as it is sent to the device:
@@ -582,7 +586,7 @@ Example operation `c8y_Configuration: {}` as it is sent to the device:
     "id": "440452",
     "status": "PENDING",
     "c8y_Configuration": {
-        "config": "test"
+        "config": "myParam: myValue\nmyOtherParam: myOtherValue"
     },
     "description": "Configuration update"
 ```
@@ -594,9 +598,15 @@ When the device receives the operation `c8y_Configuration`, the following steps 
 | 0.   | Listen for operation created by platform with `"status" : "PENDING"` | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                            | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 | 2.   | Internally interpret transmitted string and execute configuration    |                                                                                       |
-| 3.   | Update operation accordingly `"status": "SUCCESSFUL"`                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
+| 3.   | Update the fragment `c8y_Configuration` of the managed object in the inventory API so it represents the current configuration of the device    |                |
+| 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 
-Example operation `c8y_SendConfiguration: {}` as it is sent to the device:
+
+It is also recommended to upload the device configuration after every change. If the volume of data transfer from the device is limited, the configuration can be uploaded on demand. The configuration upload can be triggerd from the UI, if the connector supports the operation `c8y_SendConfiguration`. 
+
+BE AWARE: If the configuration upload is only triggered thorugh the UI and there is no automated upload, please consider the case, that of a user forgets to trigger the upload mechanism before sending a new configuration to the device. 
+
+Example operation `c8y_SendConfiguration: {}` as it is sent to the device from Cumulocity IoT:
 
 ```json5
 creationTime: "2021-09-20T13:53:29.419Z", deviceName: "123456789", deviceId: "440366",…
@@ -616,16 +626,18 @@ When the device receives the operation `c8y_SendConfiguration`, the following st
 | ---- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                            | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API)   |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                                       | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)          |
-| 2.   | Internally get current configuration and update the fragment `c8y_Configuration` of the device inventory object | [Update managed object](https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource) |
+| 2.   | Internally get current configuration and update the fragment `c8y_Configuration` of the device managed object using the inventory API | [Update managed object](https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource) |
 | 3.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                           | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)          |
 
 ### File Based Configuration
 
+File based configuration allows to have multiple _types_ of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).  
+For details and examples, compare [configuration management](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Configuration-management) section in the documentation.
 The following fragments are related to the Extended  Capability with a remark if they are required for the capability to work:
 
 | Fragment                      | Content                                        | Required for extended capability |
 | ----------------------------- | ---------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations`     | List contains element `c8y_DownloadConfigFile` | Yes                          |
 | `c8y_SupportedOperations`     | List contains element `c8y_UploadConfigFile`   | Yes                          |
 | `c8y_SupportedConfigurations` | List of supported configuration file types     | Yes (at least 1 type)        |
@@ -705,7 +717,7 @@ The following fragments are related to the extended device capability with a rem
 | ------------------------- | -------------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_SoftwareUpdate`         | Yes                          |
-| `c8y_SoftwareList`        | List of currently installed software on the device | Yes                          |
+| `c8y_SoftwareList`        | List of currently installed software on the device in the managed object of the inventory API | Yes                          |
 
 Example structure in device managed object using the inventory API:
 
@@ -786,7 +798,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                              | Required for extended capability |
 | ------------------------- | ------------------------------------ | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Firmware` | Yes                          |
 
 Firmware tab will be visible on the device page only if `c8y_Firmware` is listed in the device’s supported operations.
@@ -834,7 +846,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                                                 | Required for extended capability |
 | ------------------------- | ----------------------------------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_DeviceProfile`                               | Yes                          |
 | `c8y_Profile`             | List contains element `profileName`, `profileId`, and `profileExecuted` | Yes                          |
 
@@ -896,7 +908,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                             | Required for extended capability |
 | ------------------------- | ----------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Restart` | Yes                          |
 
 Example structure in device managed object using the inventory API:
@@ -926,7 +938,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                                 | Required for extended capability |
 | ------------------------- | ------------------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_MeasurementRequestOperation` | Yes                          |
 
 Example structure in device managed object using the inventory API:
@@ -957,7 +969,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                             | Required for extended capability |
 | ------------------------- | ----------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Command` | Yes                          |
 
 Example structure in device managed object using the inventory API:
@@ -982,7 +994,7 @@ When the device receives the operation `c8y_Command`, the following steps are ex
 | ---- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | 0.   | Listen for operation created by platform with `"status" : "PENDING"`                     | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
-| 2.   | Locally execute the command and add the result to the operation in the fragment `result` | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
+| 2.   | Locally execute the command and add the result to the operation in the fragment `result` | [Miscellaneaous/Shell Documentation](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Miscellaneous)        |
 | 3.   | Update operation `"status": "SUCCESSFUL"`                                                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 
 Example operation after it has been executed and fragment `result` has been added to `c8y_Command`:
@@ -1006,7 +1018,7 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                         | Required for extended capability |
 | ------------------------- | ----------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_RemoteAccessConnect` | Yes                          |
 | `c8y_RemoteAccessList`    | List of supported remote access types           | Yes (at least 1 type)        |
 
@@ -1112,8 +1124,8 @@ Example location update event:
 - [x] Foundation Capabilities 
     - [x] c8y_Agent
   - [x] Device Information
-      - [x] c8y_IsDevice
-      - [x] name
+     - [x] c8y_IsDevice
+     - [x] name
       - [x] type
       - [X] c8y_Hardware
       - [X] c8y_Firmware
@@ -1129,13 +1141,12 @@ Example location update event:
   - [X] Child Device Management
     - [X] Child Device Types
   - [X] Log File Retrieval
-  - [X] Device Configuration
-    - [X] Text Based Configuration
-    - [X] File Based Configuration
+  - [ ] Device Configuration
+    - [ ] Text Based Configuration
+    - [ ] File Based Configuration
   - [X] Managing Device Software
   - [X] Managing Device Firmware
-  - [X] Managing Device Firmware
-  - [X] Device Profile
+  - [ ] Device Profile
   - [X] Restart
   - [ ] Measurement Request
   - [ ] Shell
@@ -1156,6 +1167,9 @@ Example location update event:
 | 15/11/2021 | Changed structure  | medium   |
 | 22/11/2021 | Examples of managed objects using the inventory API made clearer; "Optional modules" renamed to "Extended Capabilities", Overview table of all "Extended Capabilities" created.  | medium   |
 | 29/11/2021 | Added a product definition  | minor   |
+| 01/11/2021 | Inserted more precise formulation for info stored on the managed object using inventory API; Updated Currently Testable Device Capabilities  | minor   |
+| 01/11/2021 | Text Based Configuration: The mandatory flag of the Supported Operation "c8y_SendConfiguration" was changed from "Yes" to "No"  | major   |
+| 03/11/2021 | Text Based Configuration: Inserted step 3 - update "c8y_Configuration" in inventory to relect current device configuration   | major   |
 
 =======
 # Vendor Device Certification Requirements
