@@ -1008,7 +1008,6 @@ Example operation after it has been executed and fragment `result` has been adde
 
 ## Cloud Remote Access
 
-**Document Section is still under development**
 
 Device capability to initiate a remote connection via VNC or SSH. For details and examples, compare [Cloud Remote Access](https://cumulocity.com/guides/cloud-remote-access/cra-api/) section of the documentation.
 
@@ -1064,11 +1063,11 @@ When the device receives the operation `c8y_RemoteAccessConnect`, the following 
 | ---- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                    | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                                                               | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
-| 2.   | Connect to provided `hostname` and `port` using TCP                                                                                     |                                                                                       |
-| 3.   | Using the `connectionKey` connect to device websocket endpoint of the Remote Access microservice: `wss:///service/remoteaccess/device/` |                                                                                       |
-| 4.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
-| 5.   | Start forwarding binary packets between the TCP connection and the websocket in both directions                                         |                                                                                       |
-| 6.   | Whenever one of these connections is terminated the device considers the session as ended and will also terminate the second connection |                                                                                       |
+| 2.   | Connect to the device websocket endpoint of the remote access microservice `wss:///service/remoteaccess/device/` using the `connectionKey`                                                                                   |                                                                                       |
+| 3.   | Establish local socket connection to the specified `hostname` and `port`                                                                                    |                                                                                       |
+| 4.   | Start forwarding binary packets between the TCP connection and the websocket in both directions                                         |                                                                                       |
+| 5.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
+| 6.   | Whenever one of these connections is terminated the device considers the session as ended and will also terminate the second connection. Even if the connection was not terminated gracefully by any of the involved components, the operation status must stay in SUCCESSFUL |                                                                                       |
 
 ## Location & Tracking
 
