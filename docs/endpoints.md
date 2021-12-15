@@ -171,6 +171,46 @@ List of c8y_certification_testCertificate managed objects of the same product, d
 ## GET latest Capabilites for one product where STATUS equals `SUCCESSFUL`
 should get for one product all latest Capabilites which have the STATUS of `SUCCESSFUL`
 
+**GET** `{{url}}/inventory/managedObjects?pageSize=1&query=$filter=(type eq 'c8y_certification_testCertificate' and product.productName eq '{{product_name}}' and product.vendorName eq '{{vendor_name}}' and certificate.status.code eq 'VALID')$orderby=lastUpdated desc`
+
+### Response
+
+List of c8y_certification_testCertificate managed objects ( 0 or 1). If list contains one entity, to get all `SUCCESSFUL` capabilties, search for fragment `tests.modules` and loop through all items. Either the item is type of an `container` (`{"container": true}`), then loop again through all `modules` and check if status equals `SUCCESSFUL`. 
+
+Example:
+
+```json
+{ "container": true,
+  "id": "sendingOperationalData",
+  "title": "Sending Operational Data",
+  "mandatory": true,
+  "modules": [
+     {
+       "capabilities": [...],
+       "id": "operationDataAlarms",
+       "title": "Sending Operational Data - Alarms",
+       "status": { 
+          "code": "SUCCESSFUL"
+       }
+     }, ... ]
+}
+```
+
+Otherwise, if the item is not type of a `container` (no fragment `container` exists), then search straight for status equals `SUCCESSFUL`.
+
+Example:
+
+```json
+{
+    "capabilities": [...],
+    "id": "deviceLogs",
+    "title": "Log File Retrieval",
+    "status": {
+       "code": "SUCCESSFUL"
+       }
+}
+```
+
 ## GET all products and filter for capabilities 
 should get all products which meets the selected capabilities but needed for the startpage to limit down the amount of products (Filtering)
 
