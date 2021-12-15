@@ -120,16 +120,21 @@ POST `{{baseUrl}}/inventory/managedObjects/{{test_run_id}}` **planned for releas
 ---
 
 # Endpoints that can use DPP
+
 Provides all necessary certification information to the devicepartnerportal DPP.
+
 ---
 ## Search for Productname and Vendor
+
 should search for Productname and Vendor as output we expect 0 or 1 valid Product to show the certification Logo
+
+**GET** `{{url}}/inventory/managedObjects?pageSize=1&query=$filter=(type eq 'c8y_certification_testCertificate' and product.productName eq '{{product_name}}' and product.vendorName eq '{{vendor_name}}')$orderby=lastUpdated desc`
 
 ## GET all device certificates for one Product
 should get all device certificates for one Product to present them
 
-## GET latest Capabilites for one product where STATUS equals ´SUCCESSFUL´
-should get for one product all latest Capabilites which have the STATUS of ´SUCCESSFUL´
+## GET latest Capabilites for one product where STATUS equals `SUCCESSFUL`
+should get for one product all latest Capabilites which have the STATUS of `SUCCESSFUL`
 
 ## GET all products and filter for capabilities 
 should get all products which meets the selected capabilities but needed for the startpage to limit down the amount of products (Filtering)
