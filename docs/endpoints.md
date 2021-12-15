@@ -118,3 +118,22 @@ This endpoint will expiry a Testcertificates
 POST `{{baseUrl}}/inventory/managedObjects/{{test_run_id}}` **planned for release 2.0**
 
 ---
+
+# Endpoints that can use DPP
+Provides all necessary certification information to the devicepartnerportal DPP.
+---
+## Search for Productname and Vendor
+should search for Productname and Vendor as output we expect 0 or 1 valid Product to show the certification Logo
+
+## GET all device certificates for one Product
+should get all device certificates for one Product to present them
+
+## GET latest Capabilites for one product where STATUS equals ´SUCCESSFUL´
+should get for one product all latest Capabilites which have the STATUS of ´SUCCESSFUL´
+
+## GET all products and filter for capabilities 
+should get all products which meets the selected capabilities but needed for the startpage to limit down the amount of products (Filtering)
+
+## GET pdf file for explicit product
+should get for one product a pdf file (extension of Case 2)
+------
