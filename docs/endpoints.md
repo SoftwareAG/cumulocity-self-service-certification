@@ -128,6 +128,8 @@ Provides all necessary certification information to the devicepartnerportal DPP.
 
 should search for Productname and Vendor as output we expect 0 or 1 valid Product to show the certification Logo
 
+### Reeuest
+
 **GET** `{{url}}/inventory/managedObjects?pageSize=1&query=$filter=(type eq 'c8y_certification_testCertificate' and product.productName eq '{{product_name}}' and product.vendorName eq '{{vendor_name}}' and certificate.status.code eq 'VALID')$orderby=lastUpdated desc`
 
 ### Response
@@ -137,6 +139,8 @@ List of c8y_certification_testCertificate managed objects. If list is empty it m
 ## GET all device certificates for one Product
 
 should get all device certificates for one Product to present them
+
+### Request
 
 **GET** `{{url}}/inventory/managedObjects?withTotalPages=true&pageSize=100&currentPage=1&query=$filter=(type eq 'c8y_certification_testCertificate' and product.productName eq '{{product_name}}' and product.vendorName eq '{{vendor_name}}' and certificate.status.code eq 'VALID')$orderby=lastUpdated desc`
 
@@ -171,13 +175,15 @@ List of c8y_certification_testCertificate managed objects of the same product, d
 ## GET latest Capabilites for one product where STATUS equals `SUCCESSFUL`
 should get for one product all latest Capabilites which have the STATUS of `SUCCESSFUL`
 
+### Request
+
 **GET** `{{url}}/inventory/managedObjects?pageSize=1&query=$filter=(type eq 'c8y_certification_testCertificate' and product.productName eq '{{product_name}}' and product.vendorName eq '{{vendor_name}}' and certificate.status.code eq 'VALID')$orderby=lastUpdated desc`
 
 ### Response
 
-List of c8y_certification_testCertificate managed objects ( 0 or 1). If list contains one entity, to get all `SUCCESSFUL` capabilties, search for fragment `tests.modules` and loop through all items. Either the item is type of an `container` (`{"container": true}`), then loop again through all `modules` and check if status equals `SUCCESSFUL`. 
+List of c8y_certification_testCertificate managed objects of a specific product ( 0 or 1). If list contains one entity, to get all `SUCCESSFUL` capabilties, search for fragment `tests.modules` and loop through all items. Either the item is type of an `container` (`{"container": true}`), then loop again through all `modules` and check if status equals `SUCCESSFUL`. 
 
-Example:
+**Example:**
 
 ```json
 { "container": true,
@@ -198,7 +204,7 @@ Example:
 
 Otherwise, if the item is not type of a `container` (no fragment `container` exists), then search straight for status equals `SUCCESSFUL`.
 
-Example:
+**Example:**
 
 ```json
 {
@@ -212,8 +218,19 @@ Example:
 ```
 
 ## GET all products and filter for capabilities 
+
 should get all products which meets the selected capabilities but needed for the startpage to limit down the amount of products (Filtering)
 
+### Request
+
+**GET** `{{url}}/inventory/managedObjects?withTotalPages=true&pageSize=1000&currentPage=1&query=$filter=(type eq 'c8y_certification_testCertificate' and certificate.status.code eq 'VALID' ) $orderby=lastUpdated desc`
+
+### Response
+
+List of all c8y_certification_testCertificate managed objects, order by latest updates descending. To filter the list of certificates, go through each `tests.modules` items and validat for `status.code` equals `SUCCESSFUL`. See examples above.
+
 ## GET pdf file for explicit product
+
 should get for one product a pdf file (extension of Case 2)
+
 ------
