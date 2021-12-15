@@ -128,10 +128,45 @@ Provides all necessary certification information to the devicepartnerportal DPP.
 
 should search for Productname and Vendor as output we expect 0 or 1 valid Product to show the certification Logo
 
-**GET** `{{url}}/inventory/managedObjects?pageSize=1&query=$filter=(type eq 'c8y_certification_testCertificate' and product.productName eq '{{product_name}}' and product.vendorName eq '{{vendor_name}}')$orderby=lastUpdated desc`
+**GET** `{{url}}/inventory/managedObjects?pageSize=1&query=$filter=(type eq 'c8y_certification_testCertificate' and product.productName eq '{{product_name}}' and product.vendorName eq '{{vendor_name}}' and certificate.status.code eq 'VALID')$orderby=lastUpdated desc`
+
+### Response
+
+List of c8y_certification_testCertificate managed objects. If list is empty it means that no certification exists (no certification Logo). If list contains one element it means that this prodcut was certified (certification logo).
 
 ## GET all device certificates for one Product
+
 should get all device certificates for one Product to present them
+
+**GET** `{{url}}/inventory/managedObjects?withTotalPages=true&pageSize=100&currentPage=1&query=$filter=(type eq 'c8y_certification_testCertificate' and product.productName eq '{{product_name}}' and product.vendorName eq '{{vendor_name}}' and certificate.status.code eq 'VALID')$orderby=lastUpdated desc`
+
+### Response
+
+List of c8y_certification_testCertificate managed objects of the same product, descending order (newest first). Device information of each certificate object looks as follows:
+```json
+{
+"device": {
+                "c8y_Firmware": {
+                    "name": "debian-10.11",
+                    "version": "5.10.60.1-microsoft-standard-WSL2",
+                    "url": null
+                },
+                "c8y_Agent": {
+                    "name": "DM Reference Agent",
+                    "version": "0.2",
+                    "url": "8893a9f33a8c"
+                },
+                "c8y_Hardware": {
+                    "serialNumber": "8893a9f33a8c",
+                    "model": "docker",
+                    "revision": "1.0"
+                },
+                "deviceId": "1184255"
+            }
+}
+```
+
+**!! PDF Link not defined yet !!**
 
 ## GET latest Capabilites for one product where STATUS equals `SUCCESSFUL`
 should get for one product all latest Capabilites which have the STATUS of `SUCCESSFUL`
