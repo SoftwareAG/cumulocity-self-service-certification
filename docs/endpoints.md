@@ -134,7 +134,7 @@ should search for Productname and Vendor as output we expect 0 or 1 valid Produc
 
 ### Response
 
-List of c8y_certification_testCertificate managed objects. If list is empty it means that no certification exists (no certification Logo). If list contains one element it means that this prodcut was certified (certification logo).
+List of `c8y_certification_testCertificate` managed objects. If list is empty it means that no certification exists (no certification Logo). If list contains one element it means that this prodcut was certified (certification logo).
 
 ## GET all device certificates for one Product
 
@@ -146,7 +146,7 @@ should get all device certificates for one Product to present them
 
 ### Response
 
-List of c8y_certification_testCertificate managed objects of the same product, descending order (newest first). Device information of each certificate object looks as follows:
+List of `c8y_certification_testCertificate` managed objects of the same product, descending order (newest first). Device information of each certificate object looks as follows:
 ```json
 {
 "device": {
@@ -181,7 +181,7 @@ should get for one product all latest Capabilites which have the STATUS of `SUCC
 
 ### Response
 
-List of c8y_certification_testCertificate managed objects of a specific product ( 0 or 1). If list contains one entity, to get all `SUCCESSFUL` capabilties, search for fragment `tests.modules` and loop through all items. Either the item is type of an `container` (`{"container": true}`), then loop again through all `modules` and check if status equals `SUCCESSFUL`. 
+List of `c8y_certification_testCertificate` managed objects of a specific product ( 0 or 1). If list contains one entity, to get all `SUCCESSFUL` capabilties, search for fragment `tests.modules` and loop through all items. Either the item is type of an `container` (`{"container": true}`), then loop again through all `modules` and check if status equals `SUCCESSFUL`. 
 
 **Example:**
 
@@ -227,7 +227,7 @@ should get all products which meets the selected capabilities but needed for the
 
 ### Response
 
-List of all c8y_certification_testCertificate managed objects, order by latest updates descending. To filter the list of certificates, go through each `tests.modules` items and validat for `status.code` equals `SUCCESSFUL`. See examples above.
+List of all `c8y_certification_testCertificate` managed objects, order by latest updates descending. To filter the list of certificates, go through each `tests.modules` items and validat for `status.code` equals `SUCCESSFUL`. See examples above.
 
 ## GET pdf file for explicit product
 
