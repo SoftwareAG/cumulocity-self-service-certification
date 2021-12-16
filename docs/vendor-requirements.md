@@ -1009,9 +1009,8 @@ Example operation after it has been executed and fragment `result` has been adde
 ## Cloud Remote Access
 
 
-Device capability to initiate a remote connection via VNC or SSH. For details and examples, compare [Cloud Remote Access](https://cumulocity.com/guides/cloud-remote-access/cra-api/) section of the documentation.
+Device capability to initiate a remote connection via VNC SSH or Telnet. For details and examples, compare [Cloud Remote Access](https://cumulocity.com/guides/cloud-remote-access/cra-api/) section of the documentation.
 
-**Note:** The connection type `Telnet` is considered insecure, therefore it is deprecated and should not be used for new implementations. Please use VNC or SSH instead.
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
@@ -1021,7 +1020,8 @@ The following fragments are related to the extended device capability with a rem
 | `c8y_SupportedOperations` | List contains element `c8y_RemoteAccessConnect` | Yes                          |
 | `c8y_RemoteAccessList`    | List of supported remote access types           | Yes (at least 1 type)        |
 
-Example structure in device managed object using the inventory API:
+Example structure in device managed object using the inventory API
+(NOTE: The fragment "c8y_RemoteAccessList" is created by the Cumulocity IoT UI and must not be created by the agent/connector)
 
 ```json5
 "c8y_SupportedOperations": [
