@@ -128,7 +128,7 @@ Provides all necessary certification information to the devicepartnerportal DPP.
 
 should search for Productname and Vendor as output we expect 0 or 1 valid Product to show the certification Logo
 
-### Reeuest
+### Request
 
 **GET** `{{url}}/inventory/managedObjects?pageSize=1&query=$filter=(type eq 'c8y_certification_testCertificate' and product.productName eq '{{product_name}}' and product.vendorName eq '{{vendor_name}}' and certificate.status.code eq 'VALID')$orderby=lastUpdated desc`
 
@@ -227,7 +227,27 @@ should get all products which meets the selected capabilities but needed for the
 
 ### Response
 
-List of all `c8y_certification_testCertificate` managed objects, order by latest updates descending. To filter the list of certificates, go through each `tests.modules` items and validat for `status.code` equals `SUCCESSFUL`. See examples above.
+List of all `c8y_certification_testCertificate` managed objects, order by latest updates descending. To filter the list of certificates, go through each `tests.modules` items and validat for `status.code` equals `SUCCESSFUL`. The following table shows the matches between DPP filter name and certificate id:
+|DPP Filtername|Capability|
+|-------------|-------------|
+| Alarms|`operationDataAlarms`|
+| Child Device Management|`deviceGateways`|
+| Cloud remote access|`deviceCloudRemoteAccess`|
+| Configuration management|`deviceConfiguration`|
+| Device profile|`deviceProfile`|
+| Device shell|`deviceShell`|
+| Events|`operationDataEvents`|
+| Firmware management|`deviceFirmware`|
+| Identity|`externalId`|
+| Location & Tracking|`deviceLocationAndTracking`|
+| Measurements|`operationDataMeasurements`|
+| Mobile|`deviceMobile`|
+| Network configuration|`deviceNetwork`|
+| Remote log retrieval|`deviceLogs`|
+| Restart|`deviceRestart`|
+| Measurement requests|`measurementRequest`|
+| Service monitoring|`deviceInformation_c8y_RequiredAvailability`|
+| Software management|`managingDeviceSoftware`|
 
 ## GET pdf file for explicit product
 
