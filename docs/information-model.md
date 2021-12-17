@@ -87,6 +87,16 @@ The test run object is instantiated from the test suite data structure, by addin
   "version": "1.3",
   "c8y_version": "1010.0.8",
   "testSuite": "123456",
+  // device details
+  "deviceId": "9656728", // set by MS: device id taken from the device managed object
+  // parent details
+  "additionParents": {
+    "references" : [
+        { "managedObject": {
+                            "self": "....",
+                            "id": "9656729", // set by MS: parent product id
+                        }
+         }]},
   "certificate": "234567", // testCertifcate ID
   "status": {
     "code": "PENDING"
@@ -97,8 +107,6 @@ The test run object is instantiated from the test suite data structure, by addin
     "productName": "BCM2708 000e", // set by user
     "productType": "Device",
     "vendorName": "Partner Company", // set by user
-    "deviceId": "9656728", // set by MS: device id taken from the device managed object
-    "parentId": "9656729", // set by MS: if there is a parent this should be the connection
   },
   // module listing -->
   "deviceInformation": {
@@ -189,13 +197,22 @@ This newly created object is immutable in the sense that all test results cannot
   "type": "c8y_certification_testCertificate", // set by MS: type of the manged object
   "version": "1.3",
   "hashValue": "2e400e60b947152aec082aadcc1d820a",
+  // device details
+   "device":{ "deviceId": "9656728"},
   // product details
   "product": {
     "productName": "BCM2708 000e",
+    "productType": "Product type",
     "vendorName": "Partner Company",
-    "deviceId": "9656728",
-    "parentId": "9656729",
   },
+  //parent details
+  "additionParents": {
+    "references" : [
+        { "managedObject": {
+                            "self": "....",
+                            "id": "9656729", // set by MS: parent test run od
+                        }
+         }]},
   // certificate details (set by MS)
   "certificate": {
     "creationDate": "2021-08-10T05:54:38.107Z", // date of certification
