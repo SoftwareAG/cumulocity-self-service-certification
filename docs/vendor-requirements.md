@@ -1090,15 +1090,15 @@ Example structure in device managed object using the inventory API:
 "c8y_Position": {
     "lat": 51.211977,
     "lng": 6.15173,
-    "alt": 67,
+    "alt": 67
 }
 ```
 
-Whenever the location shell be updated, the device executes the following steps:
+Whenever the location shall be updated, the device executes the following steps:
 
 | Step | Action                                               | Documentation                                                                           |
 | ---- | ---------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| 1.   | Send a position update event                         | [Create event](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource)       |
+| 1.   | Send a an event of type "c8y_LocationUpdate" for the device that carries the new position in the fragment "c8y_Position"     | [Create event](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource)       |
 | 2.   | Update the c8y_Position fragment in device inventory | [Update managed object](https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource) |
 
 Example location update event:
@@ -1141,16 +1141,18 @@ Example location update event:
     - [X] Child Device Types
   - [X] Log File Retrieval
   - [ ] Device Configuration
-    - [ ] Text Based Configuration
-    - [ ] File Based Configuration
+    - [x] Text Based Configuration
+    - [x] File Based Configuration
   - [X] Managing Device Software
   - [X] Managing Device Firmware
-  - [ ] Device Profile
+  - [x] Device Profile
   - [X] Restart
   - [ ] Measurement Request
-  - [ ] Shell
+  - [x] Shell
   - [ ] Cloud Remote Access
   - [x] Location & Tracking
+  - [ ] Mobile
+  - [ ] Network
 
 
 ##MD file change Log
