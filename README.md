@@ -18,7 +18,7 @@ The integration of the hardware has to fulfill the foundation capabilities to be
 
 ## Diagrams & Graphics
 
-The files [Endpoints](./docs/endpoints.md), [Certification Process](./docs/media/information-model.drawio.svg) and [Information Model](./docs/information-model.md) provide inside information on the tool. Interested readers can consume this information to get a deeper understanding of the tool itself.
+The files [Endpoints](./docs/endpoints.md) and [Information Model](./docs/information-model.md) provide inside information on the tool. Interested readers can consume this information to get a deeper understanding of the tool itself.
 
 ## Documentation Overview
 
