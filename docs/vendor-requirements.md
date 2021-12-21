@@ -89,7 +89,7 @@ Information about one physical device is stored within multiple managed objects.
 }
 ```
 ## Agent Information
-The term “agent” refers to the piece of software that connects a device with Cumulocity IoT. This document provides guidance for integration developers to develop this agent. The fragments `c8y_Agent` must be present in the device managed object stored in the inventory.
+The term “agent” refers to the piece of software that connects a device with Cumulocity IoT. This document provides guidance for integration developers to develop this agent. The fragments `c8y_Agent` must be sent to the inventory API to add it to the device managed object.
 
 ### c8y_Agent
 
