@@ -519,7 +519,7 @@ Example structure in device managed object using the inventory API:
 ]
 ```
 
-Example operation sent to the device:
+Example operation `c8y_LogfileRequest` as it is sent to the device:
 
 ```json5
 "c8y_LogfileRequest": {
@@ -540,7 +540,20 @@ When the device receives the operation `c8y_LogfileRequest`, the following steps
 | 2.   | Internally retrieve log file and filter w.r.t. criteria found in operation                                                                 |                                                                                       |
 | 3.   | Create an event with `"type": "c8y_LogfileRequest"`                                                                                        | [Create event](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource)     |
 | 4.   | Upload the log file as attachment to the event                                                                                             | [Attach file to event](https://cumulocity.com/api/10.10.0/#operation/postEventBinaryResource) |
-| 5.   | Update operation accordingly `"status": "SUCCESSFUL", "c8y_LogfileRequest": {"file": "https://<TENANT_DOMAIN>/event/events/{id}/binaries"` | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
+| 5.   | Update operation accordingly `"status": "SUCCESSFUL", "c8y_LogfileRequest": {"file": "https://<TENANT_DOMAIN>/event/events/{id}/binaries"`} | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
+
+
+Example operation `c8y_LogfileRequest` received and extended with the file path by the device:
+```json5
+"c8y_LogfileRequest": {
+    "logFile": "syslog",
+    "dateFrom": "2016-01-27T13:45:24+0100",
+    "dateTo": "2016-01-28T13:45:24+0100",
+    "searchText": "sms",
+    "maximumLines": 1000,
+    "file": "https://<TENANT_DOMAIN>/event/events/{id}/binaries"
+}
+```
 
 ## Device Configuration
 
