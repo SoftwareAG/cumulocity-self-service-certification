@@ -1,12 +1,11 @@
 # Vendor Requirements for Device Certification
 
-The device certification process requires the device to follow integration best practices.
-This means that more fields are mandatory for a certified device compared to platform minium requirements.
-In the following section, [Device Registration](#device-registration), the explains the registration processes for connectors using either the MQTT API and REST API. The device certification process requires the device to follow integration best practices. This means that more fields are mandatory for a certified device compared to platform minium requirements. The mandatory capabilities are described in section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). All more advanced capabilities are part of the section [Extended Capabilities](#extended-capabilities-for-vendor-device-certification-optional).
+This document provides guidance on which requirements a connector / agent needs to fulfill to be successfully certifyable using the Cumulocity IoT certification tool.
+The device certification process requires all connectors / agents that run on devices to follow standards and integration best practices. This means that more fields are mandatory for a certified device compared to platform minium requirements.
+The following section, [Device Registration](#device-registration), covers the registration processes for connectors / agents using either the MQTT API and REST API. The mandatory capabilities are described in section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). All advanced capabilities are part of the section [Extended Capabilities](#extended-capabilities-for-vendor-device-certification-optional).
 
 # Device Registration
 
-**Status: Reviewed and Ready**
 The chapter [Device Behavior](#device-behavior) describes how a connector / agent that runs on a device registers to Cumulocity IoT. It must send a mandatory minimum of information to be certifiable covered in the section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). 
 
 
@@ -43,7 +42,7 @@ Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the
 
 ## Certification of Devices and Aggregation as Products
 
-When a connector registers on Cumulocity IoT, it becomes a device listed in the "Device Management" tab. When using the self-certification tool, one certificate can be created for each combination of the connector (c8y_Agent), the Hardware (c8y_Hardware) and the Firmware (c8y_Firmware). If any of these values changes, a new device-certificate can be created. The Cumulocity IoT device certification API makes the certification information available for our [Device Partner Portal](#https://devicepartnerportal.softwareag.com/). Entries on the Device Partner Portal represent devices from a sales/user perspective - we call that a product. Products can only be segregated by their names. To link the product from the Device Partner Portal with the more granual differentiation of a device on Cumulocity IoT, we have incorporated this as manual step within the Cumulocity IoT certification tool. Device certificates therefore need to be clustered to products, so all the device certificates related to that product then be displayed under the same product on the Device Partner Portal (product to device relation is 1:n). 
+When a connector / agent registers on Cumulocity IoT, it becomes a device listed in the "Device Management" tab. When using the self-certification tool, one certificate can be created for each combination of the connector (c8y_Agent), the Hardware (c8y_Hardware) and the Firmware (c8y_Firmware). If any of these values changes, a new device-certificate can be created. The Cumulocity IoT device certification API makes the certification information available for our [Device Partner Portal](#https://devicepartnerportal.softwareag.com/). Entries on the Device Partner Portal represent devices from a sales/user perspective - we call that a product. Products can only be segregated by their names. To link the product from the Device Partner Portal with the more granual differentiation of a device on Cumulocity IoT, we have incorporated this as manual step within the Cumulocity IoT certification tool. Device certificates therefore need to be clustered to products, so all the device certificates related to that product then be displayed under the same product on the Device Partner Portal (product to device relation is 1:n). 
 
 
 
@@ -90,11 +89,14 @@ Information about one physical device is stored within multiple managed objects.
 }
 ```
 ## Agent Information
-The fragments `c8y_Agent` must be present in the device managed object stored in the inventory.
+The term “agent” refers to the piece of software that connects a device with Cumulocity IoT. This document provides guidance for integration developers to develop this agent. The fragments `c8y_Agent` must be present in the device managed object stored in the inventory.
 
 ### c8y_Agent
 
-The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
+The device certificate will be issued for a device by the properties `c8y_Agent.name`, `c8y_Agent.version`,  `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, and `c8y_Firmware.version`. Developers of this agent are free to chose the name and version. 
+
+This is an example of an “agent” named “c8yMQTT”: https://github.com/SoftwareAG/c8yMQTT
+
 
 | Fragment  | Mandatory |
 | --------- | --------- |
