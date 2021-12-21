@@ -1262,12 +1262,4 @@ When the device receives the operation `c8y_Network`, the following steps are ex
 | 01/11/2021 | Text Based Configuration: The mandatory flag of the Supported Operation "c8y_SendConfiguration" was changed from "Yes" to "No"  | major   |
 | 03/11/2021 | Text Based Configuration: Inserted step 3 - update "c8y_Configuration" in inventory to relect current device configuration   | major   |
 
-=======
-# Vendor Device Certification Requirements
-
-The device certification process requires the device to follow integration best practices.
-This means that more fields are mandatory for a certified device compared to platform minium requirements.
-In the following section, mandatory information and behavior is described.
-
-
 
