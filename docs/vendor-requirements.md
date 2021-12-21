@@ -434,7 +434,7 @@ This fragment is optional. If not present, the Extended Capabilities will not be
 
 | Fragment                  | Mandatory |
 | ------------------------- | --------- |
-| `c8y_SupportedOperations` | No        |
+| `c8y_SupportedOperations` | Yes, for devices that receive operations         |
 
 Example structure in the device managed object using the inventory API:
 
@@ -447,12 +447,12 @@ Example structure in the device managed object using the inventory API:
 
 ### com_cumulocity_model_Agent
 
-The fragment `com_cumulocity_model_Agent` is an empty fragment. It declares that the device is able to receive operations [Extended Capabilities](#extended-capabilities)).
+The fragment `com_cumulocity_model_Agent` is an empty fragment stored in the device managed object using the inventory endpoint. It declares that the device is able to receive operations [Extended Capabilities](#extended-capabilities)).
 This fragment is optional. If not present, the Extended Capabilities will not be certified.
 
 | Fragment                  | Mandatory |
 | ------------------------- | --------- |
-| `com_cumulocity_model_Agent` | No        |
+| `com_cumulocity_model_Agent` | Yes, for devices that receive operations        |
 
 Example structure in the device managed object using the inventory API:
 
@@ -1118,6 +1118,96 @@ Example location update event:
   },
 }
 ```
+
+## Network
+**Under Construction  - not to be followed yet**
+
+Device capability to either display or display and manage the WAN, Lan, and DHCP settings. Information is shown under tab 'Network' if the fragment 'c8y_Network' is present in the device managed object using the inventory API. For details and examples, compare [Network](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Network-management) section of the documentation.
+
+
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
+
+| Fragment                  | Content                                         | Required for extended capability |
+| ------------------------- | ----------------------------------------------- | ---------------------------- |
+| `com_cumulocity_model_Agent` | Enables a device to receive operations; Send to device manged object via inventory API;  | Yes                          |
+| `c8y_SupportedOperations` | List contains element `c8y_Network`; Send to device manged object via inventory API;  | Yes                          |
+| `c8y_Network`    | List of the properties c8y_ WAN, c8y_LAN, and c8y_DHCP; Send to device manged object via inventory API;           | Yes (at least 1 type)        |
+
+Example structure in device managed object using the inventory API
+
+```json5
+"c8y_SupportedOperations": [
+    "c8y_Network"
+]
+{
+"c8y_Network": {
+       "c8y_LAN": {
+           "netmask": "255.255.255.0",
+           "ip": "192.168.128.1",
+           "name": "br0",
+           "enabled": 1,
+           "mac": "00:60:64:dd:a5:c3"
+       },
+       "c8y_WAN": {
+           "password": "user-password",
+           "simStatus": "SIM OK",
+           "authType": "chap",
+           "apn": "example.apn.com",
+           "username": "test"
+       },
+       "c8y_DHCP": {
+           "dns2": "1.1.1.1",
+           "dns1": "8.8.8.8",
+           "domainName": "my.domain",
+           "addressRange": {
+               "start": "192.168.128.100",
+               "end": "192.168.128.199"
+           },
+           "enabled": 1
+       }
+   }
+}
+
+```
+
+Example operation sent to the device for `c8y_Network`:
+
+```json5
+"c8y_Network": {
+       "c8y_LAN": {
+           "netmask": "255.255.255.0",
+           "ip": "192.168.128.1",
+           "enabled": 1
+       },
+       "c8y_WAN": {
+           "password": "user-password",
+           "authType": "chap",
+           "apn": "example.apn.com",
+           "username": "ee"
+       },
+       "c8y_DHCP": {
+           "dns2": "1.1.1.1",
+           "dns1": "8.8.8.8",
+           "domainName": "my.domain",
+           "addressRange": {
+               "start": "192.168.128.100",
+               "end": "192.168.128.199"
+           },
+           "enabled": 1
+       }
+   }
+
+```
+
+When the device receives the operation `c8y_Network`, the following steps are executed:
+
+| Step | Action                                                                                                                                  | Documentation                                                                         |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                    | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
+| 1.   | Update operation `"status" : "EXECUTING"`                                                                                               | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
+| 2.   | Apply WAN, LAN, and DHCP configuration   |                         |
+| 3.   | E3.	Set new network configuration status the device managed object                                                                                  |                                        |
+| 4.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |                                                                                      |
 
 ## Currently Testable Device Capabilities of Self-Service Certification Microservice
 - [x] Foundation Capabilities 
