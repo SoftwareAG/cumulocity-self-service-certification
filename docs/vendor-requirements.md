@@ -1172,21 +1172,21 @@ Example structure in device managed object using the inventory API
 
 ```
 
-Example operation sent to the device for `c8y_Network`:
-
+Example operation `c8y_Network` to update the LAN information as it is sent from Cumulocity IoT to the device:
 ```json5
 "c8y_Network": {
        "c8y_LAN": {
            "netmask": "255.255.255.0",
            "ip": "192.168.128.1",
            "enabled": 1
-       },
-       "c8y_WAN": {
-           "password": "user-password",
-           "authType": "chap",
-           "apn": "example.apn.com",
-           "username": "ee"
-       },
+       }
+   }
+
+```
+
+Example operation `c8y_Network` to update the DHCP information as it is sent from Cumulocity IoT to the device:
+```json5
+"c8y_Network": {
        "c8y_DHCP": {
            "dns2": "1.1.1.1",
            "dns1": "8.8.8.8",
@@ -1197,6 +1197,19 @@ Example operation sent to the device for `c8y_Network`:
            },
            "enabled": 1
        }
+   }
+
+```
+
+Example operation `c8y_Network` to update the WAN information as it is sent from Cumulocity IoT to the device:
+```json5
+"c8y_Network": {
+       "c8y_WAN": {
+           "password": "user-password",
+           "authType": "chap",
+           "apn": "example.apn.com",
+           "username": "ee"
+       },
    }
 
 ```
