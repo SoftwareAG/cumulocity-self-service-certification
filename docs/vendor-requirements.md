@@ -1133,7 +1133,7 @@ The following fragments are related to the extended device capability with a rem
 | ------------------------- | ----------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Enables a device to receive operations; Send to device manged object via inventory API;  | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Network`; Send to device manged object via inventory API;  | Yes                          |
-| `c8y_Network`    | List of the properties c8y_ WAN, c8y_LAN, and c8y_DHCP; Send to device manged object via inventory API;           | Yes (at least 1 type)        |
+| `c8y_Network`    | List of the properties c8y_ WAN, c8y_LAN, or c8y_DHCP; Send to device manged object via inventory API;           | Yes (at least 1 type)        |
 
 Example structure in device managed object using the inventory API
 
@@ -1220,8 +1220,8 @@ When the device receives the operation `c8y_Network`, the following steps are ex
 | ---- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                    | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                                                               | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
-| 2.   | Apply WAN, LAN, and DHCP configuration   |                         |
-| 3.   | E3.	Set new network configuration status the device managed object                                                                                  |                                        |
+| 2.   | Apply WAN, LAN, or DHCP configuration   |                         |
+| 3.   | Set new network configuration status the device managed object                                                                                  |                                        |
 | 4.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |                                                                                      |
 
 ## Currently Testable Device Capabilities of Self-Service Certification Microservice
