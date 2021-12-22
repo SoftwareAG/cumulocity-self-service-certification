@@ -375,6 +375,8 @@ To indicate that a device wants to certify an Extended Capabilities, it has to a
 | [Shell](#shell) | Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. | is an Extended Capability |
 | [Cloud Remote Access](#cloud-remote-access) | Device capability to initiate a remote connection via VNC or SSH. | is an Extended Capability |
 | [Location & Tracking](#location-tracking) | Device capability to display and update location information. | is an Extended Capability |
+| [Network](#network) | Device capability to display and update network information. | is an Extended Capability |
+
 
 
 
