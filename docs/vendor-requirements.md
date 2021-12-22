@@ -659,13 +659,6 @@ Example structure in device managed object using the inventory API:
     ]
 ```
 
-Example operation sent to the device for `c8y_DownloadConfigFile`:
-
-```json5
-"c8y_DownloadConfigFile": {
-    "url": "<download url>"
-}
-```
 
 When the device receives the operation `c8y_DownloadConfigFile`, the following steps are executed:
 
@@ -676,10 +669,12 @@ When the device receives the operation `c8y_DownloadConfigFile`, the following s
 | 2.   | Download referenced binary and internally apply configuration        |                                                                                       |
 | 3.   | Update operation `"status": "SUCCESSFUL"`                            | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 
-Example operation sent to the device for `c8y_UploadConfigFile`:
+Example operation sent to the device for `c8y_DownloadConfigFile`:
 
 ```json5
-"c8y_UploadConfigFile":{}
+"c8y_DownloadConfigFile": {
+    "url": "<download url>"
+}
 ```
 
 When the device receives the operation `c8y_UploadConfigFile`, the following steps are executed:
@@ -692,6 +687,19 @@ When the device receives the operation `c8y_UploadConfigFile`, the following ste
 | 3.   | Create an event with the same `type` e.g. `"type": "someConfig"`                                                        | [Create event](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource)     |
 | 4.   | Upload the configuration as attachment to the event                                                                     | [Attach file to event](https://cumulocity.com/api/10.10.0/#operation/postEventBinaryResource) |
 | 5.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                   | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
+
+Example operation sent to the device for `c8y_UploadConfigFile`:
+
+```json5
+    "creationTime": "2021-12-22T16:29:31.791Z",
+    "deviceId": "5081547",
+    "deviceName": "config test",
+    "self": "https://t635974191.eu-latest.cumulocity.com/devicecontrol/operations/6670102",
+    "id": "6670102",
+    "status": "PENDING",
+    "description": "Retrieve configuration snapshot from device config test",
+    "c8y_UploadConfigFile": {}
+```
 
 ## Software Management
 
