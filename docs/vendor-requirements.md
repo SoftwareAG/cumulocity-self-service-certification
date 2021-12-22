@@ -1,12 +1,11 @@
 # Vendor Requirements for Device Certification
 
-The device certification process requires the device to follow integration best practices.
-This means that more fields are mandatory for a certified device compared to platform minium requirements.
-In the following section, [Device Registration](#device-registration), the explains the registration processes for connectors using either the MQTT API and REST API. The device certification process requires the device to follow integration best practices. This means that more fields are mandatory for a certified device compared to platform minium requirements. The mandatory capabilities are described in section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). All more advanced capabilities are part of the section [Extended Capabilities](#extended-capabilities-for-vendor-device-certification-optional).
+This document provides guidance on which requirements a connector / agent needs to fulfill to be successfully certifyable using the Cumulocity IoT certification tool.
+The device certification process requires all connectors / agents that run on devices to follow standards and integration best practices. This means that more fields are mandatory for a certified device compared to platform minium requirements.
+The following section, [Device Registration](#device-registration), covers the registration processes for connectors / agents using either the MQTT API and REST API. The mandatory capabilities are described in section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). All advanced capabilities are part of the section [Extended Capabilities](#extended-capabilities-for-vendor-device-certification-optional).
 
 # Device Registration
 
-**Status: Reviewed and Ready**
 The chapter [Device Behavior](#device-behavior) describes how a connector / agent that runs on a device registers to Cumulocity IoT. It must send a mandatory minimum of information to be certifiable covered in the section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). 
 
 
@@ -43,7 +42,7 @@ Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the
 
 ## Certification of Devices and Aggregation as Products
 
-When a connector registers on Cumulocity IoT, it becomes a device listed in the "Device Management" tab. When using the self-certification tool, one certificate can be created for each combination of the connector (c8y_Agent), the Hardware (c8y_Hardware) and the Firmware (c8y_Firmware). If any of these values changes, a new device-certificate can be created. The Cumulocity IoT device certification API makes the certification information available for our [Device Partner Portal](#https://devicepartnerportal.softwareag.com/). Entries on the Device Partner Portal represent devices from a sales/user perspective - we call that a product. Products can only be segregated by their names. To link the product from the Device Partner Portal with the more granual differentiation of a device on Cumulocity IoT, we have incorporated this as manual step within the Cumulocity IoT certification tool. Device certificates therefore need to be clustered to products, so all the device certificates related to that product then be displayed under the same product on the Device Partner Portal (product to device relation is 1:n). 
+When a connector / agent registers on Cumulocity IoT, it becomes a device listed in the "Device Management" tab. When using the self-certification tool, one certificate can be created for each combination of the connector (c8y_Agent), the Hardware (c8y_Hardware) and the Firmware (c8y_Firmware). If any of these values changes, a new device-certificate can be created. The Cumulocity IoT device certification API makes the certification information available for our [Device Partner Portal](#https://devicepartnerportal.softwareag.com/). Entries on the Device Partner Portal represent devices from a sales/user perspective - we call that a product. Products can only be segregated by their names. To link the product from the Device Partner Portal with the more granual differentiation of a device on Cumulocity IoT, we have incorporated this as manual step within the Cumulocity IoT certification tool. Device certificates therefore need to be clustered to products, so all the device certificates related to that product then be displayed under the same product on the Device Partner Portal (product to device relation is 1:n). 
 
 
 
@@ -90,11 +89,14 @@ Information about one physical device is stored within multiple managed objects.
 }
 ```
 ## Agent Information
-The fragments `c8y_Agent` must be present in the device managed object stored in the inventory.
+The term “agent” refers to the piece of software that connects a device with Cumulocity IoT. This document provides guidance for integration developers to develop this agent. The fragments `c8y_Agent` must be sent to the inventory API to add it to the device managed object.
 
 ### c8y_Agent
 
-The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
+The device certificate will be issued for a device by the properties `c8y_Agent.name`, `c8y_Agent.version`,  `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, and `c8y_Firmware.version`. Developers of this agent are free to chose the name and version. 
+
+This is an example of an “agent” named “c8yMQTT”: https://github.com/SoftwareAG/c8yMQTT
+
 
 | Fragment  | Mandatory |
 | --------- | --------- |
@@ -434,7 +436,7 @@ This fragment is optional. If not present, the Extended Capabilities will not be
 
 | Fragment                  | Mandatory |
 | ------------------------- | --------- |
-| `c8y_SupportedOperations` | No        |
+| `c8y_SupportedOperations` | Yes, for devices that receive operations         |
 
 Example structure in the device managed object using the inventory API:
 
@@ -447,12 +449,12 @@ Example structure in the device managed object using the inventory API:
 
 ### com_cumulocity_model_Agent
 
-The fragment `com_cumulocity_model_Agent` is an empty fragment. It declares that the device is able to receive operations [Extended Capabilities](#extended-capabilities)).
+The fragment `com_cumulocity_model_Agent` is an empty fragment stored in the device managed object using the inventory endpoint. It declares that the device is able to receive operations [Extended Capabilities](#extended-capabilities)).
 This fragment is optional. If not present, the Extended Capabilities will not be certified.
 
 | Fragment                  | Mandatory |
 | ------------------------- | --------- |
-| `com_cumulocity_model_Agent` | No        |
+| `com_cumulocity_model_Agent` | Yes, for devices that receive operations        |
 
 Example structure in the device managed object using the inventory API:
 
@@ -1103,15 +1105,15 @@ Example structure in device managed object using the inventory API:
 "c8y_Position": {
     "lat": 51.211977,
     "lng": 6.15173,
-    "alt": 67,
+    "alt": 67
 }
 ```
 
-Whenever the location shell be updated, the device executes the following steps:
+Whenever the location shall be updated, the device executes the following steps:
 
 | Step | Action                                               | Documentation                                                                           |
 | ---- | ---------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| 1.   | Send a position update event                         | [Create event](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource)       |
+| 1.   | Send a an event of type "c8y_LocationUpdate" for the device that carries the new position in the fragment "c8y_Position"     | [Create event](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource)       |
 | 2.   | Update the c8y_Position fragment in device inventory | [Update managed object](https://cumulocity.com/api/10.10.0/#operation/putManagedObjectResource) |
 
 Example location update event:
@@ -1131,6 +1133,109 @@ Example location update event:
   },
 }
 ```
+
+## Network
+**Under Construction  - not to be followed yet**
+
+Device capability to either display or display and manage the WAN, Lan, and DHCP settings. Information is shown under tab 'Network' if the fragment 'c8y_Network' is present in the device managed object using the inventory API. For details and examples, compare [Network](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Network-management) section of the documentation.
+
+
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
+
+| Fragment                  | Content                                         | Required for extended capability |
+| ------------------------- | ----------------------------------------------- | ---------------------------- |
+| `com_cumulocity_model_Agent` | Enables a device to receive operations; Send to device manged object via inventory API;  | Yes                          |
+| `c8y_SupportedOperations` | List contains element `c8y_Network`; Send to device manged object via inventory API;  | Yes                          |
+| `c8y_Network`    | List of the properties c8y_ WAN, c8y_LAN, or c8y_DHCP; Send to device manged object via inventory API;           | Yes (at least 1 type)        |
+
+Example structure in device managed object using the inventory API
+
+```json5
+"c8y_SupportedOperations": [
+    "c8y_Network"
+]
+{
+"c8y_Network": {
+       "c8y_LAN": {
+           "netmask": "255.255.255.0",
+           "ip": "192.168.128.1",
+           "name": "br0",
+           "enabled": 1,
+           "mac": "00:60:64:dd:a5:c3"
+       },
+       "c8y_WAN": {
+           "password": "user-password",
+           "simStatus": "SIM OK",
+           "authType": "chap",
+           "apn": "example.apn.com",
+           "username": "test"
+       },
+       "c8y_DHCP": {
+           "dns2": "1.1.1.1",
+           "dns1": "8.8.8.8",
+           "domainName": "my.domain",
+           "addressRange": {
+               "start": "192.168.128.100",
+               "end": "192.168.128.199"
+           },
+           "enabled": 1
+       }
+   }
+}
+
+```
+
+Example operation `c8y_Network` to update the LAN information as it is sent from Cumulocity IoT to the device:
+```json5
+"c8y_Network": {
+       "c8y_LAN": {
+           "netmask": "255.255.255.0",
+           "ip": "192.168.128.1",
+           "enabled": 1
+       }
+   }
+
+```
+
+Example operation `c8y_Network` to update the DHCP information as it is sent from Cumulocity IoT to the device:
+```json5
+"c8y_Network": {
+       "c8y_DHCP": {
+           "dns2": "1.1.1.1",
+           "dns1": "8.8.8.8",
+           "domainName": "my.domain",
+           "addressRange": {
+               "start": "192.168.128.100",
+               "end": "192.168.128.199"
+           },
+           "enabled": 1
+       }
+   }
+
+```
+
+Example operation `c8y_Network` to update the WAN information as it is sent from Cumulocity IoT to the device:
+```json5
+"c8y_Network": {
+       "c8y_WAN": {
+           "password": "user-password",
+           "authType": "chap",
+           "apn": "example.apn.com",
+           "username": "ee"
+       },
+   }
+
+```
+
+When the device receives the operation `c8y_Network`, the following steps are executed:
+
+| Step | Action                                                                                                                                  | Documentation                                                                         |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                    | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
+| 1.   | Update operation `"status" : "EXECUTING"`                                                                                               | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
+| 2.   | Apply WAN, LAN, or DHCP configuration   |                         |
+| 3.   | Set new network configuration status the device managed object                                                                                  |                                        |
+| 4.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |                                                                                      |
 
 ## Currently Testable Device Capabilities of Self-Service Certification Microservice
 - [x] Foundation Capabilities 
@@ -1154,16 +1259,18 @@ Example location update event:
     - [X] Child Device Types
   - [X] Log File Retrieval
   - [ ] Device Configuration
-    - [ ] Text Based Configuration
-    - [ ] File Based Configuration
+    - [x] Text Based Configuration
+    - [x] File Based Configuration
   - [X] Managing Device Software
   - [X] Managing Device Firmware
-  - [ ] Device Profile
+  - [x] Device Profile
   - [X] Restart
   - [ ] Measurement Request
-  - [ ] Shell
+  - [x] Shell
   - [ ] Cloud Remote Access
   - [x] Location & Tracking
+  - [ ] Mobile
+  - [ ] Network
 
 
 ##MD file change Log
@@ -1182,13 +1289,5 @@ Example location update event:
 | 01/11/2021 | Inserted more precise formulation for info stored on the managed object using inventory API; Updated Currently Testable Device Capabilities  | minor   |
 | 01/11/2021 | Text Based Configuration: The mandatory flag of the Supported Operation "c8y_SendConfiguration" was changed from "Yes" to "No"  | major   |
 | 03/11/2021 | Text Based Configuration: Inserted step 3 - update "c8y_Configuration" in inventory to relect current device configuration   | major   |
-
-=======
-# Vendor Device Certification Requirements
-
-The device certification process requires the device to follow integration best practices.
-This means that more fields are mandatory for a certified device compared to platform minium requirements.
-In the following section, mandatory information and behavior is described.
-
 
 
