@@ -2,11 +2,11 @@
 
 This document provides guidance on which requirements a connector / agent needs to fulfill to be successfully certifyable using the Cumulocity IoT certification tool.
 The device certification process requires all connectors / agents that run on devices to follow standards and integration best practices. This means that more fields are mandatory for a certified device compared to platform minium requirements.
-The following section, [Device Registration](#device-registration), covers the registration processes for connectors / agents using either the MQTT API and REST API. The mandatory capabilities are described in section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). All advanced capabilities are part of the section [Extended Capabilities](#extended-capabilities-for-vendor-device-certification-optional).
+The following section, *[Device Registration](#device-registration)*, covers the registration processes for connectors / agents using either the MQTT API and REST API. The mandatory capabilities are described in section *[Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory)*. All advanced capabilities are part of the section *[Extended Capabilities](#extended-capabilities-for-vendor-device-certification-optional)*.
 
 # Device Registration
 
-The chapter [Device Behavior](#device-behavior) describes how a connector / agent that runs on a device registers to Cumulocity IoT. It must send a mandatory minimum of information to be certifiable covered in the section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). 
+The chapter *[Device Behavior](#device-behavior)* describes how a connector / agent that runs on a device registers to Cumulocity IoT. It must send a mandatory minimum of information to be certifiable covered in the section *[Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory)*. 
 
 
 ## Device Behavior
@@ -15,15 +15,15 @@ When  started, the device follows the process flow defines for REST or MQTT base
 
 **Please read and follow one of these guides:**
 
-For [REST based integrations](https://cumulocity.com/guides/device-sdk/rest/#device-integration):
+For *[REST based integrations](https://cumulocity.com/guides/device-sdk/rest/#device-integration)*:
 ![Startup REST based](https://cumulocity.com/guides/images/rest/startupphase.png)
 
-For [MQTT based integrations](https://cumulocity.com/guides/device-sdk/mqtt/#device-integration) (using Smart-Rest 2 is recommended):
+For *[MQTT based integrations](https://cumulocity.com/guides/device-sdk/mqtt/#device-integration)* (using Smart-Rest 2 is recommended):
 ![Startup MQTT based](https://cumulocity.com/guides/images/mqtt/mqttDeviceIntegration.png)
 
 **Cypehr Suits:**
 
-Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the following cypher suits from release [Release 10.10](https://cumulocity.com/guides/releasenotes/release-10-9-0/announcements-10-9-0/):
+Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the following cypher suits from release *[Release 10.10](https://cumulocity.com/guides/releasenotes/release-10-9-0/announcements-10-9-0/)*:
 
 * rsa_pkcs1_sha256
 * dsa_sha256
@@ -163,7 +163,7 @@ Example structure in device managed object using the inventory API:
 
 ### c8y_RequiredAvailability
 
-Minimal communication interval to determine if device is offline. For details and examples, compare [device availability](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-availability) section of the documentation.
+Minimal communication interval to determine if device is offline. For details and examples, compare *[device availability](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-availability)* section of the documentation.
 
 | Fragment           | Mandatory |
 | ------------------ | --------- |
@@ -226,7 +226,7 @@ Example structure in device managed object using the inventory API:
 
 The External ID is displayed by the UI in the tab "Identity". The fragments `externalId` and `type` must be present in the managed object of the device using the identity API. NOTE: The externalID is not stored in the device managed object using the inventory API.
 
-For details and examples, compare [external id](https://cumulocity.com/api/10.10.0/#operation/postExternalIDCollectionResource) section of the documentation.
+For details and examples, compare *[external id](https://cumulocity.com/api/10.10.0/#operation/postExternalIDCollectionResource)* section of the documentation.
 
 Used to identify the device in Cumulocity by its unique serial number, MAC, IMEI or similar unique identification string. If you don't want to specify a type, its recommend to use `c8y_Serial`.
 
@@ -255,7 +255,7 @@ It is only mandatory to send either measurements, or events, or alarms in order 
 
 ### Measurements
 
-For details and examples, compare [measurements](https://cumulocity.com/api/10.10.0/#operation/postMeasurementCollectionResource) section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
+For details and examples, compare *[measurements](https://cumulocity.com/api/10.10.0/#operation/postMeasurementCollectionResource)* section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
 
 The device creates measurements with the following content:
 | Fragment                    | Content                                                                                                    | Mandatory for Measurements |
@@ -289,7 +289,7 @@ Example POST body:
 ```
 
 The _Measurement Fragment_ and _Measurement Fragment Series_ are used in the Cumulocity IoT UI in the following way:
-![Measurement Fragment and Series in UI](./media/measurement-fragmentand-series-in-ui.png)
+*[Measurement Fragment and Series in UI](./media/measurement-fragmentand-series-in-ui.png)*
 
 
 The following _Measurement Fragments_ are standard measurement fragments in Cumulocity IoT:
@@ -297,7 +297,7 @@ The following _Measurement Fragments_ are standard measurement fragments in Cumu
 
 ### Events
 
-For details and examples, compare [events](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource) section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
+For details and examples, compare *[events](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource)* section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
 
 The device creates events with the following content:
 | Fragment | Content                                  | Mandatory for Events |
@@ -322,7 +322,7 @@ Example POST body:
 
 ### Alarms
 
-For details and examples, compare [alarms](https://cumulocity.com/api/10.10.0/#operation/postAlarmCollectionResource) section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
+For details and examples, compare *[alarms](https://cumulocity.com/api/10.10.0/#operation/postAlarmCollectionResource)* section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
 
 The device creates alarms with the following content:
 | Fragment   | Content                                                                                                                                                | Mandatory for Alarms |
@@ -353,7 +353,7 @@ Example POST body:
 
 The device certification process requires the device to follow integration best practices.
 This means that more fields are mandatory for a certified device compared to platform minium requirements. 
-In this section Extended Capabilities and expected device behaviour are described. The Extended Capabilities require the [Foundation Capabilities for Vendor Device Certification (mandatory)](#foundation-capabilities-for-vendor-device-certification-mandatory)
+In this section Extended Capabilities and expected device behaviour are described. The Extended Capabilities require the *[Foundation Capabilities for Vendor Device Certification (mandatory)](#foundation-capabilities-for-vendor-device-certification-mandatory)*
 
 All sections below are **optional**. If a device partner decides to certify Extended Capabilities, they are documented in the certificate and shown on the device partner portal.
 Customer can filter and search for devices that support certain capabilities. Therefore, it is recommended to certify all capabilities (aka. "Extended Capabilities") offered by the device.
@@ -375,6 +375,8 @@ To indicate that a device wants to certify an Extended Capabilities, it has to a
 | [Shell](#shell) | Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. | is an Extended Capability |
 | [Cloud Remote Access](#cloud-remote-access) | Device capability to initiate a remote connection via VNC or SSH. | is an Extended Capability |
 | [Location & Tracking](#location-tracking) | Device capability to display and update location information. | is an Extended Capability |
+| [Network](#network) | Device capability to display and update network information. | is an Extended Capability |
+
 
 
 
@@ -657,13 +659,6 @@ Example structure in device managed object using the inventory API:
     ]
 ```
 
-Example operation sent to the device for `c8y_DownloadConfigFile`:
-
-```json5
-"c8y_DownloadConfigFile": {
-    "url": "<download url>"
-}
-```
 
 When the device receives the operation `c8y_DownloadConfigFile`, the following steps are executed:
 
@@ -674,10 +669,12 @@ When the device receives the operation `c8y_DownloadConfigFile`, the following s
 | 2.   | Download referenced binary and internally apply configuration        |                                                                                       |
 | 3.   | Update operation `"status": "SUCCESSFUL"`                            | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 
-Example operation sent to the device for `c8y_UploadConfigFile`:
+Example operation sent to the device for `c8y_DownloadConfigFile`:
 
 ```json5
-"c8y_UploadConfigFile":{}
+"c8y_DownloadConfigFile": {
+    "url": "<download url>"
+}
 ```
 
 When the device receives the operation `c8y_UploadConfigFile`, the following steps are executed:
@@ -690,6 +687,19 @@ When the device receives the operation `c8y_UploadConfigFile`, the following ste
 | 3.   | Create an event with the same `type` e.g. `"type": "someConfig"`                                                        | [Create event](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource)     |
 | 4.   | Upload the configuration as attachment to the event                                                                     | [Attach file to event](https://cumulocity.com/api/10.10.0/#operation/postEventBinaryResource) |
 | 5.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                   | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
+
+Example operation sent to the device for `c8y_UploadConfigFile`:
+
+```json5
+    "creationTime": "2021-12-22T16:29:31.791Z",
+    "deviceId": "5081547",
+    "deviceName": "config test",
+    "self": "https://t635974191.eu-latest.cumulocity.com/devicecontrol/operations/6670102",
+    "id": "6670102",
+    "status": "PENDING",
+    "description": "Retrieve configuration snapshot from device config test",
+    "c8y_UploadConfigFile": {}
+```
 
 ## Software Management
 
