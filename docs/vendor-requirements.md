@@ -21,7 +21,7 @@ For *[REST based integrations](https://cumulocity.com/guides/device-sdk/rest/#de
 For *[MQTT based integrations](https://cumulocity.com/guides/device-sdk/mqtt/#device-integration)* (using Smart-Rest 2 is recommended):
 ![Startup MQTT based](https://cumulocity.com/guides/images/mqtt/mqttDeviceIntegration.png)
 
-[MQTT Cheat Sheet](https://github.com/SoftwareAG/cumulocity-self-service-certification/blob/main/docs/cheatSheet.md)
+[MQTT Quick Reference](https://cumulocity.com/guides/device-sdk/mqtt/#quick-reference)
 
 ## Certificates
 
