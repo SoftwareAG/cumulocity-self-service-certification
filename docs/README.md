@@ -2,8 +2,8 @@
 
 1. [Endpoints](./endpoints.md)
 2. [Information Model](./information-model.md)
-4. [Vendor Requirements](./vendor-requirements.md)
-
+3. [Vendor Requirements](./vendor-requirements.md)
+4. [Cheat Sheet](./cheatSheet.md)
 
 ## Diagrams & Graphics
 
