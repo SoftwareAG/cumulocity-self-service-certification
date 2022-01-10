@@ -21,6 +21,10 @@ For *[REST based integrations](https://cumulocity.com/guides/device-sdk/rest/#de
 For *[MQTT based integrations](https://cumulocity.com/guides/device-sdk/mqtt/#device-integration)* (using Smart-Rest 2 is recommended):
 ![Startup MQTT based](https://cumulocity.com/guides/images/mqtt/mqttDeviceIntegration.png)
 
+[MQTT Cheat Sheet](https://github.com/SoftwareAG/cumulocity-self-service-certification/blob/main/docs/cheatSheet.md)
+
+## Certificates
+
 **Cypehr Suits:**
 
 Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the following cypher suits from release *[Release 10.10](https://cumulocity.com/guides/releasenotes/release-10-9-0/announcements-10-9-0/)*:
@@ -89,7 +93,7 @@ Information about one physical device is stored within multiple managed objects.
 }
 ```
 ## Agent Information
-The term “agent” refers to the piece of software that connects a device with Cumulocity IoT. This document provides guidance for integration developers to develop this agent. The fragments `c8y_Agent` must be sent to the inventory API to add it to the device managed object.
+The term “agent” refers to the piece of software that connects a device with Cumulocity IoT. This document provides guidance for integration developers to develop this agent. The fragments `c8y_Agent` must be sent to the inventory API to add it to the device managed object. For details and examples, compare *[What is an agent?](https://cumulocity.com/guides/concepts/interfacing-devices/#agents)* section of the documentation.
 
 ### c8y_Agent
 
