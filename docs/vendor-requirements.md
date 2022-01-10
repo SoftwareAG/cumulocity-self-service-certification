@@ -22,6 +22,7 @@ For *[MQTT based integrations](https://cumulocity.com/guides/device-sdk/mqtt/#de
 ![Startup MQTT based](https://cumulocity.com/guides/images/mqtt/mqttDeviceIntegration.png)
 
 [MQTT Quick Reference](https://cumulocity.com/guides/device-sdk/mqtt/#quick-reference)
+[MQTT Static Templates](https://cumulocity.com/guides/device-sdk/mqtt/#templates-quick-reference)
 
 ## Certificates
 
