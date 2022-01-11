@@ -367,10 +367,12 @@ The device certification process requires the device to follow integration best 
 This means that more fields are mandatory for a certified device compared to platform minium requirements. 
 In this section Extended Capabilities and expected device behaviour are described. The Extended Capabilities require the *[Foundation Capabilities for Vendor Device Certification (mandatory)](#foundation-capabilities-for-vendor-device-certification-mandatory)*
 
-All sections below are **optional**. If a device partner decides to certify Extended Capabilities, they are documented in the certificate and shown on the device partner portal.
+All sections below are **optional**. If a device partner decides to certify Extended Capabilities, they are documented in the certificate and publicly displayed on the Device Partner Portal.
 Customer can filter and search for devices that support certain capabilities. Therefore, it is recommended to certify all capabilities (aka. "Extended Capabilities") offered by the device.
 The capabilities are listed below in descending order of importance based on Software AG's experience.
-To indicate that a device wants to certify an Extended Capabilities, it has to add the respective element to the list of supported operations in the inventory object of the device. All Extended Capabilities that receive operations require the fragment  `com_cumulocity_model_Agent` to be present in the device managed object in the inventory as.
+To indicate that a device wants to certify an Extended Capabilities, it has to add the respective element to the list of supported operations in the inventory object of the device. All Extended Capabilities that receive operations require the fragment  `com_cumulocity_model_Agent` to be present in the device managed object in the inventory as. 
+
+NOTE: Before using the Self-Certification Tool please make sure all operations were successfully executed by the agent. The tool does not trigger any operations but checks the audit log of Cumulocity IoT.
 
 | Fragment / Extended Capability                        | Content                                    | Required for extended capability |
 | ------------------------------- | ------------------------------------------ | ---------------------------- |
