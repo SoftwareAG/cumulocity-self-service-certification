@@ -1,11 +1,13 @@
 ## Cumulocity MQTT Cheat Sheet 
 Topics
 
-  : PUBLISH s/us
+: PUBLISH s/us
    `Send built-in message`
-  : PUBLISH s/us/5678
+
+: PUBLISH s/us/5678
    `Send built-in message to child "5678"`
-  : PUBLISH s/ud
+
+: PUBLISH s/ud
    `Send message using default template (myDevice_10)`
   : PUBLISH s/ud/5678
    `Same as above, but to child "5678"`
