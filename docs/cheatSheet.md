@@ -1,26 +1,26 @@
 ## Cumulocity MQTT Cheat Sheet 
 Topics
 
-: PUBLISH s/us
- `Send built-in message`
-: PUBLISH s/us/5678
- `Send built-in message to child "5678"`
-: PUBLISH s/ud
- `Send message using default template (myDevice_10)`
-: PUBLISH s/ud/5678
- `Same as above, but to child "5678"`
-: PUBLISH s/uc/myCommon_10
- `Send message using myCommon_10 template`
-: PUBLISH s/uc/myCommon_10/5678
- `Same as above, but to child "5678"`
-: SUBSCRIBE s/ds
- `Receive built-in commands`
-: SUBSCRIBE s/dd
- `Receive commands using default template (myDevice_10)`
-: SUBSCRIBE s/dc/myCommon_10
- `Receive commands using myCommon_10 template`
-: SUBSCRIBE s/e
- `Receive error messages`
+  : PUBLISH s/us
+   `Send built-in message`
+  : PUBLISH s/us/5678
+   `Send built-in message to child "5678"`
+  : PUBLISH s/ud
+   `Send message using default template (myDevice_10)`
+  : PUBLISH s/ud/5678
+   `Same as above, but to child "5678"`
+  : PUBLISH s/uc/myCommon_10
+   `Send message using myCommon_10 template`
+  : PUBLISH s/uc/myCommon_10/5678
+   `Same as above, but to child "5678"`
+  : SUBSCRIBE s/ds
+   `Receive built-in commands`
+  : SUBSCRIBE s/dd
+   `Receive commands using default template (myDevice_10)`
+  : SUBSCRIBE s/dc/myCommon_10
+   `Receive commands using myCommon_10 template`
+  : SUBSCRIBE s/e
+   `Receive error messages`
 
 Connection
 : CONNECT 1234:myDevice_10 acme/device_1234
