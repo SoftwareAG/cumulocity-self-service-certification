@@ -66,7 +66,7 @@ PUBLISH s/ut/myCommon_10
 **Inventory**  
 &emsp; `100,createdDeviceName,deviceType`  
 &emsp; `101,createdChildId,childName,childType`  
-&emsp; `105 (Get children, reply: 106,child1,child2,…)`  
+&emsp; [`105 (Get children, reply: 106,child1,child2,…)`  ](https://cumulocity.com/guides/10.6.6/device-sdk/mqtt/#a-name105get-child-devices-105a)  
 &emsp; `107,fragmenttoBeUninstalled1,fragment2,…`  
 &emsp; `110,serialNumber,hardwareModel,revision`  
 &emsp; `111,IMEI,ICCID,IMSI,MCC,MNC,LAC,cellId`  
