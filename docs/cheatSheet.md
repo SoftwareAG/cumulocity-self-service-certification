@@ -85,7 +85,7 @@ PUBLISH s/ut/myCommon_10
 &emsp; `200,fragment,series,value,unit[,time]`  
 &emsp; `210,rssi,ber[,time]`  
 &emsp; `211,temperature[,time]`  
-&emsp; `212,battery[,time]&emsp; `  
+&emsp; `212,battery[,time]`  
 
 **Events**  
 &emsp; `400,eventType,text[,time]`  
