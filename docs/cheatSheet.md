@@ -1,5 +1,5 @@
 ## Cumulocity MQTT Cheat Sheet 
-**Topics**  
+[**Topics**](https://cumulocity.com/guides/device-sdk/mqtt/#topics)  
 PUBLISH s/us  
 &emsp;  `Send built-in message`  
 PUBLISH s/us/5678  
@@ -21,11 +21,11 @@ SUBSCRIBE s/dc/myCommon_10
 SUBSCRIBE s/e  
 &emsp; `Receive error messages`  
 
-**Connection**  
-CONNECT 1234:myDevice_10 acme/device_1234  
-&emsp; `Connect device with serial "1234" and default template "myDevice_10" to tenant "acme" and user "device_1234". `  
+[**Connection**](https://cumulocity.com/guides/device-sdk/mqtt/#connection)  
+&emsp; `CONNECT 1234:myDevice_10 acme/device_1234`  
+Connect device with serial "1234" and default template "myDevice_10" to tenant "acme" and user "device_1234".   
 
-**Topic format**  
+[**Topic format**](https://cumulocity.com/guides/device-sdk/mqtt/#topic-format)  
 &emsp; `<protocol>/<direction><type>[/<template>][/<child id>]`  
 **protocol**  
 &emsp; `s = standard`  
@@ -45,7 +45,7 @@ CONNECT 1234:myDevice_10 acme/device_1234
 **child id**  
 &emsp; `managed object id of the child device`  
 
-**Device registration**  
+[**Device registration**](https://cumulocity.com/guides/device-sdk/mqtt/#device-registration)  
 1. order to register a device  
 2. start device registration on the tenant  
 3. `CONNECT 1234 management/deviceboostrap` using botstrap credentials  
@@ -57,7 +57,7 @@ CONNECT 1234:myDevice_10 acme/device_1234
 9. Response  
 10. `70,tenant,username,password`  
 
-**Template registration**  
+[**Template registration**](https://cumulocity.com/guides/device-sdk/mqtt/#template-registration)  
 PUBLISH s/ut/myCommon_10  
 &emsp; `10,999,POST,MEASUREMENT,,c8y_MyMeasurement,,c8y_MyMeasurement.M.value,NUMBER, …`  
 &emsp; `10,msgId,api,method,response,type,time,custom1.path,custom1.type,custom1.value`  
@@ -152,7 +152,7 @@ PUBLISH s/ut/myCommon_10
 
 
 ### JSON via MQTT Cheat Sheet
-**Topics**  
+[**Topics**](https://cumulocity.com/guides/device-sdk/mqtt/#json)  
 PUBLISH event/events/create  
 &emsp; `create an event message`  
 PUBLISH event/events/createBulk  
@@ -184,7 +184,7 @@ SUBSCRIBE error
 SUBSCRIBE notification/operations  
 &emsp; `Receive notifications of newly created operations`  
 
-**Topics structure**  
+[**Topics structure**](https://cumulocity.com/guides/device-sdk/mqtt/#topic-structure)  
 To publish messages  
 &emsp; `<api>/<resource>/<action>/<id>`  
 To publish messages in transient mode:  
