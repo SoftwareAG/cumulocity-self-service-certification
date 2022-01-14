@@ -537,7 +537,7 @@ Example structure in device managed object using the inventory API:
 ]
 ```
 
-Example operation sent to the device:
+Example operation `c8y_LogfileRequest` as it is sent to the device:
 
 ```json5
 "c8y_LogfileRequest": {
@@ -576,6 +576,7 @@ Example operation after the URL was added by the device:
 }
 ```
 NOTE: On REST the entire fragment `c8y_LogfileRequest` in the operation must be repeated because top level fragments can only be replaced completely. In-place editing of fragments isn't possible with Cumulocity IoT REST API.
+
 
 ## Device Configuration
 
