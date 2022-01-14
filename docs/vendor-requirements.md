@@ -575,7 +575,7 @@ Example operation after the URL was added by the device:
    }
 }
 ```
-NOTE: On REST the entire fragment must be repeated because top level fragments can only be replaced completely. In-place editing of fragments isn't possible with Cumulocity IoT REST API.
+NOTE: On REST the entire fragment `c8y_LogfileRequest` in the operation must be repeated because top level fragments can only be replaced completely. In-place editing of fragments isn't possible with Cumulocity IoT REST API.
 
 ## Device Configuration
 
