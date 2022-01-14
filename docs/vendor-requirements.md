@@ -558,7 +558,24 @@ When the device receives the operation `c8y_LogfileRequest`, the following steps
 | 2.   | Internally retrieve log file and filter w.r.t. criteria found in operation                                                                 |                                                                                       |
 | 3.   | Create an event with `"type": "c8y_LogfileRequest"`                                                                                        | [Create event](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource)     |
 | 4.   | Upload the log file as attachment to the event                                                                                             | [Attach file to event](https://cumulocity.com/api/10.10.0/#operation/postEventBinaryResource) |
-| 5.   | Update operation accordingly `"status": "SUCCESSFUL", "c8y_LogfileRequest": {"file": "https://<TENANT_DOMAIN>/event/events/{id}/binaries"` | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
+| 5.   | Update operation accordingly by adding the URL of the log file `"status": "SUCCESSFUL", "c8y_LogfileRequest": {"file": "https://<TENANT_DOMAIN>/event/events/{id}/binaries"}` | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
+
+Example operation after the URL was added by the device:
+
+```json5
+{
+   "status": "SUCCESSFUL",
+   "c8y_LogfileRequest": {
+       "searchText": "kernel",
+       "logFile": "syslog",
+       "dateTo": "2021-09-22T11:40:27+0200",
+       "dateFrom": "2021-09-21T11:40:27+0200",
+       "maximumLines": 1000,
+       "file": "https://demos.cumulocity.com/event/events/157700/binaries"
+   }
+}
+```
+NOTE: On REST the entire fragment must be repeated because top level fragments can only be replaced completely. In-place editing of fragments isn't possible with Cumulocity IoT REST API.
 
 ## Device Configuration
 
@@ -1020,8 +1037,8 @@ When the device receives the operation `c8y_Command`, the following steps are ex
 | ---- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | 0.   | Listen for operation created by platform with `"status" : "PENDING"`                     | [Real-time notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
-| 2.   | Locally execute the command and add the result to the operation in the fragment `result` | [Miscellaneaous/Shell Documentation](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Miscellaneous)        |
-| 3.   | Update operation `"status": "SUCCESSFUL"`                                                | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
+| 2.   | Locally execute the command and | [Miscellaneaous/Shell Documentation](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Miscellaneous)        |
+| 3.   | Update operation `"status": "SUCCESSFUL"`  add the result to the operation in the fragment `result`      | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 
 Example operation after it has been executed and fragment `result` has been added to `c8y_Command`:
 
@@ -1031,6 +1048,8 @@ Example operation after it has been executed and fragment `result` has been adde
     "result": "123456"
 }
 ```
+
+NOTE: On REST the entire fragment must be repeated because top level fragments can only be replaced completely. In-place editing of fragments isn't possible with Cumulocity IoT REST API.
 
 ## Cloud Remote Access
 
@@ -1269,7 +1288,7 @@ When the device receives the operation `c8y_Network`, the following steps are ex
   - [X] Child Device Management
     - [X] Child Device Types
   - [X] Logfile Retrieval
-  - [ ] Device Configuration
+  - [X] Device Configuration
     - [x] Text Based Configuration
     - [x] File Based Configuration
   - [X] Managing Device Software
@@ -1281,7 +1300,7 @@ When the device receives the operation `c8y_Network`, the following steps are ex
   - [ ] Cloud Remote Access
   - [x] Location & Tracking
   - [ ] Mobile
-  - [ ] Network
+  - [X] Network
 
 
 ##MD file change Log
@@ -1300,5 +1319,4 @@ When the device receives the operation `c8y_Network`, the following steps are ex
 | 01/11/2021 | Inserted more precise formulation for info stored on the managed object using inventory API; Updated Currently Testable Device Capabilities  | minor   |
 | 01/11/2021 | Text Based Configuration: The mandatory flag of the Supported Operation "c8y_SendConfiguration" was changed from "Yes" to "No"  | major   |
 | 03/11/2021 | Text Based Configuration: Inserted step 3 - update "c8y_Configuration" in inventory to relect current device configuration   | major   |
-
-
+| 14/01/2021 | Many small adjustments; Updated currently testable capabilites  | medium   |
