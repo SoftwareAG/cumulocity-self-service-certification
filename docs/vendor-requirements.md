@@ -640,8 +640,9 @@ When the device receives the operation `c8y_Configuration`, the following steps 
 
 
 It is also recommended to upload the device configuration after every change. If the volume of data transfer from the device is limited, the configuration can be uploaded on demand. The configuration upload can be triggerd from the UI, if the connector supports the operation `c8y_SendConfiguration`. 
+NOTE: On REST the entire fragment `c8y_Configuration` in the managed obejct accessible via the inventory API must be repeated, because top level fragments can only be replaced completely. In-place editing of fragments isn't possible with Cumulocity IoT REST API.
 
-BE AWARE: If the configuration upload is only triggered thorugh the UI and there is no automated upload, please consider the case, that of a user forgets to trigger the upload mechanism before sending a new configuration to the device. 
+NOTE: If the configuration upload is only triggered thorugh the UI and there is no automated upload, please consider the case, that of a user forgets to trigger the upload mechanism before sending a new configuration to the device. 
 
 Example operation `c8y_SendConfiguration: {}` as it is sent to the device from Cumulocity IoT:
 
@@ -1268,6 +1269,9 @@ When the device receives the operation `c8y_Network`, the following steps are ex
 | 2.   | Apply WAN, LAN, or DHCP configuration   |                         |
 | 3.   | Set new network configuration status the device managed object                                                                                  |                                        |
 | 4.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update operation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |                                                                                      |
+
+NOTE: On REST the entire fragment `c8y_Netowkr` in the managed obejct accessible via the inventory API must be repeated, because top level fragments can only be replaced completely. In-place editing of fragments isn't possible with Cumulocity IoT REST API.
+
 
 ## Currently Testable Device Capabilities of Self-Service Certification Microservice
 - [x] Foundation Capabilities 
