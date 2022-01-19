@@ -106,15 +106,19 @@ This endpoint will generate a test_certificate from test_run ID
 GET `{{baseUrl}}/service/gateway-certification/test_certificate/{testRunID}?t={tenantID}`
 
 This endpoint will delete a Testcertificate Managed Object
+
 DELETE `{{baseUrl}}/inventory/managedObjects/{{test_run_id}}` **planned for release 2.0**
 
 The endpoint will delete a Testcertificate PDF
+
 DELETE `{{baseUrl}}/inventory/` **planned for release 2.0**
 
 This endpoint will Revoke a Testcertificates
+
 POST `{{baseUrl}}/inventory/managedObjects/{{test_run_id}}` **planned for release 2.0**
 
 This endpoint will expiry a Testcertificates
+
 POST `{{baseUrl}}/inventory/managedObjects/{{test_run_id}}` **planned for release 2.0**
 
 ---
