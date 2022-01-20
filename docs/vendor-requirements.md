@@ -99,7 +99,7 @@ Information about one physical device is stored within multiple managed objects.
 }
 ```
 ## Agent Information
-The term “agent” refers to the piece of software that connects a device with Cumulocity IoT. This document provides guidance for integration developers to develop this agent. The fragments `c8y_Agent` must be sent to the inventory API to add it to the device managed object. For details and examples, compare *[What is an agent? Cumulocity IoT Documentation](https://cumulocity.com/guides/concepts/interfacing-devices/#agents)* section of the documentation.
+The term “agent” refers to the piece of software that connects a device with Cumulocity IoT. This document provides guidance for integration developers to develop this agent. The fragments `c8y_Agent` must be sent to the inventory API to add it to the device managed object. For details and examples, compare *[What is an agent? Cumulocity IoT Documentation](https://cumulocity.com/guides/concepts/interfacing-devices/#agents)*.
 
 ### c8y_Agent
 
@@ -173,7 +173,7 @@ Example structure in device managed object using the inventory API:
 
 ### c8y_RequiredAvailability
 
-Minimal communication interval to determine if device is offline. For details and examples, compare *[Device Availability Cumulocity IoT Documentation](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-availability)* section of the documentation.
+Minimal communication interval to determine if device is offline. For details and examples, compare *[Device Availability Cumulocity IoT Documentation](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-availability)*.
 
 | Fragment           | Mandatory |
 | ------------------ | --------- |
