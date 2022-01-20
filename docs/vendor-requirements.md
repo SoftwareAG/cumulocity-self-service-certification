@@ -345,7 +345,7 @@ The device creates alarms with the following content:
 | `time`     | Date and time when the alarm was created                                                                                                               | Yes       |
 | `text`     | Description of the alarm                                                                                                                               | Yes       |
 | `severity` | One of the following severities: `CRITICAL`, `MAJOR`, `MINOR`, `WARNING`                                                                               | Yes       |
-| `status`   | `ACTIVE` or `CLEARED`. If not specified, a new alarm will be created as `ACTIVE`. The state `ACKNOWLEDGED` is only set by the user, not by the device. | No        |
+| `status`   | `ACTIVE` or `CLEARED`. If not specified, a new alarm will be created as `ACTIVE`. The state `ACKNOWLEDGED` is only set by the user, not by the device. The state `CLEARED` is set by the device if the problem is gone and it can be set manually by a user in the platform | No        |
 
 Example POST body:
 
