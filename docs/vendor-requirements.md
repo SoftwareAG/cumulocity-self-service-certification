@@ -58,7 +58,7 @@ When a connector / agent registers on Cumulocity IoT, it becomes a device listed
 
 # Foundation Capabilities for Vendor Device Certification (mandatory)
 
-For details and examples, compare [Metadata Cumulocity IoT Documentation](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Metadata)as well as the detail sections below.
+For details and examples, compare [Metadata Cumulocity IoT Documentation](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Metadata) as well as the detail sections below.
 
 | Fragment                     | Description                                                                         | Mandatory                                                                                                                                                   |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -105,7 +105,7 @@ The term “agent” refers to the piece of software that connects a device with
 
 The device certificate will be issued for a device by the properties `c8y_Agent.name`, `c8y_Agent.version`,  `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, and `c8y_Firmware.version`. Developers of this agent are free to chose the name and version. 
 
-This is an [example of an “agent” named “c8yMQTT”](https://github.com/SoftwareAG/c8yMQTT)
+[Example of an “agent” named “c8yMQTT”](https://github.com/SoftwareAG/c8yMQTT).
 
 
 | Fragment  | Mandatory |
