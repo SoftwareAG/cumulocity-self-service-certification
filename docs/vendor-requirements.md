@@ -1175,11 +1175,26 @@ Device capability to either display or display and manage the WAN, Lan, and DHCP
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
-| Fragment                  | Content                                         | Required for extended capability |
+| Fragment / Property                 | Content                                         | Required for extended capability |
 | ------------------------- | ----------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Enables a device to receive operations; Send to device manged object via inventory API;  | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Network`; Send to device manged object via inventory API;  | Yes                          |
-| `c8y_Network`    | List of the properties c8y_ WAN, c8y_LAN, or c8y_DHCP; Send to device manged object via inventory API;           | Yes (at least 1 type)        |
+| `c8y_Network`    | List of the properties `c8y_WAN`, `c8y_LAN`, or `c8y_DHCP`; Send to device manged object via inventory API;           | Yes        |
+
+### Display Network Settings
+
+The device can displays any network setting, all properties are optional. 
+
+| Fragment / Property                 | Content                                         | Required for extended capability |
+| ------------------------- | ----------------------------------------------- | ---------------------------- |
+| `c8y_Network.c8y_WAN`    | Lists the properties  `password`, `simStatus`, `authType`, `apn`, `username`     | No     |
+| `c8y_Network.c8y_WAN.password`    | Password (String)   | No    |
+| `c8y_Network.c8y_WAN.simStatus`    | simStatus (String)    | No    |
+| `c8y_Network.c8y_WAN.authType`    | authType (String)    | No     |
+| `c8y_Network.c8y_WAN.apn`    | apn (String)      | No     |
+| `c8y_Network.c8y_WAN.username`    |  username (String)   | No     |
+| `c8y_Network.c8y_LAN`    |  Lists the properties `netmask`, `ip`, `name`, `enabled`, `mac`     | Yes, if c8y_Wan and c8y_DHCP are not present     |
+| `c8y_Network.c8y_DHCP`    |  Lists the properties  `dns2`, `dns1`, `domainName`, `addressRange.start`,  `addressRange.end`, `enabled`,      | Yes, if c8y_Wan and c8y_Lan are not present      |
 
 Example structure in device managed object using the inventory API
 
