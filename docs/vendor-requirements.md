@@ -1100,11 +1100,19 @@ Example structure in device managed object using the inventory API
 Example operation sent to the device for `c8y_RemoteAccessConnect`:
 
 ```json5
-"c8y_RemoteAccessConnect": {
-    "hostname": "10.0.0.67", // Endpoint on local network to connect to
-    "port": 5900, // Port to be used on local network endpoint
-    "connectionKey": "eb5e9d13-1caa-486b-bdda-130ca0d87df8" // Shared secret to authenticate the connection request from device side
-}
+{
+	"creationTime": "2022-01-25T10:54:40.037Z",
+	"deviceId": "1184255",
+	"deviceName": "dm-example-device-adjusted-8893a9f33a8c",
+	"self": "https://t769416337.eu-latest.cumulocity.com/devicecontrol/operations/3978710",
+	"id": "3978710",
+	"status": "PENDING",
+	"description": "Opening remote access tunnel to 'RealSSH'",
+	"c8y_RemoteAccessConnect": {
+		"hostname": "127.0.0.1", // Endpoint on local network to connect to
+                "port": 22, // Port to be used on local network endpoint
+                "connectionKey": "5d49dd41-a843-4ee5-ae22-6a1e308fda65" // Shared secret to authenticate the connection request from device side
+            }
 ```
 
 When the device receives the operation `c8y_RemoteAccessConnect`, the following steps are executed:
