@@ -22,14 +22,19 @@ This endpoint will create a new product managed object.
 Body message has to be like:
 ```json
 {
-"vendor_name":"vendor",
-"product_name":"product",
-"product_type":"type",
-"tenant_id":"t12345678"
+    "vendor_name":"vendor",
+    "product_name":"product",
+    "product_type":"type",
+    "tenant_id":"t12345678"
 }
 ```
 
-DELETE `{{baseUrl}}/service/gateway-certification/NNN` **planned for release 2.0**
+DELETE `{{baseUrl}}/service/gateway-certification/product/{{product_id}}?t=tenant_id` **planned for release 2.0 ???**
+
+This endpoint will delete a product, and all its certification run as childAdditions.
+
+Parameter `s=true` could be used to trigger a `single` deletion, deleting only the product EXCLUDING the childAdditions.
+
 
 ---
 
@@ -70,9 +75,9 @@ POST `{{baseUrl}}/service/gateway-certification/test_run` with the body for the 
 
 ```json
 {
- "tenant_id": "tenant_id",                               
- "device_id": "device_id",                               
- "product_id": "product_id"
+    "tenant_id": "tenant_id",                               
+    "device_id": "device_id",                               
+    "product_id": "product_id"
  }
 ```
 
@@ -83,7 +88,12 @@ PUT `{{baseUrl}}/inventory/managedObjects/{{test_run_id}}`
 
 This endpoint will delete a certification run
 
-DELETE `{{baseUrl}}/inventory/managedObjects/{{test_run_id}}` **planned for release 2.0**
+DELETE `{{baseUrl}}/inventory/managedObjects/{{test_run_id}}?t=tenant_id` **planned for release 2.0???**
+
+This endpoint will delete a certification run, and all its certificate as childAdditions.
+
+Parameter `s=true` could be used to trigger a `single` deletion, deleting only the certification run EXCLUDING the childAdditions.
+
 
 ---
 
@@ -93,33 +103,42 @@ This endpoint will give you all Testcertificates
 
 GET `{{baseUrl}}/inventory/managedObjects?withTotalPages=true&pageSize=1&currentPage=1&query=$filter=type eq 'c8y_certification_testCertificate'`
 
+
 This endpoint will give you all Testcertificates - ordered by updated
 
 GET `{{baseUrl}}/inventory/managedObjects?withTotalPages=true&pageSize=1&currentPage=1&query=$filter=type eq 'c8y_certification_testCertificate'$orderby=creationTime asc`
+
 
 This endpoint will give you all Testcertificates - with Partial Name
 
 GET `{{baseUrl}}/service/gateway-certification/`
 
+
 This endpoint will generate a test_certificate from test_run ID
 
 GET `{{baseUrl}}/service/gateway-certification/test_certificate/{testRunID}?t={tenantID}`
 
-This endpoint will delete a Testcertificate Managed Object
 
-DELETE `{{baseUrl}}/inventory/managedObjects/{{test_run_id}}` **planned for release 2.0**
+This endpoint will delete a Testcertificate Managed Object, and all its PDF files as childAdditions. Parameter `s=true` could be used to trigger a `single` deletion, deleting only the TestCertificate EXCLUDING the childAdditions.
+
+DELETE `{{baseUrl}}/inventory/managedObjects/{{certificate_id}}` **planned for release 2.0???**
+
+
 
 The endpoint will delete a Testcertificate PDF
 
-DELETE `{{baseUrl}}/inventory/` **planned for release 2.0**
+DELETE `{{baseUrl}}/inventory/` **planned for release 2.0???**
+
 
 This endpoint will Revoke a Testcertificates
 
 POST `{{baseUrl}}/inventory/managedObjects/{{test_run_id}}` **planned for release 2.0**
 
+
 This endpoint will expiry a Testcertificates
 
 POST `{{baseUrl}}/inventory/managedObjects/{{test_run_id}}` **planned for release 2.0**
+
 
 ---
 
