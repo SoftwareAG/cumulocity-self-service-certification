@@ -2,7 +2,7 @@
 
 ## Overall Tests
 
-GET `{{baseUrl}}/service/gateway-certification/perform_certification/{testRunID}?d={deviceId}&t={tenantId}`
+**GET `{{baseUrl}}/service/gateway-certification/perform_certification/{testRunID}?d={deviceId}&t={tenantId}`**
 
   This endpoint shall trigger all tests for a device. Call Certification Endpoint (General)
 
@@ -10,7 +10,7 @@ GET `{{baseUrl}}/service/gateway-certification/perform_certification/{testRunID}
 
 ## Products
 
-GET `{{baseUrl}}/service/gateway-certification/NNN` **planned for release 2.0**
+**GET `{{baseUrl}}/service/gateway-certification/NNN`** **planned for release 2.0**
 
   This endpoint will give you all products for a Vendor.
 
