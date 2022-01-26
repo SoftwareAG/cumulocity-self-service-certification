@@ -2,9 +2,9 @@
 
 ## Overall Tests
 
-This endpoint shall trigger all tests for a device. Call Certification Endpoint (General)
-
 GET `{{baseUrl}}/service/gateway-certification/perform_certification/{testRunID}?d={deviceId}&t={tenantId}`
+
+  This endpoint shall trigger all tests for a device. Call Certification Endpoint (General)
 
 ---
 
@@ -12,14 +12,15 @@ GET `{{baseUrl}}/service/gateway-certification/perform_certification/{testRunID}
 
 GET `{{baseUrl}}/service/gateway-certification/NNN` **planned for release 2.0**
 
-This endpoint will give you all products for a Vendor.
+  This endpoint will give you all products for a Vendor.
 
 PUT `{{baseUrl}}/service/gateway-certification/NNN` **planned for release 2.0**
 
+  This endpoint will update an existing product managed object.
+  
 POST `{{baseUrl}}/service/gateway-certification/product`
-
-This endpoint will create a new product managed object.
-Body message has to be like:
+  
+  This endpoint will create a new product managed object.  Body message has to be like:
 ```json
 {
     "vendor_name":"vendor",
@@ -31,9 +32,9 @@ Body message has to be like:
 
 DELETE `{{baseUrl}}/service/gateway-certification/product/{{product_id}}?t=tenant_id` **planned for release 2.0 ???**
 
-This endpoint will delete a product, and all its certification run as childAdditions.
+  This endpoint will delete a product, and all its certification run as childAdditions.
 
-Parameter `s=true` could be used to trigger a `single` deletion, deleting only the product EXCLUDING the childAdditions.
+  Parameter `s=true` could be used to trigger a `single` deletion, deleting only the product EXCLUDING the childAdditions.
 
 
 ---
