@@ -240,7 +240,7 @@ Example structure in device managed object using the inventory API:
 
 
 The External ID is displayed by the UI in the tab "Identity". The fragments `externalId` and `type` must be present in the managed object of the device using the identity API. 
-NOTE: The externalID is not stored in the device managed object using the inventory API.
+NOTE: The externalID is  stored in the device managed object using the identity endpoint of the API - not the inventory endpoint.
 
 
 
