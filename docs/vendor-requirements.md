@@ -66,7 +66,7 @@ For details and examples, see the [Metadata Cumulocity IoT Documentation](https:
 | Fragment                     | Description                                                                         | Mandatory                                                                                                                                                   |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `c8y_Agent`                  | Information about the agent run on the device                                                            | Yes        |
-| `c8y_IsDevice`               | Empty fragment. Declares a Managed Object as a Device                                                     | Yes                                                                                            |
+| `c8y_IsDevice`               | Empty fragment. Defines the managed object created through the Iventory API to be a Device                                                     | Yes                                                                                            |
 | `name`                       | Sets the name of the device used e.g. in 'all devices' and 'device info' views                            | Yes                                                                                                                                                         |
 | `type`                       | Functional type of device e.g. water meter, pump, Gateway, environmental sensor                           | Yes                                                                                         |
 | `c8y_RequiredAvailability`   | Minimal communication interval to determine if device is offline                                          | No        |
@@ -75,7 +75,7 @@ For details and examples, see the [Metadata Cumulocity IoT Documentation](https:
 | `externalIds`                | Used to identify a device with a unique information from the physical world                               | Yes    |                                                         
     
 
-Information about one physical device is stored within multiple managed objects. Cumulocity IoT stores all general device information as one managed object in its inventory. The following JSON structure represents a typical managed object of a device using in the inventory API (`GET {{url}}/inventory/managedObjects/{{deviceId}}`):
+Information about one physical device is stored within multiple managed objects each accessible thourgh one endpoint of the Cumulocity IoT API. All general device information must be stored in one managed object that can be accessed via the inventory endpoint. The following JSON structure represents a typical managed object of a device accessible thorugh the inventory API endpoints ( e.g. `GET {{url}}/inventory/managedObjects/{{deviceId}}`):
 
 ```json5
 "c8y_IsDevice": {},
@@ -102,7 +102,7 @@ Information about one physical device is stored within multiple managed objects.
 }
 ```
 ## Agent Information
-The term “agent” refers to the piece of software that connects a device with Cumulocity IoT. This document provides guidance for integration developers to develop this agent. The fragments `c8y_Agent` must be sent to the inventory API to add it to the device managed object. For details and examples, compare *[What is an agent? Cumulocity IoT Documentation](https://cumulocity.com/guides/concepts/interfacing-devices/#agents)*.
+The term “agent” refers to the piece of software that connects a device with Cumulocity IoT. This document provides guidance for integration developers to develop this agent. The fragments `c8y_Agent` must be sent to the inventory endpoint of the API to add it to the device managed object. For details and examples, compare *[What is an agent? Cumulocity IoT Documentation](https://cumulocity.com/guides/concepts/interfacing-devices/#agents)*.
 
 ### c8y_Agent
 
@@ -117,7 +117,7 @@ The device certificate will be issued for a device by the properties `c8y_Agent.
 | `version` | Yes       |
 | `url`     | No        |
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_Agent": {
@@ -129,7 +129,7 @@ Example structure in device managed object using the inventory API:
 
 ## Basic Device Information
 
-The fragments `c8y_IsDevice`, `name`, `type`, `c8y_RequiredAvailability`, `c8y_Firmware`, and `c8y_Hardware` must be present in the managed object of the device stored in the inventory. 
+The fragments `c8y_IsDevice`, `name`, `type`, `c8y_RequiredAvailability`, `c8y_Firmware`, and `c8y_Hardware` must be present in the managed object accessible thorugh the inventory API endpoints. 
 
 ### name
 
@@ -139,7 +139,7 @@ The Cumulocity IoT UI uses the device `name`. Here, `name` sets the name of the 
 | -------- | --------- |
 | `name`   | Yes       |
 
-Example structure in the device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "name": "ExampleDeviceName"
@@ -147,13 +147,13 @@ Example structure in the device managed object using the inventory API:
 
 ### c8y_IsDevice
 
-`c8y_IsDevice` is an empty fragment that declares a managed object as a device.
+`c8y_IsDevice` is an empty fragment that declares the managed object accessible thorugh the inventory API endpoints as a device.
 
 | Fragment | Mandatory |
 | -------- | --------- |
 | `c8y_IsDevice`   | Yes       |
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_IsDevice": {} 
@@ -168,7 +168,7 @@ Cumulocity IoT UI uses the device `type` often for filtering purposes like sendi
 | -------- | --------- |
 | `type`   | Yes       |
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "type": "c8y_EdgeAgent"
@@ -184,7 +184,7 @@ Minimal communication interval to determine if device is offline. For details an
 | ------------------ | --------- |
 | `responseInterval` | No        |
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_RequiredAvailability": {
@@ -193,7 +193,7 @@ Example structure in device managed object using the inventory API:
 ```
 ## Hardware Information
 
-Hardware information can be stored within the fragment `c8y_Hardware` that is part of the device managed object using the inventory API. The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
+Hardware information can be stored within the fragment `c8y_Hardware` that is part of the inventory managed object accessible thorugh the inventory API endpoints. The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
 These fragments will also be used in future versions of Device Partner Portal. It displays one "Device" entry in the overview device list per `c8y_Hardware.model` and a dropdown menu in the device detail view for each `c8y_Hardware.revision`.
 
 ### c8y_Hardware
@@ -204,7 +204,7 @@ These fragments will also be used in future versions of Device Partner Portal. I
 | `revision`     | Dropdown inside device detail view to select device revision or version | Yes       |
 | `serialNumber` | Not used in Device Partner Portal                                       | Yes       |
 
-Example structure in the device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_Hardware": {
@@ -216,7 +216,7 @@ Example structure in the device managed object using the inventory API:
 
 ## Firmware Information
 
-Firmware information can be stored within the fragment `c8y_Firmware` that is part of the device managed object using the inventory API. The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
+Firmware information can be stored within the fragment `c8y_Firmware` that is part of the inventory managed object accessible thorugh the inventory API endpoints. The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
 
 ### c8y_Firmware
 
@@ -226,7 +226,7 @@ Firmware information can be stored within the fragment `c8y_Firmware` that is pa
 | `version` | Yes       |
 | `url`     | No        |
 
-Example structure in device managed object using the inventory API:
+Example structure in inventory managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_Firmware": {
@@ -239,8 +239,8 @@ Example structure in device managed object using the inventory API:
 ## External ID
 
 
-The External ID is displayed by the UI in the tab "Identity". The fragments `externalId` and `type` must be present in the managed object of the device using the identity API. 
-NOTE: The externalID is  stored in the device managed object using the identity endpoint of the API - not the inventory endpoint.
+The External ID is displayed by the UI in the tab "Identity". The fragments `externalId` and `type` must be present in the managed object accessible via Identity API endpoints. 
+NOTE: The externalID is not stored in the managed object through the inventory endpoint of the API but the identity endpoint.
 
 
 
@@ -251,7 +251,7 @@ Used to identify the device in Cumulocity by its unique serial number, MAC, IMEI
 | `externalId` | Yes       |
 | `type`       | Yes       |
 
-Example structure in an external ID managed object. This information is stored in the identity of the managed object, not in the inventory of the managed object:
+Example structure of an external ID -managed object accessible thorugh the identity API endpoints:
 
 ```json5
 {
@@ -383,7 +383,7 @@ This section describes the extended capabilities and expected device behaviour. 
 All sections below are optional. If a device partner decides to certify extended capabilities, they are documented in the certificate and publicly displayed on the Device Partner Portal.
 Customer can filter and search for devices that support certain capabilities. Therefore, it is recommended to certify all capabilities (aka. "extended capabilities") offered by the device.
 The capabilities are listed below in descending order of importance based on Software AG's experience.
-To indicate that a device wants to certify extended capabilities, it has to add the respective element to the list of supported operations in the inventory object of the device. All extended capabilities that receive operations require the fragment  `com_cumulocity_model_Agent` have to be present in the device managed object in the inventory. 
+To indicate that a device wants to certify extended capabilities, it has to add the respective element to the list of supported operations in the inventory object of the device. All extended capabilities that receive operations require the fragment  `com_cumulocity_model_Agent` have to be present in the managed object accessible thorugh the inventory API endpoints. 
 
 **Info:** Before using the Self-Certification Tool make sure all operations were successfully executed by the agent. The tool does not trigger any operations but checks the audit log of Cumulocity IoT.
 
@@ -404,7 +404,7 @@ To indicate that a device wants to certify extended capabilities, it has to add 
 | [Location & Tracking](#location-tracking) | Device capability to display and update location information. | is an Extended Capability |
 | [Network](#network) | Device capability to display and update network information. | is an Extended Capability |
 
-The following json structure represents a typical managed object of a device using in the inventory API (`GET {{url}}/inventory/managedObjects/{{deviceId}}`):
+The following JSON structure represents a typical managed object of a device accessible thorugh the inventory API endpoints ( e.g. `GET {{url}}/inventory/managedObjects/{{deviceId}}`):
 
 
 ```json5
@@ -463,7 +463,7 @@ This fragment is optional. If not present, the extended xapabilities will not be
 | ------------------------- | --------- |
 | `c8y_SupportedOperations` | Yes, for devices that receive operations         |
 
-Example structure in the device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -474,14 +474,14 @@ Example structure in the device managed object using the inventory API:
 
 ### com_cumulocity_model_Agent
 
-The fragment `com_cumulocity_model_Agent` is an empty fragment stored in the device managed object using the inventory endpoint. It declares that the device is able to receive operations [extended capabilities](#extended-capabilities)).
+The fragment `com_cumulocity_model_Agent` is an empty fragment stored in the device managed object using the inventory API endpoints. It declares that the device is able to receive operations [extended capabilities](#extended-capabilities)).
 This fragment is optional. If not present, the extended capabilities will not be certified.
 
 | Fragment                  | Mandatory |
 | ------------------------- | --------- |
 | `com_cumulocity_model_Agent` | Yes, for devices that receive operations        |
 
-Example structure in the device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "com_cumulocity_model_Agent": {}
@@ -507,7 +507,7 @@ Child device types can be freely named, however, here are some examples as orien
 | `c8y_SupportedChildDeviceTypes` | List contains supported child device types | Yes        |
 
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_SupportedChildDeviceTypes": [
@@ -530,11 +530,11 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                    | Required for extended capability |
 | ------------------------- | ------------------------------------------ | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object acceeible via the inventory API endpoints; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_LogfileRequest` | Yes                          |
 | `c8y_SupportedLogs`       | List of supported log file types; Must be present in the device manged object in the inventory;           | Yes (at least 1 type)        |
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -605,12 +605,12 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                       | Required for extended capability |
 | ------------------------- | --------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes        |
-| `c8y_Configuration` |  List of the current `config` of the device in the managed object of the inventory API     | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API endpoints; Enables a device to receive operations | Yes        |
+| `c8y_Configuration` |  List of the current `config` of the device in the managed object accessible via the inventory API endpoints    | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Configuration`     | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_SendConfiguration` | No              |
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -683,12 +683,12 @@ The following fragments are related to the Extended  Capability with a remark if
 
 | Fragment                      | Content                                        | Required for extended capability |
 | ----------------------------- | ---------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object accessible via the inventory API endpoints; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations`     | List contains element `c8y_DownloadConfigFile` | Yes                          |
 | `c8y_SupportedOperations`     | List contains element `c8y_UploadConfigFile`   | Yes                          |
 | `c8y_SupportedConfigurations` | List of supported configuration file types     | Yes (at least 1 type)        |
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -771,9 +771,9 @@ The following fragments are related to the extended device capability with a rem
 | ------------------------- | -------------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_SoftwareUpdate`         | Yes                          |
-| `c8y_SoftwareList`        | List of currently installed software on the device in the managed object of the inventory API | Yes                          |
+| `c8y_SoftwareList`        | List of currently installed software on the device in the managed object accessible via the inventory API endpoints | Yes                          |
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -852,12 +852,12 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                              | Required for extended capability |
 | ------------------------- | ------------------------------------ | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object accessible via the inventory API endpoints; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Firmware` | Yes                          |
 
 Firmware tab will be visible on the device page only if `c8y_Firmware` is listed in the device’s supported operations.
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -900,13 +900,13 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                                                 | Required for extended capability |
 | ------------------------- | ----------------------------------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object accessible cia the inventory API endpoints; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_DeviceProfile`                               | Yes                          |
 | `c8y_Profile`             | List contains element `profileName`, `profileId`, and `profileExecuted` | Yes                          |
 
 Device profile tab will be visible on the device page only if `c8y_DeviceProfile` is listed in the device’s supported operations.
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -962,10 +962,10 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                             | Required for extended capability |
 | ------------------------- | ----------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object accessible via the inventory API endpoints; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Restart` | Yes                          |
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -992,10 +992,10 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                                 | Required for extended capability |
 | ------------------------- | ------------------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object accessible via the inventory API endpoints; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_MeasurementRequestOperation` | Yes                          |
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -1023,10 +1023,10 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                             | Required for extended capability |
 | ------------------------- | ----------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object accessible via the inventory API endpoints; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_Command` | Yes                          |
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -1074,11 +1074,11 @@ The following fragments are related to the extended device capability with a rem
 
 | Fragment                  | Content                                         | Required for extended capability |
 | ------------------------- | ----------------------------------------------- | ---------------------------- |
-| `com_cumulocity_model_Agent` | Must be present in the managed object using the inventory API; Enables a device to receive operations | Yes                          |
+| `com_cumulocity_model_Agent` | Must be present in the managed object accessible via the inventory API endpoints; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | List contains element `c8y_RemoteAccessConnect` | Yes                          |
 | `c8y_RemoteAccessList`    | List of supported remote access types           | Yes (at least 1 type)        |
 
-Example structure in device managed object using the inventory API
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 (NOTE: The fragment "c8y_RemoteAccessList" is created by the Cumulocity IoT UI and must not be created by the agent/connector)
 
 ```json5
@@ -1150,7 +1150,7 @@ The following fragments are related to the extended device capability with a rem
 | `c8y_Position.trackingProtocol` | Technology used for position acquisition (e.g. GPS, Galileo, TELIC)          | No                           |
 | `c8y_Position.reportReason`     | Reason why the position update was send (e.g. triggered by schedule, action) | No                           |
 
-Example structure in device managed object using the inventory API:
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_Position": {
@@ -1188,7 +1188,7 @@ Example location update event:
 ## Network
 **Under Construction  - not to be followed yet**
 
-Device capability to either display or display and manage the WAN, Lan, and DHCP settings. Information is shown under tab 'Network' if the fragment 'c8y_Network' is present in the device managed object using the inventory API. For details and examples, compare [Network Cumulocity IoT Documentation](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Network-management) section of the documentation.
+Device capability to either display or display and manage the WAN, Lan, and DHCP settings. Information is shown under tab 'Network' if the fragment 'c8y_Network' is present in the device managed object accessible via the inventory API endpoints. For details and examples, compare [Network Cumulocity IoT Documentation](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Network-management) section of the documentation.
 
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
@@ -1214,7 +1214,7 @@ The device can displays any network setting, all properties are optional.
 | `c8y_Network.c8y_LAN`    |  Lists the properties `netmask`, `ip`, `name`, `enabled`, `mac`     | Yes, if c8y_Wan and c8y_DHCP are not present     |
 | `c8y_Network.c8y_DHCP`    |  Lists the properties  `dns2`, `dns1`, `domainName`, `addressRange.start`,  `addressRange.end`, `enabled`,      | Yes, if c8y_Wan and c8y_Lan are not present      |
 
-Example structure in device managed object using the inventory API
+Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
 "c8y_SupportedOperations": [
@@ -1300,7 +1300,7 @@ When the device receives the operation `c8y_Network`, the following steps are ex
 | 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                    | [Real-Time Notifications](https://cumulocity.com/api/10.10.0/#tag/Real-time-notification-API) |
 | 1.   | Update operation `"status" : "EXECUTING"`                                                                                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |
 | 2.   | Apply WAN, LAN, or DHCP configuration   |                         |
-| 3.   | Set new network configuration status the device managed object                                                                                  |                                        |
+| 3.   | Set new network configuration status the inventory managed object accessbile via the inventory API endpoints                                                                                 |                                        |
 | 4.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |                                                                                      |
 
 NOTE: On REST the entire fragment `c8y_Network` in the managed obejct accessible via the inventory API must be repeated, because top level fragments can only be replaced completely. In-place editing of fragments isn't possible with Cumulocity IoT REST API.
@@ -1359,3 +1359,4 @@ NOTE: On REST the entire fragment `c8y_Network` in the managed obejct accessible
 | 01/11/2021 | Text Based Configuration: The mandatory flag of the Supported Operation "c8y_SendConfiguration" was changed from "Yes" to "No"  | major   |
 | 03/11/2021 | Text Based Configuration: Inserted step 3 - update "c8y_Configuration" in inventory to relect current device configuration   | major   |
 | 14/01/2021 | Many small adjustments; Updated currently testable capabilites  | medium   |
+| 07/02/2021 | Improved inaccurate wordings around managed objects and Cumulocity API  | minor   |
