@@ -1,39 +1,37 @@
 # Vendor Requirements for Device Certification
 
-This document provides guidance on which requirements a connector / agent needs to fulfill to be successfully certifyable using the Cumulocity IoT certification tool.
+This document provides guidance on which requirements a connector/agent needs to fulfill to be successfully certifyable using the Cumulocity IoT certification tool.
 The device certification process requires all connectors / agents that run on devices to follow standards and integration best practices. This means that more fields are mandatory for a certified device compared to platform minium requirements.
-The following section, *[Device Registration](#device-registration)*, covers the registration processes for connectors / agents using either the MQTT API and REST API. The mandatory capabilities are described in section *[Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory)*. All advanced capabilities are part of the section *[Extended Capabilities](#extended-capabilities-for-vendor-device-certification-optional)*.
+The following section, [Device Registration](#device-registration), covers the registration processes for connectors/agents using either the MQTT API or the REST API. The mandatory capabilities are described in section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). All advanced capabilities are part of the section [Extended Capabilities](#extended-capabilities-for-vendor-device-certification-optional).
 
 # Device Registration
 
-The chapter *[Device Behavior](#device-behavior)* describes how a connector / agent that runs on a device registers to Cumulocity IoT. It must send a mandatory minimum of information to be certifiable covered in the section *[Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory)*. 
+The chapter [Device Behavior](#device-behavior) describes how a connector/agent that runs on a device registers to Cumulocity IoT. The connector/agent must send a mandatory minimum of information to be certifiable. This is covered in the section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). 
 
 
 ## Device Behavior
 
-When  started, the device follows the process flow defines for REST or MQTT based integration respectively.
+When  started, the device follows the process flow defined for REST or MQTT based integration respectively.
 
 **Please read and follow one of these guides:**
 
-For *[REST based integrations](https://cumulocity.com/guides/device-sdk/rest/#device-integration)*:
+For [REST based integrations](https://cumulocity.com/guides/device-sdk/rest/#device-integration):
 ![Startup REST based](https://cumulocity.com/guides/images/rest/startupphase.png)
 
-For *[MQTT based integrations](https://cumulocity.com/guides/device-sdk/mqtt/#device-integration)* (using Smart-Rest 2 is recommended):
+For [MQTT based integrations](https://cumulocity.com/guides/device-sdk/mqtt/#device-integration) (using Smart-Rest 2 is recommended):
 ![Startup MQTT based](https://cumulocity.com/guides/images/mqtt/mqttDeviceIntegration.png)
 
 ### Helpful MQTT Info
 
-[MQTT Cheat Sheet (Comprehensive)](https://github.com/SoftwareAG/cumulocity-self-service-certification/blob/main/docs/cheatSheet.md)
-
-[MQTT Quick Reference](https://cumulocity.com/guides/device-sdk/mqtt/#quick-reference)
-
-[MQTT Static Templates](https://cumulocity.com/guides/device-sdk/mqtt/#templates-quick-reference)
+* [MQTT Cheat Sheet (Comprehensive)](https://github.com/SoftwareAG/cumulocity-self-service-certification/blob/main/docs/cheatSheet.md)
+* [MQTT Quick Reference](https://cumulocity.com/guides/device-sdk/mqtt/#quick-reference)
+* [MQTT Static Templates](https://cumulocity.com/guides/device-sdk/mqtt/#templates-quick-reference)
 
 ## Certificates
 
 **Cypehr Suits:**
 
-Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the following cypher suits from release *[Release 10.10](https://cumulocity.com/guides/releasenotes/release-10-9-0/announcements-10-9-0/)*:
+Cumulocity IoT fulfills SSL Labs A+ rating and therefore supports exclusively the following cypher suits from release [Release 10.10](https://cumulocity.com/guides/releasenotes/release-10-9-0/announcements-10-9-0/):
 
 * rsa_pkcs1_sha256
 * dsa_sha256
@@ -52,13 +50,12 @@ Cumulocity IoT fulfills SSL Labs A+ rating and therefor supports exclusively the
 
 ## Certification of Devices and Aggregation as Products
 
-When a connector / agent registers on Cumulocity IoT, it becomes a device listed in the "Device Management" tab. When using the self-certification tool, one certificate can be created for each combination of the connector (c8y_Agent), the Hardware (c8y_Hardware) and the Firmware (c8y_Firmware). If any of these values changes, a new device-certificate can be created. The Cumulocity IoT device certification API makes the certification information available for our [Device Partner Portal](#https://devicepartnerportal.softwareag.com/). Entries on the Device Partner Portal represent devices from a sales/user perspective - we call that a product. Products can only be segregated by their names. To link the product from the Device Partner Portal with the more granual differentiation of a device on Cumulocity IoT, we have incorporated this as manual step within the Cumulocity IoT certification tool. Device certificates therefore need to be clustered to products, so all the device certificates related to that product then be displayed under the same product on the Device Partner Portal (product to device relation is 1:n). 
-
+When a connector/agent registers on Cumulocity IoT, it becomes a device listed in the Device Management application. When using the self-certification tool, one certificate can be created for each combination of the connector (c8y_Agent), the Hardware (c8y_Hardware) and the Firmware (c8y_Firmware). If any of these values change, a new device-certificate can be created. The Cumulocity IoT device certification API makes the certification information available for our [Device Partner Portal](#https://devicepartnerportal.softwareag.com/). Entries on the Device Partner Portal represent devices from a sales/user perspective, which is therefore defined as a product. Products can only be segregated by their names. To link the product from the Device Partner Portal with the more granual differentiation of a device on Cumulocity IoT, we have incorporated this as manual steps within the Cumulocity IoT certification tool. Device certificates therefore need to be clustered to products, so all the device certificates related to that product can then be displayed under the same product on the Device Partner Portal. The product to device relation is 1:n. 
 
 
 # Foundation Capabilities for Vendor Device Certification (mandatory)
 
-For details and examples, compare [metadata](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Metadata) section of documentation as well as the detail sections below.
+For details and examples, see the [Metadata](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Metadata) section of the Cumulocity IoT Open API documentation as well as the detail sections below.
 
 | Fragment                     | Description                                                                         | Mandatory                                                                                                                                                   |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -72,7 +69,7 @@ For details and examples, compare [metadata](https://cumulocity.com/api/10.10.0/
 | `externalIds`                | Used to identify a device with a unique information from the physical world                               | Yes    |                                                         
     
 
-Information about one physical device is stored within multiple managed objects. Cumulocity IoT stores all general device information as one managed object in its inventory. The following json structure represents a typical managed object of a device using in the inventory API (`GET {{url}}/inventory/managedObjects/{{deviceId}}`):
+Information about one physical device is stored within multiple managed objects. Cumulocity IoT stores all general device information as one managed object in its inventory. The following JSON structure represents a typical managed object of a device using in the inventory API (`GET {{url}}/inventory/managedObjects/{{deviceId}}`):
 
 ```json5
 "c8y_IsDevice": {},
@@ -130,13 +127,13 @@ The fragments `c8y_IsDevice`, `name`, `type`, `c8y_RequiredAvailability`, `c8y_F
 
 ### name
 
-The Cumulocity IoT UI uses the device `name`.  `name` sets the name of the device used e.g. in 'all devices' and 'device info' views.
+The Cumulocity IoT UI uses the device `name`. Here, `name` sets the name of the device used, e.g. in 'all devices' and 'device info' views.
 
 | Fragment | Mandatory |
 | -------- | --------- |
 | `name`   | Yes       |
 
-Example structure in device managed object using the inventory API:
+Example structure in the device managed object using the inventory API:
 
 ```json5
 "name": "ExampleDeviceName"
@@ -144,7 +141,7 @@ Example structure in device managed object using the inventory API:
 
 ### c8y_IsDevice
 
-`c8y_IsDevice` is an empty fragment that declares a Managed Object as a device.
+`c8y_IsDevice` is an empty fragment that declares a managed object as a device.
 
 | Fragment | Mandatory |
 | -------- | --------- |
@@ -158,8 +155,8 @@ Example structure in device managed object using the inventory API:
 
 ### type
 
-The fragment `type` can be interpreted as _device class_. Meaning, devices with the same `type` can receive the same types of configuration, software, firmware, and operations.
-The Cumulocity IoT UI uses the device `type` often for filtering purposes like sending a software package to all devices of one specific `type`. Based on the device `type` Cumulocity can assign Dashboards to the same `type`.
+The fragment `type` can be interpreted as `_device class_`. Meaning, devices with the same `type` can receive the same types of configuration, software, firmware, and operations.
+Cumulocity IoT UI uses the device `type` often for filtering purposes like sending a software package to all devices of one specific `type`. Based on the device `type` Cumulocity can assign Dashboards to the same `type`.
 
 | Fragment | Mandatory |
 | -------- | --------- |
@@ -173,7 +170,7 @@ Example structure in device managed object using the inventory API:
 
 ### c8y_RequiredAvailability
 
-Minimal communication interval to determine if device is offline. For details and examples, compare *[device availability](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-availability)* section of the documentation.
+Minimal communication interval to determine if device is offline. For details and examples, see [Device Availability](https://cumulocity.com/api/10.10.0/#section/Device-management-library/Device-availability).
 
 | Fragment           | Mandatory |
 | ------------------ | --------- |
@@ -188,8 +185,8 @@ Example structure in device managed object using the inventory API:
 ```
 ## Hardware Information
 
-Hardware information can bes stored within  the fragment `c8y_Hardware` that is part of the device managed object using the inventory API. The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
-These fragments will also be used in future versions of Device Partner Portal (display one "Device" entry in the overview device list per `c8y_Hardware.model` and a dropdown in the device detail view for each `c8y_Hardware.revision`).
+Hardware information can be stored within the fragment `c8y_Hardware` that is part of the device managed object using the inventory API. The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
+These fragments will also be used in future versions of Device Partner Portal. It displays one "Device" entry in the overview device list per `c8y_Hardware.model` and a dropdown menu in the device detail view for each `c8y_Hardware.revision`.
 
 ### c8y_Hardware
 
@@ -199,7 +196,7 @@ These fragments will also be used in future versions of Device Partner Portal (d
 | `revision`     | Dropdown inside device detail view to select device revision or version | Yes       |
 | `serialNumber` | Not used in Device Partner Portal                                       | Yes       |
 
-Example structure in device managed object using the inventory API:
+Example structure in the device managed object using the inventory API:
 
 ```json5
 "c8y_Hardware": {
@@ -211,7 +208,7 @@ Example structure in device managed object using the inventory API:
 
 ## Firmware Information
 
-Firmware information can bes stored within  the fragment `c8y_Firmware` that is part of the device managed object using the inventory API. The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
+Firmware information can be stored within the fragment `c8y_Firmware` that is part of the device managed object using the inventory API. The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
 
 ### c8y_Firmware
 
@@ -234,9 +231,9 @@ Example structure in device managed object using the inventory API:
 ## External ID
 
 
-The External ID is displayed by the UI in the tab "Identity". The fragments `externalId` and `type` must be present in the managed object of the device using the identity API. NOTE: The externalID is not stored in the device managed object using the inventory API.
+The external ID is displayed by the UI in the **Identity** tab. The fragments `externalId` and `type` must be present in the managed object of the device using the identity API. **Info:** The external ID is not stored in the device managed object using the inventory API.
 
-For details and examples, compare *[external id](https://cumulocity.com/api/10.10.0/#operation/postExternalIDCollectionResource)* section of the documentation.
+For details and examples, see [External ID](https://cumulocity.com/api/10.10.0/#operation/postExternalIDCollectionResource).
 
 Used to identify the device in Cumulocity by its unique serial number, MAC, IMEI or similar unique identification string. If you don't want to specify a type, its recommend to use `c8y_Serial`.
 
@@ -245,7 +242,7 @@ Used to identify the device in Cumulocity by its unique serial number, MAC, IMEI
 | `externalId` | Yes       |
 | `type`       | Yes       |
 
-Example structure in external id managed object (this information is stored in the identity managed object, not in the inventory managed object):
+Example structure in an external ID managed object. This information is stored in the identity of the managed object, not in the inventory of the managed object:
 
 ```json5
 {
@@ -256,8 +253,8 @@ Example structure in external id managed object (this information is stored in t
 
 ## Sending Operational Data
 
-Sending measurements, events, and alarms are basic capabilities of any IoT enabled device. Therefore vendors should aim to support all three. However, there might be some instance where devices only send events (e.g. basic switches) or only measurements (e.g. basic sensor).
-It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
+Sending measurements, events, and alarms are basic capabilities of any IoT enabled device. Therefore vendors should aim to support all three. However, there might be some instances where devices only send events (e.g. basic switches) or only measurements (e.g. basic sensor).
+It is only mandatory to send either measurements or events or alarms in order to get certified, although we recommend to implement all three capabilities.
 
 | Functionality                     | Content                                          | Mandatory                      |
 | ---------------------------- | ------------------------------------------------ | ------------------------------ |
@@ -265,7 +262,7 @@ It is only mandatory to send either measurements, or events, or alarms in order 
 
 ### Measurements
 
-For details and examples, compare *[measurements](https://cumulocity.com/api/10.10.0/#operation/postMeasurementCollectionResource)* section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
+It is only mandatory to send either measurements or events or alarms in order to get certified. although we recommend to implement all three capabilities. For details and examples, see [Measurements](https://cumulocity.com/api/10.10.0/#operation/postMeasurementCollectionResource). 
 
 The device creates measurements with the following content:
 | Fragment                    | Content                                                                                                    | Mandatory for Measurements |
@@ -276,7 +273,7 @@ The device creates measurements with the following content:
 | Measurement Fragment        | The category of measurement                                                                                | Yes       |
 | Measurement Fragment Series | The name of the measurement series. Contains at least the `value` fragment, optionally the `unit` fragment | Yes       |
 
- Measurement names should be written in camel-case. Cumulocity IoT UI inserts a blank space between a lower-case and an upper-case letter. Two or more consecutive upper-case letters are not separated with blank spaces. The UI also hides the prefix of a measurement name that is ending with a "_" (underline) symbol. 
+Measurement names must be written in camel-case. Cumulocity IoT UI inserts a blank space between a lower-case and an upper-case letter. Two or more consecutive upper-case letters are not separated with blank spaces. The UI also hides the prefix of a measurement name that is ending with a "_" (underline) symbol. 
  
  **Important:** Names used for fragments must not contain whitespaces nor the special characters '. , * [ ] ( ) @ $ / ''
 
@@ -300,16 +297,16 @@ Example POST body:
 }
 ```
 
-The _Measurement Fragment_ and _Measurement Fragment Series_ are used in the Cumulocity IoT UI in the following way:
-*[Measurement Fragment and Series in UI](./media/measurement-fragmentand-series-in-ui.png)*
+The `_Measurement Fragment_ and _Measurement Fragment Series_` are used in the Cumulocity IoT UI in the following way:
+Measurement Fragment and Series in UI](./media/measurement-fragmentand-series-in-ui.png)
 
 
-The following _Measurement Fragments_ are standard measurement fragments in Cumulocity IoT:
+The following `_Measurement Fragments_` are standard measurement fragments in Cumulocity IoT:
 `c8y_AccelerationMeasurement`, `c8y_AccelerationSensor`, `c8y_Battery`, `c8y_CPUMeasurement`, `c8y_CurrentMeasurement`, `c8y_CurrentSensor`, `c8y_DistanceMeasurement`, `c8y_DistanceSensor`, `c8y_HumidityMeasurement`, `c8y_HumiditySensor`, `c8y_LightMeasurement`, `c8y_LightSensor`, `c8y_MeasurementPollFrequencyOperation`, `c8y_MeasurementRequestOperation`, `c8y_MemoryMeasurement`, `c8y_MotionMeasurement`, `c8y_MotionSensor`, `c8y_MoistureMeasurement`, `c8y_SignalStrength`, `c8y_SinglePhaseEnergyMeasurement`, `c8y_SinglePhaseEnergySensor`, `c8y_Steam`, `c8y_Temperature`, `c8y_TemperatureSensor`, `c8y_TemperatureMeasurement`, `c8y_ThreePhaseEnergyMeasurement`,`c8y_ThreePhaseElectricitySensor`, `c8y_VoltageMeasurement`,
 
 ### Events
 
-For details and examples, compare *[events](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource)* section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
+It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities. For details and examples, see [Events](https://cumulocity.com/api/10.10.0/#operation/postEventCollectionResource). 
 
 The device creates events with the following content:
 | Fragment | Content                                  | Mandatory for Events |
@@ -334,9 +331,10 @@ Example POST body:
 
 ### Alarms
 
-For details and examples, compare *[alarms](https://cumulocity.com/api/10.10.0/#operation/postAlarmCollectionResource)* section of the documentation. It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.
+It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities. For details and examples, see [Alarms](https://cumulocity.com/api/10.10.0/#operation/postAlarmCollectionResource).
 
 The device creates alarms with the following content:
+
 | Fragment   | Content                                                                                                                                                | Mandatory for Alarms |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- |
 | `source`   | Device ID                                                                                                                                              | Yes       |
@@ -365,14 +363,14 @@ Example POST body:
 
 The device certification process requires the device to follow integration best practices.
 This means that more fields are mandatory for a certified device compared to platform minium requirements. 
-In this section Extended Capabilities and expected device behaviour are described. The Extended Capabilities require the *[Foundation Capabilities for Vendor Device Certification (mandatory)](#foundation-capabilities-for-vendor-device-certification-mandatory)*
+This section describes the extended capabilities and expected device behaviour. The extended capabilities require the [Foundation Capabilities for Vendor Device Certification (mandatory)](#foundation-capabilities-for-vendor-device-certification-mandatory).
 
-All sections below are **optional**. If a device partner decides to certify Extended Capabilities, they are documented in the certificate and publicly displayed on the Device Partner Portal.
-Customer can filter and search for devices that support certain capabilities. Therefore, it is recommended to certify all capabilities (aka. "Extended Capabilities") offered by the device.
+All sections below are optional. If a device partner decides to certify extended capabilities, they are documented in the certificate and publicly displayed on the Device Partner Portal.
+Customer can filter and search for devices that support certain capabilities. Therefore, it is recommended to certify all capabilities (aka. "extended capabilities") offered by the device.
 The capabilities are listed below in descending order of importance based on Software AG's experience.
-To indicate that a device wants to certify an Extended Capabilities, it has to add the respective element to the list of supported operations in the inventory object of the device. All Extended Capabilities that receive operations require the fragment  `com_cumulocity_model_Agent` to be present in the device managed object in the inventory as. 
+To indicate that a device wants to certify extended capabilities, it has to add the respective element to the list of supported operations in the inventory object of the device. All extended capabilities that receive operations require the fragment  `com_cumulocity_model_Agent` have to be present in the device managed object in the inventory. 
 
-NOTE: Before using the Self-Certification Tool please make sure all operations were successfully executed by the agent. The tool does not trigger any operations but checks the audit log of Cumulocity IoT.
+**Info:** Before using the Self-Certification Tool make sure all operations were successfully executed by the agent. The tool does not trigger any operations but checks the audit log of Cumulocity IoT.
 
 | Fragment / Extended Capability                        | Content                                    | Required for extended capability |
 | ------------------------------- | ------------------------------------------ | ---------------------------- |
@@ -390,10 +388,6 @@ NOTE: Before using the Self-Certification Tool please make sure all operations w
 | [Cloud Remote Access](#cloud-remote-access) | Device capability to initiate a remote connection via VNC or SSH. | is an Extended Capability |
 | [Location & Tracking](#location-tracking) | Device capability to display and update location information. | is an Extended Capability |
 | [Network](#network) | Device capability to display and update network information. | is an Extended Capability |
-
-
-
-
 
 The following json structure represents a typical managed object of a device using in the inventory API (`GET {{url}}/inventory/managedObjects/{{deviceId}}`):
 
@@ -447,8 +441,8 @@ The following json structure represents a typical managed object of a device usi
 
 ### c8y_SupportedOperations
 
-The fragment `c8y_SupportedOperations` is used to identify which operations (and hence certifiable [Extended Capabilities](#extended-capabilities)) are supported by the device.
-This fragment is optional. If not present, the Extended Capabilities will not be certified.
+The fragment `c8y_SupportedOperations` is used to identify which operations (and hence certifiable [extended capabilities](#extended-capabilities)) are supported by the device.
+This fragment is optional. If not present, the extended xapabilities will not be certified.
 
 | Fragment                  | Mandatory |
 | ------------------------- | --------- |
@@ -465,8 +459,8 @@ Example structure in the device managed object using the inventory API:
 
 ### com_cumulocity_model_Agent
 
-The fragment `com_cumulocity_model_Agent` is an empty fragment stored in the device managed object using the inventory endpoint. It declares that the device is able to receive operations [Extended Capabilities](#extended-capabilities)).
-This fragment is optional. If not present, the Extended Capabilities will not be certified.
+The fragment `com_cumulocity_model_Agent` is an empty fragment stored in the device managed object using the inventory endpoint. It declares that the device is able to receive operations [extended capabilities](#extended-capabilities)).
+This fragment is optional. If not present, the extended capabilities will not be certified.
 
 | Fragment                  | Mandatory |
 | ------------------------- | --------- |
