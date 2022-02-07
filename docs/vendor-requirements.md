@@ -239,8 +239,7 @@ Example structure in inventory managed object accessible thorugh the inventory A
 ## External ID
 
 
-The External ID is displayed by the UI in the tab "Identity". The fragments `externalId` and `type` must be present in the managed object accessible via Identity API endpoints. 
-
+The External ID is displayed by the UI in the tab "Identity". The fragments `externalId` and `type` must be present in the managed object accessible via identity API endpoints. 
 
 Used to identify the device in Cumulocity by its unique serial number, MAC, IMEI or similar unique identification string. If you don't want to specify a type, its recommend to use `c8y_Serial`.
 
