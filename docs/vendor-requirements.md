@@ -1216,9 +1216,10 @@ The device can displays any network setting, all properties are optional.
 Example JSON structure of a managed object accessible thorugh the inventory API endpoints:
 
 ```json5
+{
 "c8y_SupportedOperations": [
     "c8y_Network"
-]
+],
 {
 "c8y_Network": {
        "c8y_LAN": {
