@@ -1303,7 +1303,7 @@ When the device receives the operation `c8y_Network`, the following steps are ex
 | 3.   | Set new network configuration status the device managed object                                                                                  |                                        |
 | 4.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/10.10.0/#operation/getOperationResource)        |                                                                                      |
 
-NOTE: On REST the entire fragment `c8y_Netowkr` in the managed obejct accessible via the inventory API must be repeated, because top level fragments can only be replaced completely. In-place editing of fragments isn't possible with Cumulocity IoT REST API.
+NOTE: On REST the entire fragment `c8y_Network` in the managed obejct accessible via the inventory API must be repeated, because top level fragments can only be replaced completely. In-place editing of fragments isn't possible with Cumulocity IoT REST API.
 
 
 ## Currently Testable Device Capabilities of Self-Service Certification Microservice
