@@ -1220,7 +1220,7 @@ Example JSON structure of a managed object accessible thorugh the inventory API 
 "c8y_SupportedOperations": [
     "c8y_Network"
 ],
-{
+
 "c8y_Network": {
        "c8y_LAN": {
            "netmask": "255.255.255.0",
