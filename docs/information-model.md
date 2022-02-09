@@ -303,11 +303,11 @@ The life cycle of a test certificate is captured in the `certificate.status` fra
 | --------- | -------------------------------------- |
 | `VALID`   | Certification is valid                 |
 | `EXPIRED` | Certification has expired              |
-| `REVOKED` | Certification was revoked by SAG admin |
+| `UNCERTIFIED` | Certification has not finisehd yet |
 
 Ones a certificate is created, it is set to `VALID` state.
 A separate microservice compares the `certificate.creationDate` regulars against a set expiration duration and sets the state to `EXPIRED` if the expiration date is reached.
-Additionally, an administrator can manually set the state to `REVOKED`, e.g. if a company leaves to partner program or incompliance is detected.
+
 
 ## Change log
 - 2021-11-23 // I. Iliev
