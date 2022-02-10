@@ -4,7 +4,7 @@
 2. [Information Model](./information-model.md)
 3. [Vendor Requirements](./vendor-requirements.md)
 4. [Cheat Sheet](./cheatSheet.md)
-5. [Open Api Endpoint](./api-endpoints.html)
+5. [Open Api Endpoint](./endpoints_v2.md)
 6. [Open Api Endpoint as PDF](./api-endpoints.pdf)
 
 ## Diagrams & Graphics
