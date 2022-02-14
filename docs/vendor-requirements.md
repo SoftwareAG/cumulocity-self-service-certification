@@ -1066,7 +1066,6 @@ NOTE: On REST the entire fragment must be repeated because top level fragments c
 
 Device capability to initiate a remote connection via VNC or SSH. For details and examples, compare [Cloud Remote Access Cumulocity IoT Documentation](https://cumulocity.com/guides/cloud-remote-access/cra-api/) section of the documentation.
 
-
 NOTE: Telnet is considered as unsecure and is therefore not certifiable.
 
 
@@ -1079,6 +1078,7 @@ The following fragments are related to the extended device capability with a rem
 | `c8y_RemoteAccessList`    | List of supported remote access types           | Yes (at least 1 type)        |
 
 Example JSON structure of a managed object accessible through the inventory API endpoints:
+
 (NOTE: The fragment "c8y_RemoteAccessList" is created by the Cumulocity IoT UI and must not be created by the agent/connector)
 
 ```json5
