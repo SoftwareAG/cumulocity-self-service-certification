@@ -1066,6 +1066,7 @@ NOTE: On REST the entire fragment must be repeated because top level fragments c
 
 Device capability to initiate a remote connection via VNC or SSH. For details and examples, compare [Cloud Remote Access Cumulocity IoT Documentation](https://cumulocity.com/guides/cloud-remote-access/cra-api/) section of the documentation.
 
+
 NOTE: Telnet is considered as unsecure and is therefore not certifiable.
 
 
