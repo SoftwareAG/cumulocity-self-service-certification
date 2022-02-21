@@ -7,13 +7,13 @@ Get an existing product by a product ID
 GET `{{baseUrl}}/products/{product_id}`  [GET product](https://softwareag.stoplight.io/docs/gateway-certification/b3A6Mzc0MDk0NzU-get-product)
 
 Get all products for a particular tenant/vendor
-GET `{{baseUrl}}/products/`  [GET products](https://softwareag.stoplight.io/docs/gateway-certification/b3A6Mjc5OTAxNjU-get-products)
+GET `{{baseUrl}}/products`  [GET products](https://softwareag.stoplight.io/docs/gateway-certification/b3A6Mjc5OTAxNjU-get-products)
 
 Update an existing product
 PUT `{{baseUrl}}/products/{product_id}`  [UPDATE product](https://softwareag.stoplight.io/docs/gateway-certification/b3A6Mzc0MDk0NzY-update-product)
 
 Create a new product providing a partial product managed object
-POST `{{baseUrl}}/products/`  [CREATE product](https://softwareag.stoplight.io/docs/gateway-certification/b3A6Mzc0MDk0NzQ-create-product)
+POST `{{baseUrl}}/products`  [CREATE product](https://softwareag.stoplight.io/docs/gateway-certification/b3A6Mzc0MDk0NzQ-create-product)
 
 Delete an existing product
 DELETE `{{baseUrl}}/products/{product_id}`  [DELETE product](https://softwareag.stoplight.io/docs/gateway-certification/b3A6Mzc0MDk0Nzc-delete-product)
@@ -36,13 +36,13 @@ Get a testrun for a product by testrun ID
 GET `{{baseUrl}}/testruns/{testrun_id}`  [GET testrun](https://softwareag.stoplight.io/docs/gateway-certification/b3A6MzgxMzEwNDc-get-testrun)
 
 Get all testruns
-GET `{{baseUrl}}/testruns/`  [Get testruns](https://softwareag.stoplight.io/docs/gateway-certification/b3A6MzgxMzEwNDU-get-testruns)
+GET `{{baseUrl}}/testruns`  [Get testruns](https://softwareag.stoplight.io/docs/gateway-certification/b3A6MzgxMzEwNDU-get-testruns)
 
 Udate an existing testrun
 PUT `{{baseUrl}}/testruns/{testrun_id}`  [UPDATE testrun](https://softwareag.stoplight.io/docs/gateway-certification/b3A6MzgxMzEwNDg-update-testrun)
 
 Create a testrun
-POST `{{baseUrl}}/testruns/`    [CREATE testrun](https://softwareag.stoplight.io/docs/gateway-certification/b3A6MzgxMzEwNDY-create-testrun)
+POST `{{baseUrl}}/testruns`    [CREATE testrun](https://softwareag.stoplight.io/docs/gateway-certification/b3A6MzgxMzEwNDY-create-testrun)
 
 delete an existing testrun
 DELETE `{{baseUrl}}/testruns/{testrun_id}`    [DELETE testrun](https://softwareag.stoplight.io/docs/gateway-certification/b3A6MzgxMzEwNDk-delete-testrun)
@@ -58,8 +58,11 @@ GET `{{baseUrl}}/testruns/{testrun_id}/certify`  [GET testrun certify](https://s
 Get certificate by id
 GET `{{baseUrl}}/certificates/{certificate_id}`  [GET certificate](https://softwareag.stoplight.io/docs/gateway-certification/b3A6Mzc1ODYxNjU-get-certificate)
 
+Get all certificates for a particular product id (managed object id).
+GET `{{baseUrl}}/certificate`  [GET certificate](https://softwareag.stoplight.io/docs/gateway-certification/b3A6Mzc0MDk0ODQ-get-certificates)
+
 Create a certificate managed object
-POST `{{baseUrl}}/certificates/`  [CREATE  certificate](https://softwareag.stoplight.io/docs/gateway-certification/b3A6Mzc0MDk0ODU-create-certificate)
+POST `{{baseUrl}}/certificates`  [CREATE  certificate](https://softwareag.stoplight.io/docs/gateway-certification/b3A6Mzc0MDk0ODU-create-certificate)
 
 Delete certificate by id
 DELETE `{{baseUrl}}/certificates/{certificate_id}`  [DELETE certificate](https://softwareag.stoplight.io/docs/gateway-certification/b3A6Mzc1ODYxNjY-delete-certificate)
