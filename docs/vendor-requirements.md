@@ -126,6 +126,9 @@ Example JSON structure of a managed object accessible through the inventory API 
     "url": "https//link-to-agent-repo.url"
 }
 ```
+**Using MQTT?:** Please send agent information as JSON via MQTT: `inventory/managedObjects/update/<deviceID>`.
+
+
 
 ## Basic Device Information
 
