@@ -443,9 +443,9 @@ The following JSON structure represents a typical managed object of a device acc
     "c8y_DeviceProfile",
     "c8y_Restart",
     "c8y_MeasurementRequestOperation",
-    c8y_Command,
-    c8y_RemoteAccessConnect,
-    c8y_Network
+    "c8y_Command",
+    "c8y_RemoteAccessConnect",
+    "c8y_Network"
 ],
 "c8y_SupportedChildDeviceTypes": [
     "Analog"
