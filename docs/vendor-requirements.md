@@ -433,27 +433,78 @@ The following JSON structure represents a typical managed object of a device acc
     "serialNumber": "00000000e2f5ad4d"
 },
 "c8y_SupportedOperations": [
+    "c8y_LogfileRequest",
+    "c8y_DownloadConfigFile",
+    "c8y_UploadConfigFile",
+    "c8y_Configuration",
+    "c8y_SendConfiguration",
     "c8y_Software",
     "c8y_Firmware",
-    "c8y_LogfileRequest",
-    "c8y_Configuration",
-    "c8y_SendConfiguration"
+    "c8y_DeviceProfile",
+    "c8y_Restart",
+    "c8y_MeasurementRequestOperation",
+    "c8y_Command",
+    "c8y_RemoteAccessConnect",
+    "c8y_Network"
 ],
-"c8y_Position": {
-        "lng": 8.6449,
-        "lat": 49.819199
+"c8y_SupportedChildDeviceTypes": [
+    "Analog"
+],
+"c8y_SupportedLogs": [
+     "syslog"
+],
+"c8y_Configuration": {
+    "config": "mmyParam: myValue\nmyOtherParam: myOtherValue"
 },
 "c8y_SoftwareList": [{
     "name": "pi",
     "version": "3.1418",
     "url": ""
 }],
-"c8y_Configuration": {
-    "config": "mmyParam: myValue\nmyOtherParam: myOtherValue"
+"c8y_Firmware": {
+    "name": "raspberrypi-bootloader",
+    "version": "1.20140107-1",
+    "url": "31aab9856861b1a587e2094690c2f6e272712cb1"
 },
-"c8y_SupportedLogs": [
-        "agentlog"
-]
+"c8y_Profile": {
+    "profileName": "Device_Profile",
+    "profileId": "60238",
+    "profileExecuted": true
+},
+"c8y_Position": {
+        "lng": 8.6449,
+        "lat": 49.819199,
+	 "alt": 67
+},
+"c8y_Network": {
+       "c8y_LAN": {
+           "netmask": "255.255.255.0",
+           "ip": "192.168.128.1",
+           "name": "br0",
+           "enabled": 1,
+           "mac": "00:60:64:dd:a5:c3"
+       },
+       "c8y_WAN": {
+           "password": "user-password",
+           "simStatus": "SIM OK",
+           "authType": "chap",
+           "apn": "example.apn.com",
+           "username": "test"
+       },
+       "c8y_DHCP": {
+           "dns2": "1.1.1.1",
+           "dns1": "8.8.8.8",
+           "domainName": "my.domain",
+           "addressRange": {
+               "start": "192.168.128.100",
+               "end": "192.168.128.199"
+           },
+           "enabled": 1
+       }
+   }
+}
+
+
 ```
 
 ### c8y_SupportedOperations
@@ -657,15 +708,17 @@ NOTE: If the configuration upload is only triggered through the UI and there is 
 Example operation `c8y_SendConfiguration: {}` as it is sent to the device from Cumulocity IoT:
 
 ```json5
+{
 creationTime: "2021-09-20T13:53:29.419Z", deviceName: "123456789", deviceId: "440366",…
-c8y_SendConfiguration: {}
-creationTime: "2021-09-20T13:53:29.419Z"
-description: "Requested current configuration"
-deviceId: "440366"
-deviceName: "123456789"
-id: "440472"
-self: "https://t635974191.eu-latest.cumulocity.com/devicecontrol/operations/440472"
+c8y_SendConfiguration: {},
+creationTime: "2021-09-20T13:53:29.419Z",
+description: "Requested current configuration",
+deviceId: "440366",
+deviceName: "123456789",
+id: "440472",
+self: "https://t635974191.eu-latest.cumulocity.com/devicecontrol/operations/440472",
 status: "PENDING"
+}
 ```
 
 When the device receives the operation `c8y_SendConfiguration`, the following steps are executed:
