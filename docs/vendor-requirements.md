@@ -756,7 +756,7 @@ Example JSON structure of a managed object accessible through the inventory API 
     ]
 ```
 
-
+The button "Send configuration to device" in the tab "Configuration" triggers a `c8y_DownloadConfigFile` operation. 
 When the device receives the operation `c8y_DownloadConfigFile`, the following steps are executed:
 
 | Step | Action                                                               | Documentation                                                                         |
@@ -774,6 +774,7 @@ Example operation sent to the device for `c8y_DownloadConfigFile`:
 }
 ```
 
+The button "Get snapshot from device" in the tab "Configuration" triggers a `c8y_UploadConfigFile` operation. 
 When the device receives the operation `c8y_UploadConfigFile`, the following steps are executed:
 
 | Step | Action                                                                                                                  | Documentation                                                                         |
