@@ -1042,7 +1042,7 @@ When the device receives the operation `c8y_Restart` the following steps are exe
 
 ## Measurement Request
 
-Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently. The button "Get measurements" will appear in the tab _Measurements_ when clicking on _More_ in the top right, if the fragment `c8y_MeasurementRequestOperation` is a supported operation 
+Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently. The button "Get measurements" will appear in the tab _Measurements_ when clicking on _More_ in the top right, if the fragment `c8y_MeasurementRequestOperation` is a supported operation.
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
