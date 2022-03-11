@@ -1244,7 +1244,7 @@ Example location update event:
 ## Network
 **Under Construction  - not to be followed yet**
 
-Device capability to either display or display and manage the WAN, Lan, and DHCP settings. Information is shown under tab 'Network' if the fragment 'c8y_Network' is present in the device managed object accessible via the inventory API endpoints. For details and examples, compare [Network Cumulocity IoT Documentation](https://cumulocity.com/api/10.11.0/#section/Device-management-library/Network-management) section of the documentation.
+Device capability to either display or display and manage the WAN, Lan, and DHCP settings. Information is shown under tab 'Network' if the fragment 'c8y_Network' is present in the device managed object accessible via the inventory API endpoints. For details and examples, compare [Network Cumulocity IoT Documentation](https://cumulocity.com/guides/users-guide/device-management/#network) section of the documentation.
 
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
@@ -1257,18 +1257,31 @@ The following fragments are related to the extended device capability with a rem
 
 ### Display Network Settings
 
-The device can displays any network setting, all properties are optional. 
+Device capability to display network setting information. For details and examples, compare (Network Capabilities Cumulocity IoT Documentation)[].
+
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
 | Fragment / Property                 | Content                                         | Required for extended capability |
 | ------------------------- | ----------------------------------------------- | ---------------------------- |
-| `c8y_Network.c8y_WAN`    | Lists the properties  `password`, `simStatus`, `authType`, `apn`, `username`     | No     |
-| `c8y_Network.c8y_WAN.password`    | Password (String)   | No    |
-| `c8y_Network.c8y_WAN.simStatus`    | simStatus (String)    | No    |
-| `c8y_Network.c8y_WAN.authType`    | authType (String)    | No     |
-| `c8y_Network.c8y_WAN.apn`    | APN (String)      | No     |
-| `c8y_Network.c8y_WAN.username`    |  username (String)   | No     |
-| `c8y_Network.c8y_LAN`    |  Lists the properties `netmask`, `ip`, `name`, `enabled`, `mac`     | Yes, if c8y_Wan and c8y_DHCP are not present     |
-| `c8y_Network.c8y_DHCP`    |  Lists the properties  `dns2`, `dns1`, `domainName`, `addressRange.start`,  `addressRange.end`, `enabled`,      | Yes, if c8y_Wan and c8y_Lan are not present      |
+| `c8y_Network.c8y_LAN`    |  Lists the properties `netmask`, `ip`, `name`, `enabled`, `mac`. (Object) containing local network information    | No    |
+| `c8y_Network.c8y_LAN.netmask`    |  Subnet mask configured for the network interface (String)   | No |
+| `c8y_Network.c8y_LAN.ip`    |   IP address configured for the network interface (String)      | No |
+| `c8y_Network.c8y_LAN.name`    |    Identifier for the network interface (String)    |No |
+| `c8y_Network.c8y_LAN.enabled`    |   Indicator showing if the interface is enabled (Integer)   |No |
+| `c8y_Network.c8y_LAN.mac`    |   MAC address of the network interface (String)    |No |
+| `c8y_Network.c8y_WAN`    | Lists the properties  `password`, `simStatus`, `authType`, `apn`, `username`. (Object) describing mobile internet connectivity interface status     | No     |
+| `c8y_Network.c8y_WAN.password`    | SIM connectivity password (String)   | No    |
+| `c8y_Network.c8y_WAN.simStatus`    | SIM connection status (String)    | No    |
+| `c8y_Network.c8y_WAN.authType`    | Auth type used by the SIM connectivity (String)    | No     |
+| `c8y_Network.c8y_WAN.apn`    | APN used for internet access (String)      | No     |
+| `c8y_Network.c8y_WAN.username`    |  SIM connectivity username (String)   | No     |
+| `c8y_Network.c8y_DHCP`    |  Lists the properties  `dns1`, `dns2`, `domainName`, `addressRange.start`,  `addressRange.end`, `enabled` (Object) containing information for DHCP server status      | No |
+| `c8y_Network.c8y_DHCP.dns1`    |   First configured DNS server (String)    | No |
+| `c8y_Network.c8y_DHCP.dns2`    |   Second configured DNS server (String)    | No |
+| `c8y_Network.c8y_DHCP.domainName`    |  Domain name (String)    | No |
+| `c8y_Network.c8y_DHCP.addressRange.start`    |  Start of address range assigned to DHCP clients (String)    | No |
+| `c8y_Network.c8y_DHCP.aaddressRange.end`    |  End of address range assigned to DHCP clients (String)   | No |
+| `c8y_Network.c8y_DHCP.enabled`    |  Indicator showing if the DHCP server is enabled (Integer)   | No |
 
 Example JSON structure of a managed object accessible through the inventory API endpoints:
 
@@ -1307,6 +1320,26 @@ Example JSON structure of a managed object accessible through the inventory API 
 }
 
 ```
+
+### Managing Network Settings
+
+
+Device capability to manage network settings of the device. For details and examples, compare [Network Cumulocity IoT User Guide](https://cumulocity.com/guides/users-guide/device-management/#network) section of the documentation.
+
+
+When the device receives the operation `c8y_Network`, the following steps are executed:
+
+| Step | Action                                                                                                                                  | Documentation                                                                         |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                    | [Real-Time Notifications](https://cumulocity.com/api/10.11.0/#tag/Real-time-notification-API) |
+| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                                              | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/10.11.0/#operation/getOperationResource)        |
+| 2.   | Apply WAN, LAN, or DHCP configuration   |                         |
+| 3.   | Set new network configuration status the inventory managed object accessible via the inventory API endpoints                                                                                 |                                        |
+| 4.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/10.11.0/#operation/getOperationResource)        |                                                                                      |
+
+NOTE: On REST the entire fragment `c8y_Network` in the managed object accessible via the inventory API must be repeated, because top level fragments can only be replaced completely. In-place editing of fragments isn't possible with Cumulocity IoT REST API.
+
+
 
 Example operation `c8y_Network` to update the LAN information as it is sent from Cumulocity IoT to the device:
 ```json5
@@ -1350,19 +1383,6 @@ Example operation `c8y_Network` to update the WAN information as it is sent from
 
 ```
 
-When the device receives the operation `c8y_Network`, the following steps are executed:
-
-| Step | Action                                                                                                                                  | Documentation                                                                         |
-| ---- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                    | [Real-Time Notifications](https://cumulocity.com/api/10.11.0/#tag/Real-time-notification-API) |
-| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                                              | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/10.11.0/#operation/getOperationResource)        |
-| 2.   | Apply WAN, LAN, or DHCP configuration   |                         |
-| 3.   | Set new network configuration status the inventory managed object accessible via the inventory API endpoints                                                                                 |                                        |
-| 4.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/10.11.0/#operation/getOperationResource)        |                                                                                      |
-
-NOTE: On REST the entire fragment `c8y_Network` in the managed object accessible via the inventory API must be repeated, because top level fragments can only be replaced completely. In-place editing of fragments isn't possible with Cumulocity IoT REST API.
-
-
 ## Currently Testable Device Capabilities of Self-Service Certification Microservice
 - [x] Foundation Capabilities 
     - [x] c8y_Agent
@@ -1391,12 +1411,12 @@ NOTE: On REST the entire fragment `c8y_Network` in the managed object accessible
   - [X] Managing Device Firmware
   - [x] Device Profile
   - [X] Restart
-  - [ ] Measurement Request
   - [x] Shell
   - [ ] Cloud Remote Access
   - [x] Location & Tracking
   - [ ] Mobile
   - [X] Network
+  - [ ] Measurement Request
 
 
 ##MD file change Log
