@@ -1242,7 +1242,6 @@ Example location update event:
 ```
 
 ## Network
-**Under Construction  - not to be followed yet**
 
 Device capability to either display or display and manage the WAN, Lan, and DHCP settings. Information is shown under tab 'Network' if the fragment 'c8y_Network' is present in the device managed object accessible via the inventory API endpoints. For details and examples, compare [Network Cumulocity IoT Documentation](https://cumulocity.com/guides/users-guide/device-management/#network) section of the documentation.
 
@@ -1257,7 +1256,7 @@ The following fragments are related to the extended device capability with a rem
 
 ### Display Network Settings
 
-Device capability to display network setting information. For details and examples, compare (Network Capabilities Cumulocity IoT Documentation)[].
+Device capability to display network setting information. For details and examples, compare [Network Cumulocity IoT Documentation](https://cumulocity.com/guides/users-guide/device-management/#network) section of the documentation.
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
@@ -1324,7 +1323,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 ### Managing Network Settings
 
 
-Device capability to manage network settings of the device. For details and examples, compare [Network Cumulocity IoT User Guide](https://cumulocity.com/guides/users-guide/device-management/#network) section of the documentation.
+Device capability to manage network settings of the device. For details and examples, compare [Network Cumulocity IoT Documentation](https://cumulocity.com/guides/users-guide/device-management/#network) section of the documentation.
 
 
 When the device receives the operation `c8y_Network`, the following steps are executed:
