@@ -1039,6 +1039,7 @@ When the device receives the operation `c8y_Restart` the following steps are exe
 | 4.   | Query operations by agent ID and `"status" : "EXECUTING"` to clean up them. This includes the update of `c8y_Restart` to `"status" : "SUCCESSFUL"` | [Device Integration](https://cumulocity.com/guides/device-sdk/rest/#device-integration), [Update operation](https://cumulocity.com/api/10.11.0/#operation/getOperationResource) |
 | 5.   | Listen to new operations created in Cumulocity IoT                                                                                                 | [Real-time notifications](https://cumulocity.com/api/10.11.0/#tag/Real-time-notification-API)                                                                                   |
 
+
 ## Measurement Request
 
 Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently.
@@ -1410,12 +1411,12 @@ Example operation `c8y_Network` to update the WAN information as it is sent from
   - [X] Managing Device Firmware
   - [x] Device Profile
   - [X] Restart
+  - [ ] Measurement Request
   - [x] Shell
   - [ ] Cloud Remote Access
   - [x] Location & Tracking
   - [ ] Mobile
   - [X] Network
-  - [ ] Measurement Request
 
 
 ##MD file change Log
