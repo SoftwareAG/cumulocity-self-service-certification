@@ -1043,7 +1043,7 @@ When the device receives the operation `c8y_Restart` the following steps are exe
 
 ## Measurement Request
 
-Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently. The button "Get measurements" will appear in the tab _Measurements_ when clicking on _More_ in the top right, if the fragment `c8y_MeasurementRequestOperation` is a supported operation.
+Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently.
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
@@ -1059,7 +1059,7 @@ Example JSON structure of a managed object accessible through the inventory API 
     "c8y_MeasurementRequestOperation"
 ]
 ```
-
+The `c8y_MeasurementRequestOperation` is sent to the device by clicking the button "Get measurements" in the tab _Measurements_ in the top right corner under _More_.
 When the device receives the operation `c8y_MeasurementRequestOperation: {"requestName": "LOG"}` the following steps are executed:
 
 **Note:** For legacy reasons, the `c8y_MeasurementRequestOperation` operation contains the fragment `"requestName": "LOG"`. This is to be ignored by the device.
