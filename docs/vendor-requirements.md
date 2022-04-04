@@ -324,7 +324,7 @@ Example POST body:
 ```
 
 The `_Measurement Fragment_ and _Measurement Fragment Series_` are used in the Cumulocity IoT UI in the following way:
-Measurement Fragment and Series in UI](./media/measurement-fragmentand-series-in-ui.png)
+![Measurement Fragment and Series in UI](https://github.com/SoftwareAG/cumulocity-self-service-certification/tree/main/docs/media/measurement-fragmentand-series-in-ui.png)
 
 
 The following `_Measurement Fragments_` are standard measurement fragments in Cumulocity IoT:
