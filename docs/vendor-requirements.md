@@ -38,21 +38,23 @@ For *[MQTT Based Integrations Cumulocity IoT Documentation](https://cumulocity.c
 
 Cumulocity IoT fulfills SSL Labs A+ rating and therefore supports exclusively the following cypher suits from release [Release 10.9](https://cumulocity.com/guides/releasenotes/release-10-9-0/announcements-10-9-0/) and the old AES-CBC ciphers[Release 10.10](https://cumulocity.com/releasenotes/release-10-10-0/announcements-10-10-0/) :
 
-* AES-CBC ciphers
-* rsa_pkcs1_sha256
-* dsa_sha256
-* ecdsa_secp256r1_sha256
-* rsa_pkcs1_sha384
-* ecdsa_secp384r1_sha384
-* rsa_pkcs1_sha512
-* ecdsa_secp521r1_sha512
-* rsa_pss_rsae_sha256
-* rsa_pss_rsae_sha384
-* rsa_pss_rsae_sha512
-* ed25519 ed448
-* rsa_pss_pss_sha256
-* rsa_pss_pss_sha384
-* rsa_pss_pss_sha512
+* TLS-AES-256-GCM-SHA384
+* TLS-CHACHA2O-POLY1305-SHA256
+* TLS-AES-128-GCM-SHA256
+* ECDHE-RSA-AES256-GCM-SHA384
+* DHE-RSA-AES256-GCM-SHA384
+* ECDHE-RSA-CHACHA20-POLY1305
+* DHE-RSA-CHACHA20-POLY1305
+* ECDHE-RSA-AES128-GCM-SHA256
+* DHE-RSA-AES128-GCM-SHA256
+* ECDHE-RSA-AES256-SHA384
+* DHE-RSA-AES256-SHA256
+* ECDHE-RSA-AES128-SHA256
+* DHE-RSA-AES128-SHA256
+* AES256-GCM-SHA384
+* AES128-GCM-SHA256
+* AES256-SHA256
+* AES128-SHA256
 
 ## Certification of Devices and Aggregation as Products
 
