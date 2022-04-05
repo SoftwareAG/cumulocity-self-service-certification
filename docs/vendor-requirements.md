@@ -301,7 +301,7 @@ The device creates measurements with the following content:
 
 Measurement names must be written in camel-case. Cumulocity IoT UI inserts a blank space between a lower-case and an upper-case letter. Two or more consecutive upper-case letters are not separated with blank spaces. The UI also hides the prefix of a measurement name that is ending with a "_" (underline) symbol. 
  
- **Important:** Names used for fragments must not contain whitespaces nor the special characters '. , * [ ] ( ) @ $ / ''
+ **Important:** Names used for fragments must not contain whitespaces nor the special characters `'. , * [ ] ( ) @ $ / ''`. This is required to ensure a correct processing and visualization of measurement series on UI graphs [Documentation](https://cumulocity.com/api/latest/#operation/postMeasurementCollectionResource)
 
 Example POST body:
 
@@ -324,7 +324,7 @@ Example POST body:
 ```
 
 The `_Measurement Fragment_ and _Measurement Fragment Series_` are used in the Cumulocity IoT UI in the following way:
-Measurement Fragment and Series in UI](./media/measurement-fragmentand-series-in-ui.png)
+![Measurement Fragment and Series in UI](./media/measurement-fragmentand-series-in-ui.png)
 
 
 The following `_Measurement Fragments_` are standard measurement fragments in Cumulocity IoT:
