@@ -38,21 +38,23 @@ For *[MQTT Based Integrations Cumulocity IoT Documentation](https://cumulocity.c
 
 Cumulocity IoT fulfills SSL Labs A+ rating and therefore supports exclusively the following cypher suits from release [Release 10.9](https://cumulocity.com/guides/releasenotes/release-10-9-0/announcements-10-9-0/) and the old AES-CBC ciphers[Release 10.10](https://cumulocity.com/releasenotes/release-10-10-0/announcements-10-10-0/) :
 
-* AES-CBC ciphers
-* rsa_pkcs1_sha256
-* dsa_sha256
-* ecdsa_secp256r1_sha256
-* rsa_pkcs1_sha384
-* ecdsa_secp384r1_sha384
-* rsa_pkcs1_sha512
-* ecdsa_secp521r1_sha512
-* rsa_pss_rsae_sha256
-* rsa_pss_rsae_sha384
-* rsa_pss_rsae_sha512
-* ed25519 ed448
-* rsa_pss_pss_sha256
-* rsa_pss_pss_sha384
-* rsa_pss_pss_sha512
+* TLS-AES-256-GCM-SHA384
+* TLS-CHACHA2O-POLY1305-SHA256
+* TLS-AES-128-GCM-SHA256
+* ECDHE-RSA-AES256-GCM-SHA384
+* DHE-RSA-AES256-GCM-SHA384
+* ECDHE-RSA-CHACHA20-POLY1305
+* DHE-RSA-CHACHA20-POLY1305
+* ECDHE-RSA-AES128-GCM-SHA256
+* DHE-RSA-AES128-GCM-SHA256
+* ECDHE-RSA-AES256-SHA384
+* DHE-RSA-AES256-SHA256
+* ECDHE-RSA-AES128-SHA256
+* DHE-RSA-AES128-SHA256
+* AES256-GCM-SHA384
+* AES128-GCM-SHA256
+* AES256-SHA256
+* AES128-SHA256
 
 ## Certification of Devices and Aggregation as Products
 
@@ -1150,7 +1152,7 @@ The following fragments are related to the extended device capability with a rem
 
 Example JSON structure of a managed object accessible through the inventory API endpoints:
 
-(NOTE: The fragment "c8y_RemoteAccessList" is created by the Cumulocity IoT UI and must not be created by the agent/connector)
+(NOTE: The fragment "c8y_RemoteAccessList" is created by the Cumulocity IoT UI and must not be created by the agent/connector; Please establish a connection once before executing the device certification tool.)
 
 ```json5
 "c8y_SupportedOperations": [
@@ -1335,6 +1337,43 @@ Example JSON structure of a managed object accessible through the inventory API 
 
 ```
 
+
+### Mobile Connection
+
+The Connectivity tab integrates with a 3rd party SIM management platform to provide SIM management functionality within Cumulocity IoT Device Management. The tab appears for a device when all of the following criteria are met:
+
+1. Connectivity microservice is subscribed and configured
+2. The device managed object contains the c8y_Mobile fragment with the MSISDN or ICCID property set
+3. The SIM referenced by the device is managed by the SIM management provider configured for the tenant
+
+For details and examples, compare [Mobile Cumulocity IoT Documentation](https://cumulocity.com/guides/reference/device-management-library/#connectivity) section of the documentation.
+
+| Fragment / Property                 | Content                                         | Required for extended capability |
+| ------------------------- | ----------------------------------------------- | ---------------------------- |
+| `c8y_Mobile` | List contains element `ICCID` and / or `MSISDN`. Enables the Connectivity Microservice to worj with a mobile provider  | Yes                          |
+| `ICCID` | ICCID of the installed SIM;  | yes, if MSISDN is not present    |
+| `MSISDN`    | MSISDN of the installed SIM           | yes, if ICCID is not present         |
+
+Example JSON `c8y_Mobile` as it is sent from the device to Cumulocity IoT:
+
+```json5
+{
+   "c8y_Mobile": {
+       "msisdn": "380561234567",
+       "iccid": "89100423481F445593U"
+   }
+}
+```
+
+Depending on the configured connectivity provider either MSISDN or ICCID may be used to identify the SIM present in the device. We recommend you to always include both into the c8y_Mobile fragment. There are many more mobile connection related properties that may also be attached to the c8y_Mobile fragment, but only MSISDN or ICCID are relevant for connectivity management.
+
+# SmartREST example
+
+The `111` static template is provided for devices to communicate their mobile information:
+
+`111,1234567890,8930000000000000459,54353`
+
+
 ### Managing Network Settings
 
 
@@ -1425,11 +1464,11 @@ Example operation `c8y_Network` to update the WAN information as it is sent from
   - [X] Managing Device Firmware
   - [x] Device Profile
   - [X] Restart
-  - [ ] Measurement Request
+  - [x] Measurement Request
   - [x] Shell
-  - [ ] Cloud Remote Access
+  - [x] Cloud Remote Access
   - [x] Location & Tracking
-  - [ ] Mobile
+  - [x] Mobile
   - [X] Network
 
 
