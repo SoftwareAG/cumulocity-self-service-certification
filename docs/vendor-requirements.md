@@ -1152,7 +1152,7 @@ The following fragments are related to the extended device capability with a rem
 
 Example JSON structure of a managed object accessible through the inventory API endpoints:
 
-(NOTE: The fragment "c8y_RemoteAccessList" is created by the Cumulocity IoT UI and must not be created by the agent/connector)
+(NOTE: The fragment "c8y_RemoteAccessList" is created by the Cumulocity IoT UI and must not be created by the agent/connector; Please establish a connection once before executing the device certification tool.)
 
 ```json5
 "c8y_SupportedOperations": [
