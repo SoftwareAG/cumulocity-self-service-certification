@@ -418,7 +418,7 @@ To indicate that a device wants to certify extended capabilities, it has to add 
 | [Measurement Request](#measurement-request) | Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently. | Extended Capability |
 | [Shell](#shell) | Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. | Extended Capability |
 | [Cloud Remote Access](#cloud-remote-access) | Device capability to initiate a remote connection via VNC or SSH. | Extended Capability |
-| [Location & Tracking](#location-tracking) | Device capability to display and update location information. | Extended Capability |
+| [Location and Tracking](#location-and-tracking) | Device capability to display and update location information. | Extended Capability |
 | [Mobile Connection](#mobile-connection) | Device capability to enable mobile connectivity. | Extended Capability |
 | [Network](#network) | Device capability to display and update network information. |  Extended Capability |
 
@@ -1209,7 +1209,7 @@ When the device receives the operation `c8y_RemoteAccessConnect`, the following 
 | 5.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
 | 6.   | Whenever one of these connections is terminated the device considers the session as ended and will also terminate the second connection. Even if the connection was not terminated gracefully by any of the involved components, the operation status must stay in SUCCESSFUL |                                                                                       |
 
-## Location & Tracking
+## Location and Tracking
 
 Device capability to display and update location information. For details and examples, compare [Location Capabilities Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#section/Sensor-library/Location-capabilities) section of the documentation or  chapter [Tracking Device Management Library](https://cumulocity.com/guides/reference/device-management-library/#tracking).
 
