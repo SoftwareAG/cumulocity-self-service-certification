@@ -419,7 +419,7 @@ To indicate that a device wants to certify extended capabilities, it has to add 
 | [Shell](#shell) | Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. | Extended Capability |
 | [Cloud Remote Access](#cloud-remote-access) | Device capability to initiate a remote connection via VNC or SSH. | Extended Capability |
 | [Location & Tracking](#location-tracking) | Device capability to display and update location information. | Extended Capability |
-| [Mobile Connection](#mobile connection) | Device capability to enable mobile connectivity. | Extended Capability |
+| [Mobile Connection](#mobile-connection) | Device capability to enable mobile connectivity. | Extended Capability |
 | [Network](#network) | Device capability to display and update network information. |  Extended Capability |
 
 The following JSON structure represents a typical managed object of a device accessible through the inventory API endpoints ( e.g. `GET {{url}}/inventory/managedObjects/{{deviceId}}`):
