@@ -408,18 +408,19 @@ To indicate that a device wants to certify extended capabilities, it has to add 
 | ------------------------------- | ------------------------------------------ | ---------------------------- |
 | [c8y_SupportedOperations](#c8y_supportedOperations)    | Many extended operations are directly triggering the dynamic UI by invoking the respective operation tabs | Yes, if the Extended Capability is an operation      | 
 | [com_cumulocity_model_Agent](#com_cumulocity_model_Agent) | Empty fragment. Declares that the device is able to receive operations                                    | Yes, for root devices and gateways that support operations; No, for devices and gateways that don't support operations; Must not be used for child devices; |
-| [Child Device Management](#child-device-management) | Cumulocity uses the concept of child device types to distinguish the capabilities of child devices behind a gateway device.  | is an Extended Capability |
-| [Log file Retrieval](#log-file-retrieval) | Device capability to upload (filtered) log files to C8Y.   | is an Extended Capability |
-| [Device Configuration](#device-configuration) | Device capability that enables text- and / or profile-based device configuration. Text based configuration is the more basic approach. File based configuration allows to have multiple types of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).  |is an Extended Capability|
-| [Software Management](#software-management) | Device capability that enables software management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
-| [Firmware Management](#firmware-management) | Device capability that enables firmware management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | is an Extended Capability |
-| [Device Profile](#device-profile) | Device capability to manage device profiles. Device profiles represent a combination of a firmware version, one or multiple software packages and one or multiple configuration files which can be deployed on a device. | is an Extended Capability |
-| [Restart](#restart) | Device capability to restart the device | is an Extended Capability |
-| [Measurement Request](#measurement-request) | Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently. | is an Extended Capability |
-| [Shell](#shell) | Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. | is an Extended Capability |
-| [Cloud Remote Access](#cloud-remote-access) | Device capability to initiate a remote connection via VNC or SSH. | is an Extended Capability |
-| [Location & Tracking](#location-tracking) | Device capability to display and update location information. | is an Extended Capability |
-| [Network](#network) | Device capability to display and update network information. | is an Extended Capability |
+| [Child Device Management](#child-device-management) | Cumulocity uses the concept of child device types to distinguish the capabilities of child devices behind a gateway device.  | Extended Capability |
+| [Log file Retrieval](#log-file-retrieval) | Device capability to upload (filtered) log files to C8Y.   | Extended Capability |
+| [Device Configuration](#device-configuration) | Device capability that enables text- and / or profile-based device configuration. Text based configuration is the more basic approach. File based configuration allows to have multiple types of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).  |Extended Capability|
+| [Software Management](#software-management) | Device capability that enables software management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | Extended Capability |
+| [Firmware Management](#firmware-management) | Device capability that enables firmware management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | Extended Capability |
+| [Device Profile](#device-profile) | Device capability to manage device profiles. Device profiles represent a combination of a firmware version, one or multiple software packages and one or multiple configuration files which can be deployed on a device. | Extended Capability |
+| [Restart](#restart) | Device capability to restart the device | Extended Capability |
+| [Measurement Request](#measurement-request) | Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently. | Extended Capability |
+| [Shell](#shell) | Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. | Extended Capability |
+| [Cloud Remote Access](#cloud-remote-access) | Device capability to initiate a remote connection via VNC or SSH. | Extended Capability |
+| [Location and Tracking](#location-and-tracking) | Device capability to display and update location information. | Extended Capability |
+| [Mobile Connection](#mobile-connection) | Device capability to enable mobile connectivity. | Extended Capability |
+| [Network](#network) | Device capability to display and update network information. |  Extended Capability |
 
 The following JSON structure represents a typical managed object of a device accessible through the inventory API endpoints ( e.g. `GET {{url}}/inventory/managedObjects/{{deviceId}}`):
 
@@ -1208,7 +1209,7 @@ When the device receives the operation `c8y_RemoteAccessConnect`, the following 
 | 5.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
 | 6.   | Whenever one of these connections is terminated the device considers the session as ended and will also terminate the second connection. Even if the connection was not terminated gracefully by any of the involved components, the operation status must stay in SUCCESSFUL |                                                                                       |
 
-## Location & Tracking
+## Location and Tracking
 
 Device capability to display and update location information. For details and examples, compare [Location Capabilities Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#section/Sensor-library/Location-capabilities) section of the documentation or  chapter [Tracking Device Management Library](https://cumulocity.com/guides/reference/device-management-library/#tracking).
 
