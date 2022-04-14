@@ -4,6 +4,8 @@ This document provides guidance on which requirements a connector/agent needs to
 The device certification process requires all connectors / agents that run on devices to follow standards and integration best practices. This means that more fields are mandatory for a certified device compared to platform minimum requirements.
 The following section, [Device Registration](#device-registration), covers the registration processes for connectors/agents using either the MQTT API or the REST API. The mandatory capabilities are described in section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). All advanced capabilities are part of the section [Extended Capabilities](#extended-capabilities-for-vendor-device-certification-optional).
 
+An easy way to certify a device is using our [thin-edge.io](https://thin-edge.io) framework. With these [simple steps](https://github.com/SoftwareAG/cumulocity-self-service-certification/blob/main/docs/certify%20thin-edge.md) you can certify any device running thin-edge.io and get the 'Works with Cumulocity IoT' badge.
+
 # Device Registration
 
 The chapter [Device Behavior](#device-behavior) describes how a connector/agent that runs on a device registers to Cumulocity IoT. The connector/agent must send a mandatory minimum of information to be certifiable. This is covered in the section [Foundation Capabilities](#foundation-capabilities-for-vendor-device-certification-mandatory). 
