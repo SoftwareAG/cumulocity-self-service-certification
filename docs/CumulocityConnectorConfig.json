@@ -11,7 +11,7 @@
       "DeviceUsername": "<automatically filled>",
       "BootstrapUsername": "management/devicebootstrap",
       "DevicePassword": "<automatically filled>",
-      "Host": "https://devicecert-testtenant.eu-latest.cumulocity.com",
+      "Host": "mqtt.devicecert-testtenant.eu-latest.cumulocity.com",
       "BootstrapPassword": "Fhdt1bb1f",
       "BootstrapTenant": "management",
       "DeviceTenant": "<automatically filled>",
