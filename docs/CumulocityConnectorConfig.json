@@ -1,0 +1,20 @@
+{
+   "Connector": {
+      "LogLevel": 4,
+      "UTF8StringSupport": true,
+      "QueueDataPollIntervalMillis": 10000,
+      "QueueEnableDiagnosticTags": false,
+      "QueueEnableStringHistory": false,
+      "QueueDataPollSizeMins": 1
+   },
+   "Cumulocity": {
+      "DeviceUsername": "<automatically filled>",
+      "BootstrapUsername": "management/devicebootstrap",
+      "DevicePassword": "<automatically filled>",
+      "Host": "https://devicecert-testtenant.eu-latest.cumulocity.com",
+      "BootstrapPassword": "Fhdt1bb1f",
+      "BootstrapTenant": "management",
+      "DeviceTenant": "<automatically filled>",
+      "SubscribeToErrors": false,
+      "Port": "8883"
+   }
