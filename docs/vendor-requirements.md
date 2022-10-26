@@ -115,6 +115,7 @@ For details and examples, compare *[What is an agent? Cumulocity IoT Documentati
 The device certificate will be issued for a device by the properties `c8y_Agent.name`, `c8y_Agent.version`,  `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, and `c8y_Firmware.version`. Developers of this agent are free to chose the name and version. 
 
 [Example of an “agent” named “c8yMQTT”](https://github.com/SoftwareAG/c8yMQTT).
+[Cumulocity IoT Documentation of c8y_Agent Fragement](https://cumulocity.com/guides/10.14.0/reference/device-management-library/#agent-information).
 
 
 | Fragment  | Mandatory |
@@ -1220,9 +1221,9 @@ The following fragments are related to the extended device capability with a rem
 | Fragment                        | Content                                                                      | Required for extended capability |
 | ------------------------------- | ---------------------------------------------------------------------------- | ---------------------------- |
 | `c8y_Position`                  | Position information of the device;                                            | Yes                          |
-| `c8y_Position.lat`              | Latitude                                                                     | Yes                          |
-| `c8y_Position.lng`              | Longitude                                                                    | Yes                          |
-| `c8y_Position.alt`              | Altitude in meters                                                           | No                           |
+| `c8y_Position.lat`              | Latitude (Number)                                                                     | Yes                          |
+| `c8y_Position.lng`              | Longitude (Number)                                                                   | Yes                          |
+| `c8y_Position.alt`              | Altitude in meters (Number)                                                          | No                           |
 | `c8y_Position.trackingProtocol` | Technology used for position acquisition (e.g. GPS, Galileo, TELIC)          | No                           |
 | `c8y_Position.reportReason`     | Reason why the position update was send (e.g. triggered by schedule, action) | No                           |
 
@@ -1354,8 +1355,8 @@ For details and examples, compare [Mobile Cumulocity IoT Documentation](https://
 | Fragment / Property                 | Content                                         | Required for extended capability |
 | ------------------------- | ----------------------------------------------- | ---------------------------- |
 | `c8y_Mobile` | List contains element `ICCID` and / or `MSISDN`. Enables the Connectivity Microservice to worj with a mobile provider  | Yes                          |
-| `ICCID` | ICCID of the installed SIM;  | yes, if MSISDN is not present    |
-| `MSISDN`    | MSISDN of the installed SIM           | yes, if ICCID is not present         |
+| `ICCID` | ICCID of the installed SIM (String)  | yes, if MSISDN is not present    |
+| `MSISDN`    | MSISDN of the installed SIM (String)           | yes, if ICCID is not present         |
 
 Example JSON `c8y_Mobile` as it is sent from the device to Cumulocity IoT:
 
