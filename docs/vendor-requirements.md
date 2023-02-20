@@ -113,7 +113,7 @@ For details and examples, compare *[What is an agent? Cumulocity IoT Documentati
 The device certificate will be issued for a device by the properties `c8y_Agent.name`, `c8y_Agent.version`,  `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, and `c8y_Firmware.version`. Developers of this agent are free to chose the name and version. 
 
 [Example of an “agent” named “c8yMQTT”](https://github.com/SoftwareAG/c8yMQTT).
-[Cumulocity IoT Documentation of c8y_Agent Fragement](https://cumulocity.com/guides/10.14.0/reference/device-management-library/#agent-information).
+[Cumulocity IoT Documentation of c8y_Agent Fragement](https://cumulocity.com/guides/reference/device-management-library/#agent-information).
 
 
 | Fragment  | Mandatory |
