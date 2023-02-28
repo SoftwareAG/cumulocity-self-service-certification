@@ -64,7 +64,7 @@ When a connector/agent registers on Cumulocity IoT, it becomes a device listed i
 # Foundation Capabilities for Vendor Device Certification (mandatory)
 
 
-For details and examples, see the [Metadata Cumulocity IoT Documentation](https://cumulocity.com/guides/10.16.0/reference/device-management-library/#device-info) section of the Cumulocity IoT Open API documentation as well as the detail sections below.
+For details and examples, see the [Device Management Library](https://cumulocity.com/guides/reference/device-management-library/#device-info) section of the Cumulocity IoT Open API documentation as well as the detail sections below.
 
 | Fragment                     | Description                                                                         | Mandatory                                                                                                                                                   |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -113,7 +113,7 @@ For details and examples, compare *[What is an agent? Cumulocity IoT Documentati
 The device certificate will be issued for a device by the properties `c8y_Agent.name`, `c8y_Agent.version`,  `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, and `c8y_Firmware.version`. Developers of this agent are free to chose the name and version. 
 
 [Example of an “agent” named “c8yMQTT”](https://github.com/SoftwareAG/c8yMQTT).
-[Cumulocity IoT Documentation of c8y_Agent Fragement](https://cumulocity.com/guides/reference/device-management-library/#agent-information).
+[Cumulocity IoT Documentation of c8y_Agent Fragment](https://cumulocity.com/guides/reference/device-management-library/#agent-information).
 
 
 | Fragment  | Mandatory |
@@ -142,7 +142,7 @@ The fragments `c8y_IsDevice`, `name`, `type`, `c8y_RequiredAvailability`, `c8y_F
 ### name
 
 The Cumulocity IoT UI uses the device `name`. Here, `name` sets the name of the device used, e.g. in 'all devices' and 'device info' views.
-For details and examples, see [Managed Objects Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/postManagedObjectCollectionResource).
+For details and examples, see [Managed Objects Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postManagedObjectCollectionResource).
 
 | Fragment | Mandatory |
 | -------- | --------- |
@@ -157,7 +157,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 ### c8y_IsDevice
 
 `c8y_IsDevice` is an empty fragment that declares the managed object accessible through the inventory API endpoints as a device. 
-For details and examples, see [Managed Objects Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/postManagedObjectCollectionResource).
+For details and examples, see [Managed Objects Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postManagedObjectCollectionResource).
 
 
 | Fragment | Mandatory |
@@ -173,7 +173,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 ### type
 
 The fragment `type` can be interpreted as `_device class_`. Meaning, devices with the same `type` can receive the same types of configuration, software, firmware, and operations. `Type` value is indexed and is therefore used for queries. Cumulocity IoT UI for example uses it for filtering purposes like sending a software package to all devices of one specific `type` and to assign Dashboards to devices of the same `type`.
-For details and examples, see [Managed Objects Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/postManagedObjectCollectionResource).
+For details and examples, see [Managed Objects Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postManagedObjectCollectionResource).
 
 | Fragment | Mandatory |
 | -------- | --------- |
@@ -190,7 +190,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 
 Minimal communication interval to determine if device is offline. 
 
-For details and examples, see [Device Availability Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#section/Device-management-library/Device-availability).
+For details and examples, see [Device Availability Cumulocity IoT Documentation](https://cumulocity.com/api/core/#section/Device-management-library/Device-availability).
 
 
 | Fragment           | Mandatory |
@@ -260,7 +260,7 @@ The External ID is displayed by the UI in the tab "Identity". The fragments `ext
 
 Used to identify the device in Cumulocity by its unique serial number, MAC, IMEI or similar unique identification string. If you don't want to specify a type, its recommend to use `c8y_Serial`.
 
-For details and examples, see [Identity Cumulocity IoT Documentation](https://cumulocity.com/guides/reference/device-management-library/#identity).
+For details and examples, see [External ID Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/External-IDs).
 
 | Fragment     | Mandatory |
 | ------------ | --------- |
@@ -290,7 +290,7 @@ It is only mandatory to send either measurements or events or alarms in order to
 ### Measurements
 
 
-It is only mandatory to send either measurements or events or alarms in order to get certified, although we recommend to implement all three capabilities. For details and examples, see [Measurements Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/postMeasurementCollectionResource). 
+It is only mandatory to send either measurements or events or alarms in order to get certified, although we recommend to implement all three capabilities. For details and examples, see [Measurements Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postMeasurementCollectionResource). 
 
 
 The device creates measurements with the following content:
@@ -304,7 +304,7 @@ The device creates measurements with the following content:
 
 Measurement names must be written in camel-case. Cumulocity IoT UI inserts a blank space between a lower-case and an upper-case letter. Two or more consecutive upper-case letters are not separated with blank spaces. The UI also hides the prefix of a measurement name that is ending with a "_" (underline) symbol. 
  
- **Important:** Names used for fragments must not contain whitespaces nor the special characters `'. , * [ ] ( ) @ $ / ''`. This is required to ensure a correct processing and visualization of measurement series on UI graphs [Documentation](https://cumulocity.com/api/latest/#operation/postMeasurementCollectionResource)
+ **Important:** Names used for fragments must not contain whitespaces nor the special characters `'. , * [ ] ( ) @ $ / ''`. This is required to ensure a correct processing and visualization of measurement series on UI graphs [Documentation](https://cumulocity.com/api/core/#operation/postMeasurementCollectionResource)
 
 Example POST body:
 
@@ -336,7 +336,7 @@ The following `_Measurement Fragments_` are standard measurement fragments in Cu
 ### Events
 
 
-It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities. For details and examples, see [Events Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/postEventCollectionResource). 
+It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities. For details and examples, see [Events Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postEventCollectionResource). 
 
 
 The device creates events with the following content:
@@ -363,7 +363,7 @@ Example POST body:
 ### Alarms
 
 
-It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities. For details and examples, see [Alarms Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/postAlarmCollectionResource).
+It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities. For details and examples, see [Alarms Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postAlarmCollectionResource).
 
 
 The device creates alarms with the following content:
@@ -560,7 +560,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 
 ## Child Device Management
 
-For details and examples, compare [Child Operations Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#tag/Child-operations) section of the documentation. The `type` of the root device is recommended to be `Gateway`.
+For details and examples, compare [Child Operations Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/Child-operations) section of the documentation. The `type` of the root device is recommended to be `Gateway`.
 
 ### Child Device Types
 
@@ -594,7 +594,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 
 ## Log File Retrieval
 
-Device capability to upload (filtered) log files to C8Y. For details and examples, compare chapter `c8y_LogfileRequest` of section [Miscellaneous Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#section/Device-management-library/Miscellaneous).
+Device capability to upload (filtered) log files to C8Y. For details and examples, compare chapter `c8y_LogfileRequest` of section [Miscellaneous Cumulocity IoT Documentation](https://cumulocity.com/api/core/#section/Device-management-library/Miscellaneous).
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
@@ -632,12 +632,12 @@ When the device receives the operation `c8y_LogfileRequest`, the following steps
 
 | Step | Action                                                                                                                                     | Documentation                                                                         |
 | ---- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                       | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#tag/Real-time-notification-API) |
-| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                                                 | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                       | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/Real-time-notification-API) |
+| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                                                 | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
 | 2.   | Internally retrieve log file and filter w.r.t. criteria found in operation                                                                 |                                                                                       |
-| 3.   | Create an event with `"type": "c8y_LogfileRequest"`                                                                                        | [Create Event Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/postEventCollectionResource)     |
-| 4.   | Upload the log file as attachment to the event                                                                                             | [Attach File To Event Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/postEventBinaryResource) |
-| 5.   | Update operation accordingly by adding the URL of the log file `"status": "SUCCESSFUL", "c8y_LogfileRequest": {"file": "https://<TENANT_DOMAIN>/event/events/{id}/binaries"}` | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
+| 3.   | Create an event with `"type": "c8y_LogfileRequest"`                                                                                        | [Create Event Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postEventCollectionResource)     |
+| 4.   | Upload the log file as attachment to the event                                                                                             | [Attach File To Event Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postEventBinaryResource) |
+| 5.   | Update operation accordingly by adding the URL of the log file `"status": "SUCCESSFUL", "c8y_LogfileRequest": {"file": "https://<TENANT_DOMAIN>/event/events/{id}/binaries"}` | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
 
 Example operation after the URL was added by the device:
 
@@ -710,11 +710,11 @@ When the device receives the operation `c8y_Configuration`, the following steps 
 
 | Step | Action                                                               | Documentation                                                                         |
 | ---- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"` | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#tag/Real-time-notification-API) |
-| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                           | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"` | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/Real-time-notification-API) |
+| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                           | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
 | 2.   | Internally interpret transmitted string and execute configuration    |                                                                                       |
 | 3.   | Update the fragment `c8y_Configuration` of the managed object in the inventory API so it represents the current configuration of the device    |                |
-| 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
+| 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
 
 
 It is also recommended to upload the device configuration after every change. If the volume of data transfer from the device is limited, the configuration can be uploaded on demand. The configuration upload can be triggered from the UI, if the connector supports the operation `c8y_SendConfiguration`. 
@@ -742,15 +742,15 @@ When the device receives the operation `c8y_SendConfiguration`, the following st
 
 | Step | Action                                                                                                          | Documentation                                                                           |
 | ---- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                            | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#tag/Real-time-notification-API)   |
-| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                      | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)          | 
-| 2.   | Internally get current configuration and update the fragment `c8y_Configuration` of the device managed object using the inventory API | [Update Managed Object Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/putManagedObjectResource) |
-| 3.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                           | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)          |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                            | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/Real-time-notification-API)   |
+| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                      | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)          | 
+| 2.   | Internally get current configuration and update the fragment `c8y_Configuration` of the device managed object using the inventory API | [Update Managed Object Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/putManagedObjectResource) |
+| 3.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                           | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)          |
 
 ### File Based Configuration
 
 File based configuration allows to have multiple _types_ of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).  
-For details and examples, compare [configuration Management Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#section/Device-management-library/Configuration-management) section in the documentation.
+For details and examples, compare [configuration Management Cumulocity IoT Documentation](https://cumulocity.com/api/core/#section/Device-management-library/Configuration-management) section in the documentation.
 The following fragments are related to the Extended  Capability with a remark if they are required for the capability to work:
 
 | Fragment                      | Content                                        | Required for extended capability |
@@ -778,10 +778,10 @@ When the device receives the operation `c8y_DownloadConfigFile`, the following s
 
 | Step | Action                                                               | Documentation                                                                         |
 | ---- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"` | [Real-time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#tag/Real-time-notification-API) |
-| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                           | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"` | [Real-time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/Real-time-notification-API) |
+| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                           | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
 | 2.   | Download referenced binary and internally apply configuration        |                                                                                       |
-| 3.   | Update operation `"status": "SUCCESSFUL"`                            | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
+| 3.   | Update operation `"status": "SUCCESSFUL"`                            | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
 
 Example operation sent to the device for `c8y_DownloadConfigFile`:
 
@@ -796,12 +796,12 @@ When the device receives the operation `c8y_UploadConfigFile`, the following ste
 
 | Step | Action                                                                                                                  | Documentation                                                                         |
 | ---- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                    | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#tag/Real-time-notification-API) |
-| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                              | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                    | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/Real-time-notification-API) |
+| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                              | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
 | 2.   | Internally retrieve the configuration type requested in operation e.g. `"c8y_UploadConfigFile": {"type": "someConfig"}` |                                                                                       |
-| 3.   | Create an event with the same `type` e.g. `"type": "someConfig"`                                                        | [Create Event Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/postEventCollectionResource)     |
-| 4.   | Upload the configuration as attachment to the event                                                                     | [Attach File to Event Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/postEventBinaryResource) |
-| 5.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                   | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
+| 3.   | Create an event with the same `type` e.g. `"type": "someConfig"`                                                        | [Create Event Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postEventCollectionResource)     |
+| 4.   | Upload the configuration as attachment to the event                                                                     | [Attach File to Event Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postEventBinaryResource) |
+| 5.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                   | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
 
 Example operation sent to the device for `c8y_UploadConfigFile`:
 
@@ -818,7 +818,7 @@ Example operation sent to the device for `c8y_UploadConfigFile`:
 
 ## Software Management
 
-Device capability to manage and deploy software packages to the device. For details and examples, compare [c8y_SoftwareList Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#section/Device-management-library/Device-information) section in the documentation .
+Device capability to manage and deploy software packages to the device. For details and examples, compare [c8y_SoftwareList Cumulocity IoT Documentation](https://cumulocity.com/api/core/#section/Device-management-library/Device-information) section in the documentation .
 
 Note: _Firmware Management_ and _Software Management_ are handled separately in Cumulocity IoT and follow different concepts. A device can support one ore both capabilities.
 
@@ -895,15 +895,15 @@ When the device receives the operation `c8y_SoftwareUpdate`, the following steps
 
 | Step | Action                                                                   | Documentation                                                                           |
 | ---- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`     | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#tag/Real-time-notification-API)   |
-| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)          |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`     | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/Real-time-notification-API)   |
+| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)          |
 | 2.   | Execute the given `"action"` (install, update, uninstall) specified by the operation `c8y_SoftwareUpdate` |                                                                                         |
-| 3.   | Update `c8y_SoftwareList` fragment in the inventory object of the device | [Update Managed Object Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/putManagedObjectResource) |
-| 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                    | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)          |
+| 3.   | Update `c8y_SoftwareList` fragment in the inventory object of the device | [Update Managed Object Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/putManagedObjectResource) |
+| 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                    | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)          |
 
 ## Firmware Management
 
-Device capability that enables firmware management. For details and examples, compare [Device Information Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#section/Device-management-library/Device-information).
+Device capability that enables firmware management. For details and examples, compare [Device Information Cumulocity IoT Documentation](https://cumulocity.com/api/core/#section/Device-management-library/Device-information).
 
 Note: _Firmware Management_ and _Software Management_ are handled separately in Cumulocity IoT and follow different concepts. A device can support one ore both capabilities.
 
@@ -959,11 +959,11 @@ Example operation sent to the device:
 When the device receives the operation having `c8y_Firmware`, the following steps are executed:
 | Step | Action                                                                                                                                                                                                                                                                                                                       | Documentation                                                                                          |
 | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                                                                                                                                                                                                         | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#tag/Real-time-notification-API)                  |
-| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                                                                                                                                                                                                                                   | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)                         |
-| 2.   | Compare name and version stored in the fragment `c8y_Firmware` in the inventory object of the device with the name and version stored in the received operation fragment `c8y_Firmware`. If the name and/or version are differing download from the (device specific) firmware repository referenced in the URL and install. | [Device Information Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#section/Device-management-library/Device-information) |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                                                                                                                                                                                                         | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/Real-time-notification-API)                  |
+| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                                                                                                                                                                                                                                   | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)                         |
+| 2.   | Compare name and version stored in the fragment `c8y_Firmware` in the inventory object of the device with the name and version stored in the received operation fragment `c8y_Firmware`. If the name and/or version are differing download from the (device specific) firmware repository referenced in the URL and install. | [Device Information Cumulocity IoT Documentation](https://cumulocity.com/api/core/#section/Device-management-library/Device-information) |
 | 3.   | Update the fragment `c8y_Firmware` of the inventory object of the device.                                                                                                                                                                                                                                                    |                                                                                                        |
-| 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                                                                                                                                                                                                                        | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)                         |
+| 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                                                                                                                                                                                                                        | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)                         |
 
 ## Device Profile
 
@@ -1021,15 +1021,15 @@ When the device receives operation `c8y_DeviceProfile` it will execute the follo
 
 | Step | Action | Documentation |
 | ---- | ------ | ------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                                                                                 | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#tag/Real-time-notification-API) |
-| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                                                                                                           | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                                                                                 | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/Real-time-notification-API) |
+| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                                                                                                           | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
 | 2.   | Use the information stored in the operation `c8y_DeviceProfile` regarding software, firmware and configuration to execute changes as described in respective sections.                               |
 | 3.   | Update the fragment `c8y_Profile` of the inventory object of the device by adding the nested fragments `"profileName”:"Device_Profile"`, `"profileId": "60238"` and `"profileExecuted": true/false`. |                                                                                       |     |
-| 3.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                                                                                                | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
+| 3.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                                                                                                | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
 
 ## Restart
 
-Device capability to restart the device. For details and examples, compare [Miscellaneous Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#section/Device-management-library/Miscellaneous) section of the documentation.
+Device capability to restart the device. For details and examples, compare [Miscellaneous Cumulocity IoT Documentation](https://cumulocity.com/api/core/#section/Device-management-library/Miscellaneous) section of the documentation.
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
@@ -1050,12 +1050,12 @@ When the device receives the operation `c8y_Restart` the following steps are exe
 
 | Step | Action                                                                                                                                             | Documentation                                                                                                                                                           |
 | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0.   | Listen for operations created by platform with `"status" : "PENDING"`                                                                              | [Real-time notifications](https://cumulocity.com/api/latest/#tag/Real-time-notification-API)                                                                                   |
-| 1.   | Update operation `c8y_Restart` to `"status" : "EXECUTING"`                                                                                         | [Update operation](https://cumulocity.com/api/latest/#operation/getOperationResource)                                                                                          |
+| 0.   | Listen for operations created by platform with `"status" : "PENDING"`                                                                              | [Real-time notifications](https://cumulocity.com/api/core/#tag/Real-time-notification-API)                                                                                   |
+| 1.   | Update operation `c8y_Restart` to `"status" : "EXECUTING"`                                                                                         | [Update operation](https://cumulocity.com/api/core/#operation/getOperationResource)                                                                                          |
 | 2.   | Restart the device                                                                                                                                 |                                                                                                                                                                         |
-| 3.   | Query all operations in `"status" : "EXECUTING"` to continue processing them                                                                       | [Real-time notifications](https://cumulocity.com/api/latest/#tag/Real-time-notification-API)                                                                                   |
-| 4.   | Query operations by agent ID and `"status" : "EXECUTING"` to clean up them. This includes the update of `c8y_Restart` to `"status" : "SUCCESSFUL"` | [Device Integration](https://cumulocity.com/guides/device-sdk/rest/#device-integration), [Update operation](https://cumulocity.com/api/latest/#operation/getOperationResource) |
-| 5.   | Listen to new operations created in Cumulocity IoT                                                                                                 | [Real-time notifications](https://cumulocity.com/api/latest/#tag/Real-time-notification-API)                                                                                   |
+| 3.   | Query all operations in `"status" : "EXECUTING"` to continue processing them                                                                       | [Real-time notifications](https://cumulocity.com/api/core/#tag/Real-time-notification-API)                                                                                   |
+| 4.   | Query operations by agent ID and `"status" : "EXECUTING"` to clean up them. This includes the update of `c8y_Restart` to `"status" : "SUCCESSFUL"` | [Device Integration](https://cumulocity.com/guides/device-sdk/rest/#device-integration), [Update operation](https://cumulocity.com/api/core/#operation/getOperationResource) |
+| 5.   | Listen to new operations created in Cumulocity IoT                                                                                                 | [Real-time notifications](https://cumulocity.com/api/core/#tag/Real-time-notification-API)                                                                                   |
 
 
 ## Measurement Request
@@ -1084,14 +1084,14 @@ The device vendor can decide if all or a useful subset of measurements are send 
 
 | Step | Action                                                               | Documentation                                                                                 |
 | ---- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"` | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#tag/Real-time-notification-API)         |
-| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                           | [Update operation](https://cumulocity.com/api/latest/#operation/getOperationResource)                |
-| 2.   | Send all or a useful subset of measurements                          | [Create Measurement Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/postMeasurementCollectionResource) |
-| 3.   | Update operation `"status": "SUCCESSFUL"`                            | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)                |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"` | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/Real-time-notification-API)         |
+| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                           | [Update operation](https://cumulocity.com/api/core/#operation/getOperationResource)                |
+| 2.   | Send all or a useful subset of measurements                          | [Create Measurement Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postMeasurementCollectionResource) |
+| 3.   | Update operation `"status": "SUCCESSFUL"`                            | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)                |
 
 ## Shell
 
-Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. For details and examples, compare [Miscellaneous Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#section/Device-management-library/Miscellaneous) section of the documentation.
+Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. For details and examples, compare [Miscellaneous Cumulocity IoT Documentation](https://cumulocity.com/api/core/#section/Device-management-library/Miscellaneous) section of the documentation.
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
@@ -1120,10 +1120,10 @@ When the device receives the operation `c8y_Command`, the following steps are ex
 
 | Step | Action                                                                                   | Documentation                                                                         |
 | ---- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                     | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#tag/Real-time-notification-API) |
-| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
-| 2.   | Locally execute the command and | [Miscellaneous/Shell Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#section/Device-management-library/Miscellaneous)        |
-| 3.   | Update operation `"status": "SUCCESSFUL"`  add the result to the operation in the fragment `result`      | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                     | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/Real-time-notification-API) |
+| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
+| 2.   | Locally execute the command and | [Miscellaneous/Shell Cumulocity IoT Documentation](https://cumulocity.com/api/core/#section/Device-management-library/Miscellaneous)        |
+| 3.   | Update operation `"status": "SUCCESSFUL"`  add the result to the operation in the fragment `result`      | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
 
 Example operation after it has been executed and fragment `result` has been added to `c8y_Command`:
 
@@ -1202,17 +1202,17 @@ When the device receives the operation `c8y_RemoteAccessConnect`, the following 
 
 | Step | Action                                                                                                                                  | Documentation                                                                         |
 | ---- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                    | [Real-time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#tag/Real-time-notification-API) |
-| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                                              | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                    | [Real-time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/Real-time-notification-API) |
+| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                                              | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
 | 2.   | Connect to the device WebSocket endpoint of the remote access microservice `wss://<c8y host>/service/remoteaccess/device/<connectionKey> `                                                                                   |                                                                                       |
 | 3.   | Establish local socket connection to the specified `hostname` and `port`                                                                                    |                                                                                       |
 | 4.   | Start forwarding binary packets between the TCP connection and the WebSocket in both directions                                         |                                                                                       |
-| 5.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
+| 5.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
 | 6.   | Whenever one of these connections is terminated the device considers the session as ended and will also terminate the second connection. Even if the connection was not terminated gracefully by any of the involved components, the operation status must stay in SUCCESSFUL |                                                                                       |
 
 ## Location and Tracking
 
-Device capability to display and update location information. For details and examples, compare [Location Capabilities Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#section/Sensor-library/Location-capabilities) section of the documentation or  chapter [Tracking Device Management Library](https://cumulocity.com/guides/reference/device-management-library/#tracking).
+Device capability to display and update location information. For details and examples, compare [Location Capabilities Cumulocity IoT Documentation](https://cumulocity.com/api/core/#section/Sensor-library/Location-capabilities) section of the documentation or  chapter [Tracking Device Management Library](https://cumulocity.com/guides/reference/device-management-library/#tracking).
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
@@ -1239,8 +1239,8 @@ Whenever the location shall be updated, the device executes the following steps:
 
 | Step | Action                                               | Documentation                                                                           |
 | ---- | ---------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| 1.   | Send a an event of type "c8y_LocationUpdate" for the device that carries the new position in the fragment "c8y_Position"     | [Create event](https://cumulocity.com/api/latest/#operation/postEventCollectionResource)       |
-| 2.   | Update the c8y_Position fragment in device inventory | [Update Managed Object Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/putManagedObjectResource) |
+| 1.   | Send a an event of type "c8y_LocationUpdate" for the device that carries the new position in the fragment "c8y_Position"     | [Create event](https://cumulocity.com/api/core/#operation/postEventCollectionResource)       |
+| 2.   | Update the c8y_Position fragment in device inventory | [Update Managed Object Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/putManagedObjectResource) |
 
 Example location update event:
 
@@ -1290,7 +1290,7 @@ The following fragments are related to the extended device capability with a rem
 | `c8y_Network.c8y_WAN`    | Lists the properties  `password`, `simStatus`, `authType`, `apn`, `username`. (Object) describing mobile internet connectivity interface status     | No     |
 | `c8y_Network.c8y_WAN.password`    | SIM connectivity password (String)   | No    |
 | `c8y_Network.c8y_WAN.simStatus`    | SIM connection status (String)    | No    |
-| `c8y_Network.c8y_WAN.authType`    | Auth type used by the SIM connectivity (String)    | No     |
+| `c8y_Network.c8y_WAN.authType`    | Authentication type used by the SIM connectivity (String)    | No     |
 | `c8y_Network.c8y_WAN.apn`    | APN used for internet access (String)      | No     |
 | `c8y_Network.c8y_WAN.username`    |  SIM connectivity username (String)   | No     |
 | `c8y_Network.c8y_DHCP`    |  Lists the properties  `dns1`, `dns2`, `domainName`, `addressRange.start`,  `addressRange.end`, `enabled` (Object) containing information for DHCP server status      | No |
@@ -1352,7 +1352,7 @@ For details and examples, compare [Mobile Cumulocity IoT Documentation](https://
 
 | Fragment / Property                 | Content                                         | Required for extended capability |
 | ------------------------- | ----------------------------------------------- | ---------------------------- |
-| `c8y_Mobile` | List contains element `ICCID` and / or `MSISDN`. Enables the Connectivity Microservice to worj with a mobile provider  | Yes                          |
+| `c8y_Mobile` | List contains element `ICCID` and / or `MSISDN`. Enables the Connectivity Microservice to work with a mobile provider  | Yes                          |
 | `ICCID` | ICCID of the installed SIM (String)  | yes, if MSISDN is not present    |
 | `MSISDN`    | MSISDN of the installed SIM (String)           | yes, if ICCID is not present         |
 
@@ -1386,11 +1386,11 @@ When the device receives the operation `c8y_Network`, the following steps are ex
 
 | Step | Action                                                                                                                                  | Documentation                                                                         |
 | ---- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                    | [Real-Time Notifications](https://cumulocity.com/api/latest/#tag/Real-time-notification-API) |
-| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                                              | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                    | [Real-Time Notifications](https://cumulocity.com/api/core/#tag/Real-time-notification-API) |
+| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                                              | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
 | 2.   | Apply WAN, LAN, or DHCP configuration   |                         |
 | 3.   | Set new network configuration status the inventory managed object accessible via the inventory API endpoints                                                                                 |                                        |
-| 4.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#operation/getOperationResource)        |                                                                                      |
+| 4.   | Update operation `"status": "SUCCESSFUL"`                                                                                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |                                                                                      |
 
 NOTE: On REST the entire fragment `c8y_Network` in the managed object accessible via the inventory API must be repeated, because top level fragments can only be replaced completely. In-place editing of fragments isn't possible with Cumulocity IoT REST API.
 
