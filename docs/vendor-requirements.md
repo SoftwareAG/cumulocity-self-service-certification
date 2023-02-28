@@ -16,7 +16,7 @@ When  started, the device follows the process flow defined for REST or MQTT base
 **Please read and follow one of these guides:**
 
 
-For *[REST Based Integrations Cumulocity IoT Documentation](https://cumulocity.com/guides/device-sdk/rest/#device-integration)*:
+For *[REST Based Integrations Cumulocity IoT Documentation](https://cumulocity.com/guides/10.16.0/device-integration/rest/)*:
 ![Startup REST Based Cumulocity IoT Documentation](https://cumulocity.com/guides/images/rest/startupphase.png)
 
 For *[MQTT Based Integrations Cumulocity IoT Documentation](https://cumulocity.com/guides/device-sdk/mqtt/#device-integration)* (using Smart-Rest 2 is recommended):
@@ -64,7 +64,7 @@ When a connector/agent registers on Cumulocity IoT, it becomes a device listed i
 # Foundation Capabilities for Vendor Device Certification (mandatory)
 
 
-For details and examples, see the [Metadata Cumulocity IoT Documentation](https://cumulocity.com/api/latest/#section/Device-management-library/Metadata) section of the Cumulocity IoT Open API documentation as well as the detail sections below.
+For details and examples, see the [Metadata Cumulocity IoT Documentation](https://cumulocity.com/guides/10.16.0/reference/device-management-library/#device-info) section of the Cumulocity IoT Open API documentation as well as the detail sections below.
 
 | Fragment                     | Description                                                                         | Mandatory                                                                                                                                                   |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
