@@ -20,7 +20,9 @@ The integration of the hardware has to fulfill the foundation capabilities to be
 
 The files [Endpoints](./docs/endpoints.md) and [Information Model](./docs/information-model.md) provide inside information on the tool. Interested readers can consume this information to get a deeper understanding of the tool itself.
 
-## Documentation Overview
+## References
 
+[MQTT Cheat Sheet](./docs/cheatSheet.md)
+[VIDEO Certification Tool for Cumulocity IoT Device Partners](https://www.youtube.com/watch?v=fyi8K0jL7ZU)
 [Documentation ](./docs/README.md)
 
