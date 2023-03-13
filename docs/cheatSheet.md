@@ -79,7 +79,8 @@ PUBLISH s/ut/myCommon_10
 &emsp; [`118,supportedLog1,log2,...`](https://cumulocity.com/guides/reference/smartrest-two/#set-supported-logs-118)   
 &emsp; [`119,supportedConfiguration1,config2,...`](https://cumulocity.com/guides/reference/smartrest-two/#set-supported-configurations-119)   
 &emsp; [`120,configType,url,filename[,time]`](https://cumulocity.com/guides/reference/smartrest-two/#set-currently-installed-configuration-120)   
-&emsp; [`121,profileExecuted,profileID`](https://cumulocity.com/guides/reference/smartrest-two/#set-device-profile-that-is-being-applied-121)   
+&emsp; [`121,profileExecuted,profileID`](https://cumulocity.com/guides/reference/smartrest-two/#set-device-profile-that-is-being-applied-121) 
+&emsp; [`122,Name of the agent,Version of the agent, The agent URL, Maintainer of the agent`](https://cumulocity.com/guides/reference/smartrest-two/#set-device-agent-information-122)   
 
 **Measurements**  
 &emsp; [`200,fragment,series,value,unit[,time]`](https://cumulocity.com/guides/reference/smartrest-two/#create-custom-measurement-200)   
