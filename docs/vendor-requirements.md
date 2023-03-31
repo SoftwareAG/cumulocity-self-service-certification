@@ -726,15 +726,15 @@ Example operation `c8y_SendConfiguration: {}` as it is sent to the device from C
 
 ```json5
 {
-creationTime: "2021-09-20T13:53:29.419Z", deviceName: "123456789", deviceId: "440366",…
-c8y_SendConfiguration: {},
-creationTime: "2021-09-20T13:53:29.419Z",
-description: "Requested current configuration",
-deviceId: "440366",
-deviceName: "123456789",
-id: "440472",
-self: "https://t635974191.eu-latest.cumulocity.com/devicecontrol/operations/440472",
-status: "PENDING"
+"creationTime": "2021-09-20T13:53:29.419Z", "deviceName": "123456789", "deviceId": "440366",
+"c8y_SendConfiguration": {},
+"creationTime": "2021-09-20T13:53:29.419Z",
+"description": "Requested current configuration",
+"deviceId": "440366",
+"deviceName": "123456789",
+"id": "440472",
+"self": "https://t635974191.eu-latest.cumulocity.com/devicecontrol/operations/440472",
+"status": "PENDING"
 }
 ```
 
@@ -818,7 +818,7 @@ Example operation sent to the device for `c8y_UploadConfigFile`:
 
 ## Software Management
 
-Device capability to manage and deploy software packages to the device. For details and examples, compare [c8y_SoftwareList Cumulocity IoT Documentation](https://cumulocity.com/api/core/#section/Device-management-library/Device-information) section in the documentation .
+Device capability to manage and deploy software packages to the device. It can either be implemented as the [Standard Software Management]() or as the [Advanced Software Management]() while the second approach is more powerful. For details and examples, compare [Software Cumulocity IoT Documentation](https://cumulocity.com/guides/reference/device-management-library/#software) section in the documentation. 
 
 Note: _Firmware Management_ and _Software Management_ are handled separately in Cumulocity IoT and follow different concepts. A device can support one ore both capabilities.
 
@@ -838,13 +838,27 @@ Note: _Firmware Management_ and _Software Management_ are handled separately in 
 
 **Info:** `"c8y_SupportedOperations": ["c8y_SoftwareList"]` (not to be confused with the _inventory fragment_ `c8y_SoftwareList`) and `"c8y_SupportedOperations": ["c8y_Software"]` are deprecated and should not be used for new agent implementations.
 
+
+
+
+### Standard Software Management: Without c8y_SupportedSoftwareTypes
+
+
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
 | Fragment                  | Content                                            | Required for extended capability |
 | ------------------------- | -------------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
-| `c8y_SupportedOperations` | List contains element `c8y_SoftwareUpdate`         | Yes                          |
+| `c8y_SupportedOperations` | List contains element `c8y_SoftwareUpdate`. NOTE: The fragment `c8y_SoftwareList` must not be used as a supported operation anymore.         | Yes                          |
 | `c8y_SoftwareList`        | List of currently installed software on the device in the managed object accessible via the inventory API endpoints | Yes                          |
+
+
+A device may update its software list by updating its managed object `c8y_SoftwareList`. For details and examples, compare [Changing installed Software Cumulocity IoT Documentation](https://cumulocity.com/guides/reference/device-management-library/#changing-installed-software).
+
+
+```JSON5
+PUT */inventory/managedObjects/<deviceID>
+```
 
 Example JSON structure of a managed object accessible through the inventory API endpoints:
 
@@ -854,12 +868,12 @@ Example JSON structure of a managed object accessible through the inventory API 
 ],
 "c8y_SoftwareList": [
     {
-        "name": "Software A",
+        "name": "Software_A",
         "version": "1.0.1",
-        "url": "www.some-external-url.com"
+        "url": "www.some-external-url.com",
     },
     {
-        "name": "Software B",
+        "name": "Software_B",
         "version": "2.1.0",
         "url": "mytenant.cumulocity.com/inventory/binaries/12345"
     }
@@ -876,17 +890,11 @@ Example operation sent to the device:
         "url": "http://www.example.com",
         "action": "install"
     },
-    {
-        "name": "mySoftware2",
-        "version": "1.1.0",
-        "url": "http://www.example.com",
-        "action": "update"
-    },
         {
         "name": "mySoftware2",
         "version": "1.1.0",
         "url": "http://www.example.com",
-        "action": "uninstall"
+        "action": "delete"
     }
 ]
 ```
@@ -899,7 +907,84 @@ When the device receives the operation `c8y_SoftwareUpdate`, the following steps
 | 1.   | Update operation `"status" : "EXECUTING"`  on the platform                               | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)          |
 | 2.   | Execute the given `"action"` (install, update, uninstall) specified by the operation `c8y_SoftwareUpdate` |                                                                                         |
 | 3.   | Update `c8y_SoftwareList` fragment in the inventory object of the device | [Update Managed Object Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/putManagedObjectResource) |
-| 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                    | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)          |
+| 4.   | Update operation accordingly `"status": "SUCCESSFUL"` or  `"status": "FAILED"`                   | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)          |
+
+
+###Advanced Software Management: With c8y_SupportedSoftwareTypes
+
+In this approach software packages became separate entities and are represented as the device managed object child additions. To facilitate the management of them, the Advanced Software Management default [microservice](https://cumulocity.com/guides/concepts/applications/#microservices) was introduced.
+
+Devices may indicate their support for Advanced Software Management by including the `c8y_SoftwareUpdate` operation in their `c8y_SupportedOperations` fragment and additionally listing their supported software types in the `c8y_SupportedSoftwareTypes` fragment.
+
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
+
+| Fragment                  | Content                                            | Required for extended capability |
+| ------------------------- | -------------------------------------------------- | ---------------------------- |
+| `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
+| `c8y_SupportedOperations` | Must be present in the inventory; List contains element `c8y_SoftwareUpdate`. NOTE: The fragment `c8y_SoftwareList` must not be used as a supported operation anymore.         | Yes                          |
+| `c8y_SoftwareList`        | Must be present in the inventory; List of currently installed software on the device in the managed object accessible via the inventory API endpoints | Yes                          |
+| `c8y_SupportedSoftwareTypes`        | Must be present in the inventory; Fragment for Advanced Software Management: List of currently installed software on the device in the managed object accessible via the inventory API endpoints | Yes                          |
+
+
+A device may update its software list by updating its managed object `c8y_SoftwareList`. 
+
+
+
+
+```JSON5
+PUT */inventory/managedObjects/<deviceID>
+```
+
+Example JSON structure of a managed object accessible through the inventory API endpoints:
+
+```json5
+"c8y_SupportedOperations": [
+    "c8y_SoftwareUpdate"
+],
+  "c8y_SupportedSoftwareTypes": [
+    "type_a",
+    "type_b"
+  ]
+
+```
+
+An example managed object for the software package:
+```json5
+{
+  "type": "c8y_InstalledSoftware",
+  "name": "Software Name",
+  "id": "123",
+  "softwareType": "yum",
+  "version": "1.0",
+  "url": "www.example.com",
+  "owner": "service_advanced-software-mgmt"
+}
+```
+Notice that the owner field is required and must be set to `service_advanced-software-mgmt` for the microservice to detect the software package.
+
+Querying, adding and removing software packages can be done with the microservice REST endpoints or using SmartREST static templates.
+
+Example operation sent to the device:
+
+```json5
+"c8y_SoftwareUpdate": [
+    {
+        "name": "mySoftware1",
+        "version": "1.0.0",
+        "url": "http://www.example.com",
+        "softwareType": "type A",
+        "action": "install"
+    },
+        {
+        "name": "mySoftware3",
+        "version": "1.1.0",
+        "url": "http://www.example.com",
+        "softwareType": "type B",
+        "action": "delete"
+    }
+]
+```
+
 
 ## Firmware Management
 
@@ -1455,7 +1540,7 @@ Example operation `c8y_Network` to update the WAN information as it is sent from
     - [X] Events
     - [X] Alarms
 
-- [ ] Extended Capabilities
+- [x] Extended Capabilities
   - [X] Child Device Management
     - [X] Child Device Types
   - [X] Logfile Retrieval
@@ -1492,3 +1577,4 @@ Example operation `c8y_Network` to update the WAN information as it is sent from
 | 03/11/2021 | Text Based Configuration: Inserted step 3 - update "c8y_Configuration" in inventory to reflect current device configuration   | major   |
 | 14/01/2021 | Many small adjustments; Updated currently testable capabilities  | medium   |
 | 07/02/2021 | Improved inaccurate wordings around managed objects and Cumulocity API  | minor   |
+| 30/03/2023 | Advanced Software Management in Progress  | major   |
