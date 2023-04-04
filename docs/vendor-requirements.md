@@ -991,13 +991,13 @@ Querying, adding and removing software packages can be done with the microservic
   "next": ...
 }
 ```
-| Query paramater |	Mandatory |	Details |
+| Query parameter |	Mandatory |	Details |
 |---|---|----|
 |deviceId|	Yes	ID of the device|
 |name	|No	Filter parameter for the software name|
 |version|	No	|Filter parameter for the software version|
 |type	|No|	Filter parameter for the software type|
-|pageSize	|cNo|	The number of items on the page of the paginated result, between 1 and 2000|
+|pageSize	|No|	The number of items on the page of the paginated result, between 1 and 2000|
 |currentPage	|No	|The current page of the paginated result|
 |withTotalPages	|No|	When set to true, the returned result will contain the total number of the pages in the statistics object|
 
@@ -1263,6 +1263,140 @@ When the device receives operation `c8y_DeviceProfile` it will execute the follo
 | 2.   | Use the information stored in the operation `c8y_DeviceProfile` regarding software, firmware and configuration to execute changes as described in respective sections.                               |
 | 3.   | Update the fragment `c8y_Profile` of the inventory object of the device by adding the nested fragments `"profileName”:"Device_Profile"`, `"profileId": "60238"` and `"profileExecuted": true/false`. |                                                                                       |     |
 | 3.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                                                                                                | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)        |
+
+## Services
+
+The Cumulocity IoT UI allows you to monitor software services running on a device. The services are represented in Cumulocity IoT domain model as the device managed object child additions with `c8y_Service` type.
+
+The Device details page shows a Services tab for devices that have at least one software service. A service can have measurements, alarms and events assigned.
+
+Query, update, add and remove services using Cumulocity IoT REST API for manipulating managed objects. Compare [Services Cumulocity IoT Documentation](https://cumulocity.com/guides/reference/device-management-library/#services).
+
+The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
+
+| Fragment                  | Content                                                                 | Required for extended capability |
+| ------------------------- | ----------------------------------------------------------------------- | ---------------------------- |
+| `com_cumulocity_model_Agent` | Enables a device to receive operations; Must be present in the inventory managed object accessible via the endpoint `/inventory/managedObjects/<deviceId>/` [String];    | Yes                          |
+| `name` | Name of the service [String]; Added as child addition via the endpoint `/inventory/managedObjects/<deviceId>/childAdditions`                               | Yes                          |
+| `type` | Type of the managed object must always be `c8y_Service` [String]; Added as child addition via the endpoint `/inventory/managedObjects/<deviceId>/childAdditions`               | Yes                          |
+| `serviceType` | An arbitrary string for organizing services [String]; Added as child addition  via the endpoint `/inventory/managedObjects/<deviceId>/childAdditions`         | Yes                          |
+| `status` | `up`, `down`, `unknown` or any custom service status [String]; Added as child addition managed object via the endpoint `/inventory/managedObjects/<deviceId>/childAdditions`                  | Yes                          |
+
+#### Announcing a Service to the Platfrom
+
+
+Using the inventory Rest API childAdditions Endpoint:
+
+`POST /inventory/managedObjects/<deviceId>/childAdditions`
+`Content-Type: "application/vnd.com.nsn.cumulocity.measurement+json"`
+
+```json5
+{
+  "name": "DatabaseService",
+  "type": "c8y_Service",
+  "serviceType": "systemd",
+  "status": "up"
+}
+```
+
+**Using SmartREST static template 102:**
+
+The second parameter, the unique ID, does not reference the internal numeric ID but a string-based external ID which is defined by the device instead of the platform. We recommend you to prefix the unique ID with a device-specific prefix to avoid clashes with other devices running the same service:
+
+`102,myDatabaseDevice,systemd,DatabaseService,up`
+
+#### Updating the Status of a Service
+
+
+Using the inventory Rest API serviceID Endpoint:
+
+`POST /inventory/managedObjects/<serviceId>`
+
+`Content-Type: "application/vnd.com.nsn.cumulocity.measurement+json"`
+
+```json5
+{
+  "status": "down"
+}
+```
+
+Or by using SmartREST static template 104 (remember to target the service in the MQTT topic using its unique ID):
+
+`104,down`
+
+#### Sending Service Data
+
+**Measurement REST API:**
+
+`POST /device/<serviceId>/measurements`
+
+`Content-Type: "application/vnd.com.nsn.cumulocity.measurement+json"`
+
+```json5
+{
+  "source": {
+    "id": "123"
+  },
+  "time": "2020-03-19T12:03:27.845Z",
+  "type": "c8y_Memory",
+  "c8y_Memory": {
+    "allocated": {
+      "unit": "MB",
+      "value": 100
+    }
+  }
+}
+```
+
+Or using SmartREST static template 200 sent to topic `s/us/<serviceUniqueId>`:
+
+`200,c8y_Memory,allocated,100,MB`
+
+**Events REST API:**
+
+`POST /device/<serviceId>/events`
+
+`Content-Type: "application/vnd.com.nsn.cumulocity.measurement+json"`
+
+```json5
+{
+	"source": {
+    	"id":"10200" },
+    "type": "TestEvent",
+    "text": "sensor was triggered",
+    "time": "2014-03-03T12:03:27.845Z"
+}
+```
+
+Or using SmartREST static template 200 sent to topic `s/us/<serviceUniqueId>`:
+
+`200,c8y_Memory,allocated,100,MB`
+
+**Alarms REST API:**
+
+`POST /device/<serviceId>/alarms`
+
+`Content-Type: "application/vnd.com.nsn.cumulocity.measurement+json"`
+
+```json5
+{
+	"source": {
+    	"id": "10200" },
+    "type": "TestAlarm",
+    "text": "I am an alarm",
+    "severity": "MINOR",
+    "status": "ACTIVE",
+    "time": "2014-03-03T12:03:27.845Z"
+}
+```
+
+Or using SmartREST static template 200 sent to topic `s/us/<serviceUniqueId>`:
+
+`200,c8y_Memory,allocated,100,MB`
+
+Similarly to measurements, alarms and events associated with the service can also be sent.
+
+
 
 ## Restart
 
@@ -1577,41 +1711,6 @@ Example JSON structure of a managed object accessible through the inventory API 
 ```
 
 
-### Mobile Connection
-
-The Connectivity tab integrates with a 3rd party SIM management platform to provide SIM management functionality within Cumulocity IoT Device Management. The tab appears for a device when all of the following criteria are met:
-
-1. Connectivity microservice is subscribed and configured
-2. The device managed object contains the c8y_Mobile fragment with the MSISDN or ICCID property set
-3. The SIM referenced by the device is managed by the SIM management provider configured for the tenant
-
-For details and examples, compare [Mobile Cumulocity IoT Documentation](https://cumulocity.com/guides/reference/device-management-library/#connectivity) section of the documentation.
-
-| Fragment / Property                 | Content                                         | Required for extended capability |
-| ------------------------- | ----------------------------------------------- | ---------------------------- |
-| `c8y_Mobile` | List contains element `ICCID` and / or `MSISDN`. Enables the Connectivity Microservice to work with a mobile provider  | Yes                          |
-| `ICCID` | ICCID of the installed SIM (String)  | yes, if MSISDN is not present    |
-| `MSISDN`    | MSISDN of the installed SIM (String)           | yes, if ICCID is not present         |
-
-Example JSON `c8y_Mobile` as it is sent from the device to Cumulocity IoT:
-
-```json5
-{
-   "c8y_Mobile": {
-       "msisdn": "380561234567",
-       "iccid": "89100423481F445593U"
-   }
-}
-```
-
-Depending on the configured connectivity provider either MSISDN or ICCID may be used to identify the SIM present in the device. We recommend you to always include both into the c8y_Mobile fragment. There are many more mobile connection related properties that may also be attached to the c8y_Mobile fragment, but only MSISDN or ICCID are relevant for connectivity management.
-
-# SmartREST example
-
-The `111` static template is provided for devices to communicate their mobile information:
-
-`111,1234567890,8930000000000000459,54353`
-
 
 ### Managing Network Settings
 
@@ -1674,6 +1773,45 @@ Example operation `c8y_Network` to update the WAN information as it is sent from
    }
 
 ```
+
+
+## Mobile Connection
+
+The Connectivity tab integrates with a 3rd party SIM management platform to provide SIM management functionality within Cumulocity IoT Device Management. The tab appears for a device when all of the following criteria are met:
+
+1. Connectivity microservice is subscribed and configured
+2. The device managed object contains the c8y_Mobile fragment with the MSISDN or ICCID property set
+3. The SIM referenced by the device is managed by the SIM management provider configured for the tenant
+
+For details and examples, compare [Mobile Cumulocity IoT Documentation](https://cumulocity.com/guides/reference/device-management-library/#connectivity) section of the documentation.
+
+| Fragment / Property                 | Content                                         | Required for extended capability |
+| ------------------------- | ----------------------------------------------- | ---------------------------- |
+| `c8y_Mobile` | List contains element `ICCID` and / or `MSISDN`. Enables the Connectivity Microservice to work with a mobile provider  | Yes                          |
+| `ICCID` | ICCID of the installed SIM (String)  | yes, if MSISDN is not present    |
+| `MSISDN`    | MSISDN of the installed SIM (String)           | yes, if ICCID is not present         |
+
+Example JSON `c8y_Mobile` as it is sent from the device to Cumulocity IoT:
+
+```json5
+{
+   "c8y_Mobile": {
+       "msisdn": "380561234567",
+       "iccid": "89100423481F445593U"
+   }
+}
+```
+
+Depending on the configured connectivity provider either MSISDN or ICCID may be used to identify the SIM present in the device. We recommend you to always include both into the c8y_Mobile fragment. There are many more mobile connection related properties that may also be attached to the c8y_Mobile fragment, but only MSISDN or ICCID are relevant for connectivity management.
+
+#### SmartREST example
+
+The `111` static template is provided for devices to communicate their mobile information:
+
+`111,1234567890,8930000000000000459,54353`
+
+
+
 
 ## Currently Testable Device Capabilities of Self-Service Certification Microservice
 - [x] Foundation Capabilities 
