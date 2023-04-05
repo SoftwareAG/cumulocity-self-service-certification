@@ -412,9 +412,10 @@ To indicate that a device wants to certify extended capabilities, it has to add 
 | [Child Device Management](#child-device-management) | Cumulocity uses the concept of child device types to distinguish the capabilities of child devices behind a gateway device.  | Extended Capability |
 | [Log file Retrieval](#log-file-retrieval) | Device capability to upload (filtered) log files to C8Y.   | Extended Capability |
 | [Device Configuration](#device-configuration) | Device capability that enables text- and / or profile-based device configuration. Text based configuration is the more basic approach. File based configuration allows to have multiple types of configurations (e.g. one file for defining polling intervals and another to configure the internal log-levels).  |Extended Capability|
-| [Software Management](#software-management) | Device capability that enables software management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | Extended Capability |
+| [Software Management](#software-management) | Device capability that enables software management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. There are 3 versions of Software Management: [Standard Software Management](#standard-software-management),  [Advanced Software Management](#advanced-software-management), and Legacy Software Management, which cannot be used for device certification. | Extended Capability |
 | [Firmware Management](#firmware-management) | Device capability that enables firmware management. Firmware Management and Software Management are handled separately in Cumulocity IoT and follow different concepts. | Extended Capability |
 | [Device Profile](#device-profile) | Device capability to manage device profiles. Device profiles represent a combination of a firmware version, one or multiple software packages and one or multiple configuration files which can be deployed on a device. | Extended Capability |
+| [Services](#services) | Device capability to turn services of a device on and off. A service can be the sending of measurements, alarms or events. | Extended Capability |
 | [Restart](#restart) | Device capability to restart the device | Extended Capability |
 | [Measurement Request](#measurement-request) | Device capability to send an updated set of measurements on user request. This can be usefully for devices, that send measurements infrequently. | Extended Capability |
 | [Shell](#shell) | Device capability to send any command to the device. The feature is often used to send shell commands to the device and receive the output as result. | Extended Capability |
@@ -519,8 +520,6 @@ The following JSON structure represents a typical managed object of a device acc
            "enabled": 1
        }
    }
-}
-
 
 ```
 
@@ -841,8 +840,7 @@ Note: _Firmware Management_ and _Software Management_ are handled separately in 
 
 
 
-### Standard Software Management: Without c8y_SupportedSoftwareTypes
-
+### Standard Software Management
 
 The following fragments are related to the extended device capability with a remark if they are required for the capability to work:
 
@@ -910,7 +908,7 @@ When the device receives the operation `c8y_SoftwareUpdate`, the following steps
 | 4.   | Update operation accordingly `"status": "SUCCESSFUL"` or  `"status": "FAILED"`                   | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)          |
 
 
-### Advanced Software Management: With c8y_SupportedSoftwareTypes
+### Advanced Software Management
 
 In this approach software packages became separate entities and are represented as the device managed object child additions. To facilitate the management, the Advanced Software Management default [microservice](https://cumulocity.com/guides/concepts/applications/#microservices) was introduced.  This means the List of the software is managed through a new separate API endpoint and not through the inventory API. 
 
@@ -1113,12 +1111,16 @@ The `c8y_SoftwareUpdate` operation contains also partial list of software packag
 |softwareType	|string	|Yes|	An arbitrary string for organizing software artifacts|
 |action|	string	|Yes	|Action to be executed from the device on the software (possible values: “install” or “delete”)|
 
-The device is expected to perform the following actions:
 
-1. Set operation status to EXECUTING
-2. Iterate through the list of packages contained in the operation and perform the respective action for each one
-3. Update the software list in the device’s own managed object
-4. Set operation status to SUCCESSFUL
+When the device receives the operation having `c8y_SoftwareUpdate`, the following steps are executed:
+| Step | Action                                                                                                                                                                                                                                                                                                                       | Documentation                                                                                          |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| 0.   | Listen for operation created by platform with `"status" : "PENDING"`                                                                                                                                                                                                                                                         | [Real-Time Notifications Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/Real-time-notification-API)                  |
+| 1.   | Update operation `"status" : "EXECUTING"`  on the platform                                                                                                                                                                                                                                                                                   | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)                         |
+| 2.   | Iterate through the list of packages contained in the operation and perform the respective action for each one | [Device Information Cumulocity IoT Documentation](https://cumulocity.com/api/core/#section/Device-management-library/Device-information) |
+| 3.   | Update the `c8y_SoftwareList` in the device’s own managed object                                                                                                                                                                                                                                                |                                                                                                        |
+| 4.   | Update operation accordingly `"status": "SUCCESSFUL"`                                                                                                                                                                                                                                                                        | [Update Operation Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/getOperationResource)                         |
+
 
 
 **SmartREST example**
