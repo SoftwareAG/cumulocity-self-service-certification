@@ -1840,6 +1840,7 @@ The `111` static template is provided for devices to communicate their mobile in
     - [x] Text Based Configuration
     - [x] File Based Configuration
   - [X] Managing Device Software
+  - [X] Services
   - [X] Managing Device Firmware
   - [x] Device Profile
   - [X] Restart
