@@ -539,7 +539,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 
 ```json5
 "c8y_SupportedOperations": [
-    "c8y_Software",
+    "c8y_SoftwareUpdate",
     "c8y_Firmware"
 ]
 ```
@@ -850,7 +850,8 @@ The following fragments are related to the extended device capability with a rem
 | Fragment                  | Content                                            | Required for extended capability |
 | ------------------------- | -------------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
-| `c8y_SupportedOperations` | List contains element `c8y_SoftwareUpdate`. NOTE: The fragment `c8y_SoftwareList` must not be used as a supported operation anymore.         | Yes                          |
+| `c8y_SupportedOperations` | List contains element `c8y_SoftwareUpdate`. NOTE: The fragment `c8y_SoftwareList` must not be used as a supported operation anymore.       | Yes                          |
+| `c8y_Software`        | Must not be present within the list of `c8y_SupportedOperations` as this is a legacy type of operation for software management. It is only tolerated by the platform for legacy reasons and prohibits from a successful certification     | Yes - it must not be present as a supported operation                         |
 | `c8y_SoftwareList`        | List of currently installed software on the device in the managed object accessible via the inventory API endpoints | Yes                          |
 
 
@@ -923,6 +924,7 @@ The following fragments are related to the extended device capability with a rem
 | ------------------------- | -------------------------------------------------- | ---------------------------- |
 | `com_cumulocity_model_Agent` | Must be present in the inventory; Enables a device to receive operations | Yes                          |
 | `c8y_SupportedOperations` | Must be present in the inventory; List contains element `c8y_SoftwareUpdate`. NOTE: The fragment `c8y_SoftwareList` should not be used as a supported operation anymore.         | Yes                          |
+| `c8y_Software`        | Must not be present within the list of `c8y_SupportedOperations` as this is a legacy type of operation for software management. It is only tolerated by the platform for legacy reasons and prohibits from a successful certification     | Yes - it must not be present as a supported operation                         |
 | `c8y_SoftwareList`        | List of currently installed software on the device in the managed object accessible via the advanced-software-mgmt API endpoints. It is not part of the inventory managed object anymore. It contains the properties `name`, `version`, `url`, `softwareType` | Yes                          |
 | `c8y_SupportedSoftwareTypes`        | Must be present in the inventory managed object; List of supported software types in the managed object accessible via the inventory API endpoints | Yes                          |
 
