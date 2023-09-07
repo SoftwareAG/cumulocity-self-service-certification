@@ -458,7 +458,8 @@ The following JSON structure represents a typical managed object of a device acc
     "c8y_UploadConfigFile",
     "c8y_Configuration",
     "c8y_SendConfiguration",
-    "c8y_Software",
+    "c8y_SoftwareList",
+    "c8y_SoftwareUpdate",
     "c8y_Firmware",
     "c8y_DeviceProfile",
     "c8y_Restart",
@@ -1842,6 +1843,7 @@ The `111` static template is provided for devices to communicate their mobile in
     - [x] Text Based Configuration
     - [x] File Based Configuration
   - [X] Managing Device Software
+  - [X] Services
   - [X] Managing Device Firmware
   - [x] Device Profile
   - [X] Restart
