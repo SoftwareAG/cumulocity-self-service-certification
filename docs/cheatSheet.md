@@ -80,7 +80,10 @@ PUBLISH s/ut/myCommon_10
 &emsp; [`119,supportedConfiguration1,config2,...`](https://cumulocity.com/guides/reference/smartrest-two/#set-supported-configurations-119)   
 &emsp; [`120,configType,url,filename[,time]`](https://cumulocity.com/guides/reference/smartrest-two/#set-currently-installed-configuration-120)   
 &emsp; [`121,profileExecuted,profileID`](https://cumulocity.com/guides/reference/smartrest-two/#set-device-profile-that-is-being-applied-121) 
-&emsp; [`122,Name of the agent,Version of the agent, The agent URL, Maintainer of the agent`](https://cumulocity.com/guides/reference/smartrest-two/#set-device-agent-information-122)   
+&emsp; [`122,Name of the agent,Version of the agent, The agent URL, Maintainer of the agent`](https://cumulocity.com/guides/reference/smartrest-two/#set-device-agent-information-122)
+&emsp; [`140,docker,3.2.1,systemd,https://www.docker.com/,nginx,1.6,container,https://www.nginx.com/`](https://cumulocity.com/guides/reference/smartrest-two/#set-advanced-software-list-140)
+&emsp; [141,docker,3.2.1,systemd,https://www.docker.com/,nginx,1.6,container,https://www.nginx.com/](https://cumulocity.com/guides/reference/smartrest-two/#append-advanced-software-items-141)
+&emsp; [142,docker,3.2.1,nginx,1.6](https://cumulocity.com/guides/reference/smartrest-two/#remove-advanced-software-items-142)
 
 **Measurements**  
 &emsp; [`200,fragment,series,value,unit[,time]`](https://cumulocity.com/guides/reference/smartrest-two/#create-custom-measurement-200)   
