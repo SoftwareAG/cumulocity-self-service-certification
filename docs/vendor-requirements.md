@@ -18,13 +18,10 @@ When  started, the device follows the process flow defined for REST or MQTT base
 **Please read and follow one of these guides:**
 
 
-For *[REST Based Integrations Cumulocity IoT Documentation](https://cumulocity.com/guides/10.16.0/device-integration/rest/)*:
-![Startup REST Based Cumulocity IoT Documentation](https://cumulocity.com/guides/images/rest/startupphase.png)
-
-For *[MQTT Based Integrations Cumulocity IoT Documentation](https://cumulocity.com/guides/device-sdk/mqtt/#device-integration)* (using Smart-Rest 2 is recommended):
-
-
-![Startup MQTT based](https://cumulocity.com/guides/images/mqtt/mqttDeviceIntegration.png)
+* [REST Based Integrations Cumulocity IoT Documentation](https://cumulocity.com/guides/10.16.0/device-integration/rest/)
+* [Startup REST Based Cumulocity IoT Documentation](https://cumulocity.com/guides/images/rest/startupphase.png)
+* [MQTT Based Integrations Cumulocity IoT Documentation](https://cumulocity.com/guides/device-sdk/mqtt/#device-integration)* (using Smart-Rest 2 is recommended):
+* [Startup MQTT based](https://cumulocity.com/guides/images/mqtt/mqttDeviceIntegration.png)
 
 ### Helpful MQTT Info
 
@@ -66,7 +63,7 @@ When a connector/agent registers on Cumulocity IoT, it becomes a device listed i
 # Foundation Capabilities for Vendor Device Certification (mandatory)
 
 
-For details and examples, see the [Device Management Library](https://cumulocity.com/guides/reference/device-management-library/#device-info) section of the Cumulocity IoT Open API documentation as well as the detail sections below.
+ * [Device Management Library Documentation](https://cumulocity.com/guides/reference/device-management-library/#device-info) 
 
 | Fragment                     | Description                                                                         | Mandatory                                                                                                                                                   |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -114,9 +111,9 @@ For details and examples, compare *[What is an agent? Cumulocity IoT Documentati
 
 The device certificate will be issued for a device by the properties `c8y_Agent.name`, `c8y_Agent.version`,  `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, and `c8y_Firmware.version`. Developers of this agent are free to chose the name and version. 
 
-[Example of an “agent” named “c8yMQTT”](https://github.com/SoftwareAG/c8yMQTT).
-[Cumulocity IoT Documentation of c8y_Agent Fragment](https://cumulocity.com/guides/reference/device-management-library/#agent-information).
-
+* [Example](https://github.com/SoftwareAG/c8yMQTT)
+* [c8y_Agent Fragment](https://cumulocity.com/guides/reference/device-management-library/#agent-information)
+* [MQTT SmartREST template #122](https://cumulocity.com/guides/reference/smartrest-two/#set-device-agent-information-122)
 
 | Fragment  | Mandatory |
 | --------- | --------- |
@@ -133,9 +130,6 @@ Example JSON structure of a managed object accessible through the inventory API 
     "url": "https//link-to-agent-repo.url"
 }
 ```
-**Using MQTT?:** Please send agent information as JSON via MQTT to topic: `inventory/managedObjects/update/<deviceID>`.
-
-
 
 ## Basic Device Information
 
@@ -144,7 +138,7 @@ The fragments `c8y_IsDevice`, `name`, `type`, `c8y_RequiredAvailability`, `c8y_F
 ### name
 
 The Cumulocity IoT UI uses the device `name`. Here, `name` sets the name of the device used, e.g. in 'all devices' and 'device info' views.
-For details and examples, see [Managed Objects Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postManagedObjectCollectionResource).
+* [name Documentation](https://cumulocity.com/api/core/#operation/postManagedObjectCollectionResource)
 
 | Fragment | Mandatory |
 | -------- | --------- |
@@ -159,7 +153,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 ### c8y_IsDevice
 
 `c8y_IsDevice` is an empty fragment that declares the managed object accessible through the inventory API endpoints as a device. 
-For details and examples, see [Managed Objects Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postManagedObjectCollectionResource).
+* [c8y_IsDevice Documentation](https://cumulocity.com/api/core/#operation/postManagedObjectCollectionResource)
 
 
 | Fragment | Mandatory |
@@ -175,7 +169,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 ### type
 
 The fragment `type` can be interpreted as `_device class_`. Meaning, devices with the same `type` can receive the same types of configuration, software, firmware, and operations. `Type` value is indexed and is therefore used for queries. Cumulocity IoT UI for example uses it for filtering purposes like sending a software package to all devices of one specific `type` and to assign Dashboards to devices of the same `type`.
-For details and examples, see [Managed Objects Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postManagedObjectCollectionResource).
+* [type Documentation](https://cumulocity.com/api/core/#operation/postManagedObjectCollectionResource).
 
 | Fragment | Mandatory |
 | -------- | --------- |
@@ -192,7 +186,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 
 Minimal communication interval to determine if device is offline. 
 
-For details and examples, see [Device Availability Cumulocity IoT Documentation](https://cumulocity.com/api/core/#section/Device-management-library/Device-availability).
+ * [Device Availability Documentation](https://cumulocity.com/api/core/#section/Device-management-library/Device-availability)
 
 
 | Fragment           | Mandatory |
@@ -211,7 +205,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 Hardware information can be stored within the fragment `c8y_Hardware` that is part of the inventory managed object accessible through the inventory API endpoints. The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`.
 These fragments will also be used in future versions of Device Partner Portal. It displays one "Device" entry in the overview device list per `c8y_Hardware.model` and a dropdown menu in the device detail view for each `c8y_Hardware.revision`. 
 
-For details and examples, see [Hardware Information Cumulocity IoT Documentation](https://cumulocity.com/guides/reference/device-management-library/#hardware-information).
+ * [Hardware Information Documentation](https://cumulocity.com/guides/reference/device-management-library/#hardware-information)
 
 ### c8y_Hardware
 
@@ -235,7 +229,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 
 Firmware information can be stored within the fragment `c8y_Firmware` that is part of the inventory managed object accessible through the inventory API endpoints. The device certificate will be issued for device defined by: `c8y_Hardware.model`, `c8y_Hardware.revision`, `c8y_Firmware.name`, `c8y_Firmware.version`, `c8y_Agent.name`, and `c8y_Agent.version`. 
 
-For details and examples, see [Firmware Information Cumulocity IoT Documentation](https://cumulocity.com/guides/reference/device-management-library/#firmware).
+ * [Firmware Information Documentation](https://cumulocity.com/guides/reference/device-management-library/#firmware)
 
 ### c8y_Firmware
 
@@ -262,7 +256,7 @@ The External ID is displayed by the UI in the tab "Identity". The fragments `ext
 
 Used to identify the device in Cumulocity by its unique serial number, MAC, IMEI or similar unique identification string. If you don't want to specify a type, its recommend to use `c8y_Serial`.
 
-For details and examples, see [External ID Cumulocity IoT Documentation](https://cumulocity.com/api/core/#tag/External-IDs).
+ * [External ID Documentation](https://cumulocity.com/api/core/#tag/External-IDs)
 
 | Fragment     | Mandatory |
 | ------------ | --------- |
@@ -292,7 +286,8 @@ It is only mandatory to send either measurements or events or alarms in order to
 ### Measurements
 
 
-It is only mandatory to send either measurements or events or alarms in order to get certified, although we recommend to implement all three capabilities. For details and examples, see [Measurements Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postMeasurementCollectionResource). 
+It is only mandatory to send either measurements or events or alarms in order to get certified, although we recommend to implement all three capabilities.  
+* [Measurements Documentation](https://cumulocity.com/api/core/#operation/postMeasurementCollectionResource)
 
 
 The device creates measurements with the following content:
@@ -338,7 +333,8 @@ The following `_Measurement Fragments_` are standard measurement fragments in Cu
 ### Events
 
 
-It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities. For details and examples, see [Events Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postEventCollectionResource). 
+It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.  
+* [Events Documentation](https://cumulocity.com/api/core/#operation/postEventCollectionResource)
 
 
 The device creates events with the following content:
@@ -365,7 +361,8 @@ Example POST body:
 ### Alarms
 
 
-It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities. For details and examples, see [Alarms Cumulocity IoT Documentation](https://cumulocity.com/api/core/#operation/postAlarmCollectionResource).
+It is only mandatory to send either measurements, or events, or alarms in order to get certified while it is still recommended to implement all three capabilities.  
+* [Alarms Documentation](https://cumulocity.com/api/core/#operation/postAlarmCollectionResource)
 
 
 The device creates alarms with the following content:
