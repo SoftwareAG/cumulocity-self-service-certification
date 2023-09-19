@@ -1534,25 +1534,43 @@ Example JSON structure of a managed object accessible through the inventory API 
 ```json5
 "c8y_SupportedOperations": [
     "c8y_RemoteAccessConnect"
-]
-"c8y_RemoteAccessList": [
-    {
-        "Id": 3234,
-        "name": "My Connection",
-        "hostname": "10.0.0.67",
-        "port": 5900,
-        "protocol": "VNC",
-        "credentials": {
-            "username": "someUser",
-            "password":  "{cipher
-        }SwRUVOR0gKHmPUuKLulIIM3EMGvxFTg22had6b",
-	"privateKey": null,
-        "publicKey": null,
-        "hostKey": null,
-        "type": "PASS_ONLY"
-    }
-}
-]
+],
+ "c8y_RemoteAccessList": [
+        {
+            "serialVersionUID": 6652959747455810127,
+            "hostname": "127.0.0.1",
+            "protocol": "VNC",
+            "credentials": {
+                "privateKey": null,
+                "password": "{cipher}1fbef2ce080ac655ed4ca1e2736ab0bcba481bad034a1e126d1430e9e2472167",
+                "certificate": null,
+                "publicKey": null,
+                "hostKey": null,
+                "type": "PASS_ONLY",
+                "username": null
+            },
+            "port": 5900,
+            "name": "VNC",
+            "id": "1"
+        },
+        {
+            "serialVersionUID": 6652959747455810127,
+            "hostname": "127.0.0.1",
+            "protocol": "SSH",
+            "credentials": {
+                "privateKey": null,
+                "password": "{cipher}10bee5a48f54be9edbff5c00993cc5e87896a10813c5bfc5b51759ff86f92c85",
+                "certificate": null,
+                "publicKey": null,
+                "hostKey": "",
+                "type": "USER_PASS",
+                "username": "dwaffwa"
+            },
+            "port": 22,
+            "name": "SSH",
+            "id": "2"
+        }
+    ],
 ```
 
 Example operation sent to the device for `c8y_RemoteAccessConnect`:
