@@ -60,12 +60,12 @@ Cumulocity IoT fulfills SSL Labs A+ rating and therefore supports exclusively th
 When a connector/agent registers on Cumulocity IoT, it becomes a device listed in the Device Management application. When using the self-certification tool, one certificate can be created for each combination of the connector (c8y_Agent), the Hardware (c8y_Hardware) and the Firmware (c8y_Firmware). If any of these values change, a new device-certificate can be created. The Cumulocity IoT device certification API makes the certification information available for our [Device Partner Portal](#https://devicepartnerportal.softwareag.com/). Entries on the Device Partner Portal represent devices from a sales/user perspective, which is therefore defined as a product. Products can only be segregated by their names. To link the product from the Device Partner Portal with the more granular differentiation of a device on Cumulocity IoT, we have incorporated this as manual steps within the Cumulocity IoT certification tool. Device certificates therefore need to be clustered to products, so all the device certificates related to that product can then be displayed under the same product on the Device Partner Portal. The product to device relation is 1:n. 
 
 
-# Foundation Capabilities for Vendor Device Certification (mandatory)
+# Foundation Capabilities for Vendor Device Certification (Mandatory for certification)
 
 
  * [Device Management Library Documentation](https://cumulocity.com/guides/reference/device-management-library/#device-info) 
 
-| Fragment                     | Description                                                                         | Mandatory                                                                                                                                                   |
+| Fragment                     | Description                                                                         | Mandatory for certification                                                                                                                                                   |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `c8y_Agent`                  | Information about the agent run on the device                                                            | Yes        |
 | `c8y_IsDevice`               | Empty fragment. Defines the managed object created through the Inventory API to be a Device                                                     | Yes                                                                                            |
@@ -115,7 +115,7 @@ The device certificate will be issued for a device by the properties `c8y_Agent.
 * [c8y_Agent Fragment](https://cumulocity.com/guides/reference/device-management-library/#agent-information)
 * [MQTT SmartREST template #122](https://cumulocity.com/guides/reference/smartrest-two/#set-device-agent-information-122)
 
-| Fragment  | Mandatory |
+| Fragment  | Mandatory for certification |
 | --------- | --------- |
 | `name`    | Yes       |
 | `version` | Yes       |
@@ -140,7 +140,7 @@ The fragments `c8y_IsDevice`, `name`, `type`, `c8y_RequiredAvailability`, `c8y_F
 The Cumulocity IoT UI uses the device `name`. Here, `name` sets the name of the device used, e.g. in 'all devices' and 'device info' views.
 * [name Documentation](https://cumulocity.com/api/core/#operation/postManagedObjectCollectionResource)
 
-| Fragment | Mandatory |
+| Fragment | Mandatory for certification |
 | -------- | --------- |
 | `name`   | Yes       |
 
@@ -156,7 +156,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 * [c8y_IsDevice Documentation](https://cumulocity.com/api/core/#operation/postManagedObjectCollectionResource)
 
 
-| Fragment | Mandatory |
+| Fragment | Mandatory for certification |
 | -------- | --------- |
 | `c8y_IsDevice`   | Yes       |
 
@@ -171,7 +171,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 The fragment `type` can be interpreted as `_device class_`. Meaning, devices with the same `type` can receive the same types of configuration, software, firmware, and operations. `Type` value is indexed and is therefore used for queries. Cumulocity IoT UI for example uses it for filtering purposes like sending a software package to all devices of one specific `type` and to assign Dashboards to devices of the same `type`.
 * [type Documentation](https://cumulocity.com/api/core/#operation/postManagedObjectCollectionResource).
 
-| Fragment | Mandatory |
+| Fragment | Mandatory for certification |
 | -------- | --------- |
 | `type`   | Yes       |
 
@@ -189,7 +189,7 @@ Minimal communication interval to determine if device is offline.
  * [Device Availability Documentation](https://cumulocity.com/api/core/#section/Device-management-library/Device-availability)
 
 
-| Fragment           | Mandatory |
+| Fragment           | Mandatory for certification |
 | ------------------ | --------- |
 | `responseInterval` | No        |
 
@@ -209,7 +209,7 @@ These fragments will also be used in future versions of Device Partner Portal. I
 
 ### c8y_Hardware
 
-| Fragment       | Meaning in Device Partner Portal                                        | Mandatory |
+| Fragment       | Meaning in Device Partner Portal                                        | Mandatory for certification |
 | -------------- | ----------------------------------------------------------------------- | --------- |
 | `model`        | Device in list view                                                     | Yes       |
 | `revision`     | Dropdown inside device detail view to select device revision or version | Yes       |
@@ -233,7 +233,7 @@ Firmware information can be stored within the fragment `c8y_Firmware` that is pa
 
 ### c8y_Firmware
 
-| Fragment  | Mandatory |
+| Fragment  | Mandatory for certification |
 | --------- | --------- |
 | `name`    | Yes       |
 | `version` | Yes       |
@@ -258,7 +258,7 @@ Used to identify the device in Cumulocity by its unique serial number, MAC, IMEI
 
  * [External ID Documentation](https://cumulocity.com/api/core/#tag/External-IDs)
 
-| Fragment     | Mandatory |
+| Fragment     | Mandatory for certification |
 | ------------ | --------- |
 | `externalId` | Yes       |
 | `type`       | Yes       |
@@ -279,7 +279,7 @@ NOTE: The externalID is not stored in the managed object through the inventory e
 Sending measurements, events, and alarms are basic capabilities of any IoT enabled device. Therefore vendors should aim to support all three. However, there might be some instances where devices only send events (e.g. basic switches) or only measurements (e.g. basic sensor).
 It is only mandatory to send either measurements or events or alarms in order to get certified, although we recommend to implement all three capabilities.
 
-| Functionality                     | Content                                          | Mandatory                      |
+| Functionality                     | Content                                          | Mandatory for certification                      |
 | ---------------------------- | ------------------------------------------------ | ------------------------------ |
 | Measurements (M), Events (E), Alarms (A)| Information send from the device to the platform | Yes, at least one of the three |
 
@@ -291,7 +291,7 @@ It is only mandatory to send either measurements or events or alarms in order to
 
 
 The device creates measurements with the following content:
-| Fragment                    | Content                                                                                                    | Mandatory for Measurements |
+| Fragment                    | Content                                                                                                    | Mandatory for all Measurements |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------- | --------- |
 | `source`                    | Device ID                                                                                                  | Yes       |
 | `type`                      | Type of measurement                                                                                        | Yes       |
@@ -338,7 +338,7 @@ It is only mandatory to send either measurements, or events, or alarms in order 
 
 
 The device creates events with the following content:
-| Fragment | Content                                  | Mandatory for Events |
+| Fragment | Content                                  | Mandatory for all Events |
 | -------- | ---------------------------------------- | --------- |
 | `source` | Device ID                                | Yes       |
 | `type`   | Type of event                            | Yes       |
@@ -367,7 +367,7 @@ It is only mandatory to send either measurements, or events, or alarms in order 
 
 The device creates alarms with the following content:
 
-| Fragment   | Content                                                                                                                                                | Mandatory for Alarms |
+| Fragment   | Content                                                                                                                                                | Mandatory for all Alarms |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- |
 | `source`   | Device ID                                                                                                                                              | Yes       |
 | `type`     | Type of alarm                                                                                                                                          | Yes       |
@@ -528,7 +528,7 @@ The following JSON structure represents a typical managed object of a device acc
 The fragment `c8y_SupportedOperations` is used to identify which operations (and hence certifiable [extended capabilities](#extended-capabilities)) are supported by the device.
 This fragment is optional. If not present, the extended capabilities will not be certified.
 
-| Fragment                  | Mandatory |
+| Fragment                  | Mandatory for certification |
 | ------------------------- | --------- |
 | `c8y_SupportedOperations` | Yes, for devices that receive operations         |
 
@@ -546,7 +546,7 @@ Example JSON structure of a managed object accessible through the inventory API 
 The fragment `com_cumulocity_model_Agent` is an empty fragment stored in the device managed object using the inventory API endpoints. It declares that the device is able to receive operations [extended capabilities](#extended-capabilities)).
 This fragment is optional. If not present, the extended capabilities will not be certified.
 
-| Fragment                  | Mandatory |
+| Fragment                  | Mandatory for certification |
 | ------------------------- | --------- |
 | `com_cumulocity_model_Agent` | Yes, for devices that receive operations        |
 
@@ -991,7 +991,7 @@ Querying, adding and removing software packages can be done with the microservic
   "next": ...
 }
 ```
-| Query parameter |	Mandatory |	Details |
+| Query parameter |	Mandatory for certification |	Details |
 |---|---|----|
 |deviceId|	Yes	ID of the device|
 |name	|No	Filter parameter for the software name|
@@ -1105,7 +1105,7 @@ The `c8y_SoftwareUpdate` operation contains also partial list of software packag
 }
 ```
 
-|Field	|DataType|	Mandatory	|Details|
+|Field	|DataType|	Mandatory for certification	|Details|
 |---|---|---|---|
 | name	|string|	Yes|	Name of the software|c
 | version|	string|	Yes|	A version identifier of the software
@@ -1891,3 +1891,4 @@ The `111` static template is provided for devices to communicate their mobile in
 | 14/01/2021 | Many small adjustments; Updated currently testable capabilities  | medium   |
 | 07/02/2021 | Improved inaccurate wordings around managed objects and Cumulocity API  | minor   |
 | 30/03/2023 | Advanced Software Management in Progress  | major   |
+| 19/12/2023 |  Wording, Links and examples adjusted | minor   |
